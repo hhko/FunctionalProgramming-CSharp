@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/Part1-Foundations/">
+    <Project Path="Part1-Foundations/Ch01-Paradigm-Shift/Ch01.csproj" />
+    <Project Path="Part1-Foundations/Ch02-HigherKinds/Ch02.csproj" />
+    <Project Path="Part1-Foundations/Ch03-Functor/Ch03.csproj" />
+    <Project Path="Part1-Foundations/Ch04-Applicative/Ch04.csproj" />
+    <Project Path="Part1-Foundations/Ch05-Foldable/Ch05.csproj" />
+    <Project Path="Part1-Foundations/Ch06-Monad/Ch06.csproj" />
+    <Project Path="Part1-Foundations/Ch07-Validation/Ch07.csproj" />
+    <Project Path="Part1-Foundations/Ch08-Traversable/Ch08.csproj" />
+  </Folder>
+</Solution>

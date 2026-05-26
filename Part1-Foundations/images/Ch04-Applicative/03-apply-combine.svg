@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="480" fill="#ffffff"/>
+
+  <text x="450" y="34" font-size="15" fill="#1f1f1f" text-anchor="middle" font-weight="bold">apply : K&lt;F, a→b&gt; → (K&lt;F, a&gt; → K&lt;F, b&gt;)</text>
+  <text x="450" y="54" font-size="12" fill="#666" text-anchor="middle" font-style="italic">컨테이너 안 함수와 컨테이너 안 값을 결합해 컨테이너 안 결과를 만듭니다</text>
+
+  <rect x="40" y="80" width="820" height="370" fill="#f4f9ff" stroke="none" rx="12"/>
+  <text x="60" y="106" font-size="13" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.5">Elevated World</text>
+
+  <rect x="100" y="160" width="180" height="80" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="190" y="195" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">K&lt;F, a → b&gt;</text>
+  <text x="190" y="222" font-size="11" fill="#0c3a5e" text-anchor="middle" font-style="italic">컨테이너 안 함수</text>
+
+  <rect x="100" y="310" width="180" height="80" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="190" y="345" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">K&lt;F, a&gt;</text>
+  <text x="190" y="372" font-size="11" fill="#0c3a5e" text-anchor="middle" font-style="italic">컨테이너 안 값</text>
+
+  <line x1="282" y1="200" x2="540" y2="245" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <line x1="282" y1="350" x2="540" y2="265" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+
+  <text x="395" y="200" font-size="32" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">⊛</text>
+  <text x="395" y="380" font-size="14" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-style="italic">apply 가 두 시민을 결합</text>
+
+  <rect x="600" y="215" width="180" height="80" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="690" y="250" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">K&lt;F, b&gt;</text>
+  <text x="690" y="277" font-size="11" fill="#0c3a5e" text-anchor="middle" font-style="italic">컨테이너 안 결과</text>
+</svg>

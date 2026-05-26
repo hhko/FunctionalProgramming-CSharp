@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 470" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+    <marker id="arrow-lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="470" fill="#ffffff"/>
+
+  <!-- ═══════════════════ 패널 ① — a → b (Normal → Normal) ═══════════════════ -->
+  <g>
+    <!-- 패널 헤더 -->
+    <text x="175" y="22" font-size="15" fill="#1f1f1f" text-anchor="middle" font-weight="bold">a → b</text>
+    <text x="175" y="42" font-size="11" fill="#666" text-anchor="middle" font-style="italic">Normal World 함수</text>
+
+    <!-- Elevated 띠 (위, 비어 있음) -->
+    <rect x="40" y="60" width="270" height="150" fill="#f4f9ff" stroke="none" rx="10"/>
+    <text x="55" y="78" font-size="9" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.4">Elevated World</text>
+    <text x="175" y="140" font-size="11" fill="#bbb" text-anchor="middle" font-style="italic">— (사용 안 함) —</text>
+
+    <!-- Normal 띠 (아래) -->
+    <rect x="40" y="215" width="270" height="150" fill="#fffdf3" stroke="none" rx="10"/>
+    <text x="55" y="233" font-size="9" fill="#bf9000" font-style="italic" font-weight="bold" letter-spacing="0.4">Normal World</text>
+
+    <!-- a 박스 -->
+    <rect x="75" y="275" width="70" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="4"/>
+    <text x="110" y="313" font-size="22" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">a</text>
+
+    <!-- b 박스 -->
+    <rect x="205" y="275" width="70" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="4"/>
+    <text x="240" y="313" font-size="22" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">b</text>
+
+    <!-- 함수 화살표 -->
+    <line x1="147" y1="305" x2="203" y2="305" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+    <text x="175" y="295" font-size="14" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">f</text>
+
+    <!-- 하단 설명 -->
+    <text x="175" y="400" font-size="11" fill="#666" text-anchor="middle">함수 합성 ∘ 그대로 가능</text>
+    <text x="175" y="420" font-size="11" fill="#666" text-anchor="middle" font-style="italic">composition</text>
+  </g>
+
+  <!-- ═══════════════════ 패널 ② — a → E<b> (Normal → Elevated, World-crossing) ═══════════════════ -->
+  <g>
+    <text x="465" y="22" font-size="15" fill="#1f1f1f" text-anchor="middle" font-weight="bold">a → E&lt;b&gt;</text>
+    <text x="465" y="42" font-size="11" fill="#666" text-anchor="middle" font-style="italic">World-crossing 함수</text>
+
+    <!-- Elevated 띠 (위) -->
+    <rect x="330" y="60" width="270" height="150" fill="#f4f9ff" stroke="none" rx="10"/>
+    <text x="345" y="78" font-size="9" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.4">Elevated World</text>
+
+    <!-- E<b> 박스 (위 띠, 오른쪽) -->
+    <rect x="495" y="120" width="70" height="60" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="4"/>
+    <text x="530" y="158" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;b&gt;</text>
+
+    <!-- Normal 띠 (아래) -->
+    <rect x="330" y="215" width="270" height="150" fill="#fffdf3" stroke="none" rx="10"/>
+    <text x="345" y="233" font-size="9" fill="#bf9000" font-style="italic" font-weight="bold" letter-spacing="0.4">Normal World</text>
+
+    <!-- a 박스 (아래 띠, 왼쪽) -->
+    <rect x="365" y="275" width="70" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="4"/>
+    <text x="400" y="313" font-size="22" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">a</text>
+
+    <!-- World-crossing 화살표 (대각선, 아래 → 위) -->
+    <line x1="435" y1="275" x2="495" y2="180" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+    <text x="486" y="225" font-size="14" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">f</text>
+
+    <!-- 하단 설명 -->
+    <text x="465" y="400" font-size="11" fill="#666" text-anchor="middle">6장 Monad — bind 가 합성 회복</text>
+    <text x="465" y="420" font-size="11" fill="#666" text-anchor="middle" font-style="italic">bind / SelectMany / &gt;=&gt;</text>
+  </g>
+
+  <!-- ═══════════════════ 패널 ③ — E<a> → b (Elevated → Normal, Lowering) ═══════════════════ -->
+  <g>
+    <text x="755" y="22" font-size="15" fill="#1f1f1f" text-anchor="middle" font-weight="bold">E&lt;a&gt; → b</text>
+    <text x="755" y="42" font-size="11" fill="#666" text-anchor="middle" font-style="italic">끌어내림 (Lowering)</text>
+
+    <!-- Elevated 띠 (위) -->
+    <rect x="620" y="60" width="270" height="150" fill="#f4f9ff" stroke="none" rx="10"/>
+    <text x="635" y="78" font-size="9" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.4">Elevated World</text>
+
+    <!-- E<a> 박스 (위 띠, 왼쪽) -->
+    <rect x="655" y="120" width="70" height="60" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="4"/>
+    <text x="690" y="158" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;a&gt;</text>
+
+    <!-- Normal 띠 (아래) -->
+    <rect x="620" y="215" width="270" height="150" fill="#fffdf3" stroke="none" rx="10"/>
+    <text x="635" y="233" font-size="9" fill="#bf9000" font-style="italic" font-weight="bold" letter-spacing="0.4">Normal World</text>
+
+    <!-- b 박스 (아래 띠, 오른쪽) -->
+    <rect x="785" y="275" width="70" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="4"/>
+    <text x="820" y="313" font-size="22" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">b</text>
+
+    <!-- Lowering 화살표 (대각선, 위 → 아래) -->
+    <line x1="725" y1="180" x2="785" y2="275" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+    <text x="770" y="225" font-size="14" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">f</text>
+
+    <!-- 하단 설명 -->
+    <text x="755" y="400" font-size="11" fill="#666" text-anchor="middle">4장 Foldable — fold 의 자리</text>
+    <text x="755" y="420" font-size="11" fill="#666" text-anchor="middle" font-style="italic">fold / reduce / sum</text>
+  </g>
+
+  <!-- ═══════════════════ 패널 ④ — E<a> → E<b> (Elevated → Elevated, Lifted) ═══════════════════ -->
+  <g>
+    <text x="1045" y="22" font-size="15" fill="#1f1f1f" text-anchor="middle" font-weight="bold">E&lt;a&gt; → E&lt;b&gt;</text>
+    <text x="1045" y="42" font-size="11" fill="#666" text-anchor="middle" font-style="italic">Lifted function</text>
+
+    <!-- Elevated 띠 (위) -->
+    <rect x="910" y="60" width="270" height="150" fill="#f4f9ff" stroke="none" rx="10"/>
+    <text x="925" y="78" font-size="9" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.4">Elevated World</text>
+
+    <!-- E<a> 박스 (위 띠, 왼쪽) -->
+    <rect x="945" y="120" width="70" height="60" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="4"/>
+    <text x="980" y="158" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;a&gt;</text>
+
+    <!-- E<b> 박스 (위 띠, 오른쪽) -->
+    <rect x="1075" y="120" width="70" height="60" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="4"/>
+    <text x="1110" y="158" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;b&gt;</text>
+
+    <!-- 함수 화살표 (위 띠 안, 가로) -->
+    <line x1="1017" y1="150" x2="1073" y2="150" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+    <text x="1045" y="140" font-size="14" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">f</text>
+
+    <!-- Normal 띠 (아래, 비어 있음) -->
+    <rect x="910" y="215" width="270" height="150" fill="#fffdf3" stroke="none" rx="10"/>
+    <text x="925" y="233" font-size="9" fill="#bf9000" font-style="italic" font-weight="bold" letter-spacing="0.4">Normal World</text>
+    <text x="1045" y="295" font-size="11" fill="#bbb" text-anchor="middle" font-style="italic">— (사용 안 함) —</text>
+
+    <!-- 하단 설명 -->
+    <text x="1045" y="400" font-size="11" fill="#666" text-anchor="middle">3장 Functor — map 의 자리</text>
+    <text x="1045" y="420" font-size="11" fill="#666" text-anchor="middle" font-style="italic">map / apply / traverse</text>
+  </g>
+
+  <!-- 최하단 캡션 -->
+  <text x="600" y="455" font-size="12" fill="#1f1f1f" text-anchor="middle" font-style="italic">두 World (Elevated 위·Normal 아래) 사이의 4 가지 함수 유형 — 1부의 각 추상이 어느 분면을 다루는지의 지도</text>
+</svg>

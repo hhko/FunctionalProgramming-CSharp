@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+    <marker id="arrow-lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="520" fill="#ffffff"/>
+
+  <rect x="40" y="40" width="820" height="190" fill="#f4f9ff" stroke="none" rx="12"/>
+  <text x="60" y="66" font-size="13" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.5">Elevated World</text>
+
+  <rect x="170" y="115" width="120" height="70" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="230" y="158" font-size="22" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;a&gt;</text>
+
+  <rect x="610" y="115" width="120" height="70" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="670" y="158" font-size="22" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;b&gt;</text>
+
+  <line x1="292" y1="150" x2="608" y2="150" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="450" y="138" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">Map(f)</text>
+  <text x="450" y="210" font-size="12" fill="#0c3a5e" text-anchor="middle" font-style="italic">E&lt;a&gt; → E&lt;b&gt; 유형 함수 (끌어올린 결과)</text>
+
+  <rect x="40" y="295" width="820" height="190" fill="#fffdf3" stroke="none" rx="12"/>
+  <text x="60" y="321" font-size="13" fill="#bf9000" font-style="italic" font-weight="bold" letter-spacing="0.5">Normal World</text>
+
+  <rect x="170" y="370" width="120" height="70" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="230" y="416" font-size="24" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">a</text>
+
+  <rect x="610" y="370" width="120" height="70" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="670" y="416" font-size="24" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">b</text>
+
+  <line x1="292" y1="405" x2="608" y2="405" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="450" y="393" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">f</text>
+  <text x="450" y="465" font-size="12" fill="#5a4400" text-anchor="middle" font-style="italic">a → b 유형 함수 (원본)</text>
+
+  <line x1="230" y1="365" x2="230" y2="193" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <line x1="670" y1="365" x2="670" y2="193" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+
+  <line x1="450" y1="370" x2="450" y2="225" stroke="#1f77b4" stroke-width="2" stroke-linecap="round" marker-end="url(#arrow-lift)" stroke-dasharray="6 5"/>
+  <text x="466" y="263" font-size="22" fill="#1f77b4" font-weight="bold" font-family="'Consolas', monospace">map</text>
+  <text x="466" y="283" font-size="12" fill="#1f77b4" font-style="italic">끌어올림</text>
+</svg>

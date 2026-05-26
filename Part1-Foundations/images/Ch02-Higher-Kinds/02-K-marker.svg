@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 70 960 470" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333"/>
+    </marker>
+  </defs>
+  <rect width="960" height="540" fill="#ffffff"/>
+
+  <!-- Left: concrete types -->
+  <text x="180" y="100" font-size="14" fill="#222" text-anchor="middle" font-weight="bold">자료 타입 (3-tuple 의 자료)</text>
+  <rect x="60" y="120" width="240" height="60" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/>
+  <text x="180" y="158" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">MyOption&lt;a&gt;</text>
+  <rect x="60" y="200" width="240" height="60" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/>
+  <text x="180" y="238" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">MyList&lt;a&gt;</text>
+  <rect x="60" y="280" width="240" height="60" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/>
+  <text x="180" y="318" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">MyResult&lt;a&gt;</text>
+
+  <!-- Middle: tag types -->
+  <text x="480" y="100" font-size="14" fill="#222" text-anchor="middle" font-weight="bold">태그 타입 (3-tuple 의 태그)</text>
+  <rect x="360" y="120" width="240" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/>
+  <text x="480" y="158" font-size="15" fill="#594300" text-anchor="middle" font-family="'Consolas', monospace">MyOptionF</text>
+  <rect x="360" y="200" width="240" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/>
+  <text x="480" y="238" font-size="15" fill="#594300" text-anchor="middle" font-family="'Consolas', monospace">MyListF</text>
+  <rect x="360" y="280" width="240" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/>
+  <text x="480" y="318" font-size="15" fill="#594300" text-anchor="middle" font-family="'Consolas', monospace">MyResultF</text>
+
+  <!-- Right: K<F, a> view -->
+  <text x="780" y="100" font-size="14" fill="#222" text-anchor="middle" font-weight="bold">공통 어휘 (K&lt;in F, A&gt; 의 시각)</text>
+  <rect x="660" y="120" width="240" height="60" fill="#fff7ee" stroke="#cc6600" stroke-width="2" rx="6"/>
+  <text x="780" y="158" font-size="15" fill="#5a2e00" text-anchor="middle" font-family="'Consolas', monospace">K&lt;MyOptionF, a&gt;</text>
+  <rect x="660" y="200" width="240" height="60" fill="#fff7ee" stroke="#cc6600" stroke-width="2" rx="6"/>
+  <text x="780" y="238" font-size="15" fill="#5a2e00" text-anchor="middle" font-family="'Consolas', monospace">K&lt;MyListF, a&gt;</text>
+  <rect x="660" y="280" width="240" height="60" fill="#fff7ee" stroke="#cc6600" stroke-width="2" rx="6"/>
+  <text x="780" y="318" font-size="15" fill="#5a2e00" text-anchor="middle" font-family="'Consolas', monospace">K&lt;MyResultF, a&gt;</text>
+
+  <!-- Arrows -->
+  <line x1="300" y1="150" x2="360" y2="150" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="300" y1="230" x2="360" y2="230" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="300" y1="310" x2="360" y2="310" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="600" y1="150" x2="660" y2="150" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="600" y1="230" x2="660" y2="230" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="600" y1="310" x2="660" y2="310" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Bottom: K interface definition -->
+  <rect x="160" y="400" width="640" height="110" fill="#fafafa" stroke="#ccc" stroke-width="1" rx="6"/>
+  <text x="480" y="428" font-size="14" fill="#444" text-anchor="middle" font-weight="bold">— 빈 인터페이스 한 줄이 모든 Elevated World 의 입구 —</text>
+  <text x="480" y="462" font-size="20" fill="#222" text-anchor="middle" font-family="'Consolas', monospace">public interface K&lt;in F, A&gt;;</text>
+  <text x="480" y="492" font-size="12" fill="#666" text-anchor="middle" font-style="italic">멤버 없음. 단지 "F 안에 A 가 있다" 라는 신호만 컴파일러에 전한다.</text>
+</svg>
