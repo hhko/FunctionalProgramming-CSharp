@@ -80,7 +80,7 @@ LanguageExt v5 의 결정적 발상인 **`K<F, A>` 마커 인터페이스 + self
 Part 1 ~ 4 는 함수형의 어휘와 동작 원리를 쌓습니다 (Foundations → 실제 컬렉션 → 효과 모나드 → 변환기 순). Part 5 ~ 8 은 부작용 (side-effect) 을 순수하게 다루는 고급 주제를 직접 구현합니다. 효과를 값으로 인코딩하고 (IO / Eff), 견고하게 다루고 (Schedule / Resource), 안전하게 동시 처리하고 (STM), 메모리 안전하게 스트리밍합니다. Part 9 ~ 10 은 함수형 테스트 표준과 실무 예제로 마무리합니다.
 
 | Part | 주제 | 상태 |
-|---|---|---|---|
+|---|---|---|
 | **[Part 1. Foundations](./Part01-Foundations/README.md)** | 함수형 기초 — 두 평행 세계 비유 정착 + Functor / Foldable / Applicative / Monad / Traversable + Validation 실전. 5개 trait + 4분면 격자. | **진행 중** |
 | **Part 2. Collections** | 불변 컬렉션 — Part 1 의 toy 추상을 실제 `Seq` / `Map` / `HashMap` 에 적용. `Alternative` / `SemigroupK` / `MonoidK` (선택과 결합). | 예정 |
 | **Part 3. Effect Monads** | 효과를 담는 모나드 — `Reader` / `State` / `Writer` 와 `Readable` / `Stateful` / `Writable` trait. 효과를 타입으로 인코딩. | 예정 |
