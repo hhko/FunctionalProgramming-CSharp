@@ -104,12 +104,15 @@ FunctionalProgramming-CSharp/
 │   ├── README.md                   : 1부 배경과 목표
 │   ├── Ch01-Paradigm-Shift.md
 │   ├── Ch02-Higher-Kinds.md
-│   ├── Ch03-Functor.md
-│   ├── Ch04-Applicative.md
-│   ├── Ch05-Foldable.md
-│   ├── Ch06-Monad.md               : 예정
-│   ├── Ch07-Validation.md          : 예정
-│   ├── Ch08-Traversable.md         : 예정
+│   ├── Ch03-Monoid.md
+│   ├── Ch04-Functor.md
+│   ├── Ch05-Applicative.md
+│   ├── Ch06-Foldable.md
+│   ├── Ch07-Monad.md               : 예정
+│   ├── Ch08-Validation.md          : 예정
+│   ├── Ch09-Traversable.md         : 예정
+│   ├── Ch10-Bifunctor.md
+│   ├── Ch11-NaturalTransformation.md
 │   └── images/                     : 본문 SVG 도식
 ├── Part02-Collections/             : 2부 (예정) — 불변 컬렉션 — 추상의 실전 적용
 ├── Part03-EffectMonads/            : 3부 (예정) — 효과를 담는 모나드 (Reader / State / Writer)
@@ -122,56 +125,30 @@ FunctionalProgramming-CSharp/
 ├── Part10-RealWorld/               : 10부 (예정) — 실무 예제
 └── code/                           : 학습용 실행 코드
     ├── FunctionalProgramming-CSharp.slnx
-    ├── Part01-Foundations/
+    ├── Part01-Foundations/         : 11 챕터 모두 완성 (빌드·실행 가능)
     │   ├── Ch01-Paradigm-Shift/
     │   ├── Ch02-HigherKinds/
-    │   ├── Ch03-Functor/
-    │   ├── Ch04-Applicative/
-    │   ├── Ch05-Foldable/
-    │   ├── Ch06-Monad/
-    │   ├── Ch07-Validation/
-    │   └── Ch08-Traversable/
-    ├── Part02-Collections/
-    │   ├── Ch09-Sequences/
-    │   ├── Ch10-Maps-and-Sets/
-    │   └── Ch11-Alternative/
-    ├── Part03-EffectMonads/
-    │   ├── Ch12-Reader/
-    │   ├── Ch13-State/
-    │   ├── Ch14-Writer/
-    │   └── Ch15-Why-Transformers/
-    ├── Part04-MonadTransformers/
-    │   ├── Ch16-Transformer-Idea/
-    │   ├── Ch17-ReaderT-StateT-WriterT/
-    │   ├── Ch18-OptionT-EitherT/
-    │   └── Ch19-MonadIO/
-    ├── Part05-EffectSystem/
-    │   ├── Ch20-IO/
-    │   ├── Ch21-Error-Fin-Fallible/
-    │   ├── Ch22-Eff/
-    │   └── Ch23-Eff-Runtime/
-    ├── Part06-RobustEffects/
-    │   ├── Ch24-Schedule/
-    │   ├── Ch25-Resource/
-    │   └── Ch26-Observability/
-    ├── Part07-Concurrency/
-    │   ├── Ch27-Atom/
-    │   ├── Ch28-STM/
-    │   └── Ch29-Concurrent-Collections/
-    ├── Part08-Streaming/
-    │   ├── Ch30-StreamT/
-    │   ├── Ch31-Pipes/
-    │   └── Ch32-Conduit/
-    ├── Part09-FunctionalTesting/
-    │   ├── Ch33-Law-Verification/
-    │   ├── Ch34-Property-Based/
-    │   └── Ch35-Testing-Effects/
-    └── Part10-RealWorld/
-        ├── Ch36-Domain-Modeling/
-        ├── Ch37-Effectful-Application/
-        ├── Ch38-Streaming-Pipeline/
-        └── Ch39-Capstone/
+    │   ├── Ch03-Monoid/
+    │   ├── Ch04-Functor/
+    │   ├── Ch05-Applicative/
+    │   ├── Ch06-Foldable/
+    │   ├── Ch07-Monad/
+    │   ├── Ch08-Validation/
+    │   ├── Ch09-Traversable/
+    │   ├── Ch10-Bifunctor/
+    │   └── Ch11-NaturalTransformation/
+    ├── Part02-Collections/         : 예정 (Ch12 ~ Ch14)
+    ├── Part03-EffectMonads/        : 예정 (Ch15 ~ Ch18)
+    ├── Part04-MonadTransformers/   : 예정 (Ch19 ~ Ch22)
+    ├── Part05-EffectSystem/        : 예정 (Ch23 ~ Ch26)
+    ├── Part06-RobustEffects/       : 예정 (Ch27 ~ Ch29)
+    ├── Part07-Concurrency/         : 예정 (Ch30 ~ Ch32)
+    ├── Part08-Streaming/           : 예정 (Ch33 ~ Ch35)
+    ├── Part09-FunctionalTesting/   : 예정 (Ch36 ~ Ch38)
+    └── Part10-RealWorld/           : 예정 (Ch39 ~ Ch42)
 ```
+
+> 총 42 챕터 구성 — 1부 11 챕터 (신규 Ch03 Monoid / Ch10 Bifunctor / Ch11 NaturalTransformation 추가) + 2 ~ 10 부 31 챕터 (각 2 ~ 4 챕터). 1부 코드는 11 챕터 모두 완성, 본문은 8 장 완성 (Ch01 / 02 / 03 / 04 / 05 / 06 / 10 / 11), 3 장 (Ch07 / 08 / 09) 예정.
 
 본문 (`PartN-…/*.md`) 과 코드 (`code/PartN-…/*`) 가 시그니처 단계에서 정합 합니다. 본문을 읽으면서 해당 코드를 IDE 에서 직접 실행 / 수정해 볼 수 있습니다.
 
@@ -186,11 +163,11 @@ cd code
 dotnet build FunctionalProgramming-CSharp.slnx          # 전체 프로젝트 빌드
 
 # 각 챕터는 독립 실행 가능한 콘솔 데모 — 데모가 모든 법칙/검증 결과를 출력
-dotnet run --project Part1-Foundations/Ch03-Functor/Ch03.csproj
-dotnet run --project Part10-RealWorld/Ch39-Capstone/Ch39.csproj
+dotnet run --project Part01-Foundations/Ch04-Functor/Ch04.csproj
+dotnet run --project Part01-Foundations/Ch11-NaturalTransformation/Ch11.csproj
 ```
 
-각 챕터 코드는 `code/PartN-…/ChNN-…/` 에 독립적으로 들어 있어 한 챕터만 따로 실행해 볼 수 있습니다. 검증은 `Tests/` 의 콘솔 `bool` 헬퍼로 이뤄지며, 9부 (Ch33 ~ 35) 에서 이를 xUnit + Shouldly / property-based 표준으로 옮기는 법을 다룹니다. 각 챕터의 `Challenges/` 에는 직접 해보기 정답 코드가 들어 있습니다.
+각 챕터 코드는 `code/Part01-Foundations/ChNN-…/` (1부는 완성, 2 ~ 10부는 예정) 에 독립적으로 들어 있어 한 챕터만 따로 실행해 볼 수 있습니다. 검증은 `Tests/` 의 콘솔 `bool` 헬퍼로 이뤄지며, 9부 (Ch36 ~ Ch38) 에서 이를 xUnit + Shouldly / property-based 표준으로 옮기는 법을 다룹니다. 각 챕터의 `Challenges/` 에는 직접 해보기 정답 코드가 들어 있습니다.
 
 ---
 
