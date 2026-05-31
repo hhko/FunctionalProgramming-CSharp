@@ -1,12 +1,15 @@
 <Solution>
-  <Folder Name="/Part1-Foundations/">
-    <Project Path="Part1-Foundations/Ch01-Paradigm-Shift/Ch01.csproj" />
-    <Project Path="Part1-Foundations/Ch02-HigherKinds/Ch02.csproj" />
-    <Project Path="Part1-Foundations/Ch03-Functor/Ch03.csproj" />
-    <Project Path="Part1-Foundations/Ch04-Applicative/Ch04.csproj" />
-    <Project Path="Part1-Foundations/Ch05-Foldable/Ch05.csproj" />
-    <Project Path="Part1-Foundations/Ch06-Monad/Ch06.csproj" />
-    <Project Path="Part1-Foundations/Ch07-Validation/Ch07.csproj" />
-    <Project Path="Part1-Foundations/Ch08-Traversable/Ch08.csproj" />
+  <Folder Name="/Part01-Foundations/">
+    <Project Path="Part01-Foundations/Ch01-Paradigm-Shift/Ch01.csproj" />
+    <Project Path="Part01-Foundations/Ch02-HigherKinds/Ch02.csproj" />
+    <Project Path="Part01-Foundations/Ch03-Monoid/Ch03.csproj" />
+    <Project Path="Part01-Foundations/Ch04-Functor/Ch04.csproj" />
+    <Project Path="Part01-Foundations/Ch05-Applicative/Ch05.csproj" />
+    <Project Path="Part01-Foundations/Ch06-Foldable/Ch06.csproj" />
+    <Project Path="Part01-Foundations/Ch07-Monad/Ch07.csproj" />
+    <Project Path="Part01-Foundations/Ch08-Validation/Ch08.csproj" />
+    <Project Path="Part01-Foundations/Ch09-Traversable/Ch09.csproj" />
+    <Project Path="Part01-Foundations/Ch10-Bifunctor/Ch10.csproj" />
+    <Project Path="Part01-Foundations/Ch11-NaturalTransformation/Ch11.csproj" />
   </Folder>
 </Solution>
