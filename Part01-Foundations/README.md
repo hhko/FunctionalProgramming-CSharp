@@ -17,13 +17,13 @@
 1부를 마치면 독자는 다음을 갖게 됩니다.
 
 - 왜 함수형인가의 마음가짐 + 두 평행 세계 (Normal / Elevated) 비유의 진입.
-- Higher Kinds (고차 카인드) — C# 에서 Elevated World 를 하나의 어휘 (`K<F, A>`) 로 묶는 우회 + 그것을 직접 구현한 3-tuple 패턴 (자료 / 태그 / trait).
+- *Higher Kinds* (고차 카인드) — C# 에서 Elevated World 를 하나의 어휘 (`K<F, A>`) 로 묶는 우회 + 그것을 직접 구현한 3-tuple 패턴 (자료 / 태그 / trait).
 - *Monoid / Semigroup* — Normal World 의 결합 (`Combine`) 과 단위원 (`Empty`) 을 다루는 Order 0 의 trait. self-bound + `static abstract` 패턴을 `K<F, A>` 마커 없이 가장 단순한 형태로 먼저 연습합니다.
 - *Functor / `map`* — Normal World 의 함수 `a → b` 를 Elevated World 의 함수 `E<a> → E<b>` 로 끌어올리는 추상 + `Functor<F>` trait 의 직접 구현.
 - *Applicative / `pure` + `apply`* — Normal World 의 다인자 함수를 Elevated World 에서 차례로 적용 + `Lift2 / Lift3 / Lift4` 의 직접 구현.
 - *Foldable / `fold`* — Elevated World 안의 구조를 Normal World 의 한 값으로 끌어내리는 추상 + `Foldable<F>` 의 직접 구현. 원소를 거르는 Filterable (Foldable + Functor 결합) 도 같은 자리에서 봅니다.
 - *Monad / `bind`* — 출력 타입만 Elevated 한 함수 `a → E<b>` 를 `E<a> → E<b>` 로 끌어올리는 결정타 + Kleisli 합성 `>=>` + LINQ 의 직접 구현.
-- Validation 실전 — *applicative style* 누적 vs *monadic style* 단락. 같은 도메인에 두 어법이 어떻게 다른 결과를 내는지 직접 작성한 `MyValidation` 위에서 봅니다.
+- *Validation* — *applicative style* 누적 vs *monadic style* 단락. 같은 도메인에 두 어법이 어떻게 다른 결과를 내는지 직접 작성한 `MyValidation` 위에서 봅니다.
 - *Traversable / `traverse` / `sequence`* — 두 Elevated 세계의 층 순서를 뒤집는 추상. Functor + Foldable + Applicative 의 합성임을 직접 구현으로 본 후 일반화.
 - *Bifunctor / Biapplicative / Bimonad* — 두 타입 인자 모두에 작용하는 2-인자 trait (`Either<L, R>` / `Pair<A, B>`). Functor 의 2-인자 일반화 + `Bifunctor<F>` 의 직접 구현.
 - *NaturalTransformation* — 컨테이너 자체를 다른 컨테이너로 바꾸는 변환 (`K<F, A> → K<G, A>`, 값 타입은 유지). Functor 의 `map` 과 직교하는 `Natural<F, G>` 의 직접 구현.

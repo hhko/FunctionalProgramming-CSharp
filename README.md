@@ -10,8 +10,8 @@
 
 함수형 프로그래밍을 처음 만나면 두 가지 어려움이 동시에 옵니다.
 
-- *어휘의 어려움* — `Functor`, `Monad`, `Applicative` 같은 이름이 어디서 왔고 왜 그 모양인지 시그니처만 봐서는 안 보입니다.
-- *동작의 어려움* — 라이브러리 한 줄 호출 (`xs.Map(f)`) 안에 무엇이 들어 있고 어떻게 작동하는지 손에 잡히지 않습니다.
+- **어휘의 어려움** — `Functor`, `Monad`, `Applicative` 같은 이름이 어디서 왔고 왜 그 모양인지 시그니처만 봐서는 안 보입니다.
+- **동작의 어려움** — 라이브러리 한 줄 호출 (`xs.Map(f)`) 안에 무엇이 들어 있고 어떻게 작동하는지 손에 잡히지 않습니다.
 
 두 가지 어려움이 동시에 작동하므로 한쪽만 해결해서는 함수형이 손에 잡히지 않습니다. 이 책은 두 가지 어려움을 **결정적인 두 축**으로 정면 돌파합니다.
 
@@ -35,7 +35,7 @@ LanguageExt v5 의 결정적 발상인 **`K<F, A>` 마커 인터페이스 + self
 
 - **라이브러리 사용이 아니라 라이브러리의 구현 자체를 학습 도구로 씁니다.** 처음부터 끝까지 전체 `K<F, A>` 직접 구현으로 통일됩니다.
 - 학습용 trait (`Functor<F>`, `Applicative<F>`, `Foldable<F>`, `Monad<F>`, `Traversable<F>`) 을 본문이 처음부터 정의하고, 학습용 자료 타입 (`MyList<A>`, `MyMaybe<A>`, `MyValidation<E, A>`) 에 손으로 부착하면서 추상의 내부 구조를 만집니다.
-- 학습용 코드가 LanguageExt v5 의 공식 `Functor.Trait.cs` / `Applicative.Trait.cs` 와 시그니처 단계에서 정합 — 본문을 마치면 라이브러리 코드를 익숙한 패턴의 변형으로 읽을 수 있습니다.
+- 학습용 코드가 LanguageExt v5 의 공식 `Functor.Trait.cs` / `Applicative.Trait.cs` 와 시그니처 단계에서 정합합니다. 본문을 마치면 라이브러리 코드를 익숙한 패턴의 변형으로 읽을 수 있습니다.
 
 도구가 동작 원리를 정합니다.
 
@@ -55,8 +55,8 @@ LanguageExt v5 의 결정적 발상인 **`K<F, A>` 마커 인터페이스 + self
 이 책을 끝까지 읽고 나면 독자는 다음을 갖게 됩니다.
 
 1. **이해의 자신감** — Functor / Monad / IO 효과 / 컬렉션 / 동시성 / 스트리밍 같은 추상의 내부 메커니즘을 일상의 말로 설명할 수 있습니다.
-2. **선택의 자신감** — 도메인 문제 앞에서 어느 추상이 적절한 자리 인지 시그니처만 보고 판단하고 조합 할 수 있습니다.
-3. **구현 + 읽기의 자신감** — LanguageExt v5 / Haskell / F# / Scala 의 함수형 코드를 시그니처만 보고도 읽어내고, 자기 손으로 비슷한 자료를 구현 할 수 있습니다.
+2. **선택의 자신감** — 도메인 문제 앞에서 어느 추상이 적절한 자리인지 시그니처만 보고 판단하고 조합할 수 있습니다.
+3. **구현 + 읽기의 자신감** — LanguageExt v5 / Haskell / F# / Scala 의 함수형 코드를 시그니처만 보고도 읽어내고, 자기 손으로 비슷한 자료를 구현할 수 있습니다.
 4. **실무의 자신감** — LanguageExt v5 의 효과 시스템 (`Eff` / `IO` / Schedule / Resource / OpenTelemetry) 으로 실무 코드를 자신 있게 작성할 수 있습니다.
 5. **테스트 자동화의 자신감** — xUnit + property-based + 합법칙 검증의 함수형 테스트 표준을 자기 코드에 적용할 수 있습니다.
 
@@ -75,7 +75,7 @@ LanguageExt v5 의 결정적 발상인 **`K<F, A>` 마커 인터페이스 + self
 
 ## 목차
 
-이 책은 10개 Part로 구성됩니다. **10개 Part 의 실행 코드 (`code/`) 가 모두 구현** 되어 있고, 이 책은 모든 Part가 **`K<F, A>` 직접 구현과 Elevated World 비유** 두 축 위에서 자란다는 점이 차별점입니다.
+이 책은 10 개 Part 로 구성됩니다. **10 개 Part 의 실행 코드 (`code/`) 가 모두 구현** 되어 있고, 이 책은 모든 Part 가 **`K<F, A>` 직접 구현과 Elevated World 비유** 두 축 위에서 자란다는 점이 차별점입니다.
 
 Part 1 ~ 4 는 함수형의 어휘와 동작 원리를 쌓습니다 (Foundations → 실제 컬렉션 → 효과 모나드 → 변환기 순). Part 5 ~ 8 은 부작용 (side-effect) 을 순수하게 다루는 고급 주제를 직접 구현합니다. 효과를 값으로 인코딩하고 (IO / Eff), 견고하게 다루고 (Schedule / Resource), 안전하게 동시 처리하고 (STM), 메모리 안전하게 스트리밍합니다. Part 9 ~ 10 은 함수형 테스트 표준과 실무 예제로 마무리합니다.
 
@@ -148,9 +148,9 @@ FunctionalProgramming-CSharp/
     └── Part10-RealWorld/           : 예정 (Ch39 ~ Ch42)
 ```
 
-> 총 42 챕터 구성 — 1부 11 챕터 (신규 Ch03 Monoid / Ch10 Bifunctor / Ch11 NaturalTransformation 추가) + 2 ~ 10 부 31 챕터 (각 2 ~ 4 챕터). 1부 코드는 11 챕터 모두 완성, 본문은 8 장 완성 (Ch01 / 02 / 03 / 04 / 05 / 06 / 10 / 11), 3 장 (Ch07 / 08 / 09) 예정.
+> **총 42 챕터 구성** — 1부 11 챕터 (신규 Ch03 Monoid / Ch10 Bifunctor / Ch11 NaturalTransformation 추가) + 2 ~ 10 부 31 챕터 (각 2 ~ 4 챕터). 1부 코드는 11 챕터 모두 완성, 본문은 8 장 완성 (Ch01 / 02 / 03 / 04 / 05 / 06 / 10 / 11), 3 장 (Ch07 / 08 / 09) 예정.
 
-본문 (`PartN-…/*.md`) 과 코드 (`code/PartN-…/*`) 가 시그니처 단계에서 정합 합니다. 본문을 읽으면서 해당 코드를 IDE 에서 직접 실행 / 수정해 볼 수 있습니다.
+본문 (`PartN-…/*.md`) 과 코드 (`code/PartN-…/*`) 가 시그니처 단계에서 정합합니다. 본문을 읽으면서 해당 코드를 IDE 에서 직접 실행 / 수정해 볼 수 있습니다.
 
 ---
 
@@ -181,7 +181,7 @@ dotnet run --project Part01-Foundations/Ch11-NaturalTransformation/Ch11.csproj
 
 ## 함께 보는 자료
 
-- **Scott Wlaschin, "Map and Bind and Apply, Oh My!" 시리즈** — [fsharpforfunandprofit.com/posts/elevated-world](https://fsharpforfunandprofit.com/posts/elevated-world/). 이 책의 축 1 (Elevated World 어법) 의 원전. F# 의 어휘로 정착된 비유를이 책이 C# / `K<F, A>` 위에 다시 입힙니다.
+- **Scott Wlaschin, "Map and Bind and Apply, Oh My!" 시리즈** — [fsharpforfunandprofit.com/posts/elevated-world](https://fsharpforfunandprofit.com/posts/elevated-world/). 이 책의 축 1 (Elevated World 어법) 의 원전입니다. F# 의 어휘로 정착된 비유를 이 책이 C# / `K<F, A>` 위에 다시 입힙니다.
 - **LanguageExt v5** — [github.com/louthy/language-ext](https://github.com/louthy/language-ext). 이 책의 축 2 (`K<F, A>` 직접 구현) 의 기준. 본문의 학습용 trait 시그니처가 라이브러리의 `Functor.Trait.cs` / `Applicative.Trait.cs` 등과 정합합니다.
 - **Paul Louth (LanguageExt 저자) 의 블로그** — <https://paullouth.com/>.
 - **Thinking Functionally wiki (LanguageExt)** — <https://github.com/louthy/language-ext/wiki/Thinking-Functionally>.

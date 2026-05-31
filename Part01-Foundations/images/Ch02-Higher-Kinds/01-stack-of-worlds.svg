@@ -40,10 +40,9 @@
 
   <!-- Unifying K<F, A> band -->
   <line x1="60" y1="320" x2="900" y2="320" stroke="#999" stroke-width="1.5" stroke-dasharray="6 4"/>
-  <text x="480" y="340" font-size="14" fill="#444" text-anchor="middle" font-style="italic">↓ 셋 모두 "F 안에 a 가 든 자료" — 윤곽이 같다 ↓</text>
+  <text x="480" y="340" font-size="13" fill="#666" text-anchor="middle">↓ 같은 윤곽 ↓</text>
 
-  <rect x="280" y="380" width="400" height="100" fill="#fff7ee" stroke="#cc6600" stroke-width="2" rx="8"/>
-  <text x="480" y="412" font-size="22" fill="#5a2e00" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">K&lt;in F, A&gt;</text>
-  <text x="480" y="442" font-size="13" fill="#5a2e00" text-anchor="middle">F 가 무엇이든 — Option / List / Result —</text>
-  <text x="480" y="462" font-size="13" fill="#5a2e00" text-anchor="middle">"F 안에 A 가 있다" 라는 *공통 어법*</text>
+  <rect x="280" y="380" width="400" height="90" fill="#fff7ee" stroke="#cc6600" stroke-width="2" rx="8"/>
+  <text x="480" y="418" font-size="24" fill="#5a2e00" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">K&lt;in F, A&gt;</text>
+  <text x="480" y="448" font-size="13" fill="#5a2e00" text-anchor="middle">"F 안에 A" 라는 공통 어법</text>
 </svg>
