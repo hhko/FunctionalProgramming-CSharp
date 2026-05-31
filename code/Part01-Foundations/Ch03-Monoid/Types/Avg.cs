@@ -1,3 +1,4 @@
+using System.Diagnostics.Contracts;
 using Ch03.Traits;
 
 namespace Ch03.Types;
@@ -12,14 +13,17 @@ namespace Ch03.Types;
 // (Wlaschin, Monoids in Practice)
 public readonly record struct Avg(int Total, int Count) : Monoid<Avg>
 {
+    [Pure]
     public static Avg Empty => new(0, 0);
+
+    [Pure]
     public Avg Combine(Avg rhs) => new(Total + rhs.Total, Count + rhs.Count);
 
-    public static Avg operator +(Avg lhs, Avg rhs) => lhs.Combine(rhs);
-
     // 최종 추출 — 누적된 자료에서 평균 계산. 빈 경우 (Count == 0) 는 0.0.
+    [Pure]
     public double Value => Count == 0 ? 0.0 : (double)Total / Count;
 
     // 한 값을 입력하는 정통 생성 어법 — Avg.Of(5) == Avg(5, 1).
+    [Pure]
     public static Avg Of(int value) => new(value, 1);
 }

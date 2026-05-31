@@ -11,41 +11,41 @@ Console.WriteLine("=== Ch03 — Monoid / Semigroup ===\n");
 Console.WriteLine("== A1 — Sum / Product / Concat ==");
 
 var sums = new[] { new Sum(1), new Sum(2), new Sum(3) };
-Console.WriteLine($"  FoldAll(Sum 1, 2, 3)        = {FoldAll.Of(sums)}      (1+2+3, Empty=0)");
+Console.WriteLine($"  Monoid.combine(Sum 1, 2, 3) = {Monoid.combine(sums)}      (1+2+3, Empty=0)");
 
 var prods = new[] { new Product(2), new Product(3) };
-Console.WriteLine($"  FoldAll(Product 2, 3)       = {FoldAll.Of(prods)}     (2*3, Empty=1)");
+Console.WriteLine($"  Monoid.combine(Product 2, 3) = {Monoid.combine(prods)}     (2*3, Empty=1)");
 
 var concats = new[] { new Concat("a"), new Concat("b"), new Concat("c") };
-Console.WriteLine($"  FoldAll(Concat a, b, c)     = {FoldAll.Of(concats)}");
+Console.WriteLine($"  Monoid.combine(Concat a, b, c) = {Monoid.combine(concats)}");
 
 Console.WriteLine();
 Console.WriteLine("== A2 — Boolean: All / Any ==");
 
 var alls = new[] { new All(true), new All(true), new All(false) };
-Console.WriteLine($"  FoldAll(All T, T, F)        = {FoldAll.Of(alls)}    (모두 참? 거짓)");
+Console.WriteLine($"  Monoid.combine(All T, T, F) = {Monoid.combine(alls)}    (모두 참? 거짓)");
 
 var alls2 = new[] { new All(true), new All(true), new All(true) };
-Console.WriteLine($"  FoldAll(All T, T, T)        = {FoldAll.Of(alls2)}     (모두 참)");
+Console.WriteLine($"  Monoid.combine(All T, T, T) = {Monoid.combine(alls2)}     (모두 참)");
 
 var anys = new[] { new Any(false), new Any(true), new Any(false) };
-Console.WriteLine($"  FoldAll(Any F, T, F)        = {FoldAll.Of(anys)}     (하나라도 참? 참)");
+Console.WriteLine($"  Monoid.combine(Any F, T, F) = {Monoid.combine(anys)}     (하나라도 참? 참)");
 
 var anys2 = new[] { new Any(false), new Any(false) };
-Console.WriteLine($"  FoldAll(Any F, F)           = {FoldAll.Of(anys2)}    (모두 거짓)");
+Console.WriteLine($"  Monoid.combine(Any F, F)    = {Monoid.combine(anys2)}    (모두 거짓)");
 
 Console.WriteLine();
 Console.WriteLine("== A3 — Max / Min ==");
 
 var maxes = new[] { new Max(3), new Max(7), new Max(2), new Max(5) };
-Console.WriteLine($"  FoldAll(Max 3, 7, 2, 5)     = {maxes[0].Combine(maxes[1]).Combine(maxes[2]).Combine(maxes[3])}");
+Console.WriteLine($"  Monoid.combine(Max 3, 7, 2, 5) = {Monoid.combine(maxes)}");
 
 var mins = new[] { new Min(3), new Min(7), new Min(2), new Min(5) };
-Console.WriteLine($"  FoldAll(Min 3, 7, 2, 5)     = {mins[0].Combine(mins[1]).Combine(mins[2]).Combine(mins[3])}");
+Console.WriteLine($"  Monoid.combine(Min 3, 7, 2, 5) = {Monoid.combine(mins)}");
 
 // 빈 컬렉션도 안전 — Empty 가 답을 들고 있음
-Console.WriteLine($"  FoldAll(Max 빈)              = {FoldAll.Of(Array.Empty<Max>())}   (Empty=int.MinValue)");
-Console.WriteLine($"  FoldAll(Min 빈)              = {FoldAll.Of(Array.Empty<Min>())}   (Empty=int.MaxValue)");
+Console.WriteLine($"  Monoid.combine(Max 빈)      = {Monoid.combine(Array.Empty<Max>())}   (Empty=int.MinValue)");
+Console.WriteLine($"  Monoid.combine(Min 빈)      = {Monoid.combine(Array.Empty<Min>())}   (Empty=int.MaxValue)");
 
 Console.WriteLine();
 
@@ -55,19 +55,19 @@ Console.WriteLine();
 
 Console.WriteLine("== B — 빈 컬렉션의 안전: Empty 가 답을 들고 있음 ==");
 
-Console.WriteLine($"  FoldAll(Sum 빈)              = {FoldAll.Of(Array.Empty<Sum>())}      (Empty=0)");
-Console.WriteLine($"  FoldAll(Product 빈)          = {FoldAll.Of(Array.Empty<Product>())}      (Empty=1)");
-Console.WriteLine($"  FoldAll(Concat 빈)           = '{FoldAll.Of(Array.Empty<Concat>()).Value}'        (Empty=\"\")");
-Console.WriteLine($"  FoldAll(All 빈)              = {FoldAll.Of(Array.Empty<All>())}   (Empty=true, vacuous truth)");
-Console.WriteLine($"  FoldAll(Any 빈)              = {FoldAll.Of(Array.Empty<Any>())}  (Empty=false, vacuous falsity)");
+Console.WriteLine($"  Monoid.combine(Sum 빈)      = {Monoid.combine(Array.Empty<Sum>())}      (Empty=0)");
+Console.WriteLine($"  Monoid.combine(Product 빈)  = {Monoid.combine(Array.Empty<Product>())}      (Empty=1)");
+Console.WriteLine($"  Monoid.combine(Concat 빈)   = '{Monoid.combine(Array.Empty<Concat>()).Value}'        (Empty=\"\")");
+Console.WriteLine($"  Monoid.combine(All 빈)      = {Monoid.combine(Array.Empty<All>())}   (Empty=true, vacuous truth)");
+Console.WriteLine($"  Monoid.combine(Any 빈)      = {Monoid.combine(Array.Empty<Any>())}  (Empty=false, vacuous falsity)");
 
 Console.WriteLine();
 
 // ─────────────────────────────────────────────────────────────────────
-// Part C — + 연산자 데모 (Semigroup 의 default operator)
+// Part C — + 연산자 데모 (SemigroupExtensions 의 extension operator)
 // ─────────────────────────────────────────────────────────────────────
 
-Console.WriteLine("== C — + 연산자: Combine 의 syntactic sugar ==");
+Console.WriteLine("== C — + 연산자: SemigroupExtensions 의 extension static operator ==");
 
 var sumOp = new Sum(1) + new Sum(2) + new Sum(3);
 Console.WriteLine($"  Sum(1) + Sum(2) + Sum(3)            = {sumOp}");
@@ -78,9 +78,13 @@ Console.WriteLine($"  Concat 'hello' + ' ' + 'world'      = {concatOp}");
 var allOp = new All(true) + new All(true) + new All(false);
 Console.WriteLine($"  All T + T + F                       = {allOp}");
 
-// + 와 Combine 은 같은 결과 — operator 는 syntactic sugar
+// + 와 Combine 은 같은 결과 — extension operator 가 Combine 으로 위임
 var same = new Sum(2).Combine(new Sum(3)).Equals(new Sum(2) + new Sum(3));
 Console.WriteLine($"  a.Combine(b) == a + b               = {same}");
+
+// Semigroup.combine 자유 함수 어법 — instance + 와 같은 결과
+var freeFun = Semigroup.combine(new Sum(2), new Sum(3));
+Console.WriteLine($"  Semigroup.combine(Sum(2), Sum(3))   = {freeFun}");
 
 Console.WriteLine();
 
@@ -93,13 +97,13 @@ Console.WriteLine("  (평균은 직접 Monoid 아님 — 자료의 모양을 바
 
 int[] scores = { 80, 90, 70, 85, 75 };
 var avgs = scores.Select(Avg.Of).ToArray();
-var totalAvg = FoldAll.Of(avgs);
+var totalAvg = Monoid.combine(avgs);
 Console.WriteLine($"  scores = [80, 90, 70, 85, 75]");
-Console.WriteLine($"  FoldAll(Avg) = {totalAvg}  → 평균 = {totalAvg.Value}");
+Console.WriteLine($"  Monoid.combine(Avg) = {totalAvg}  → 평균 = {totalAvg.Value}");
 
 // 빈 컬렉션도 안전 — Empty (0, 0) 이 답을 들고 있음
-var emptyAvg = FoldAll.Of(Array.Empty<Avg>());
-Console.WriteLine($"  FoldAll(Avg 빈) = {emptyAvg} → 평균 = {emptyAvg.Value} (Empty=(0,0))");
+var emptyAvg = Monoid.combine(Array.Empty<Avg>());
+Console.WriteLine($"  Monoid.combine(Avg 빈) = {emptyAvg} → 평균 = {emptyAvg.Value} (Empty=(0,0))");
 
 Console.WriteLine();
 
@@ -130,3 +134,22 @@ Console.WriteLine($"  Max 결합 법칙      : {MonoidLaws.AssociativityHolds(mx
 var (av1, av2, av3) = (Avg.Of(80), Avg.Of(90), Avg.Of(70));
 Console.WriteLine($"  Avg 결합 법칙      : {MonoidLaws.AssociativityHolds(av1, av2, av3)}");
 Console.WriteLine($"  Avg 좌 항등        : {MonoidLaws.LeftIdentityHolds(av1)}");
+
+// ─────────────────────────────────────────────────────────────────────
+// Part F — Instance record form (v5 정통 자리)
+// ─────────────────────────────────────────────────────────────────────
+
+Console.WriteLine();
+Console.WriteLine("== F — Instance record form (trait 을 값처럼 전달) ==");
+
+// trait 의 static virtual Instance — Monoid.instance<A>() helper 로 호출 (v5 정통).
+var sumInstance = Monoid.instance<Sum>();
+Console.WriteLine($"  Monoid.instance<Sum>().Empty           = {sumInstance.Empty}");
+Console.WriteLine($"  Monoid.instance<Sum>().Combine(2, 3)   = {sumInstance.Combine(new Sum(2), new Sum(3))}");
+
+var concatInstance = Monoid.instance<Concat>();
+Console.WriteLine($"  Monoid.instance<Concat>().Empty        = '{concatInstance.Empty.Value}'");
+Console.WriteLine($"  Monoid.instance<Concat>().Combine(a, b) = {concatInstance.Combine(new Concat("a"), new Concat("b"))}");
+
+var allInstance = Monoid.instance<All>();
+Console.WriteLine($"  Monoid.instance<All>().Empty           = {allInstance.Empty}");

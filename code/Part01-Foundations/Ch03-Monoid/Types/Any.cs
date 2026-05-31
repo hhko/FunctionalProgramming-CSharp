@@ -1,3 +1,4 @@
+using System.Diagnostics.Contracts;
 using Ch03.Traits;
 
 namespace Ch03.Types;
@@ -8,8 +9,9 @@ namespace Ch03.Types;
 // LINQ 의 xs.Any(p) 가 빈 컬렉션에 대해 false 를 돌려주는 자리와 정합합니다.
 public readonly record struct Any(bool Value) : Monoid<Any>
 {
+    [Pure]
     public static Any Empty => new(false);
-    public Any Combine(Any rhs) => new(Value || rhs.Value);
 
-    public static Any operator +(Any lhs, Any rhs) => lhs.Combine(rhs);
+    [Pure]
+    public Any Combine(Any rhs) => new(Value || rhs.Value);
 }

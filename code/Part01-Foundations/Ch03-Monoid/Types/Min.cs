@@ -1,3 +1,4 @@
+using System.Diagnostics.Contracts;
 using Ch03.Traits;
 
 namespace Ch03.Types;
@@ -8,8 +9,9 @@ namespace Ch03.Types;
 // (Min(int.MaxValue, 5) == 5). Max 와 대칭의 Monoid.
 public readonly record struct Min(int Value) : Monoid<Min>
 {
+    [Pure]
     public static Min Empty => new(int.MaxValue);
-    public Min Combine(Min rhs) => new(System.Math.Min(Value, rhs.Value));
 
-    public static Min operator +(Min lhs, Min rhs) => lhs.Combine(rhs);
+    [Pure]
+    public Min Combine(Min rhs) => new(System.Math.Min(Value, rhs.Value));
 }
