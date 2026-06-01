@@ -11,7 +11,7 @@
 
 ---
 
-## §10.1 목적 — 인자가 둘인 컨테이너의 양쪽을 변환하기
+## 10.1 목적 — 인자가 둘인 컨테이너의 양쪽을 변환하기
 
 4장의 Functor 는 컨테이너 안의 값 하나를 변환했습니다 (`E<a> → E<b>`). 그런데 타입 인자가 둘인 컨테이너가 있습니다. `Either<L, R>` 는 실패 `L` 과 성공 `R` 두 갈래를 가지고, `Pair<A, B>` 는 두 값을 나란히 담습니다.
 
@@ -26,7 +26,7 @@ Pair<A, B>     — (A, B) 두 값
 
 ---
 
-## §10.2 Bifunctor — 두 함수로 양쪽을 변환
+## 10.2 Bifunctor — 두 함수로 양쪽을 변환
 
 Bifunctor 의 핵심 멤버는 `BiMap` 입니다. 두 함수를 받아 두 인자를 동시에 변환합니다.
 
@@ -47,7 +47,7 @@ MapSecond : (A → B) → F<L, A> → F<L, B>     == BiMap(identity, second, fab
 
 ---
 
-## §10.3 trait 직접 구현 — 2-인자 마커 `K<in F, L, A>`
+## 10.3 trait 직접 구현 — 2-인자 마커 `K<in F, L, A>`
 
 2장의 `K<in F, A>` 는 인자가 하나인 컨테이너의 마커였습니다. 인자가 둘이면 마커도 인자가 둘인 `K<in F, L, A>` 로 늘어납니다. F 의 `in` (contravariant) 표기는 *brand 가 type-level dispatch 의 어휘* 라는 동기와, *11장 `Natural<out F, in G>` 같은 trait 의 variance 어휘를 가능하게 한다* 는 두 동기에서 옵니다 (자세한 풀이는 K 마커의 contravariant 가 만든 variance 반전 (§11.3)). 나머지 패턴 (self-bound + `static abstract`) 은 그대로입니다.
 
@@ -73,7 +73,7 @@ public interface Bifunctor<F>
 
 ---
 
-## §10.4 예제 — Either / Pair
+## 10.4 예제 — Either / Pair
 
 두 자료 타입에 Bifunctor 를 부착합니다. 먼저 두 값을 나란히 담는 `Pair` 입니다.
 
@@ -123,7 +123,7 @@ public sealed class EitherF : Bifunctor<EitherF>
 
 ---
 
-## §10.5 가족 — Biapplicative / Bimonad
+## 10.5 가족 — Biapplicative / Bimonad
 
 Bifunctor 위에 두 인자 버전의 Applicative 와 Monad 가 쌓입니다. v5 의 어휘로 Biapplicative 와 Bimonad 입니다.
 
@@ -137,7 +137,7 @@ Bimonad 는 Bifunctor 를 상속해 두 갈래 각각에 `bind` 를 제공합니
 
 ---
 
-## §10.6 Bifoldable — Foldable 의 2-인자 대칭
+## 10.6 Bifoldable — Foldable 의 2-인자 대칭
 
 4장 Functor 에 6장 Foldable 이 대응하듯, Bifunctor 에는 Bifoldable 이 대응합니다. 두 갈래를 각각 접어 한 값으로 끌어내리는 추상입니다.
 
@@ -149,7 +149,7 @@ BiFold : (S → L → S) → (S → A → S) → S → F<L, A> → S
 
 ---
 
-## §10.7 두 법칙 — Functor 법칙의 두 인자 판
+## 10.7 두 법칙 — Functor 법칙의 두 인자 판
 
 Bifunctor 도 Functor 와 같은 두 법칙을 따릅니다. 다만 인자가 둘이라 양쪽에 함께 성립해야 합니다.
 
@@ -169,7 +169,7 @@ BiMap(g1 ∘ f1, g2 ∘ f2, fab) == BiMap(g1, g2, BiMap(f1, f2, fab))
 
 ---
 
-## §10.8 Q&A
+## 10.8 Q&A
 
 > **Q1. Bifunctor 와 Functor 의 관계는 무엇입니까?**
 
@@ -193,7 +193,7 @@ LanguageExt v5 의 trait 으로 제공되지 않기 때문입니다. 이 책의 
 
 ---
 
-## §10.9 요약
+## 10.9 요약
 
 - Bifunctor 는 타입 인자가 둘인 컨테이너 (`Either<L, R>`, `Pair<A, B>`) 의 양쪽을 변환하는 trait 입니다. 마커는 `K<F, L, A>` 입니다.
 - 핵심 멤버는 `BiMap : (L → M) → (A → B) → F<L, A> → F<M, B>` 하나이고, `MapFirst` / `MapSecond` 는 항등 함수를 넣은 기본 구현으로 따라옵니다.
