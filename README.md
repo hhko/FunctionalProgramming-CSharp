@@ -2,7 +2,7 @@
 
 > **C# 으로 배우는 함수형 프로그래밍 — Wlaschin 의 Elevated World 비유와 LanguageExt v5 의 `K<F, A>` 직접 구현으로**
 
-이 책은 .NET 개발자가 Haskell / F# / Scala 의 함수형 어휘를 C# 어법으로 손에 잡고, LanguageExt v5 의 내부 구현 방식을 직접 코드로 옮겨 보면서 함수형의 어휘 + 동작 원리 양쪽을 동시에 익히는 책입니다.
+이 책은 .NET 개발자가 Haskell / F# / Scala 의 함수형 어휘를 C# 어법으로 손에 잡고, LanguageExt v5 의 내부 구현 방식을 직접 코드로 옮겨 보면서 함수형의 어휘와 동작 원리 양쪽을 동시에 익히는 책입니다.
 
 ---
 
@@ -56,7 +56,7 @@ LanguageExt v5 의 핵심 발상인 **`K<F, A>` 마커 인터페이스 + self-bo
 
 1. **이해의 자신감** — Functor / Monad / IO 효과 / 컬렉션 / 동시성 / 스트리밍 같은 추상의 내부 메커니즘을 일상의 말로 설명할 수 있습니다.
 2. **선택의 자신감** — 도메인 문제 앞에서 어느 추상이 적절한지 시그니처만 보고 판단하고 조합할 수 있습니다.
-3. **구현 + 읽기의 자신감** — LanguageExt v5 / Haskell / F# / Scala 의 함수형 코드를 시그니처만 보고도 읽어내고, 자기 손으로 비슷한 자료를 구현할 수 있습니다.
+3. **구현과 읽기의 자신감** — LanguageExt v5 / Haskell / F# / Scala 의 함수형 코드를 시그니처만 보고도 읽어내고, 자기 손으로 비슷한 자료를 구현할 수 있습니다.
 4. **실무의 자신감** — LanguageExt v5 의 효과 시스템 (`Eff` / `IO` / Schedule / Resource / OpenTelemetry) 으로 실무 코드를 자신 있게 작성할 수 있습니다.
 5. **테스트 자동화의 자신감** — xUnit + property-based + 합법칙 검증의 함수형 테스트 표준을 자기 코드에 적용할 수 있습니다.
 
@@ -81,7 +81,7 @@ Part 1 ~ 4 는 함수형의 어휘와 동작 원리를 쌓습니다 (Foundations
 
 | Part | 주제 | 상태 |
 |---|---|---|
-| **[Part 1. Foundations](./Part01-Foundations/README.md)** | 함수형 기초 — 두 평행 세계 비유 정착 + Functor / Foldable / Applicative / Monad / Traversable + Validation 실전. 5개 trait + 4 가지 함수 유형. | **진행 중** |
+| **[Part 1. Foundations](./Part01-Foundations/README.md)** | 함수형 기초 — 두 평행 세계 비유 정착 + Functor / Foldable / Applicative / Monad / Traversable + Validation 실전. 5개 trait + 4 가지 함수 유형(`a -> b`, `a -> E<b>`, `E<a> -> b`, `E<a> -> E<b>`). | **진행 중** |
 | **Part 2. Collections** | 불변 컬렉션 — Part 1 의 toy 추상을 실제 `Seq` / `Map` / `HashMap` 에 적용. `Alternative` / `SemigroupK` / `MonoidK` (선택과 결합). | 예정 |
 | **Part 3. Effect Monads** | 효과를 담는 모나드 — `Reader` / `State` / `Writer` 와 `Readable` / `Stateful` / `Writable` trait. 효과를 타입으로 인코딩. | 예정 |
 | **Part 4. Monad Transformers** | 세계를 쌓다 — `ReaderT` / `StateT` / `WriterT` / `OptionT` / `EitherT` + `MonadIO`. 여러 효과를 한 스택에. | 예정 |
@@ -98,34 +98,33 @@ Part 1 ~ 4 는 함수형의 어휘와 동작 원리를 쌓습니다 (Foundations
 
 ```
 FunctionalProgramming-CSharp/
-├── README.md                       : 이 문서 (책 전체 안내)
-├── LanguageExt-Concept-Map.md      : LanguageExt v5 기능 ↔ 함수형 개념 ↔ 책 커버리지 매핑표
-├── Part01-Foundations/             : 1부 본문 (진행 중)
-│   ├── README.md                   : 1부 배경과 목표
+├── README.md                           : 이 문서 (책 전체 안내)
+├── Part01-Foundations/                 : 1부 본문 (진행 중)
+│   ├── README.md                       : 1부 배경과 목표
 │   ├── Ch01-Paradigm-Shift.md
 │   ├── Ch02-Higher-Kinds.md
 │   ├── Ch03-Monoid.md
 │   ├── Ch04-Functor.md
 │   ├── Ch05-Applicative.md
 │   ├── Ch06-Foldable.md
-│   ├── Ch07-Monad.md               : 예정
-│   ├── Ch08-Validation.md          : 예정
-│   ├── Ch09-Traversable.md         : 예정
-│   ├── Ch10-Bifunctor.md
-│   ├── Ch11-NaturalTransformation.md
-│   └── images/                     : 본문 SVG 도식
-├── Part02-Collections/             : 2부 (예정) — 불변 컬렉션 — 추상의 실전 적용
-├── Part03-EffectMonads/            : 3부 (예정) — 효과를 담는 모나드 (Reader / State / Writer)
-├── Part04-MonadTransformers/       : 4부 (예정) — 세계를 쌓다 — 모나드 변환기
-├── Part05-EffectSystem/            : 5부 (예정) — IO 와 효과 런타임 (IO / Eff)
-├── Part06-RobustEffects/           : 6부 (예정) — 견고한 효과 (Schedule / Resource / Observability)
-├── Part07-Concurrency/             : 7부 (예정) — 동시성 (Atom / STM / Ref)
-├── Part08-Streaming/               : 8부 (예정) — 스트리밍 (StreamT / Pipes / Conduit)
-├── Part09-FunctionalTesting/       : 9부 (예정) — 함수형 테스트 표준
-├── Part10-RealWorld/               : 10부 (예정) — 실무 예제
-└── code/                           : 학습용 실행 코드
+│   ├── Ch07-Monad.md                   : 예정
+│   ├── Ch08-Validation.md              : 예정
+│   ├── Ch09-Traversable.md             : 예정
+│   ├── Ch10-Bifunctor.md               : 예정
+│   ├── Ch11-NaturalTransformation.md   : 예정
+│   └── images/                         : 본문 SVG 도식
+├── Part02-Collections/                 : 2부 예정 — 불변 컬렉션 — 추상의 실전 적용
+├── Part03-EffectMonads/                : 3부 예정 — 효과를 담는 모나드 (Reader / State / Writer)
+├── Part04-MonadTransformers/           : 4부 예정 — 세계를 쌓다 — 모나드 변환기
+├── Part05-EffectSystem/                : 5부 예정 — IO 와 효과 런타임 (IO / Eff)
+├── Part06-RobustEffects/               : 6부 예정 — 견고한 효과 (Schedule / Resource / Observability)
+├── Part07-Concurrency/                 : 7부 예정 — 동시성 (Atom / STM / Ref)
+├── Part08-Streaming/                   : 8부 예정 — 스트리밍 (StreamT / Pipes / Conduit)
+├── Part09-FunctionalTesting/           : 9부 예정 — 함수형 테스트 표준
+├── Part10-RealWorld/                   : 10부 예정 — 실무 예제
+└── code/                               : 학습용 실행 코드
     ├── FunctionalProgramming-CSharp.slnx
-    ├── Part01-Foundations/         : 11 챕터 모두 완성 (빌드·실행 가능)
+    ├── Part01-Foundations/             : 11 챕터 모두 완성 (빌드·실행 가능)
     │   ├── Ch01-Paradigm-Shift/
     │   ├── Ch02-HigherKinds/
     │   ├── Ch03-Monoid/
@@ -137,18 +136,16 @@ FunctionalProgramming-CSharp/
     │   ├── Ch09-Traversable/
     │   ├── Ch10-Bifunctor/
     │   └── Ch11-NaturalTransformation/
-    ├── Part02-Collections/         : 예정 (Ch12 ~ Ch14)
-    ├── Part03-EffectMonads/        : 예정 (Ch15 ~ Ch18)
-    ├── Part04-MonadTransformers/   : 예정 (Ch19 ~ Ch22)
-    ├── Part05-EffectSystem/        : 예정 (Ch23 ~ Ch26)
-    ├── Part06-RobustEffects/       : 예정 (Ch27 ~ Ch29)
-    ├── Part07-Concurrency/         : 예정 (Ch30 ~ Ch32)
-    ├── Part08-Streaming/           : 예정 (Ch33 ~ Ch35)
-    ├── Part09-FunctionalTesting/   : 예정 (Ch36 ~ Ch38)
-    └── Part10-RealWorld/           : 예정 (Ch39 ~ Ch42)
+    ├── Part02-Collections/             : 예정 (Ch12 ~ Ch14)
+    ├── Part03-EffectMonads/            : 예정 (Ch15 ~ Ch18)
+    ├── Part04-MonadTransformers/       : 예정 (Ch19 ~ Ch22)
+    ├── Part05-EffectSystem/            : 예정 (Ch23 ~ Ch26)
+    ├── Part06-RobustEffects/           : 예정 (Ch27 ~ Ch29)
+    ├── Part07-Concurrency/             : 예정 (Ch30 ~ Ch32)
+    ├── Part08-Streaming/               : 예정 (Ch33 ~ Ch35)
+    ├── Part09-FunctionalTesting/       : 예정 (Ch36 ~ Ch38)
+    └── Part10-RealWorld/               : 예정 (Ch39 ~ Ch42)
 ```
-
-> **총 42 챕터 구성** — 1부 11 챕터 (신규 Ch03 Monoid / Ch10 Bifunctor / Ch11 NaturalTransformation 추가) + 2 ~ 10 부 31 챕터 (각 2 ~ 4 챕터). 1부 코드는 11 챕터 모두 완성, 본문은 8 장 완성 (Ch01 / 02 / 03 / 04 / 05 / 06 / 10 / 11), 3 장 (Ch07 / 08 / 09) 예정.
 
 본문 (`PartN-…/*.md`) 과 코드 (`code/PartN-…/*`) 가 시그니처 단계에서 정합합니다. 본문을 읽으면서 해당 코드를 IDE 에서 직접 실행 / 수정해 볼 수 있습니다.
 

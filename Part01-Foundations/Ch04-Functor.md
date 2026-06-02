@@ -10,8 +10,6 @@
 > - [ ] 어떤 Functor 든 받는 일반 함수를 직접 작성할 수 있습니다.
 > - [ ] Functor 가 아닌 변환의 시그니처가 왜 다른지 분류할 수 있습니다.
 
-> 참고 — 이 장의 Elevated World 어휘는 Scott Wlaschin 의 "Map and Bind and Apply, Oh my!" 시리즈 ([fsharpforfunandprofit.com/posts/elevated-world](https://fsharpforfunandprofit.com/posts/elevated-world/)) 의 어휘 분류를 따릅니다. 1부 전체가 그 시리즈의 흐름 (`map → apply → bind → traverse → Reader`) 과 정렬됩니다.
-
 ---
 
 ## 4.1 `E<a> → E<b>` 유형 함수의 일반화 — 목적

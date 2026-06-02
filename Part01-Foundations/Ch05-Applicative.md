@@ -66,6 +66,8 @@ Func<int, int, int>       add  = (x, y) => x + y;     // (int, int) → int     
 Func<int, Func<int, int>> addC = x => y => x + y;     // int → (int → int)     ← 들어감
 ```
 
+**한 줄 정리** — `Map` 의 첫 자리는 1 인자 Normal 함수만 받으므로, 2 인자 이상 함수는 Curry 로 1 인자 체인으로 비틀어야 들어갑니다.
+
 #### 두 번째 단계 — 첫 인자만 `Map` 으로 적용해 봅니다
 
 ```csharp
@@ -76,7 +78,15 @@ K<MyMaybeF, Func<int, int>> step1 = MyMaybeF.Map(addC, two);
 
 시그니처를 따라가 봅니다. `Map : (a → b) → E<a> → E<b>` 에서 `a = int`, `b = Func<int, int>` 이므로 결과는 `K<MyMaybeF, Func<int, int>>` 입니다. **인자 한 개만 줬으니 다음 인자를 기다리는 함수가 그대로 Elevated 한 칸 안에 갇혀 있습니다**.
 
-#### 세 번째 단계 — 두 번째 인자 `three` 는 무엇으로 합치나?
+**한 줄 정리** — Curry 한 함수의 첫 인자만 `Map` 으로 적용하면, 다음 인자를 기다리는 함수가 Elevated 한 칸 안에 갇힌 모양 `K<F, a → b>` 가 됩니다.
+
+**두 단계 정리** — 두 단계로 문제의 모양이 드러났습니다. `Map` 의 첫 자리가 1 인자 Normal 함수만 받는다는 한계 (첫 번째 단계), 첫 인자 적용 후 Elevated 한 칸 안에 함수가 갇힌다는 결과 (두 번째 단계) 입니다. 다음 두 단계에서 갇힌 함수를 풀어낼 새 도구를 시그니처로 유도합니다.
+
+### 5.1.2 갇힌 함수를 풀어낼 새 도구 — `Apply` 의 시그니처 유도
+
+앞 두 단계에서 갇힌 함수 `K<F, a → b>` 와 두 번째 Elevated 값 `K<F, a>` 의 결합 자리가 남았습니다. 이 자리를 어떤 시그니처의 도구로 풀어야 하는지, 그 도구가 `Map` 으로 환원되지 않는 이유를 두 단계로 확인합니다.
+
+#### 세 번째 단계 (a) — 두 번째 인자 `three` 는 무엇으로 합치나?
 
 `step1` 안에 갇힌 함수를 풀어내 `three : K<MyMaybeF, int>` 와 합치려면 다음 모양의 도구가 필요합니다.
 
@@ -98,6 +108,10 @@ wrapped(5);                // ✗ 컴파일 에러. wrapped 는 함수가 아니
 ```
 
 `plain` 은 값을 받아 값을 돌려주는 일반 함수입니다. `plain(5)` 처럼 직접 호출합니다. `wrapped` 는 컨테이너 (`MyMaybeF` 의 `Just`) 이고 그 안에 함수가 들어 있을 뿐입니다. 컨테이너를 마치 함수처럼 호출하면 컴파일러가 거부합니다.
+
+**한 줄 정리** — 필요한 도구의 시그니처 모양은 `K<F, a → b> → K<F, a> → K<F, b>` 이며, 첫 자리가 컨테이너 안 함수 (Elevated 시민) 라는 점이 일반 함수 (Normal 시민) 와의 한 겹 차이입니다.
+
+#### 세 번째 단계 (b) — `Map` 첫 자리는 Normal 함수만, `Apply` 가 필요합니다
 
 이제 `Map` 의 시그니처에 두 타입을 각각 넣어 봅니다.
 
@@ -132,13 +146,17 @@ K<MyMaybeF, int> sum = MyMaybeF.Apply<int, int>(step1, three);   // → Just(5)
 
 `Map` 과 `Apply` 의 결정적 차이는 **첫 자리의 함수가 Normal World 시민이냐 Elevated World 시민이냐** 에 있습니다. 이 한 겹 차이가 두 trait 을 가르는 자리입니다.
 
+**한 줄 정리** — `Map` 은 첫 자리에 Normal 함수만 받으므로 갇힌 함수 `K<F, a → b>` 를 그대로 결합할 수 없고, 첫 자리에 컨테이너 안 함수를 받는 새 도구 `Apply` 가 필요합니다.
+
 #### 네 번째 단계 — 그래서 `apply` 가 필요합니다
 
 위 필요한 시그니처 `K<F, a → b> → K<F, a> → K<F, b>` 가 정확히 **`Apply` 의 시그니처**입니다. `Pure + Apply` 두 멤버가 함께 있어야 갇힌 함수를 풀어내고 두 Elevated 값을 한 Normal 함수로 합칠 수 있습니다.
 
 > Raab 의 진단 인용 — "map only can work with one-argument functions! The definition of map expects a function `'a -> 'b` as its first argument." 두 인자 이상 함수에 `map` 을 적용하면 `option<('a -> 'b)>` 같은 함수가 컨테이너 안에 갇힌 어색한 모양만 남습니다.
 
-### 5.1.2 4 가지 함수 유형 — 시그니처와 1부 매핑
+**네 단계 정리** — 네 단계 통일 논증의 결론은 한 줄입니다. `Map` 의 1 인자 한계 (첫 번째 단계 ~ 두 번째 단계) 가 `Apply` 라는 새 시그니처를 자연스럽게 유도하고 (세 번째 단계), `Pure + Apply` 두 멤버가 그 자리를 닫습니다 (네 번째 단계). 다음 절은 이 새 도구가 4 가지 함수 유형의 어디에 자리잡는지 보여줍니다.
+
+### 5.1.3 4 가지 함수 유형 — 시그니처와 1부 매핑
 
 | 시그니처 | 1부 매핑 | 어휘 (elevated-world 글) |
 |---|---|---|
@@ -149,7 +167,7 @@ K<MyMaybeF, int> sum = MyMaybeF.Apply<int, int>(step1, three);   // → Just(5)
 
 4장의 `map` 은 `E<a> → E<b>` 의 1 인자 자리만 다뤘습니다. `a → b` 한 개를 받아 `E<a> → E<b>` 로 끌어올렸습니다. 5장의 Applicative 는 같은 `E<a> → E<b>` 를 다인자로 넓힙니다. `Lift2` 가 `(a, b) → c` 한 개를 `E<a> → E<b> → E<c>` 로, `Lift3` 가 3 인자를 `E<a> → E<b> → E<c> → E<d>` 로 끌어올립니다.
 
-### 5.1.3 이 장의 목표
+### 5.1.4 이 장의 목표
 
 이 장의 목표는 한 줄입니다. 어떤 E 든 다인자 Normal 함수 `(a, b, …, z) → r` 을 그 모양 그대로 `E<a> → E<b> → … → E<z> → E<r>` 의 다인자 Elevated 함수로 끌어올릴 수 있어야 합니다. 그 끌어올림의 trait 이 Applicative 입니다.
 
