@@ -347,7 +347,7 @@ public interface Semigroup<A>
 
 네 자리를 차례로 봅니다.
 
-- **`where A : Semigroup<A>`** — self-bound 제약. 자기 자신이 자기 trait 을 구현한다는 약속 (2 장 §2.10.1) 입니다. `A` 자리에 들어갈 타입이 **Semigroup 의 구현체임** 을 컴파일러에 보장합니다. 일반 함수 안에서 `a + b` 같은 호출이 가능한 자리를 만드는 도구이고, 4 장 이후 모든 trait 의 공통 골격입니다.
+- **`where A : Semigroup<A>`** — self-bound 제약. 자기 자신이 자기 trait 을 구현한다는 약속 (2 장 §2.8.1) 입니다. `A` 자리에 들어갈 타입이 **Semigroup 의 구현체임** 을 컴파일러에 보장합니다. 일반 함수 안에서 `a + b` 같은 호출이 가능한 자리를 만드는 도구이고, 4 장 이후 모든 trait 의 공통 골격입니다.
 - **`A Combine(A rhs)`** — instance 메서드. 결합 능력이 **값과 함께 사는** 어법입니다. 호출 모양은 `lhs.Combine(rhs)` 입니다. 왼쪽 값 `lhs` 가 자기 안의 결합 능력으로 오른쪽 값 `rhs` 와 합쳐집니다. 4 장 이후 모든 trait 이 `static abstract` 인 것과 대비됩니다. 왜 그렇게 다른지는 §3.10 에서 자세히 짚습니다.
 - **`static virtual A operator +`** — default 연산자. `+` 가 모든 Semigroup 구현체에 자동 제공되는 어법입니다. 본문은 한 줄, `lhs.Combine(rhs)` 의 위임입니다. 즉 **`+` 는 `Combine` 의 syntactic sugar** 입니다. 구현체가 `Combine` 한 메서드만 정의하면 `+` 가 자동으로 작동합니다. Haskell 의 `<>` 연산자가 C# 의 `+` 로 옮겨오는 모양입니다. 다만 trait 의 default `+` 는 **generic 제약 context 안에서만** 직접 호출됩니다 (`where M : Semigroup<M>` 안의 `a + b`). 구체 타입 `Sum + Sum` 직접 호출을 위해서는 `Functions/SemigroupExtensions.cs` 의 *extension static operator +* 가 필요합니다 (다음 §3.6.5).
 - **`static virtual SemigroupInstance<A> Instance`** — trait 을 record 형태로 노출. v5 의 결정적 어법으로, trait 을 **값처럼 전달** 할 수 있게 합니다. C# 의 generic 제약은 **제약 자체를 인자로 못 받는** 한계가 있는데, 이 한계를 우회하는 도구입니다. `record SemigroupInstance<A>(Func<A, A, A> Combine)` 형태이고, `Semigroup.combine` static helper 가 `Combine` 필드의 기본값입니다. `Monoid.instance<A>()` 같은 helper 로 가져와 `instance.Combine(x, y)` 어법으로 호출합니다.
@@ -376,7 +376,7 @@ public interface Monoid<A> : Semigroup<A>
 
 세 자리를 봅니다.
 
-- **`Monoid<A> : Semigroup<A>`** — trait 상속. Monoid 가 Semigroup 의 모든 능력 (`Combine` + default `+` + `Instance`) 을 물려받고 두 멤버를 더한다는 어법입니다. trait 들 사이의 상속 관계 (2 장 §2.12) 가 처음 등장합니다. 5 장 Applicative (Functor 의 자식), 7 장 Monad (Applicative 의 자식) 같은 1 부의 다른 trait 사슬의 원형이기도 합니다.
+- **`Monoid<A> : Semigroup<A>`** — trait 상속. Monoid 가 Semigroup 의 모든 능력 (`Combine` + default `+` + `Instance`) 을 물려받고 두 멤버를 더한다는 어법입니다. trait 들 사이의 상속 관계 (2 장 §2.10) 가 처음 등장합니다. 5 장 Applicative (Functor 의 자식), 7 장 Monad (Applicative 의 자식) 같은 1 부의 다른 trait 사슬의 원형이기도 합니다.
 - **`static abstract A Empty { get; }`** — 타입의 단위원. 결합 능력이 **값과 함께 산다** 면 단위원은 **타입에 단 하나 박힌다** 는 어법입니다. `Sum` 타입의 단위원이 `Sum(0)`, `Product` 타입의 단위원이 `Product(1)` 같이 **각 타입마다 하나** 입니다. 어느 인스턴스가 들고 있는 게 아니라 타입 자체가 들고 있는 자리라 `static abstract` 가 자연스럽습니다 (§3.6.3 에서 자세히).
 - **`new static virtual MonoidInstance<A> Instance`** — Semigroup 의 `Instance` 를 가리고 단위원까지 가진 record 로 노출. `record MonoidInstance<A>(A Empty, Func<A, A, A> Combine) : SemigroupInstance<A>(Combine)` 형태로 SemigroupInstance 를 상속하고 `Empty` 한 자리만 더합니다. trait 의 상속 (`Monoid<A> : Semigroup<A>`) 이 **Instance record 의 상속** 과 정확히 정렬됩니다.
 
@@ -421,17 +421,17 @@ public interface Monoid<A> : Semigroup<A> where A : Monoid<A>
 }
 ```
 
-**Monoid 의 시그니처에는 `K<F, A>` 가 등장하지 않습니다.** 그 이유는 Monoid 가 **완성 타입** (`int`, `string`) 에 대한 추상이기 때문입니다. 끌어올릴 컨테이너 (`Option<a>`, `List<a>`) 가 없으니 **컨테이너의 안쪽을 가리키는 어휘** 도 필요 없습니다. `K<F, A>` 의 결정적 동기 (2 장 §2.9, C# 이 `* → *` 의 type constructor 를 일급으로 못 다룬다는 Order 2 의 미지원 우회) 자체가 Monoid 에는 적용되지 않습니다.
+**Monoid 의 시그니처에는 `K<F, A>` 가 등장하지 않습니다.** 그 이유는 Monoid 가 **완성 타입** (`int`, `string`) 에 대한 추상이기 때문입니다. 끌어올릴 컨테이너 (`Option<a>`, `List<a>`) 가 없으니 **컨테이너의 안쪽을 가리키는 어휘** 도 필요 없습니다. `K<F, A>` 의 결정적 동기 (2 장 §2.7, C# 이 `* → *` 의 type constructor 를 일급으로 못 다룬다는 Order 2 의 미지원 우회) 자체가 Monoid 에는 적용되지 않습니다.
 
 | trait | kind | 자료 타입 어법 | `K<F, A>` |
 |---|---|---|---|
 | Monoid | `*` (Order 0) | `Sum`, `Concat` (완성 타입) | 불필요 |
 | Functor | `* → *` (Order 1) | `MyList<a>`, `MyMaybe<a>` (컨테이너) | 필요 |
 
-Monoid 의 자료 타입 어법도 단순화됩니다. 2 장 §2.13 의 3-tuple 패턴 (자료 / 태그 / trait 의 세 조각) 에서 **태그** 가 빠집니다. `Sum` 자체가 자료 타입이면서 동시에 **trait 의 구현체** 입니다. 태그 타입 (`MyListF` 같은 빈 클래스) 도 없고 `K<F, A>` 마커도 없습니다. 자료가 trait 을 직접 구현하는 가장 단순한 부착 패턴입니다.
+Monoid 의 자료 타입 어법도 단순화됩니다. 2 장 §2.11 의 3-tuple 패턴 (자료 / 태그 / trait 의 세 조각) 에서 **태그** 가 빠집니다. `Sum` 자체가 자료 타입이면서 동시에 **trait 의 구현체** 입니다. 태그 타입 (`MyListF` 같은 빈 클래스) 도 없고 `K<F, A>` 마커도 없습니다. 자료가 trait 을 직접 구현하는 가장 단순한 부착 패턴입니다.
 
 ```csharp
-// 3-tuple 패턴 (Order 1 — Ch02 §2.13)
+// 3-tuple 패턴 (Order 1 — Ch02 §2.11)
 public sealed class MyList<A>   : K<MyListF, A> { ... }     // 자료
 public sealed class MyListF     : Functor<MyListF> { ... }  // 태그 (Map 의 호스트)
 public interface  Functor<F>    where F : Functor<F> { ... } // trait
@@ -506,7 +506,7 @@ public static class MonoidLaws
 }
 ```
 
-검증 함수의 시그니처를 봅니다. **`where M : Monoid<M>`** 한 줄이 **어떤 Monoid 든** 받아들이는 약속입니다. `M.Empty` 는 타입의 능력 (static), `a.Combine(b)` 는 값의 능력 (instance). 두 호출이 한 함수 안에서 자기 위치에 정확히 놓입니다. 어떤 자료 타입이 Monoid 만 만족하면 이 검증 함수 세 개가 **공짜로** 적용되고, 2 장 §2.14 의 **어떤 Functor 든 받는 일반 함수** 와 같은 ROI 입니다.
+검증 함수의 시그니처를 봅니다. **`where M : Monoid<M>`** 한 줄이 **어떤 Monoid 든** 받아들이는 약속입니다. `M.Empty` 는 타입의 능력 (static), `a.Combine(b)` 는 값의 능력 (instance). 두 호출이 한 함수 안에서 자기 위치에 정확히 놓입니다. 어떤 자료 타입이 Monoid 만 만족하면 이 검증 함수 세 개가 **공짜로** 적용되고, 2 장 §2.12 의 **어떤 Functor 든 받는 일반 함수** 와 같은 ROI 입니다.
 
 검증을 호출해 봅니다.
 
@@ -746,7 +746,7 @@ Monoid.combine(Array.Empty<Sum>());
 // → Sum(0) — 빈 목록도 안전
 ```
 
-다섯 자료 타입에 **같은 함수 한 줄 호출**. trait 한 정의 + 자료마다 부착이 만드는 ROI 의 가장 명확한 실증 사례입니다. **trait 부착 한 번에 컨테이너의 모든 시민이 trait 의 모든 능력을 자동으로 가집니다** (1 장 §1.7.2) 가 Monoid 에서 작동하는 모양으로, `FunctorOps.Run` (2 장 §2.14) 의 Order 0 자리 원형이기도 합니다.
+다섯 자료 타입에 **같은 함수 한 줄 호출**. trait 한 정의 + 자료마다 부착이 만드는 ROI 의 가장 명확한 실증 사례입니다. **trait 부착 한 번에 컨테이너의 모든 시민이 trait 의 모든 능력을 자동으로 가집니다** (1 장 §1.7.2) 가 Monoid 에서 작동하는 모양으로, `FunctorOps.Run` (2 장 §2.12) 의 Order 0 자리 원형이기도 합니다.
 
 `Monoid.combine` 자유 함수는 6 장 Foldable 의 디딤돌이기도 합니다. Foldable 은 **컨테이너 (`E<a>`) 안의 구조를 Normal World 의 한 값으로 끌어내리는** 추상이고, 그 끌어내림의 출발점이 **어떤 값으로 시작해 무엇으로 합칠 것인가** 의 결정입니다. `Monoid.combine` 이 그 결정을 **Monoid 의 `Empty` + `Combine`** 으로 묶은 함수입니다. 6 장에서 같은 발상에 **컨테이너 모양** (`E<a>`) 을 추가하면 Foldable 의 시그니처로 자연스럽게 진화합니다.
 

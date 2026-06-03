@@ -215,7 +215,7 @@ static abstract                       // 정적 + 추상
 | 자리 | 의미 |
 |---|---|
 | `Applicative<F> : Functor<F>` | Applicative 는 Functor 의 능력 위에 두 멤버를 추가. `Map` 을 자동으로 갖습니다 |
-| `where F : Applicative<F>` | F 가 자기 자신을 구현체로 갖습니다 (2장 §2.10 의 self-bound) |
+| `where F : Applicative<F>` | F 가 자기 자신을 구현체로 갖습니다 (2장 §2.8 의 self-bound) |
 | 두 멤버 모두 `static abstract` | trait 에 사는 능력. 호출은 `MyMaybeF.Pure(...)`, `MyMaybeF.Apply(...)` |
 | `Apply` 의 첫 인자 `K<F, Func<A, B>>` | **함수도 컨테이너 안에 삽니다** — `map` 과의 결정적 차이 |
 

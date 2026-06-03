@@ -164,7 +164,7 @@ static abstract                  // 정적 + 추상
 
 | 자리 | 의미 |
 |---|---|
-| `where F : Foldable<F>` | F 가 자기 자신을 구현체로 갖습니다 (2장 §2.10 의 self-bound) |
+| `where F : Foldable<F>` | F 가 자기 자신을 구현체로 갖습니다 (2장 §2.8 의 self-bound) |
 | `static abstract` | trait 에 사는 능력. 호출은 `MyListF.FoldRight(...)` |
 | 출력 `B` (`K<F, B>` 가 아님!) | F 가 결과에서 사라집니다 — 끌어내림의 시그니처 강제 |
 | `B seed`, `Func<A, B, B> f` | Normal 의 두 도구 — 시작 값과 한 단계 누적 함수 |
@@ -331,7 +331,7 @@ var r3 = nums.FoldLeft((acc, n) => acc + n, 0);
 
 ### 6.3.1 3-tuple 패턴으로 부착
 
-추상 trait 만으로는 동작하지 않습니다. 2장 §2.13 의 3-tuple 패턴으로 첫 자료 타입에 부착합니다. 4장의 MyList Functor 와 완전히 같은 자료 타입 위에 다른 능력을 얹습니다.
+추상 trait 만으로는 동작하지 않습니다. 2장 §2.11 의 3-tuple 패턴으로 첫 자료 타입에 부착합니다. 4장의 MyList Functor 와 완전히 같은 자료 타입 위에 다른 능력을 얹습니다.
 
 ```csharp
 // ① 자료 타입 — 시퀀스를 들고 K<MyListF, A> 를 구현 (4장과 공유).

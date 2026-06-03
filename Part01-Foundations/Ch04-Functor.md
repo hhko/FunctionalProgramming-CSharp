@@ -132,7 +132,7 @@ static abstract             // 정적 + 추상
 
 | 자리 | 의미 |
 |---|---|
-| `where F : Functor<F>` | F 가 자기 자신을 구현체로 갖습니다 (2장 §2.10 의 self-bound) |
+| `where F : Functor<F>` | F 가 자기 자신을 구현체로 갖습니다 (2장 §2.8 의 self-bound) |
 | `static abstract` | trait 에 사는 능력. 호출은 `MyListF.Map(...)` |
 | 입력 `K<F, A>` / 출력 `K<F, B>` | F 가 같습니다 — 모양 보존이 시그니처 단계에서 강제됨 |
 
@@ -234,7 +234,7 @@ var r3 = maybe.Map(n => n.ToString());
 
 ### 4.3.1 3-tuple 패턴으로 부착
 
-추상 trait 만으로는 동작하지 않습니다. 2장 §2.13 의 3-tuple 패턴으로 첫 자료 타입에 부착합니다.
+추상 trait 만으로는 동작하지 않습니다. 2장 §2.11 의 3-tuple 패턴으로 첫 자료 타입에 부착합니다.
 
 ```csharp
 // ① 자료 타입 — 시퀀스를 들고 K<MyListF, A> 를 구현.
