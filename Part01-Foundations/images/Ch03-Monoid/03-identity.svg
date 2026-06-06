@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 400" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#888"/>
+    </marker>
+  </defs>
+  <rect width="980" height="400" fill="#ffffff"/>
+
+  <text x="490" y="34" font-size="17" fill="#1f1f1f" text-anchor="middle" font-weight="bold">단위원의 항등 — Empty 는 사슬에서 사라지고, 빈 입력의 답이 된다</text>
+
+  <!-- Top: Empty vanishes in chain -->
+  <rect x="30" y="60" width="920" height="120" fill="#fffdf3" rx="12"/>
+  <text x="52" y="86" font-size="13" fill="#bf9000" font-weight="bold">① 사슬 어디에 끼어도 사라진다  —  항등 법칙  Empty · x == x == x · Empty</text>
+
+  <g font-family="'Consolas', monospace" font-size="15">
+    <rect x="70"  y="110" width="56" height="44" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/><text x="98"  y="138" fill="#5a4400" text-anchor="middle">a</text>
+    <rect x="190" y="110" width="90" height="44" fill="#f3f3f3" stroke="#bbb" stroke-width="1.6" stroke-dasharray="4 3" rx="6"/><text x="235" y="138" fill="#999" text-anchor="middle">Empty</text>
+    <rect x="344" y="110" width="56" height="44" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/><text x="372" y="138" fill="#5a4400" text-anchor="middle">b</text>
+    <circle cx="158" cy="132" r="12" fill="#bf9000"/><text x="158" y="137" font-size="13" fill="#fff" text-anchor="middle">·</text>
+    <circle cx="312" cy="132" r="12" fill="#bf9000"/><text x="312" y="137" font-size="13" fill="#fff" text-anchor="middle">·</text>
+    <line x1="412" y1="132" x2="556" y2="132" stroke="#888" stroke-width="1.6" marker-end="url(#ar3)"/>
+    <rect x="566" y="110" width="120" height="44" fill="#fde9b8" stroke="#bf9000" stroke-width="2.6" rx="6"/><text x="626" y="138" fill="#5a4400" text-anchor="middle" font-weight="bold">a · b</text>
+  </g>
+  <text x="235" y="172" font-size="11" fill="#999" text-anchor="middle">투명 — 빠진 것처럼</text>
+
+  <!-- Bottom: empty input fold -->
+  <rect x="30" y="198" width="920" height="180" fill="#f4f9ff" rx="12"/>
+  <text x="52" y="224" font-size="13" fill="#1f77b4" font-weight="bold">② 빈 입력의 답이 된다  —  Empty 한 자리가 §3.2.3 의 어긋남을 없앤다</text>
+
+  <g font-family="'Consolas', monospace" font-size="14" fill="#0c3a5e">
+    <text x="70" y="258">combine( [] )</text>
+    <line x1="280" y1="253" x2="340" y2="253" stroke="#888" stroke-width="1.5" marker-end="url(#ar3)"/>
+    <rect x="350" y="238" width="150" height="30" fill="#d1e9fa" stroke="#1f77b4" stroke-width="2" rx="5"/><text x="425" y="259" text-anchor="middle" font-weight="bold">Empty</text>
+    <text x="540" y="258" font-size="12" fill="#1f77b4">← 빈 목록도 안전 (예외·null 불필요)</text>
+
+    <text x="70" y="296">combine( [a] )</text>
+    <line x1="280" y1="291" x2="340" y2="291" stroke="#888" stroke-width="1.5" marker-end="url(#ar3)"/>
+    <rect x="350" y="276" width="150" height="30" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="5"/><text x="425" y="297" text-anchor="middle">a</text>
+
+    <text x="70" y="334">combine( [a, b] )</text>
+    <line x1="280" y1="329" x2="340" y2="329" stroke="#888" stroke-width="1.5" marker-end="url(#ar3)"/>
+    <rect x="350" y="314" width="150" height="30" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="5"/><text x="425" y="335" text-anchor="middle">a · b</text>
+
+    <text x="70" y="368">combine( [a, b, c] )</text>
+    <line x1="280" y1="363" x2="340" y2="363" stroke="#888" stroke-width="1.5" marker-end="url(#ar3)"/>
+    <rect x="350" y="348" width="150" height="30" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="5"/><text x="425" y="369" text-anchor="middle">a · b · c</text>
+  </g>
+</svg>

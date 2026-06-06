@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 540" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+    <marker id="arrow-lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+  </defs>
+
+  <rect width="1100" height="540" fill="#ffffff"/>
+
+  <text x="550" y="32" font-size="15" fill="#1f1f1f" text-anchor="middle" font-weight="bold">Map 의 한계와 Apply 의 필요성</text>
+  <text x="550" y="52" font-size="12" fill="#666" text-anchor="middle" font-style="italic">f : a → b → c (2 인자) 를 끌어올리려면 Map 한 번으로 끝나지 않습니다</text>
+
+  <rect x="40" y="80" width="1020" height="200" fill="#f4f9ff" stroke="none" rx="12"/>
+  <text x="60" y="106" font-size="13" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.5">Elevated World</text>
+
+  <text x="155" y="135" font-size="13" fill="#1f77b4" text-anchor="middle" font-weight="bold">단계 1 (시작)</text>
+  <rect x="100" y="148" width="110" height="60" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="155" y="185" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;a&gt;</text>
+
+  <text x="370" y="135" font-size="13" fill="#1f77b4" text-anchor="middle" font-weight="bold">단계 2 (Map 후)</text>
+  <rect x="290" y="148" width="170" height="60" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="375" y="185" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;b → c&gt;</text>
+  <text x="375" y="232" font-size="11" fill="#bf9000" text-anchor="middle" font-style="italic">함수가 컨테이너 안에 갇혔습니다</text>
+
+  <text x="610" y="135" font-size="13" fill="#1f77b4" text-anchor="middle" font-weight="bold">+ E&lt;b&gt;</text>
+  <rect x="555" y="148" width="110" height="60" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="610" y="185" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;b&gt;</text>
+
+  <text x="475" y="178" font-size="28" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">⊛</text>
+
+  <text x="860" y="135" font-size="13" fill="#1f77b4" text-anchor="middle" font-weight="bold">단계 3 (Apply 후)</text>
+  <rect x="805" y="148" width="110" height="60" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="860" y="185" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;c&gt;</text>
+
+  <line x1="212" y1="178" x2="288" y2="178" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="250" y="166" font-size="14" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">Map(f)</text>
+
+  <line x1="667" y1="178" x2="803" y2="178" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="735" y="166" font-size="14" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">apply</text>
+
+  <rect x="40" y="320" width="1020" height="200" fill="#fffdf3" stroke="none" rx="12"/>
+  <text x="60" y="346" font-size="13" fill="#bf9000" font-style="italic" font-weight="bold" letter-spacing="0.5">Normal World — 원하는 모양</text>
+
+  <rect x="100" y="395" width="110" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="155" y="432" font-size="20" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">a</text>
+
+  <rect x="555" y="395" width="110" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="610" y="432" font-size="20" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">b</text>
+
+  <rect x="805" y="395" width="110" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="860" y="432" font-size="20" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">c</text>
+
+  <line x1="212" y1="425" x2="553" y2="425" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)" stroke-dasharray="0"/>
+  <text x="382" y="413" font-size="14" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">f (2 인자)</text>
+
+  <line x1="667" y1="425" x2="803" y2="425" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+
+  <line x1="155" y1="395" x2="155" y2="213" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <line x1="610" y1="395" x2="610" y2="213" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <line x1="860" y1="395" x2="860" y2="213" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+</svg>

@@ -20,51 +20,60 @@
   <rect width="1180" height="480" fill="#ffffff"/>
 
   <!-- Title -->
-  <text x="590" y="34" font-size="18" fill="#1f1f1f" text-anchor="middle" font-weight="bold">N×M    →    N+M</text>
+  <text x="590" y="34" font-size="18" fill="#1f1f1f" text-anchor="middle" font-weight="bold">같은 Map 을 손으로 N×M 번 베끼는 격자  →  trait 한 번 정의 N+M</text>
 
   <!-- ============ LEFT: N×M ============ -->
-  <rect x="30" y="80" width="500" height="370" fill="#fff7f5" stroke="none" rx="14"/>
-  <text x="280" y="115" font-size="15" fill="#c00" text-anchor="middle" font-weight="bold">객체지향 — N × M</text>
+  <rect x="30" y="78" width="500" height="372" fill="#fff7f5" stroke="none" rx="14"/>
+  <text x="280" y="112" font-size="15" fill="#c00" text-anchor="middle" font-weight="bold">객체지향 — N × M (격자를 손으로 채움)</text>
 
   <!-- 능력 헤더 (3) -->
-  <text x="225" y="155" font-size="13" fill="#444" text-anchor="middle" font-weight="bold">Map</text>
-  <text x="320" y="155" font-size="13" fill="#444" text-anchor="middle" font-weight="bold">Bind</text>
-  <text x="415" y="155" font-size="13" fill="#444" text-anchor="middle" font-weight="bold">Fold</text>
+  <text x="225" y="152" font-size="13" fill="#444" text-anchor="middle" font-weight="bold">Map</text>
+  <text x="320" y="152" font-size="13" fill="#444" text-anchor="middle" font-weight="bold">Bind</text>
+  <text x="415" y="152" font-size="13" fill="#444" text-anchor="middle" font-weight="bold">Fold</text>
 
-  <!-- 3x3 격자 (9 셀) — 시각적 강조 -->
+  <!-- 3x3 격자 (9 셀) — 각 칸을 ✎ 직접 구현 -->
   <!-- Row 1: List -->
-  <text x="125" y="195" font-size="13" fill="#444" text-anchor="end" font-weight="bold">List</text>
+  <text x="125" y="200" font-size="13" fill="#444" text-anchor="end" font-weight="bold">List</text>
   <rect x="180" y="170" width="90" height="50" fill="url(#grad-nxm)" stroke="#c00" stroke-width="2" rx="4"/>
+  <text x="225" y="201" font-size="16" fill="#a02018" text-anchor="middle">✎</text>
   <rect x="275" y="170" width="90" height="50" fill="url(#grad-nxm)" stroke="#c00" stroke-width="2" rx="4"/>
+  <text x="320" y="201" font-size="16" fill="#a02018" text-anchor="middle">✎</text>
   <rect x="370" y="170" width="90" height="50" fill="url(#grad-nxm)" stroke="#c00" stroke-width="2" rx="4"/>
+  <text x="415" y="201" font-size="16" fill="#a02018" text-anchor="middle">✎</text>
 
   <!-- Row 2: Option -->
-  <text x="125" y="250" font-size="13" fill="#444" text-anchor="end" font-weight="bold">Option</text>
+  <text x="125" y="255" font-size="13" fill="#444" text-anchor="end" font-weight="bold">Option</text>
   <rect x="180" y="225" width="90" height="50" fill="url(#grad-nxm)" stroke="#c00" stroke-width="2" rx="4"/>
+  <text x="225" y="256" font-size="16" fill="#a02018" text-anchor="middle">✎</text>
   <rect x="275" y="225" width="90" height="50" fill="url(#grad-nxm)" stroke="#c00" stroke-width="2" rx="4"/>
+  <text x="320" y="256" font-size="16" fill="#a02018" text-anchor="middle">✎</text>
   <rect x="370" y="225" width="90" height="50" fill="url(#grad-nxm)" stroke="#c00" stroke-width="2" rx="4"/>
+  <text x="415" y="256" font-size="16" fill="#a02018" text-anchor="middle">✎</text>
 
   <!-- Row 3: Task -->
-  <text x="125" y="305" font-size="13" fill="#444" text-anchor="end" font-weight="bold">Task</text>
+  <text x="125" y="310" font-size="13" fill="#444" text-anchor="end" font-weight="bold">Task</text>
   <rect x="180" y="280" width="90" height="50" fill="url(#grad-nxm)" stroke="#c00" stroke-width="2" rx="4"/>
+  <text x="225" y="311" font-size="16" fill="#a02018" text-anchor="middle">✎</text>
   <rect x="275" y="280" width="90" height="50" fill="url(#grad-nxm)" stroke="#c00" stroke-width="2" rx="4"/>
+  <text x="320" y="311" font-size="16" fill="#a02018" text-anchor="middle">✎</text>
   <rect x="370" y="280" width="90" height="50" fill="url(#grad-nxm)" stroke="#c00" stroke-width="2" rx="4"/>
+  <text x="415" y="311" font-size="16" fill="#a02018" text-anchor="middle">✎</text>
 
-  <!-- 9 cell counter (총 비용 숫자) — 큰 강조 -->
-  <text x="280" y="380" font-size="40" fill="#c00" text-anchor="middle" font-weight="bold">9</text>
-  <text x="280" y="406" font-size="12" fill="#933" text-anchor="middle">= 3 × 3 별개 구현</text>
-  <text x="280" y="428" font-size="11" fill="#933" text-anchor="middle">✗ 컨테이너마다 별개 코드</text>
+  <!-- 9 cell counter -->
+  <text x="280" y="382" font-size="40" fill="#c00" text-anchor="middle" font-weight="bold">9</text>
+  <text x="280" y="408" font-size="12" fill="#933" text-anchor="middle">= 3 × 3 별개 구현</text>
+  <text x="280" y="430" font-size="11" fill="#933" text-anchor="middle">✗ 칸마다 따로 — "같은 Map" 약속이 강제 안 됨</text>
 
   <!-- ============ 중앙 화살표 ============ -->
   <line x1="545" y1="240" x2="615" y2="240" stroke="#444" stroke-width="4" marker-end="url(#arrow-big)"/>
   <text x="580" y="225" font-size="13" fill="#444" text-anchor="middle" font-weight="bold">절감</text>
 
   <!-- ============ RIGHT: N+M ============ -->
-  <rect x="650" y="80" width="500" height="370" fill="#f4fbf6" stroke="none" rx="14"/>
-  <text x="900" y="115" font-size="15" fill="#0a7" text-anchor="middle" font-weight="bold">함수형 — N + M</text>
+  <rect x="650" y="78" width="500" height="372" fill="#f4fbf6" stroke="none" rx="14"/>
+  <text x="900" y="112" font-size="15" fill="#0a7" text-anchor="middle" font-weight="bold">함수형 — N + M (F 자리에 끼움)</text>
 
-  <!-- trait 영역 (M=3) — 왼쪽 세로 3 박스 -->
-  <text x="745" y="155" font-size="12" fill="#444" text-anchor="middle" font-weight="bold">trait (M=3)</text>
+  <!-- trait 영역 (M=3) -->
+  <text x="745" y="152" font-size="12" fill="#444" text-anchor="middle" font-weight="bold">trait (M=3)</text>
   <rect x="680" y="170" width="130" height="50" fill="url(#grad-nplusm-trait)" stroke="#0a7" stroke-width="2" rx="4"/>
   <text x="745" y="200" font-size="12" fill="#1a5a32" text-anchor="middle" font-weight="bold">Functor&lt;F&gt;</text>
   <rect x="680" y="225" width="130" height="50" fill="url(#grad-nplusm-trait)" stroke="#0a7" stroke-width="2" rx="4"/>
@@ -72,11 +81,11 @@
   <rect x="680" y="280" width="130" height="50" fill="url(#grad-nplusm-trait)" stroke="#0a7" stroke-width="2" rx="4"/>
   <text x="745" y="310" font-size="12" fill="#1a5a32" text-anchor="middle" font-weight="bold">Foldable&lt;F&gt;</text>
 
-  <!-- 가운데 + (연결 표시) -->
+  <!-- 가운데 + -->
   <text x="900" y="260" font-size="32" fill="#0a7" text-anchor="middle" font-weight="bold">+</text>
 
-  <!-- 컨테이너 영역 (N=3) — 오른쪽 세로 3 박스 -->
-  <text x="1055" y="155" font-size="12" fill="#444" text-anchor="middle" font-weight="bold">컨테이너 (N=3)</text>
+  <!-- 컨테이너 영역 (N=3) -->
+  <text x="1055" y="152" font-size="12" fill="#444" text-anchor="middle" font-weight="bold">컨테이너 (N=3)</text>
   <rect x="990" y="170" width="130" height="50" fill="url(#grad-nplusm-cont)" stroke="#0a7" stroke-width="2" rx="4"/>
   <text x="1055" y="200" font-size="12" fill="#1a5a32" text-anchor="middle" font-weight="bold">MyList</text>
   <rect x="990" y="225" width="130" height="50" fill="url(#grad-nplusm-cont)" stroke="#0a7" stroke-width="2" rx="4"/>
@@ -84,8 +93,8 @@
   <rect x="990" y="280" width="130" height="50" fill="url(#grad-nplusm-cont)" stroke="#0a7" stroke-width="2" rx="4"/>
   <text x="1055" y="310" font-size="12" fill="#1a5a32" text-anchor="middle" font-weight="bold">MyTask</text>
 
-  <!-- 6 cell counter (총 비용 숫자) — 큰 강조 -->
-  <text x="900" y="380" font-size="40" fill="#0a7" text-anchor="middle" font-weight="bold">6</text>
-  <text x="900" y="406" font-size="12" fill="#395" text-anchor="middle">= 3 + 3 (trait + 컨테이너)</text>
-  <text x="900" y="428" font-size="11" fill="#395" text-anchor="middle">✓ F 자리에 컨테이너만 바꿔 끼움</text>
+  <!-- 6 cell counter -->
+  <text x="900" y="382" font-size="40" fill="#0a7" text-anchor="middle" font-weight="bold">6</text>
+  <text x="900" y="408" font-size="12" fill="#395" text-anchor="middle">= 3 + 3 (trait + 컨테이너)</text>
+  <text x="900" y="430" font-size="11" fill="#395" text-anchor="middle">✓ F 자리에 컨테이너만 바꿔 끼움 — 격자가 사라짐</text>
 </svg>

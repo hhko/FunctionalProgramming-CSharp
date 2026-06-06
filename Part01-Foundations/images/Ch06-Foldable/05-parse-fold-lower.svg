@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+    <marker id="arrow-lower" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#bf9000"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="520" fill="#ffffff"/>
+
+  <rect x="40" y="40" width="820" height="190" fill="#f4f9ff" stroke="none" rx="12"/>
+  <text x="60" y="66" font-size="13" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.5">Elevated World</text>
+
+  <rect x="140" y="115" width="180" height="70" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="230" y="158" font-size="17" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">MyMaybe&lt;int&gt;</text>
+
+  <rect x="580" y="115" width="180" height="70" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="670" y="158" font-size="17" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">MyMaybe&lt;int&gt;</text>
+
+  <line x1="322" y1="150" x2="578" y2="150" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="450" y="138" font-size="15" fill="#1f1f1f" text-anchor="middle" font-style="italic" font-family="'Consolas', monospace">(있음/없음 두 분기)</text>
+  <text x="450" y="210" font-size="12" fill="#0c3a5e" text-anchor="middle" font-style="italic">MyMaybe&lt;int&gt; 자료 — FoldLeft 의 입력 (Just 또는 Nothing)</text>
+
+  <rect x="40" y="295" width="820" height="190" fill="#fffdf3" stroke="none" rx="12"/>
+  <text x="60" y="321" font-size="13" fill="#bf9000" font-style="italic" font-weight="bold" letter-spacing="0.5">Normal World</text>
+
+  <rect x="140" y="370" width="180" height="70" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="230" y="416" font-size="24" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">42</text>
+
+  <rect x="580" y="370" width="180" height="70" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="670" y="416" font-size="24" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">0</text>
+
+  <line x1="322" y1="405" x2="578" y2="405" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)" stroke-dasharray="6 4"/>
+  <text x="450" y="393" font-size="17" fill="#888888" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">step</text>
+  <text x="450" y="465" font-size="12" fill="#5a4400" text-anchor="middle" font-style="italic">int 결과 — Just(42) 면 step(42, 0) = 42 / Nothing 이면 seed 그대로 0</text>
+
+  <line x1="230" y1="193" x2="230" y2="365" stroke="#bf9000" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lower)"/>
+  <line x1="670" y1="193" x2="670" y2="365" stroke="#bf9000" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lower)"/>
+
+  <line x1="450" y1="225" x2="450" y2="370" stroke="#bf9000" stroke-width="2" stroke-linecap="round" marker-end="url(#arrow-lower)" stroke-dasharray="6 5"/>
+  <text x="466" y="263" font-size="22" fill="#bf9000" font-weight="bold" font-family="'Consolas', monospace">fold</text>
+  <text x="466" y="283" font-size="12" fill="#bf9000" font-style="italic">끌어내림</text>
+</svg>

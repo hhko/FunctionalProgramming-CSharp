@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 360" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="ar4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#888"/>
+    </marker>
+  </defs>
+  <rect width="960" height="360" fill="#ffffff"/>
+
+  <text x="480" y="36" font-size="17" fill="#1f1f1f" text-anchor="middle" font-weight="bold">Sum vs Product — 같은 int, 다른 Monoid</text>
+
+  <!-- shared input -->
+  <rect x="60" y="150" width="150" height="56" fill="#f3f3f3" stroke="#888" stroke-width="2" rx="8"/>
+  <text x="135" y="175" font-size="15" fill="#333" text-anchor="middle" font-family="'Consolas', monospace">[2, 3, 4]</text>
+  <text x="135" y="195" font-size="11" fill="#666" text-anchor="middle">같은 입력</text>
+
+  <!-- branch lines -->
+  <line x1="210" y1="168" x2="300" y2="110" stroke="#888" stroke-width="1.6" marker-end="url(#ar4)"/>
+  <line x1="210" y1="188" x2="300" y2="246" stroke="#888" stroke-width="1.6" marker-end="url(#ar4)"/>
+
+  <!-- Sum path (top) -->
+  <rect x="310" y="74" width="560" height="86" fill="#fffdf3" stroke="#bf9000" stroke-width="2" rx="10"/>
+  <text x="330" y="100" font-size="14" fill="#5a4400" font-weight="bold" font-family="'Consolas', monospace">Sum</text>
+  <text x="330" y="122" font-size="12.5" fill="#5a4400">Empty = <tspan font-family="'Consolas', monospace" font-weight="bold">0</tspan>  ·  Combine = <tspan font-family="'Consolas', monospace" font-weight="bold">+</tspan> (덧셈)</text>
+  <text x="330" y="144" font-size="12.5" fill="#5a4400" font-family="'Consolas', monospace">0 + 2 + 3 + 4</text>
+  <line x1="640" y1="117" x2="700" y2="117" stroke="#888" stroke-width="1.6" marker-end="url(#ar4)"/>
+  <rect x="710" y="95" width="140" height="44" fill="#fde9b8" stroke="#bf9000" stroke-width="2.6" rx="6"/>
+  <text x="780" y="123" font-size="16" fill="#5a4400" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">Sum(9)</text>
+
+  <!-- Product path (bottom) -->
+  <rect x="310" y="210" width="560" height="86" fill="#fff7ee" stroke="#cc6600" stroke-width="2" rx="10"/>
+  <text x="330" y="236" font-size="14" fill="#5a2e00" font-weight="bold" font-family="'Consolas', monospace">Product</text>
+  <text x="330" y="258" font-size="12.5" fill="#5a2e00">Empty = <tspan font-family="'Consolas', monospace" font-weight="bold">1</tspan>  ·  Combine = <tspan font-family="'Consolas', monospace" font-weight="bold">*</tspan> (곱셈)</text>
+  <text x="330" y="280" font-size="12.5" fill="#5a2e00" font-family="'Consolas', monospace">1 * 2 * 3 * 4</text>
+  <line x1="640" y1="253" x2="700" y2="253" stroke="#888" stroke-width="1.6" marker-end="url(#ar4)"/>
+  <rect x="710" y="231" width="140" height="44" fill="#ffe6cc" stroke="#cc6600" stroke-width="2.6" rx="6"/>
+  <text x="780" y="259" font-size="16" fill="#5a2e00" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">Product(24)</text>
+
+  <text x="480" y="334" font-size="12.5" fill="#555" text-anchor="middle">합치는 연산이 <tspan font-weight="bold">단위원</tspan>을 결정한다 (0 vs 1). 래퍼 struct 가 "어떻게 합칠지" 의 선택을 표현 — Haskell 의 newtype Sum / Product</text>
+</svg>

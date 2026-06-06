@@ -1,48 +1,51 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 70 960 470" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
-  <rect width="960" height="540" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <rect width="960" height="520" fill="#ffffff"/>
 
-  <!-- 3 elevated worlds stacked horizontally as parallel band -->
+  <text x="480" y="40" font-size="17" fill="#1f1f1f" text-anchor="middle" font-weight="bold">수많은 Elevated World — 같은 윤곽, 다른 효과</text>
+
   <!-- Option<a> -->
   <g>
-    <rect x="60" y="120" width="260" height="160" fill="#f7faff" stroke="#1f77b4" stroke-width="2" rx="8"/>
-    <text x="190" y="148" font-size="16" fill="#0c3a5e" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">Option&lt;a&gt;</text>
-    <text x="190" y="170" font-size="11" fill="#0c3a5e" text-anchor="middle" font-style="italic">"있을 수도, 없을 수도"</text>
-    <rect x="100" y="200" width="80" height="55" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="4"/>
-    <text x="140" y="234" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">Some(a)</text>
-    <rect x="200" y="200" width="80" height="55" fill="#fbe9e9" stroke="#990000" stroke-width="2" rx="4"/>
-    <text x="240" y="234" font-size="16" fill="#5a0000" text-anchor="middle" font-family="'Consolas', monospace">None</text>
+    <rect x="60" y="80" width="260" height="160" fill="#f7faff" stroke="#1f77b4" stroke-width="2" rx="8"/>
+    <text x="190" y="108" font-size="16" fill="#0c3a5e" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">Option&lt;a&gt;</text>
+    <text x="190" y="130" font-size="11" fill="#0c3a5e" text-anchor="middle" font-style="italic">"있을 수도, 없을 수도"</text>
+    <rect x="100" y="160" width="80" height="55" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="4"/>
+    <text x="140" y="194" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">Some(a)</text>
+    <rect x="200" y="160" width="80" height="55" fill="#fbe9e9" stroke="#990000" stroke-width="2" rx="4"/>
+    <text x="240" y="194" font-size="15" fill="#5a0000" text-anchor="middle" font-family="'Consolas', monospace">None</text>
   </g>
 
   <!-- List<a> -->
   <g>
-    <rect x="350" y="120" width="260" height="160" fill="#f7faff" stroke="#1f77b4" stroke-width="2" rx="8"/>
-    <text x="480" y="148" font-size="16" fill="#0c3a5e" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">List&lt;a&gt;</text>
-    <text x="480" y="170" font-size="11" fill="#0c3a5e" text-anchor="middle" font-style="italic">"여러 개일 수도"</text>
-    <rect x="380" y="200" width="50" height="55" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="4"/>
-    <text x="405" y="234" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">a₁</text>
-    <rect x="440" y="200" width="50" height="55" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="4"/>
-    <text x="465" y="234" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">a₂</text>
-    <rect x="500" y="200" width="50" height="55" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="4"/>
-    <text x="525" y="234" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">a₃</text>
-    <text x="565" y="234" font-size="16" fill="#666">…</text>
+    <rect x="350" y="80" width="260" height="160" fill="#f7faff" stroke="#1f77b4" stroke-width="2" rx="8"/>
+    <text x="480" y="108" font-size="16" fill="#0c3a5e" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">List&lt;a&gt;</text>
+    <text x="480" y="130" font-size="11" fill="#0c3a5e" text-anchor="middle" font-style="italic">"여러 개일 수도"</text>
+    <rect x="380" y="160" width="50" height="55" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="4"/>
+    <text x="405" y="194" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">a₁</text>
+    <rect x="440" y="160" width="50" height="55" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="4"/>
+    <text x="465" y="194" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">a₂</text>
+    <rect x="500" y="160" width="50" height="55" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="4"/>
+    <text x="525" y="194" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">a₃</text>
+    <text x="567" y="194" font-size="16" fill="#666">…</text>
   </g>
 
   <!-- Result<a> -->
   <g>
-    <rect x="640" y="120" width="260" height="160" fill="#f7faff" stroke="#1f77b4" stroke-width="2" rx="8"/>
-    <text x="770" y="148" font-size="16" fill="#0c3a5e" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">Result&lt;a&gt;</text>
-    <text x="770" y="170" font-size="11" fill="#0c3a5e" text-anchor="middle" font-style="italic">"성공 또는 실패"</text>
-    <rect x="680" y="200" width="80" height="55" fill="#d9ead3" stroke="#38761d" stroke-width="2" rx="4"/>
-    <text x="720" y="234" font-size="14" fill="#1c3a0d" text-anchor="middle" font-family="'Consolas', monospace">Ok(a)</text>
-    <rect x="780" y="200" width="80" height="55" fill="#fbe9e9" stroke="#990000" stroke-width="2" rx="4"/>
-    <text x="820" y="234" font-size="14" fill="#5a0000" text-anchor="middle" font-family="'Consolas', monospace">Err(e)</text>
+    <rect x="640" y="80" width="260" height="160" fill="#f7faff" stroke="#1f77b4" stroke-width="2" rx="8"/>
+    <text x="770" y="108" font-size="16" fill="#0c3a5e" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">Result&lt;a&gt;</text>
+    <text x="770" y="130" font-size="11" fill="#0c3a5e" text-anchor="middle" font-style="italic">"성공 또는 실패"</text>
+    <rect x="680" y="160" width="80" height="55" fill="#d9ead3" stroke="#38761d" stroke-width="2" rx="4"/>
+    <text x="720" y="194" font-size="14" fill="#1c3a0d" text-anchor="middle" font-family="'Consolas', monospace">Ok(a)</text>
+    <rect x="780" y="160" width="80" height="55" fill="#fbe9e9" stroke="#990000" stroke-width="2" rx="4"/>
+    <text x="820" y="194" font-size="14" fill="#5a0000" text-anchor="middle" font-family="'Consolas', monospace">Err(e)</text>
   </g>
 
-  <!-- Unifying K<F, A> band -->
-  <line x1="60" y1="320" x2="900" y2="320" stroke="#999" stroke-width="1.5" stroke-dasharray="6 4"/>
-  <text x="480" y="340" font-size="13" fill="#666" text-anchor="middle">↓ 같은 윤곽 ↓</text>
+  <text x="480" y="272" font-size="13" fill="#888" text-anchor="middle" font-style="italic">Task&lt;a&gt;, Validation&lt;e, a&gt;, Reader&lt;r, a&gt; … 그 외 수십 개</text>
 
-  <rect x="280" y="380" width="400" height="90" fill="#fff7ee" stroke="#cc6600" stroke-width="2" rx="8"/>
-  <text x="480" y="418" font-size="24" fill="#5a2e00" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">K&lt;in F, A&gt;</text>
-  <text x="480" y="448" font-size="13" fill="#5a2e00" text-anchor="middle">"F 안에 A" 라는 공통 어법</text>
+  <!-- Unifying K<F, A> band -->
+  <line x1="60" y1="305" x2="900" y2="305" stroke="#999" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="480" y="335" font-size="14" fill="#555" text-anchor="middle" font-weight="bold">↓ "F 안에 a 가 든 자료" — 윤곽은 모두 같다 ↓</text>
+
+  <rect x="270" y="375" width="420" height="100" fill="#fff7ee" stroke="#cc6600" stroke-width="2.5" rx="10"/>
+  <text x="480" y="420" font-size="26" fill="#5a2e00" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">K&lt;F, A&gt;</text>
+  <text x="480" y="452" font-size="13" fill="#5a2e00" text-anchor="middle">컴파일러가 다룰 수 있는 하나의 공통 어휘 (2장의 목표)</text>
 </svg>

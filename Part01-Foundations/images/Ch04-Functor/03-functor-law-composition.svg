@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="500" fill="#ffffff"/>
+
+  <rect x="40" y="40" width="820" height="180" fill="#f4f9ff" stroke="none" rx="12"/>
+  <text x="60" y="66" font-size="13" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.5">Elevated World — Map(f) 다음 Map(g) (두 단계)</text>
+
+  <rect x="90" y="120" width="110" height="60" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="145" y="158" font-size="20" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;a&gt;</text>
+
+  <line x1="202" y1="150" x2="378" y2="150" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="290" y="138" font-size="18" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">Map(f)</text>
+
+  <rect x="380" y="120" width="110" height="60" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="435" y="158" font-size="20" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;b&gt;</text>
+
+  <line x1="492" y1="150" x2="668" y2="150" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="580" y="138" font-size="18" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">Map(g)</text>
+
+  <rect x="670" y="120" width="110" height="60" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="725" y="158" font-size="20" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;c&gt;</text>
+
+  <text x="450" y="275" font-size="42" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">≡</text>
+
+  <rect x="40" y="300" width="820" height="180" fill="#f4f9ff" stroke="none" rx="12"/>
+  <text x="60" y="326" font-size="13" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.5">Elevated World — Map(g ∘ f) (한 단계, 합성 후 한 번)</text>
+
+  <rect x="170" y="375" width="120" height="70" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="230" y="420" font-size="22" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;a&gt;</text>
+
+  <line x1="292" y1="410" x2="608" y2="410" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="450" y="398" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">Map(g ∘ f)</text>
+
+  <rect x="610" y="375" width="120" height="70" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="670" y="420" font-size="22" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;c&gt;</text>
+</svg>

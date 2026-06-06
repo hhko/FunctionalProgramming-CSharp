@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+    <marker id="arrow-lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="460" fill="#ffffff"/>
+
+  <text x="600" y="32" font-size="15" fill="#1f1f1f" text-anchor="middle" font-weight="bold">Lift2 = pure ∘ curry → apply → apply (한 번의 끌어올림 + 두 번의 결합)</text>
+  <text x="600" y="52" font-size="12" fill="#666" text-anchor="middle" font-style="italic">Normal 의 2 인자 함수 f : a → b → c 를 Elevated 의 (K&lt;F,a&gt;,K&lt;F,b&gt;) → K&lt;F,c&gt; 로</text>
+
+  <rect x="40" y="80" width="1120" height="200" fill="#f4f9ff" stroke="none" rx="12"/>
+  <text x="60" y="106" font-size="13" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.5">Elevated World — 단계별 사슬</text>
+
+  <rect x="80" y="160" width="180" height="70" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="170" y="195" font-size="14" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">K&lt;F, a→b→c&gt;</text>
+  <text x="170" y="248" font-size="11" fill="#1f77b4" text-anchor="middle" font-style="italic">pure(curry f)</text>
+
+  <line x1="262" y1="195" x2="328" y2="195" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="295" y="183" font-size="14" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">⊛ xa</text>
+
+  <rect x="330" y="160" width="180" height="70" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="420" y="195" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">K&lt;F, b→c&gt;</text>
+  <text x="420" y="248" font-size="11" fill="#1f77b4" text-anchor="middle" font-style="italic">apply(_, xa)</text>
+
+  <line x1="512" y1="195" x2="578" y2="195" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="545" y="183" font-size="14" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">⊛ xb</text>
+
+  <rect x="580" y="160" width="160" height="70" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="660" y="200" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">K&lt;F, c&gt;</text>
+  <text x="660" y="248" font-size="11" fill="#1f77b4" text-anchor="middle" font-style="italic">apply(_, xb)</text>
+
+  <rect x="40" y="320" width="1120" height="120" fill="#fffdf3" stroke="none" rx="12"/>
+  <text x="60" y="346" font-size="13" fill="#bf9000" font-style="italic" font-weight="bold" letter-spacing="0.5">Normal World — 같은 자리에서의 등가 표현</text>
+
+  <text x="600" y="395" font-size="16" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace">Lift2(f) (xa, xb)  ≡  apply(apply(pure(curry f), xa), xb)</text>
+  <text x="600" y="420" font-size="12" fill="#5a4400" text-anchor="middle" font-style="italic">curry 가 다인자 함수를 단인자 사슬로 만들고, pure + apply 가 한 단계씩 결합합니다</text>
+</svg>

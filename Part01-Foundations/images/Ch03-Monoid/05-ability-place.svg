@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 420" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <rect width="980" height="420" fill="#ffffff"/>
+
+  <text x="490" y="36" font-size="17" fill="#1f1f1f" text-anchor="middle" font-weight="bold">능력이 사는 자리 — 값(instance) vs 타입(static), Order 0 vs Order 1</text>
+
+  <!-- ===== LEFT: Order 0 (Monoid) ===== -->
+  <rect x="30" y="64" width="450" height="320" fill="#fffdf3" rx="12"/>
+  <text x="255" y="92" font-size="14" fill="#bf9000" text-anchor="middle" font-weight="bold">Order 0 — Monoid (Normal World 아래)</text>
+
+  <!-- value -->
+  <rect x="55" y="112" width="400" height="110" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="8"/>
+  <text x="75" y="138" font-size="13" fill="#5a4400" font-weight="bold">능력이 값에 산다</text>
+  <rect x="75" y="150" width="80" height="40" fill="#ffffff" stroke="#bf9000" stroke-width="1.6" rx="5"/><text x="115" y="176" font-size="14" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace">5</text>
+  <rect x="170" y="150" width="110" height="40" fill="#ffffff" stroke="#bf9000" stroke-width="1.6" rx="5"/><text x="225" y="176" font-size="14" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace">"hello"</text>
+  <text x="75" y="212" font-size="13" fill="#5a4400" font-family="'Consolas', monospace">Combine → <tspan font-weight="bold">a.Combine(b)</tspan>  (instance)</text>
+
+  <!-- type -->
+  <rect x="55" y="236" width="400" height="120" fill="#fde9b8" stroke="#bf9000" stroke-width="2" rx="8"/>
+  <text x="75" y="262" font-size="13" fill="#5a4400" font-weight="bold">단위원은 타입에 산다</text>
+  <rect x="75" y="274" width="90" height="40" fill="#ffffff" stroke="#bf9000" stroke-width="1.6" rx="5"/><text x="120" y="300" font-size="14" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace">Sum</text>
+  <rect x="180" y="274" width="110" height="40" fill="#ffffff" stroke="#bf9000" stroke-width="1.6" rx="5"/><text x="235" y="300" font-size="14" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace">Concat</text>
+  <text x="75" y="338" font-size="13" fill="#5a4400" font-family="'Consolas', monospace">Empty → <tspan font-weight="bold">Sum.Empty</tspan>  (static)</text>
+
+  <!-- ===== RIGHT: Order 1 (Functor 이후) ===== -->
+  <rect x="500" y="64" width="450" height="320" fill="#f4f9ff" rx="12"/>
+  <text x="725" y="92" font-size="14" fill="#1f77b4" text-anchor="middle" font-weight="bold">Order 1 — Functor 이후 (Elevated World 위)</text>
+
+  <rect x="525" y="112" width="400" height="160" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="8"/>
+  <text x="545" y="138" font-size="13" fill="#0c3a5e" font-weight="bold">능력이 컨테이너 종류에 산다</text>
+  <rect x="545" y="150" width="120" height="40" fill="#ffffff" stroke="#1f77b4" stroke-width="1.6" rx="5"/><text x="605" y="176" font-size="14" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">MyListF</text>
+  <rect x="680" y="150" width="130" height="40" fill="#ffffff" stroke="#1f77b4" stroke-width="1.6" rx="5"/><text x="745" y="176" font-size="14" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">MyMaybeF</text>
+  <text x="545" y="216" font-size="13" fill="#0c3a5e" font-family="'Consolas', monospace">Map → <tspan font-weight="bold">MyListF.Map(f, fa)</tspan></text>
+  <text x="545" y="240" font-size="13" fill="#0c3a5e">능력 = <tspan font-family="'Consolas', monospace" font-weight="bold">static abstract</tspan></text>
+  <text x="545" y="262" font-size="12.5" fill="#0c3a5e">+ <tspan font-family="'Consolas', monospace">K&lt;F, A&gt;</tspan> 가 컨테이너 안쪽을 가리킴</text>
+
+  <rect x="525" y="288" width="400" height="68" fill="#d1e9fa" stroke="#1f77b4" stroke-width="1.6" rx="8"/>
+  <text x="725" y="314" font-size="12.5" fill="#0c3a5e" text-anchor="middle">특정 값(<tspan font-family="'Consolas', monospace">MyList&lt;int&gt;</tspan>)이 아니라</text>
+  <text x="725" y="336" font-size="12.5" fill="#0c3a5e" text-anchor="middle"><tspan font-weight="bold">컨테이너 종류</tspan>가 Map 을 정의 → static abstract</text>
+
+  <!-- bottom note -->
+  <text x="490" y="404" font-size="12.5" fill="#555" text-anchor="middle">같은 self-bound 패턴 위에서, <tspan font-weight="bold">추상이 값이냐 컨테이너냐</tspan>가 instance / static 을 가른다 — 의미가 어법을 결정</text>
+</svg>

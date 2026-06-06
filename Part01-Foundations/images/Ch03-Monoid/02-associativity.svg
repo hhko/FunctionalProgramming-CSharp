@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 440" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#888"/>
+    </marker>
+  </defs>
+  <rect width="980" height="440" fill="#ffffff"/>
+
+  <text x="490" y="34" font-size="17" fill="#1f1f1f" text-anchor="middle" font-weight="bold">결합 법칙 — 순차 결합과 병렬 결합이 같은 답</text>
+
+  <!-- value chips helper colors: gold -->
+  <!-- ===== 순차 (one core) ===== -->
+  <rect x="30" y="64" width="920" height="150" fill="#fffdf3" rx="12"/>
+  <text x="52" y="90" font-size="13" fill="#bf9000" font-weight="bold">순차 결합  ((a · b) · c) · d   —  코어 1 이 처음부터 끝까지</text>
+
+  <!-- chips a b c d in a chain -->
+  <g font-family="'Consolas', monospace" font-size="15">
+    <rect x="60"  y="120" width="48" height="44" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/><text x="84"  y="148" fill="#5a4400" text-anchor="middle">a</text>
+    <rect x="200" y="120" width="48" height="44" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/><text x="224" y="148" fill="#5a4400" text-anchor="middle">b</text>
+    <rect x="340" y="120" width="48" height="44" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/><text x="364" y="148" fill="#5a4400" text-anchor="middle">c</text>
+    <rect x="480" y="120" width="48" height="44" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/><text x="504" y="148" fill="#5a4400" text-anchor="middle">d</text>
+    <rect x="690" y="120" width="220" height="44" fill="#fde9b8" stroke="#bf9000" stroke-width="2.6" rx="6"/><text x="800" y="148" fill="#5a4400" text-anchor="middle" font-weight="bold">((a·b)·c)·d</text>
+  </g>
+  <!-- combine markers between chips -->
+  <g>
+    <circle cx="154" cy="142" r="13" fill="#bf9000"/><text x="154" y="147" font-size="14" fill="#fff" text-anchor="middle">·</text>
+    <circle cx="294" cy="142" r="13" fill="#bf9000"/><text x="294" y="147" font-size="14" fill="#fff" text-anchor="middle">·</text>
+    <circle cx="434" cy="142" r="13" fill="#bf9000"/><text x="434" y="147" font-size="14" fill="#fff" text-anchor="middle">·</text>
+    <line x1="528" y1="142" x2="688" y2="142" stroke="#888" stroke-width="1.6" marker-end="url(#ar)"/>
+  </g>
+  <text x="60" y="196" font-size="11.5" fill="#8a6d00">단계: a·b → ·c → ·d  (3 번, 한 코어가 직렬로)</text>
+
+  <!-- ===== 병렬 (two cores) ===== -->
+  <rect x="30" y="234" width="920" height="160" fill="#f4f9ff" rx="12"/>
+  <text x="52" y="260" font-size="13" fill="#1f77b4" font-weight="bold">병렬 결합  (a · b) · (c · d)   —  코어 1 / 코어 2 가 좌·우를 따로, 마지막에 합침</text>
+
+  <g font-family="'Consolas', monospace" font-size="15">
+    <rect x="60"  y="290" width="48" height="44" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/><text x="84"  y="318" fill="#0c3a5e" text-anchor="middle">a</text>
+    <rect x="170" y="290" width="48" height="44" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/><text x="194" y="318" fill="#0c3a5e" text-anchor="middle">b</text>
+    <rect x="360" y="290" width="48" height="44" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/><text x="384" y="318" fill="#0c3a5e" text-anchor="middle">c</text>
+    <rect x="470" y="290" width="48" height="44" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/><text x="494" y="318" fill="#0c3a5e" text-anchor="middle">d</text>
+    <rect x="690" y="290" width="220" height="44" fill="#d1e9fa" stroke="#1f77b4" stroke-width="2.6" rx="6"/><text x="800" y="318" fill="#0c3a5e" text-anchor="middle" font-weight="bold">(a·b)·(c·d)</text>
+  </g>
+  <g>
+    <circle cx="139" cy="312" r="13" fill="#1f77b4"/><text x="139" y="317" font-size="14" fill="#fff" text-anchor="middle">·</text>
+    <text x="139" y="356" font-size="11" fill="#1f77b4" text-anchor="middle">코어 1</text>
+    <circle cx="439" cy="312" r="13" fill="#1f77b4"/><text x="439" y="317" font-size="14" fill="#fff" text-anchor="middle">·</text>
+    <text x="439" y="356" font-size="11" fill="#1f77b4" text-anchor="middle">코어 2</text>
+    <line x1="518" y1="312" x2="688" y2="312" stroke="#888" stroke-width="1.6" marker-end="url(#ar)"/>
+    <text x="603" y="304" font-size="11" fill="#1f77b4" text-anchor="middle">최종 합침</text>
+  </g>
+
+  <!-- equality between two results -->
+  <text x="800" y="226" font-size="20" fill="#0a7" text-anchor="middle" font-weight="bold">‖</text>
+  <text x="800" y="416" font-size="12.5" fill="#0a7" text-anchor="middle" font-weight="bold">두 결과 같다 (결합 법칙). 단, 좌·우 순서는 유지 — 교환 법칙 아님</text>
+</svg>

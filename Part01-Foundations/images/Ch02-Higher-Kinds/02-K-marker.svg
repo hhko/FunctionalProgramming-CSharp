@@ -1,48 +1,53 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 70 960 470" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#333"/>
     </marker>
   </defs>
-  <rect width="960" height="540" fill="#ffffff"/>
+  <rect width="960" height="520" fill="#ffffff"/>
 
-  <!-- Left: concrete types -->
-  <text x="180" y="100" font-size="14" fill="#222" text-anchor="middle" font-weight="bold">자료 타입</text>
-  <rect x="60" y="120" width="240" height="60" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/>
-  <text x="180" y="158" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">MyOption&lt;a&gt;</text>
-  <rect x="60" y="200" width="240" height="60" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/>
-  <text x="180" y="238" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">MyList&lt;a&gt;</text>
-  <rect x="60" y="280" width="240" height="60" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/>
-  <text x="180" y="318" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">MyResult&lt;a&gt;</text>
+  <text x="480" y="38" font-size="17" fill="#1f1f1f" text-anchor="middle" font-weight="bold">3-tuple — 자료 / 태그 / 공통 어휘 K&lt;F, A&gt;</text>
 
-  <!-- Middle: tag types -->
-  <text x="480" y="100" font-size="14" fill="#222" text-anchor="middle" font-weight="bold">태그 타입</text>
-  <rect x="360" y="120" width="240" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/>
-  <text x="480" y="158" font-size="15" fill="#594300" text-anchor="middle" font-family="'Consolas', monospace">MyOptionF</text>
-  <rect x="360" y="200" width="240" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/>
-  <text x="480" y="238" font-size="15" fill="#594300" text-anchor="middle" font-family="'Consolas', monospace">MyListF</text>
-  <rect x="360" y="280" width="240" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/>
-  <text x="480" y="318" font-size="15" fill="#594300" text-anchor="middle" font-family="'Consolas', monospace">MyResultF</text>
+  <!-- Left: 자료 타입 -->
+  <text x="180" y="86" font-size="14" fill="#222" text-anchor="middle" font-weight="bold">① 자료 타입</text>
+  <rect x="60" y="104" width="240" height="60" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/>
+  <text x="180" y="142" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">MyOption&lt;a&gt;</text>
+  <rect x="60" y="184" width="240" height="60" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/>
+  <text x="180" y="222" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">MyList&lt;a&gt;</text>
+  <rect x="60" y="264" width="240" height="60" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/>
+  <text x="180" y="302" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">MyResult&lt;a&gt;</text>
 
-  <!-- Right: K<F, a> view -->
-  <text x="780" y="100" font-size="14" fill="#222" text-anchor="middle" font-weight="bold">공통 어휘 K&lt;in F, A&gt;</text>
-  <rect x="660" y="120" width="240" height="60" fill="#fff7ee" stroke="#cc6600" stroke-width="2" rx="6"/>
-  <text x="780" y="158" font-size="15" fill="#5a2e00" text-anchor="middle" font-family="'Consolas', monospace">K&lt;MyOptionF, a&gt;</text>
-  <rect x="660" y="200" width="240" height="60" fill="#fff7ee" stroke="#cc6600" stroke-width="2" rx="6"/>
-  <text x="780" y="238" font-size="15" fill="#5a2e00" text-anchor="middle" font-family="'Consolas', monospace">K&lt;MyListF, a&gt;</text>
-  <rect x="660" y="280" width="240" height="60" fill="#fff7ee" stroke="#cc6600" stroke-width="2" rx="6"/>
-  <text x="780" y="318" font-size="15" fill="#5a2e00" text-anchor="middle" font-family="'Consolas', monospace">K&lt;MyResultF, a&gt;</text>
+  <!-- Middle: 태그 타입 -->
+  <text x="480" y="86" font-size="14" fill="#222" text-anchor="middle" font-weight="bold">② 태그 타입 (능력 호스트)</text>
+  <rect x="360" y="104" width="240" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/>
+  <text x="480" y="142" font-size="15" fill="#594300" text-anchor="middle" font-family="'Consolas', monospace">MyOptionF</text>
+  <rect x="360" y="184" width="240" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/>
+  <text x="480" y="222" font-size="15" fill="#594300" text-anchor="middle" font-family="'Consolas', monospace">MyListF</text>
+  <rect x="360" y="264" width="240" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/>
+  <text x="480" y="302" font-size="15" fill="#594300" text-anchor="middle" font-family="'Consolas', monospace">MyResultF</text>
 
-  <!-- Arrows -->
-  <line x1="300" y1="150" x2="360" y2="150" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
-  <line x1="300" y1="230" x2="360" y2="230" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
-  <line x1="300" y1="310" x2="360" y2="310" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
-  <line x1="600" y1="150" x2="660" y2="150" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
-  <line x1="600" y1="230" x2="660" y2="230" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
-  <line x1="600" y1="310" x2="660" y2="310" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Right: 공통 어휘 K -->
+  <text x="780" y="86" font-size="14" fill="#222" text-anchor="middle" font-weight="bold">공통 어휘 K&lt;F, A&gt;</text>
+  <rect x="660" y="104" width="240" height="60" fill="#fff7ee" stroke="#cc6600" stroke-width="2" rx="6"/>
+  <text x="780" y="142" font-size="15" fill="#5a2e00" text-anchor="middle" font-family="'Consolas', monospace">K&lt;MyOptionF, a&gt;</text>
+  <rect x="660" y="184" width="240" height="60" fill="#fff7ee" stroke="#cc6600" stroke-width="2" rx="6"/>
+  <text x="780" y="222" font-size="15" fill="#5a2e00" text-anchor="middle" font-family="'Consolas', monospace">K&lt;MyListF, a&gt;</text>
+  <rect x="660" y="264" width="240" height="60" fill="#fff7ee" stroke="#cc6600" stroke-width="2" rx="6"/>
+  <text x="780" y="302" font-size="15" fill="#5a2e00" text-anchor="middle" font-family="'Consolas', monospace">K&lt;MyResultF, a&gt;</text>
+
+  <!-- Arrows: 자료 → 태그 (짝), 태그 → K (감쌈) -->
+  <line x1="300" y1="134" x2="360" y2="134" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="300" y1="214" x2="360" y2="214" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="300" y1="294" x2="360" y2="294" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="600" y1="134" x2="660" y2="134" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="600" y1="214" x2="660" y2="214" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="600" y1="294" x2="660" y2="294" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <text x="330" y="356" font-size="11" fill="#888" text-anchor="middle">자료마다 짝 태그</text>
+  <text x="630" y="356" font-size="11" fill="#888" text-anchor="middle">"F 안에 a" 신호로 입음</text>
 
   <!-- Bottom: K interface definition -->
-  <rect x="160" y="400" width="640" height="100" fill="#fafafa" stroke="#ccc" stroke-width="1" rx="6"/>
-  <text x="480" y="446" font-size="22" fill="#222" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">public interface K&lt;in F, A&gt;;</text>
-  <text x="480" y="478" font-size="12" fill="#666" text-anchor="middle">빈 인터페이스 — "F 안에 A" 신호만</text>
+  <rect x="160" y="392" width="640" height="100" fill="#fafafa" stroke="#ccc" stroke-width="1" rx="6"/>
+  <text x="480" y="438" font-size="22" fill="#222" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">public interface K&lt;in F, A&gt;;</text>
+  <text x="480" y="470" font-size="12" fill="#666" text-anchor="middle">빈 인터페이스 — 멤버 0개, "F 안에 A" type-level 신호만 (동작은 trait 의 static abstract 에)</text>
 </svg>
