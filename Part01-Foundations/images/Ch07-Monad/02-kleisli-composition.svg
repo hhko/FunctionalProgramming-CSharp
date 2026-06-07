@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+    <marker id="arrow-lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="520" fill="#ffffff"/>
+
+  <rect x="40" y="40" width="820" height="195" fill="#f4f9ff" stroke="none" rx="12"/>
+  <text x="60" y="66" font-size="13" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.5">Elevated World</text>
+
+  <rect x="40" y="300" width="820" height="180" fill="#fffdf3" stroke="none" rx="12"/>
+  <text x="60" y="326" font-size="13" fill="#bf9000" font-style="italic" font-weight="bold" letter-spacing="0.5">Normal World</text>
+
+  <rect x="70" y="362" width="110" height="66" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="125" y="403" font-size="24" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">a</text>
+
+  <rect x="285" y="120" width="140" height="70" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="355" y="163" font-size="22" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;b&gt;</text>
+
+  <rect x="510" y="362" width="110" height="66" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="565" y="403" font-size="24" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">b</text>
+
+  <rect x="710" y="120" width="140" height="70" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="780" y="163" font-size="22" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;c&gt;</text>
+
+  <line x1="180" y1="368" x2="288" y2="192" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="140" y="266" font-size="16" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">f : a → E&lt;b&gt;</text>
+
+  <line x1="420" y1="192" x2="513" y2="365" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <text x="392" y="288" font-size="13" fill="#1f77b4" text-anchor="middle" font-style="italic" font-weight="bold">bind 가 b 꺼냄</text>
+
+  <line x1="617" y1="365" x2="713" y2="192" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="760" y="266" font-size="16" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">g : b → E&lt;c&gt;</text>
+
+  <line x1="125" y1="450" x2="770" y2="450" stroke="#1f77b4" stroke-width="2.5" stroke-linecap="round" marker-end="url(#arrow-lift)" stroke-dasharray="6 5"/>
+  <text x="447" y="442" font-size="18" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">f &gt;=&gt; g</text>
+
+  <text x="448" y="500" font-size="12" fill="#5a4400" text-anchor="middle" font-style="italic">f &gt;=&gt; g : a → E&lt;c&gt;    (올림 f → 내림 bind → 올림 g 가 한 함수)</text>
+  <text x="848" y="500" font-size="11" fill="#888888" text-anchor="end" font-style="italic">시간 →</text>
+</svg>

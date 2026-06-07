@@ -25,7 +25,7 @@
   <rect x="180" y="295" width="160" height="70" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
   <text x="260" y="337" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">K&lt;F, b&gt;</text>
 
-  <text x="260" y="440" font-size="13" fill="#666" text-anchor="middle" font-style="italic">3 장 Functor 의 단일 사다리</text>
+  <text x="260" y="440" font-size="13" fill="#666" text-anchor="middle" font-style="italic">4 장 Functor 의 단일 사다리</text>
 
   <!-- Equality sign -->
   <text x="555" y="290" font-size="50" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">≡</text>
@@ -51,5 +51,5 @@
   <!-- pure label on K<F, a→b> -->
   <text x="700" y="118" font-size="13" fill="#1f77b4" text-anchor="middle" font-style="italic">↑ pure(f)</text>
 
-  <text x="820" y="440" font-size="13" fill="#666" text-anchor="middle" font-style="italic">4 장 Applicative 의 두 도구로 같은 자리 도달</text>
+  <text x="820" y="440" font-size="13" fill="#666" text-anchor="middle" font-style="italic">5 장 Applicative 의 두 도구로 같은 자리 도달</text>
 </svg>

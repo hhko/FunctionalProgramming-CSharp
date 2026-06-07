@@ -68,7 +68,7 @@
     <text x="486" y="225" font-size="14" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">f</text>
 
     <!-- 하단 설명 -->
-    <text x="465" y="400" font-size="11" fill="#666" text-anchor="middle">6장 Monad — bind 가 합성 회복</text>
+    <text x="465" y="400" font-size="11" fill="#666" text-anchor="middle">7장 Monad — bind 가 합성 회복</text>
     <text x="465" y="420" font-size="11" fill="#666" text-anchor="middle" font-style="italic">bind / SelectMany / &gt;=&gt;</text>
   </g>
 
@@ -98,7 +98,7 @@
     <text x="770" y="225" font-size="14" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">f</text>
 
     <!-- 하단 설명 -->
-    <text x="755" y="400" font-size="11" fill="#666" text-anchor="middle">4장 Foldable — fold 의 자리</text>
+    <text x="755" y="400" font-size="11" fill="#666" text-anchor="middle">6장 Foldable — fold 의 자리</text>
     <text x="755" y="420" font-size="11" fill="#666" text-anchor="middle" font-style="italic">fold / reduce / sum</text>
   </g>
 
@@ -129,7 +129,7 @@
     <text x="1045" y="295" font-size="11" fill="#bbb" text-anchor="middle" font-style="italic">— (사용 안 함) —</text>
 
     <!-- 하단 설명 -->
-    <text x="1045" y="400" font-size="11" fill="#666" text-anchor="middle">3장 Functor — map 의 자리</text>
+    <text x="1045" y="400" font-size="11" fill="#666" text-anchor="middle">4장 Functor — map 의 자리</text>
     <text x="1045" y="420" font-size="11" fill="#666" text-anchor="middle" font-style="italic">map / apply / traverse</text>
   </g>
 

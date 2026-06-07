@@ -20,11 +20,11 @@
   <!-- Middle: 태그 타입 -->
   <text x="480" y="86" font-size="14" fill="#222" text-anchor="middle" font-weight="bold">② 태그 타입 (능력 호스트)</text>
   <rect x="360" y="104" width="240" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/>
-  <text x="480" y="142" font-size="15" fill="#594300" text-anchor="middle" font-family="'Consolas', monospace">MyOptionF</text>
+  <text x="480" y="142" font-size="15" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace">MyOptionF</text>
   <rect x="360" y="184" width="240" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/>
-  <text x="480" y="222" font-size="15" fill="#594300" text-anchor="middle" font-family="'Consolas', monospace">MyListF</text>
+  <text x="480" y="222" font-size="15" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace">MyListF</text>
   <rect x="360" y="264" width="240" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/>
-  <text x="480" y="302" font-size="15" fill="#594300" text-anchor="middle" font-family="'Consolas', monospace">MyResultF</text>
+  <text x="480" y="302" font-size="15" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace">MyResultF</text>
 
   <!-- Right: 공통 어휘 K -->
   <text x="780" y="86" font-size="14" fill="#222" text-anchor="middle" font-weight="bold">공통 어휘 K&lt;F, A&gt;</text>

@@ -42,7 +42,7 @@ Combine : a → a → a              (Normal → Normal → Normal)
 
 3 장의 위치를 한 줄로 정리합니다. **Normal World 의 결합을 trait 으로 정의한 Order 0 trait, 4 장 이후 Order 1 trait 으로 올라가는 디딤돌**. Normal World 아래에 살지만 1 부 전체에서 두 번 다시 등장합니다 — 8 장 Validation 의 오류 누적, 3 부 Writer 의 로그 누적이 모두 Monoid 의 결합으로 작동합니다 (§3.11).
 
-3 장도 1·2 장처럼 도구를 나열하지 않습니다. 먼저 **결합 능력이 trait 에 살지 않으면 어떤 고통이 생기는지** 를 체험하고 (§3.2), 그 고통을 trait 으로 묶는 발상 (§3.3) 을 본 뒤, 결합의 두 약속(법칙)을 단계로 정착시킵니다 (§3.4 ~ §3.5).
+3 장도 1·2 장처럼 도구를 나열하지 않습니다. 먼저 **결합 능력이 trait 에 살지 않으면 어떤 고통이 생기는지** 를 체험하고, 그 고통을 trait 으로 묶는 발상을 본 뒤, 결합의 두 약속(법칙)을 단계로 정착시킵니다.
 
 ---
 
@@ -178,7 +178,7 @@ a.Combine(b)  또는  a + b         (C# 어법 — 값의 instance 메서드 또
 | 오른쪽 인자 `a` | 결합의 다른쪽 피연산자 (값) |
 | 반환값 `a` | 두 값이 합쳐진 결과 (같은 타입의 한 값) |
 
-세 자리가 모두 **같은 타입 `a`** 라는 점이 핵심입니다. 두 값과 결과가 같은 World 안에 산다는 약속이고, Wlaschin 의 *closure (닫혀 있음)* 어휘가 가리키는 성질입니다. closure 가 깨지면 결과가 **다른 타입** 으로 빠져나가 `Combine` 을 또 호출할 수 없습니다.
+세 자리가 모두 **같은 타입 `a`** 라는 점이 핵심입니다. 두 값과 결과가 같은 World 안에 산다는 약속이고, Wlaschin 의 closure (닫혀 있음) 어휘가 가리키는 성질입니다. closure 가 깨지면 결과가 **다른 타입** 으로 빠져나가 `Combine` 을 또 호출할 수 없습니다.
 
 > *closure (닫혀 있음)* 은 C# 의 **람다 closure** (변수 capture) 와는 완전히 다른 의미입니다. 여기서 **닫혀 있음** 은 **연산의 결과가 같은 타입을 벗어나지 않음** 을 가리키는 집합론·대수의 어휘입니다.
 
@@ -230,7 +230,7 @@ int Sum(int[] xs) =>
         : xs.Aggregate(Combine);
 ```
 
-§3.2.3 에서 본 어긋남이 바로 이 `???` 자리입니다. 빈 입력의 답이 trait 의 어휘 안에 없으니 호출자가 매번 결정하고, 결정이 다르면 같은 trait 의 두 인스턴스가 **빈 경우만 다른 결과** 를 냅니다.
+앞서 본 어긋남 (§3.2.3) 이 바로 이 `???` 자리입니다. 빈 입력의 답이 trait 의 어휘 안에 없으니 호출자가 매번 결정하고, 결정이 다르면 같은 trait 의 두 인스턴스가 **빈 경우만 다른 결과** 를 냅니다.
 
 빈 경우의 답을 trait 안에 함께 가두면 호출자가 결정할 일이 없습니다. 그 답이 **단위원 (identity element)** 이고, 단위원을 가진 trait 이 다음 절의 Monoid 입니다.
 
@@ -321,7 +321,7 @@ public static A combine<A>(IEnumerable<A> xs) where A : Monoid<A>
 }
 ```
 
-`xs.Length == 0` 같은 분기가 없습니다. `acc = A.Empty` 한 줄이 빈 경우의 답을 미리 들고 있고, 항등 법칙이 첫 합칠 자리에서 `Empty + x == x` 로 작동해 **시작값이 결과를 오염시키지 않는다** 는 보장을 줍니다. §3.2.3 에서 세 사람이 세 가지로 갈라졌던 빈 입력의 답이, 이제 trait 한 자리(`A.Empty`)로 통일됩니다.
+`xs.Length == 0` 같은 분기가 없습니다. `acc = A.Empty` 한 줄이 빈 경우의 답을 미리 들고 있고, 항등 법칙이 첫 합칠 자리에서 `Empty + x == x` 로 작동해 **시작값이 결과를 오염시키지 않는다** 는 보장을 줍니다. 세 사람이 세 가지로 갈라졌던 빈 입력의 답 (§3.2.3) 이, 이제 trait 한 자리(`A.Empty`)로 통일됩니다.
 
 명령형 어법의 두 비용 (반복 + 빈 경우, §3.2) 이 한 자리에서 해소되었습니다. 결합 능력은 trait 한 정의로 묶었고, 빈 경우는 단위원 한 자리에 사라졌습니다. Monoid 의 두 멤버 (`Combine` + `Empty`) 가 두 비용에 각각 답하는 어법입니다.
 
@@ -680,7 +680,7 @@ public readonly record struct Any(bool Value) : Monoid<Any>
 
 ### 3.8.6 비 Monoid 를 Monoid 로 만드는 세 패턴
 
-§3.7 에서 평균 / 뺄셈이 Monoid 가 아니라는 자리를 봤습니다. 그런데 **자료의 모양을 바꿔** Monoid 의 어휘 안으로 끌어들이는 패턴이 있습니다. Wlaschin 의 *Monoids in Practice* 시리즈가 세 패턴으로 정리합니다.
+평균 / 뺄셈이 Monoid 가 아니라는 자리 (§3.7) 를 앞서 봤습니다. 그런데 **자료의 모양을 바꿔** Monoid 의 어휘 안으로 끌어들이는 패턴이 있습니다. Wlaschin 의 *Monoids in Practice* 시리즈가 세 패턴으로 정리합니다.
 
 - **첫 번째 — closure 회복 (list 로 감싸기)**. 두 값을 합쳤더니 결과가 **다른 타입** 으로 빠져나가는 자리. 두 `char` 를 합치면 `string` 이 되어 char 의 Monoid 가 안 되지만, **`char` 를 `[char]` 리스트로 감싸면** 두 리스트의 이어붙이기가 closure 를 만족합니다. *"anything can be put into a list, and lists (with concatenation) are always monoids."* 8 장 Validation 의 **오류 리스트** 도 같은 패턴입니다.
 - **두 번째 — associativity 회복 (동사 → 명사)**. 결합 법칙이 깨지는 자리. **연산을 수행하지 말고** 연산을 **자료 구조로 표현** 합니다. `'a' - 'b'` (빼기) 가 결합 법칙을 깨면, `CharsToRemove(['b'])` 같은 자료 구조로 의도를 표현하고 최종 단계에서 한 번에 적용합니다. **동사 (함수) 를 명사 (자료 구조) 로** 바꾸는 어법입니다.
@@ -744,7 +744,7 @@ Ch06 fold            : Monoid<A> 의 E<A> → A          (Elevated World 의 E<a
 
 ## 3.10 왜 Order 0 은 instance, Order 1 은 `static abstract` 인가
 
-§3.6.3 에서 같은 trait 안의 `Combine` (instance) 과 `Empty` (static) 의 어법 차이를 봤습니다. 이 비대칭은 3 장 안에서 그치지 않고, **3 장 Monoid 와 4 장 이후 모든 trait** 의 어법 차이로 확장됩니다.
+같은 trait 안의 `Combine` (instance) 과 `Empty` (static) 의 어법 차이 (§3.6.3) 를 앞서 봤습니다. 이 비대칭은 3 장 안에서 그치지 않고, **3 장 Monoid 와 4 장 이후 모든 trait** 의 어법 차이로 확장됩니다.
 
 ![능력의 자리 — 값 vs 타입, Order 0 vs Order 1](./images/Ch03-Monoid/05-ability-place.svg)
 

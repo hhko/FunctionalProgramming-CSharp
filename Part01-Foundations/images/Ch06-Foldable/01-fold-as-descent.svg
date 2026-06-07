@@ -31,8 +31,8 @@
   <rect x="40" y="350" width="820" height="140" fill="#fffdf3" stroke="none" rx="12"/>
   <text x="60" y="376" font-size="13" fill="#bf9000" font-style="italic" font-weight="bold" letter-spacing="0.5">Normal World — 압축된 한 값</text>
 
-  <rect x="400" y="395" width="120" height="70" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
-  <text x="460" y="440" font-size="24" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">b</text>
+  <rect x="390" y="395" width="120" height="70" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="450" y="440" font-size="24" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">b</text>
 
   <line x1="450" y1="240" x2="450" y2="390" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
   <text x="478" y="305" font-size="22" fill="#1f77b4" font-weight="bold" font-family="'Consolas', monospace">fold</text>

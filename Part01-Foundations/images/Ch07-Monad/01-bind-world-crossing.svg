@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+    <marker id="arrow-lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="520" fill="#ffffff"/>
+
+  <rect x="40" y="40" width="820" height="195" fill="#f4f9ff" stroke="none" rx="12"/>
+  <text x="60" y="66" font-size="13" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.5">Elevated World</text>
+
+  <rect x="110" y="120" width="150" height="70" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="185" y="163" font-size="22" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;a&gt;</text>
+
+  <rect x="640" y="120" width="150" height="70" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="715" y="163" font-size="22" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;b&gt;</text>
+  <text x="715" y="214" font-size="12" fill="#1f77b4" text-anchor="middle" font-style="italic">되돌림 (bind 결과)</text>
+
+  <line x1="262" y1="155" x2="638" y2="155" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)" stroke-dasharray="6 5"/>
+  <text x="450" y="147" font-size="20" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">bind</text>
+
+  <rect x="40" y="300" width="820" height="180" fill="#fffdf3" stroke="none" rx="12"/>
+  <text x="60" y="326" font-size="13" fill="#bf9000" font-style="italic" font-weight="bold" letter-spacing="0.5">Normal World</text>
+
+  <rect x="395" y="372" width="110" height="68" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="450" y="414" font-size="24" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">a</text>
+
+  <line x1="185" y1="192" x2="405" y2="372" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <text x="250" y="305" font-size="14" fill="#1f77b4" font-weight="bold" font-style="italic">꺼냄 (a)</text>
+
+  <line x1="495" y1="372" x2="715" y2="192" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="650" y="305" font-size="16" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">f : a → E&lt;b&gt;</text>
+
+  <text x="450" y="466" font-size="13" fill="#5a4400" text-anchor="middle" font-style="italic">bind : E&lt;a&gt; → (a → E&lt;b&gt;) → E&lt;b&gt;    (꺼냄 → 적용 → 되돌림)</text>
+</svg>

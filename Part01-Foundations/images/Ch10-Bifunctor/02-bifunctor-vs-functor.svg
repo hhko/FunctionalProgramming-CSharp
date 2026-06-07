@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="520" fill="#ffffff"/>
+
+  <!-- 위: Functor map — 한쪽(R)만 -->
+  <text x="100" y="95" font-size="15" font-weight="bold" fill="#bf9000">Functor 의 map — 둘째 인자 (R) 만 변환</text>
+
+  <rect x="110" y="115" width="200" height="64" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="210" y="153" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">Either&lt;L, R&gt;</text>
+  <line x1="320" y1="147" x2="560" y2="147" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="440" y="135" font-size="15" fill="#1f1f1f" text-anchor="middle" font-family="'Consolas', monospace">map(second)</text>
+  <rect x="570" y="115" width="220" height="64" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="680" y="153" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">Either&lt;L, R'&gt;</text>
+  <text x="680" y="200" font-size="12" fill="#990000" text-anchor="middle" font-style="italic">L 은 손대지 못함</text>
+
+  <line x1="50" y1="240" x2="850" y2="240" stroke="#dddddd" stroke-width="1.5"/>
+
+  <!-- 아래: Bifunctor BiMap — 양쪽 -->
+  <text x="100" y="300" font-size="15" font-weight="bold" fill="#1f77b4">Bifunctor 의 BiMap — 두 인자 (L, R) 모두 변환</text>
+
+  <rect x="110" y="320" width="200" height="64" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="210" y="358" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">Either&lt;L, R&gt;</text>
+  <line x1="320" y1="352" x2="560" y2="352" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="440" y="340" font-size="15" fill="#1f1f1f" text-anchor="middle" font-family="'Consolas', monospace">BiMap(first, second)</text>
+  <rect x="570" y="320" width="220" height="64" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.6" rx="6"/>
+  <text x="680" y="358" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">Either&lt;L', R'&gt;</text>
+  <text x="680" y="405" font-size="12" fill="#1f77b4" text-anchor="middle" font-style="italic">L 도 R 도 변환</text>
+
+  <text x="450" y="470" font-size="13" fill="#1f1f1f" text-anchor="middle" font-style="italic">MapSecond 가 곧 Functor 의 map 입니다. Bifunctor 는 Functor 를 포함합니다.</text>
+</svg>

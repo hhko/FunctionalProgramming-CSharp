@@ -107,11 +107,11 @@ FunctionalProgramming-CSharp/
 │   ├── Ch04-Functor.md
 │   ├── Ch05-Applicative.md
 │   ├── Ch06-Foldable.md
-│   ├── Ch07-Monad.md                   : 예정
-│   ├── Ch08-Validation.md              : 예정
-│   ├── Ch09-Traversable.md             : 예정
-│   ├── Ch10-Bifunctor.md               : 예정
-│   ├── Ch11-NaturalTransformation.md   : 예정
+│   ├── Ch07-Monad.md
+│   ├── Ch08-Validation.md
+│   ├── Ch09-Traversable.md
+│   ├── Ch10-Bifunctor.md
+│   ├── Ch11-NaturalTransformation.md
 │   └── images/                         : 본문 SVG 도식
 ├── Part02-Collections/                 : 2부 예정 — 불변 컬렉션 — 추상의 실전 적용
 ├── Part03-EffectMonads/                : 3부 예정 — 효과를 담는 모나드 (Reader / State / Writer)

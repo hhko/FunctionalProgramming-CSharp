@@ -46,7 +46,7 @@
 | 함수 시그니처 | 자리 | 처리하는 trait |
 |---|---|---|
 | `a → b` | Normal → Normal | (추상 불필요 — C# 의 기본 함수 합성으로 충분) |
-| `a → E<b>` | Normal → Elevated | **Monad** (7장 `bind`) — 합성 회복 |
+| `a → E<b>` | Normal → Elevated | **Monad** (7장 `bind`) — 합성 되살리기 |
 | `E<a> → b` | Elevated → Normal | **Foldable** (6장 `fold`) — 끌어내림 |
 | `E<a> → E<b>` | Elevated → Elevated | **Functor** (4장 `map`) — 끌어올림 |
 
@@ -64,7 +64,7 @@
 | 4장 | 1인자 lift | Functor / `map` — Normal 함수 한 개를 Elevated 로 끌어올림 |
 | 5장 | N 인자 lift | Applicative / `pure` + `apply` — 다인자 함수의 Elevated 적용 |
 | 6장 | lower | Foldable / `fold` — Elevated 의 구조를 Normal 의 한 값으로 (+ Filterable) |
-| 7장 | 합성 회복 | Monad / `bind` — `a → E<b>` 의 합성 가능성 회복 + Kleisli + LINQ |
+| 7장 | 합성 되살리기 | Monad / `bind` — `a → E<b>` 의 합성 가능성 되살리기 + Kleisli + LINQ |
 | 8장 | 실전 | Validation — applicative 누적 vs monadic 단락 |
 | 9장 | 핵심 trait 최정상 | Traversable / `traverse` — 두 Elevated 의 층 순서 뒤집기 (세 추상의 합성) |
 | 10장 | 2-인자 확장 | Bifunctor / Biapplicative / Bimonad — 두 타입 인자 모두에 작용 |
@@ -82,11 +82,11 @@
 
 ### 2장 — [Higher Kinds](./Ch02-Higher-Kinds.md)
 
-기술적 출발점입니다. 객체지향 어법의 N×M 비용 (각 컨테이너가 자기 `Map` / `Bind` / `Fold` 를 인스턴스 메서드로 따로 구현) 으로 문제 배경을 시작해, 함수형의 N+M 비용 (trait 한 자리에 능력 + F 자리에 컨테이너 끼움) 으로 회복하는 발상을 잡습니다. 값 생성자 (Order 0/1/2) 와 타입 생성자의 평행을 통합 비교 표로 본 뒤, C# 의 핵심 제약 (Order 1 부분 / Order 2 미지원) 과 HKT 를 지원했다면 어떤 가치가 있었을지를 거쳐 `K<F, A>` 마커 + self-bound + `static abstract` 두 우회 도구로 가상 한 줄을 실제 한 줄로 대체합니다. 3-tuple 패턴 (자료 / 태그 / trait) 이 1부 전체의 모든 trait 구현의 공통 골격입니다.
+기술적 출발점입니다. 객체지향 어법의 N×M 비용 (각 컨테이너가 자기 `Map` / `Bind` / `Fold` 를 인스턴스 메서드로 따로 구현) 으로 문제 배경을 시작해, 함수형의 N+M 비용 (trait 한 자리에 능력 + F 자리에 컨테이너 끼움) 으로 해소하는 발상을 잡습니다. 값 생성자 (Order 0/1/2) 와 타입 생성자의 평행을 통합 비교 표로 본 뒤, C# 의 핵심 제약 (Order 1 부분 / Order 2 미지원) 과 HKT 를 지원했다면 어떤 가치가 있었을지를 거쳐 `K<F, A>` 마커 + self-bound + `static abstract` 두 우회 도구로 가상 한 줄을 실제 한 줄로 대체합니다. 3-tuple 패턴 (자료 / 태그 / trait) 이 1부 전체의 모든 trait 구현의 공통 골격입니다.
 
 ### 3장 — [Monoid / Semigroup](./Ch03-Monoid.md)
 
-가장 단순한 trait 입니다. Normal World 의 두 값을 하나로 합치는 결합 (`Combine`) 과 그 결합의 단위원 (`Empty`) 을 다룹니다. kind 가 `*` 인 Order 0 의 추상이라 `K<F, A>` 마커 없이 self-bound + `static abstract` 패턴만 먼저 손에 익힙니다. 4장 이후의 Order 1 trait (Functor 계열) 로 올라가는 디딤돌이며, 7장 Validation 의 오류 누적과 3부 Writer 의 로그 누적이 모두 이 결합을 다시 만납니다.
+가장 단순한 trait 입니다. Normal World 의 두 값을 하나로 합치는 결합 (`Combine`) 과 그 결합의 단위원 (`Empty`) 을 다룹니다. kind 가 `*` 인 Order 0 의 추상이라 `K<F, A>` 마커 없이 self-bound + `static abstract` 패턴만 먼저 손에 익힙니다. 4장 이후의 Order 1 trait (Functor 계열) 로 올라가는 디딤돌이며, 8장 Validation 의 오류 누적과 3부 Writer 의 로그 누적이 모두 이 결합을 다시 만납니다.
 
 ### 4장 — [Functor / map](./Ch04-Functor.md)
 
@@ -102,7 +102,7 @@ N 인자 lift. Normal World 의 다인자 함수 `(a, b, …) → r` 을 Elevate
 
 ### 7장 — Monad / bind / Kleisli (예정)
 
-합성 회복의 결정타입니다. 출력 타입만 Elevated 인 함수 `a → E<b>` 는 직접 합성이 안 됩니다. `bind` 가 이를 `E<a> → E<b>` 로 끌어올려 합성을 가능하게 합니다. Kleisli 합성 `>=>` 로 Elevated World 의 정식 ∘ 가 완성됩니다. LINQ `from-from-select` 가 사실 이 합성의 syntactic sugar 였음을 직접 구현한 `Monad<F>` 위에서 봅니다.
+합성 되살리기의 결정타입니다. 출력 타입만 Elevated 인 함수 `a → E<b>` 는 직접 합성이 안 됩니다. `bind` 가 이를 `E<a> → E<b>` 로 끌어올려 합성을 가능하게 합니다. Kleisli 합성 `>=>` 로 Elevated World 의 정식 ∘ 가 완성됩니다. LINQ `from-from-select` 가 사실 이 합성의 syntactic sugar 였음을 직접 구현한 `Monad<F>` 위에서 봅니다.
 
 ### 8장 — Validation 실전 (예정)
 
@@ -126,7 +126,7 @@ Functor 의 `map` 이 컨테이너 안의 값을 바꾼다면, NaturalTransforma
 
 본문 예제는 모두 `code/Part01-Foundations/` 에 실행 가능한 형태로 들어 있습니다 (외부 패키지 의존 0). 각 챕터는 `Traits/` · `Types/` · `Functions/` · `Tests/` · `Challenges/` · `Program.cs` 구성이며, `Program.cs` 의 콘솔 데모가 두 법칙 (Functor) ~ 다섯 법칙 (Applicative) 등 검증 결과를 출력합니다. 학습용 `MyList` / `MyMaybe` / `MyValidation` 에 `Monoid` / `Functor` / `Applicative` / `Foldable` / `Monad` / `Traversable` / `Bifunctor` / `Natural` trait 을 직접 부착하며, 시그니처는 LanguageExt v5 의 공식 trait 와 정합합니다.
 
-1부의 11 개 챕터 코드 (`Ch01` ~ `Ch11`) 는 모두 완성되어 빌드·실행 가능합니다 (신규 3 챕터 Ch03 Monoid / Ch10 Bifunctor / Ch11 NaturalTransformation 포함). 본문은 Ch01 / Ch02 / Ch03 / Ch04 / Ch05 / Ch06 / Ch10 / Ch11 이 완성되었고, Ch07 / Ch08 / Ch09 본문은 집필 중입니다 (코드는 모두 완성).
+1부의 11 개 챕터 코드 (`Ch01` ~ `Ch11`) 는 모두 완성되어 빌드·실행 가능합니다 (신규 3 챕터 Ch03 Monoid / Ch10 Bifunctor / Ch11 NaturalTransformation 포함). 본문은 Ch01 ~ Ch11 이 모두 완성되었습니다 (코드도 모두 완성).
 
 ---
 

@@ -3,6 +3,9 @@
     <marker id="arrow-lift-up" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
     </marker>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
   </defs>
 
   <rect width="1100" height="520" fill="#ffffff"/>
@@ -19,6 +22,10 @@
   <rect x="360" y="135" width="120" height="70" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
   <text x="420" y="178" font-size="20" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;b&gt;</text>
 
+  <!-- map: horizontal Elevated function E<a> → E<b> -->
+  <line x1="240" y1="170" x2="360" y2="170" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="300" y="128" font-size="16" fill="#1f1f1f" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">Map(f)</text>
+
   <!-- fold right side: E<a> only at top -->
   <rect x="700" y="135" width="120" height="70" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
   <text x="760" y="178" font-size="20" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;a&gt;</text>
@@ -32,6 +39,10 @@
 
   <rect x="360" y="375" width="120" height="70" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
   <text x="420" y="420" font-size="24" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">b</text>
+
+  <!-- map: horizontal Normal function a → b -->
+  <line x1="240" y1="410" x2="360" y2="410" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="300" y="398" font-size="16" fill="#1f1f1f" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">f</text>
 
   <!-- fold right side: b at bottom -->
   <rect x="940" y="375" width="120" height="70" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>

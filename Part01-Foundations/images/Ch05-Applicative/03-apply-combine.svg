@@ -21,8 +21,8 @@
   <text x="190" y="345" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">K&lt;F, a&gt;</text>
   <text x="190" y="372" font-size="11" fill="#0c3a5e" text-anchor="middle" font-style="italic">컨테이너 안 값</text>
 
-  <line x1="282" y1="200" x2="540" y2="245" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
-  <line x1="282" y1="350" x2="540" y2="265" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <line x1="282" y1="200" x2="598" y2="250" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <line x1="282" y1="350" x2="598" y2="260" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
 
   <text x="395" y="200" font-size="32" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">⊛</text>
   <text x="395" y="380" font-size="14" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-style="italic">apply 가 두 시민을 결합</text>

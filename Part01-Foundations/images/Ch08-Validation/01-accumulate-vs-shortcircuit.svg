@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="520" fill="#ffffff"/>
+
+  <text x="230" y="46" font-size="16" font-weight="bold" fill="#38761d" text-anchor="middle">applicative style — 누적</text>
+  <text x="670" y="46" font-size="16" font-weight="bold" fill="#990000" text-anchor="middle">monadic style — 단락</text>
+
+  <line x1="450" y1="28" x2="450" y2="500" stroke="#cccccc" stroke-width="1.5" stroke-dasharray="5 5"/>
+
+  <!-- LEFT: 4 개 모두 평가, 모두 Invalid -->
+  <rect x="140" y="78" width="180" height="40" fill="#fbe9e9" stroke="#990000" stroke-width="2" rx="6"/>
+  <text x="230" y="104" font-size="15" fill="#5a0000" text-anchor="middle" font-family="'Consolas', monospace">email  ✗</text>
+  <rect x="140" y="128" width="180" height="40" fill="#fbe9e9" stroke="#990000" stroke-width="2" rx="6"/>
+  <text x="230" y="154" font-size="15" fill="#5a0000" text-anchor="middle" font-family="'Consolas', monospace">password  ✗</text>
+  <rect x="140" y="178" width="180" height="40" fill="#fbe9e9" stroke="#990000" stroke-width="2" rx="6"/>
+  <text x="230" y="204" font-size="15" fill="#5a0000" text-anchor="middle" font-family="'Consolas', monospace">age  ✗</text>
+  <rect x="140" y="228" width="180" height="40" fill="#fbe9e9" stroke="#990000" stroke-width="2" rx="6"/>
+  <text x="230" y="254" font-size="15" fill="#5a0000" text-anchor="middle" font-family="'Consolas', monospace">tier  ✗</text>
+
+  <text x="230" y="296" font-size="12" fill="#38761d" text-anchor="middle" font-style="italic">4 개 모두 평가</text>
+  <line x1="230" y1="304" x2="230" y2="338" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+
+  <rect x="110" y="342" width="240" height="66" fill="#fbe9e9" stroke="#990000" stroke-width="2.6" rx="6"/>
+  <text x="230" y="370" font-size="15" fill="#5a0000" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">Invalid — 에러 4 건</text>
+  <text x="230" y="392" font-size="12" fill="#5a0000" text-anchor="middle" font-family="'Consolas', monospace">[email | password | age | tier]</text>
+
+  <!-- RIGHT: 첫 실패에서 멈춤 -->
+  <rect x="580" y="78" width="180" height="40" fill="#fbe9e9" stroke="#990000" stroke-width="2" rx="6"/>
+  <text x="670" y="104" font-size="15" fill="#5a0000" text-anchor="middle" font-family="'Consolas', monospace">email  ✗</text>
+  <rect x="580" y="128" width="180" height="40" fill="#f3f3f3" stroke="#888888" stroke-width="1.6" rx="6" stroke-dasharray="5 4"/>
+  <text x="670" y="154" font-size="13" fill="#888888" text-anchor="middle" font-family="'Consolas', monospace">password (평가 안 됨)</text>
+  <rect x="580" y="178" width="180" height="40" fill="#f3f3f3" stroke="#888888" stroke-width="1.6" rx="6" stroke-dasharray="5 4"/>
+  <text x="670" y="204" font-size="13" fill="#888888" text-anchor="middle" font-family="'Consolas', monospace">age (평가 안 됨)</text>
+  <rect x="580" y="228" width="180" height="40" fill="#f3f3f3" stroke="#888888" stroke-width="1.6" rx="6" stroke-dasharray="5 4"/>
+  <text x="670" y="254" font-size="13" fill="#888888" text-anchor="middle" font-family="'Consolas', monospace">tier (평가 안 됨)</text>
+
+  <text x="670" y="296" font-size="12" fill="#990000" text-anchor="middle" font-style="italic">첫 실패에서 멈춤</text>
+  <line x1="670" y1="304" x2="670" y2="338" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+
+  <rect x="550" y="342" width="240" height="66" fill="#fbe9e9" stroke="#990000" stroke-width="2.6" rx="6"/>
+  <text x="670" y="370" font-size="15" fill="#5a0000" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">Invalid — 에러 1 건</text>
+  <text x="670" y="392" font-size="12" fill="#5a0000" text-anchor="middle" font-family="'Consolas', monospace">[email]</text>
+
+  <text x="450" y="455" font-size="13" fill="#1f1f1f" text-anchor="middle" font-style="italic">같은 입력 (4 칸 모두 잘못). 어느 의미가 맞는지는 도메인이 고릅니다.</text>
+</svg>

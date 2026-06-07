@@ -4,7 +4,7 @@
       <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
     </marker>
     <marker id="arrow-lower" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#bf9000"/>
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
     </marker>
   </defs>
 
@@ -19,7 +19,7 @@
   <rect x="580" y="115" width="180" height="70" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
   <text x="670" y="158" font-size="17" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">MyMaybe&lt;int&gt;</text>
 
-  <line x1="322" y1="150" x2="578" y2="150" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <line x1="322" y1="150" x2="578" y2="150" stroke="#1f1f1f" stroke-width="2.4"/>
   <text x="450" y="138" font-size="15" fill="#1f1f1f" text-anchor="middle" font-style="italic" font-family="'Consolas', monospace">(있음/없음 두 분기)</text>
   <text x="450" y="210" font-size="12" fill="#0c3a5e" text-anchor="middle" font-style="italic">MyMaybe&lt;int&gt; 자료 — FoldLeft 의 입력 (Just 또는 Nothing)</text>
 
@@ -32,14 +32,14 @@
   <rect x="580" y="370" width="180" height="70" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
   <text x="670" y="416" font-size="24" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">0</text>
 
-  <line x1="322" y1="405" x2="578" y2="405" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)" stroke-dasharray="6 4"/>
-  <text x="450" y="393" font-size="17" fill="#888888" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">step</text>
+  <line x1="322" y1="405" x2="578" y2="405" stroke="#1f1f1f" stroke-width="2.4" stroke-dasharray="6 4"/>
+  <text x="340" y="393" font-size="17" fill="#888888" text-anchor="start" font-weight="bold" font-family="'Consolas', monospace">step</text>
   <text x="450" y="465" font-size="12" fill="#5a4400" text-anchor="middle" font-style="italic">int 결과 — Just(42) 면 step(42, 0) = 42 / Nothing 이면 seed 그대로 0</text>
 
-  <line x1="230" y1="193" x2="230" y2="365" stroke="#bf9000" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lower)"/>
-  <line x1="670" y1="193" x2="670" y2="365" stroke="#bf9000" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lower)"/>
+  <line x1="230" y1="193" x2="230" y2="365" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lower)"/>
+  <line x1="670" y1="193" x2="670" y2="365" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lower)"/>
 
-  <line x1="450" y1="225" x2="450" y2="370" stroke="#bf9000" stroke-width="2" stroke-linecap="round" marker-end="url(#arrow-lower)" stroke-dasharray="6 5"/>
-  <text x="466" y="263" font-size="22" fill="#bf9000" font-weight="bold" font-family="'Consolas', monospace">fold</text>
-  <text x="466" y="283" font-size="12" fill="#bf9000" font-style="italic">끌어내림</text>
+  <line x1="450" y1="225" x2="450" y2="370" stroke="#1f77b4" stroke-width="2" stroke-linecap="round" marker-end="url(#arrow-lower)" stroke-dasharray="6 5"/>
+  <text x="466" y="263" font-size="22" fill="#1f77b4" font-weight="bold" font-family="'Consolas', monospace">fold</text>
+  <text x="466" y="283" font-size="12" fill="#1f77b4" font-style="italic">끌어내림</text>
 </svg>

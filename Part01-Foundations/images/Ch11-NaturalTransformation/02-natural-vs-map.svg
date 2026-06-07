@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+    <marker id="arrow-lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="520" fill="#ffffff"/>
+
+  <text x="450" y="46" font-size="16" font-weight="bold" fill="#1f1f1f" text-anchor="middle">map (가로 · 값) 과 NaturalTransformation (세로 · 컨테이너) 은 직교합니다</text>
+
+  <!-- 네 모서리 -->
+  <rect x="150" y="100" width="180" height="64" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="240" y="138" font-size="17" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">F&lt;a&gt;</text>
+  <rect x="570" y="100" width="180" height="64" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="660" y="138" font-size="17" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">F&lt;b&gt;</text>
+  <rect x="150" y="360" width="180" height="64" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="240" y="398" font-size="17" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace">G&lt;a&gt;</text>
+  <rect x="570" y="360" width="180" height="64" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="660" y="398" font-size="17" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace">G&lt;b&gt;</text>
+
+  <!-- 가로 map -->
+  <line x1="332" y1="132" x2="568" y2="132" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="450" y="120" font-size="15" fill="#1f1f1f" text-anchor="middle" font-family="'Consolas', monospace">F.map(f)</text>
+  <line x1="332" y1="392" x2="568" y2="392" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="450" y="412" font-size="15" fill="#1f1f1f" text-anchor="middle" font-family="'Consolas', monospace">G.map(f)</text>
+
+  <!-- 세로 Transform -->
+  <line x1="240" y1="166" x2="240" y2="358" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <text x="150" y="265" font-size="15" fill="#1f77b4" font-family="'Consolas', monospace">Transform</text>
+  <line x1="660" y1="166" x2="660" y2="358" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <text x="690" y="265" font-size="15" fill="#1f77b4" font-family="'Consolas', monospace">Transform</text>
+
+  <text x="450" y="470" font-size="13" fill="#1f1f1f" text-anchor="middle" font-style="italic">두 경로 (가로 후 세로 / 세로 후 가로) 가 같은 결과 — 자연성 법칙.</text>
+</svg>
