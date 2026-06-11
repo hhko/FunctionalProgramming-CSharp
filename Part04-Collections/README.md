@@ -60,7 +60,7 @@
 
 ### 12장 — Sequences / Seq · Lst
 
-순서가 있는 컬렉션입니다. 기초의 `MyList` 가 가리키던 자리를 실무 시민 lazy 시퀀스가 채웁니다. 학습용 `MySeq<a>` (lazy `IEnumerable` 백킹) 에 같은 `Functor` / `Applicative` / `Monad` / `Foldable` / `Traversable` trait 을 직접 부착하고, toy `MyList` 가 즉시 materialize 했던 것과 달리 계산이 끝까지 미뤄지는 차이를 봅니다. LINQ `Select` / `SelectMany` 가이 trait 들의 별명이었음을 재확인합니다.
+순서가 있는 컬렉션입니다. 기초의 `MyList` 가 가리키던 자리를 실무 시민 lazy 시퀀스가 채웁니다. 학습용 `MySeq<a>` (lazy `IEnumerable` 백킹) 에 같은 `Functor` / `Applicative` / `Monad` / `Foldable` / `Traversable` trait 을 직접 부착하고, toy `MyList` 가 즉시 materialize 했던 것과 달리 계산이 끝까지 미뤄지는 차이를 봅니다. LINQ `Select` / `SelectMany` 가 이 trait 들의 별명이었음을 재확인합니다.
 
 두 가지가 더 드러납니다. ① 챌린지의 `MyLst` (재귀적 cons 구조) 는 표현이 완전히 달라도 같은 trait 이 그대로 붙음을 보여 줍니다. 추상은 표현이 아니라 시그니처의 약속에 달려 있습니다. ② 시퀀스에는 적법한 Applicative 가 둘 있습니다. 데카르트 곱 (`MySeq.Apply`) 과 짝 맞춤 (`ZipSeq`) 입니다. 같은 자료 타입에 서로 다른 추상이 공존할 수 있다는 첫 사례입니다.
 
