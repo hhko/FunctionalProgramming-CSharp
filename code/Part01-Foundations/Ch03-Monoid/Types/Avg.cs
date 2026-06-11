@@ -9,8 +9,8 @@ namespace Ch03.Types;
 // 그러나 {Total, Count} 두 자리의 자료로 누적하면 두 정수의 덧셈 Monoid 두 개 짝이라
 // 자연스럽게 Monoid 가 됩니다. 마지막 단계에 .Value 로 평균을 추출.
 //
-// "design the type to be a monoid first, then compute the desired result at the end."
-// (Wlaschin, Monoids in Practice)
+// 패턴 (Wlaschin, Working with non-monoids) — 먼저 자료를 Monoid 로 설계하고, 원하는 결과는
+// 마지막에 추출한다. Avg 는 {Total, Count} 로 누적한 뒤 .Value 로 평균을 뽑는다.
 public readonly record struct Avg(int Total, int Count) : Monoid<Avg>
 {
     [Pure]

@@ -16,7 +16,7 @@
 
   <!-- type -->
   <rect x="55" y="236" width="400" height="120" fill="#fde9b8" stroke="#bf9000" stroke-width="2" rx="8"/>
-  <text x="75" y="262" font-size="13" fill="#5a4400" font-weight="bold">단위원은 타입에 산다</text>
+  <text x="75" y="262" font-size="13" fill="#5a4400" font-weight="bold">항등원은 타입에 산다</text>
   <rect x="75" y="274" width="90" height="40" fill="#ffffff" stroke="#bf9000" stroke-width="1.6" rx="5"/><text x="120" y="300" font-size="14" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace">Sum</text>
   <rect x="180" y="274" width="110" height="40" fill="#ffffff" stroke="#bf9000" stroke-width="1.6" rx="5"/><text x="235" y="300" font-size="14" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace">Concat</text>
   <text x="75" y="338" font-size="13" fill="#5a4400" font-family="'Consolas', monospace">Empty → <tspan font-weight="bold">Sum.Empty</tspan>  (static)</text>

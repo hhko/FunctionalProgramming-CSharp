@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 560" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+    <marker id="arrow-retry" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#bf9000"/>
+    </marker>
+  </defs>
+
+  <rect width="920" height="560" fill="#ffffff"/>
+
+  <!-- Elevated World band (top) — 단일 원자 참조가 1000 개 Swap 을 CAS 로 모음 -->
+  <rect x="40" y="56" width="840" height="252" fill="#f4f9ff" rx="12"/>
+  <text x="62" y="82" font-size="13" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.5">Elevated World — 단일 Atom (1000 개 Swap 을 CAS 로 원자적 갱신)</text>
+
+  <!-- 1000 Swap 호출이 Atom 으로 모임 -->
+  <rect x="80" y="104" width="150" height="56" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="155" y="128" font-size="12" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">Swap(c =&gt;</text>
+  <text x="155" y="146" font-size="12" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">c.N + 1)</text>
+
+  <rect x="244" y="104" width="150" height="56" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="319" y="128" font-size="12" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">Swap(c =&gt;</text>
+  <text x="319" y="146" font-size="12" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">c.N + 1)</text>
+
+  <text x="445" y="138" font-size="20" fill="#0c3a5e" text-anchor="middle" font-weight="bold">···</text>
+
+  <rect x="496" y="104" width="150" height="56" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="571" y="128" font-size="12" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">Swap(c =&gt;</text>
+  <text x="571" y="146" font-size="12" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">c.N + 1)</text>
+
+  <text x="700" y="118" font-size="12" fill="#1f77b4" text-anchor="middle" font-weight="bold">1000 회 (순서는</text>
+  <text x="700" y="136" font-size="12" fill="#1f77b4" text-anchor="middle" font-weight="bold">비결정)</text>
+
+  <!-- Swap 들이 단일 Atom 으로 모이는 화살표 -->
+  <line x1="155" y1="160" x2="380" y2="196" stroke="#1f77b4" stroke-width="2.4" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <line x1="319" y1="160" x2="420" y2="196" stroke="#1f77b4" stroke-width="2.4" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <line x1="571" y1="160" x2="500" y2="196" stroke="#1f77b4" stroke-width="2.4" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+
+  <!-- Atom box -->
+  <rect x="330" y="204" width="260" height="80" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.6" rx="6"/>
+  <text x="460" y="236" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">Atom&lt;Counter&gt;</text>
+  <text x="460" y="262" font-size="13" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">CompareExchange 루프</text>
+
+  <!-- CAS retry self-loop -->
+  <path d="M 590 224 C 660 204, 660 264, 595 254" fill="none" stroke="#bf9000" stroke-width="2.4" marker-end="url(#arrow-retry)"/>
+  <text x="668" y="240" font-size="12" fill="#bf9000" font-family="'Consolas', monospace">CAS 실패 → 재시도</text>
+
+  <!-- 끌어내림: Atom 의 최종 상태를 Normal World 의 단언으로 -->
+  <line x1="460" y1="284" x2="460" y2="368" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <text x="474" y="332" font-size="14" fill="#1f77b4" font-weight="bold" font-family="'Consolas', monospace">끌어내림 (단언)</text>
+
+  <!-- Normal World band (bottom) — 결정적 단언 -->
+  <rect x="40" y="384" width="840" height="142" fill="#fffdf3" rx="12"/>
+  <text x="62" y="410" font-size="13" fill="#bf9000" font-style="italic" font-weight="bold" letter-spacing="0.5">Normal World — 항상 같은 최종값 (결정적 단언)</text>
+
+  <rect x="330" y="430" width="260" height="68" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="460" y="463" font-size="20" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">Value.N == 1000</text>
+  <text x="460" y="485" font-size="12" fill="#5a4400" text-anchor="middle">최종값은 증가 횟수</text>
+</svg>

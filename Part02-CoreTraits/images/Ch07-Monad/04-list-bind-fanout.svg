@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 340" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+  </defs>
+
+  <rect width="1080" height="340" fill="#ffffff"/>
+
+  <text x="540" y="46" font-size="16" font-weight="bold" fill="#1f1f1f" text-anchor="middle">List 의 bind — 각 원소가 여러 갈래로 (map 후 flatten)</text>
+
+  <!-- Box 1: [1, 2, 3] -->
+  <rect x="40" y="130" width="180" height="90" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.4" rx="8"/>
+  <text x="130" y="170" font-size="13" fill="#1f77b4" text-anchor="middle" font-style="italic">MyList&lt;int&gt;</text>
+  <text x="130" y="197" font-size="20" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">[1, 2, 3]</text>
+
+  <!-- map 화살표 -->
+  <line x1="226" y1="175" x2="370" y2="175" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="298" y="163" font-size="14" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">map</text>
+  <text x="298" y="200" font-size="12" fill="#1f1f1f" text-anchor="middle" font-family="'Consolas', monospace">n =&gt; [n, n*10]</text>
+
+  <!-- Box 2: [[1,10],[2,20],[3,30]] -->
+  <rect x="376" y="125" width="318" height="100" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.4" rx="8"/>
+  <text x="535" y="165" font-size="13" fill="#1f77b4" text-anchor="middle" font-style="italic">MyList&lt;MyList&lt;int&gt;&gt; (한 겹 더 겹침)</text>
+  <text x="535" y="197" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">[[1,10], [2,20], [3,30]]</text>
+
+  <!-- flatten 화살표 -->
+  <line x1="700" y1="175" x2="844" y2="175" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="772" y="163" font-size="14" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">flatten</text>
+  <text x="772" y="200" font-size="12" fill="#1f1f1f" text-anchor="middle">이어붙임</text>
+
+  <!-- Box 3: [1,10,2,20,3,30] -->
+  <rect x="850" y="130" width="200" height="90" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.4" rx="8"/>
+  <text x="950" y="170" font-size="13" fill="#1f77b4" text-anchor="middle" font-style="italic">MyList&lt;int&gt;</text>
+  <text x="950" y="197" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">[1,10,2,20,3,30]</text>
+
+  <text x="540" y="290" font-size="13" fill="#1f1f1f" text-anchor="middle" font-style="italic">bind 은 map 으로 각 원소를 리스트로 펼친 뒤 flatten 으로 이어붙입니다. 한 입력이 여러 갈래로 퍼지는 비결정성입니다.</text>
+</svg>

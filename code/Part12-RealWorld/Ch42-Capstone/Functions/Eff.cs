@@ -1,0 +1,28 @@
+using Ch42.Types;
+
+namespace Ch42.Functions;
+
+public static class MonadExtensions
+{
+    public static K<M, B> Select<M, A, B>(this K<M, A> ma, Func<A, B> f)
+        where M : Monad<M> => M.MapDefault(f, ma);
+
+    public static K<M, C> SelectMany<M, A, B, C>(
+        this K<M, A> ma, Func<A, K<M, B>> bind, Func<A, B, C> project)
+        where M : Monad<M> => M.SelectManyD(ma, bind, project);
+}
+
+public static class Eff
+{
+    public static K<ReaderTF<RT>, Unit> Print<RT>(string msg) where RT : Has<RT, IConsole> =>
+        from con in ReaderTF<RT>.Asks(rt => RT.Get(rt))
+        from _ in ReaderTF<RT>.LiftIO(new IO<Unit>(() => { con.WriteLine(msg); return Unit.Default; }))
+        select _;
+
+    public static K<ReaderTF<RT>, Unit> SaveOrder<RT>(Order order) where RT : Has<RT, IStore> =>
+        from st in ReaderTF<RT>.Asks(rt => RT.Get(rt))
+        from _ in ReaderTF<RT>.LiftIO(new IO<Unit>(() => { st.Save(order.Id, order.Amount); return Unit.Default; }))
+        select _;
+
+    public static A Run<RT, A>(K<ReaderTF<RT>, A> eff, RT rt) => ((ReaderT<RT, A>)eff).Run(rt).Run();
+}

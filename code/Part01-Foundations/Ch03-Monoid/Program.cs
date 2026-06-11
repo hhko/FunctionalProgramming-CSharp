@@ -135,6 +135,35 @@ var (av1, av2, av3) = (Avg.Of(80), Avg.Of(90), Avg.Of(70));
 Console.WriteLine($"  Avg 결합 법칙      : {MonoidLaws.AssociativityHolds(av1, av2, av3)}");
 Console.WriteLine($"  Avg 좌 항등        : {MonoidLaws.LeftIdentityHolds(av1)}");
 
+// 가짜 반례 — Mean (평균) 은 시그니처는 통과하지만 결합 법칙을 어긴다.
+// (a·b)·c = 5.5, a·(b·c) = 4.0 → 묶는 순서가 결과를 바꿈. §3.7 의 평균 반례.
+var (m1, m2, m3) = (new Mean(2), new Mean(4), new Mean(8));
+Console.WriteLine($"  Mean 결합 법칙     : {(MonoidLaws.AssociativityHolds(m1, m2, m3) ? "통과" : "위반 (예상대로)")}");
+Console.WriteLine($"    (a·b)·c = {m1.Combine(m2).Combine(m3).Value}, a·(b·c) = {m1.Combine(m2.Combine(m3)).Value}  → 시그니처는 통과, 결합 법칙은 위반");
+
+// ─────────────────────────────────────────────────────────────────────
+// Part E2 — 법칙을 임의 입력으로 (최소 property 검증)
+// ─────────────────────────────────────────────────────────────────────
+
+Console.WriteLine();
+Console.WriteLine("== E2 — 법칙을 임의 입력으로: 최소 property 검증 (ForAll) ==");
+
+// 특정 값이 아니라 임의 입력 100 건으로 결합·항등을 검사한다.
+var assocRandom = Property.ForAll(
+    r => (new Sum(r.Next(-1000, 1000)), new Sum(r.Next(-1000, 1000)), new Sum(r.Next(-1000, 1000))),
+    t => MonoidLaws.AssociativityHolds(t.Item1, t.Item2, t.Item3));
+var identRandom = Property.ForAll(
+    r => new Sum(r.Next(-1000, 1000)),
+    a => MonoidLaws.LeftIdentityHolds(a) && MonoidLaws.RightIdentityHolds(a));
+Console.WriteLine($"  Sum 결합 법칙 (임의 100 건) : {(assocRandom ? "통과" : "위반")}");
+Console.WriteLine($"  Sum 항등 법칙 (임의 100 건) : {(identRandom ? "통과" : "위반")}");
+
+// 가짜 Mean 은 임의 입력에서 곧장 반례가 잡힌다.
+var meanRandom = Property.ForAll(
+    r => (new Mean(r.Next(100)), new Mean(r.Next(100)), new Mean(r.Next(100))),
+    t => MonoidLaws.AssociativityHolds(t.Item1, t.Item2, t.Item3));
+Console.WriteLine($"  Mean 결합 법칙 (임의 100 건) : {(meanRandom ? "통과" : "위반 (예상대로)")}");
+
 // ─────────────────────────────────────────────────────────────────────
 // Part F — Instance record form (v5 정통 자리)
 // ─────────────────────────────────────────────────────────────────────

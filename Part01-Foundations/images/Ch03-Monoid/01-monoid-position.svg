@@ -30,5 +30,5 @@
   <rect x="246" y="314" width="170" height="44" fill="#fde9b8" stroke="#bf9000" stroke-width="2.6" rx="6"/>
   <text x="331" y="341" font-size="13" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">Monoid</text>
   <text x="62" y="390" font-size="12" fill="#5a4400">자료: <tspan font-family="'Consolas', monospace">struct Sum : Monoid&lt;Sum&gt;</tspan> (1-tuple: 자료가 trait 직접 구현) · <tspan font-weight="bold">K&lt;F, A&gt; 불필요</tspan></text>
-  <text x="62" y="410" font-size="12" fill="#5a4400">값이 능력을 가진다 — <tspan font-family="'Consolas', monospace">a.Combine(b)</tspan> (instance) · 단위원은 <tspan font-family="'Consolas', monospace">Sum.Empty</tspan> (static)</text>
+  <text x="62" y="410" font-size="12" fill="#5a4400">값이 능력을 가진다 — <tspan font-family="'Consolas', monospace">a.Combine(b)</tspan> (instance) · 항등원은 <tspan font-family="'Consolas', monospace">Sum.Empty</tspan> (static)</text>
 </svg>

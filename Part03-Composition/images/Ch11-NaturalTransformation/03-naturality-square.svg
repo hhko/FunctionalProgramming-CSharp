@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+    <marker id="arrow-lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="470" fill="#ffffff"/>
+
+  <text x="450" y="34" font-size="15" fill="#1f1f1f" text-anchor="middle" font-weight="bold">자연성 법칙 — 두 경로가 같은 결과로 만나는 사각형</text>
+  <text x="450" y="54" font-size="12" fill="#666" text-anchor="middle" font-style="italic">Transform(F.Map(f, fa)) == G.Map(f, Transform(fa))</text>
+
+  <!-- Top-left F<a> -->
+  <rect x="150" y="100" width="180" height="62" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="240" y="128" font-size="14" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">MyList&lt;a&gt;</text>
+  <text x="240" y="148" font-size="11" fill="#0c3a5e" text-anchor="middle">F&lt;a&gt;</text>
+
+  <!-- Top-right F<b> -->
+  <rect x="570" y="100" width="180" height="62" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="660" y="128" font-size="14" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">MyList&lt;b&gt;</text>
+  <text x="660" y="148" font-size="11" fill="#0c3a5e" text-anchor="middle">F&lt;b&gt;</text>
+
+  <!-- Bottom-left G<a> -->
+  <rect x="150" y="330" width="180" height="62" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="240" y="358" font-size="14" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">MyMaybe&lt;a&gt;</text>
+  <text x="240" y="378" font-size="11" fill="#0c3a5e" text-anchor="middle">G&lt;a&gt;</text>
+
+  <!-- Bottom-right G<b> -->
+  <rect x="570" y="330" width="180" height="62" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="660" y="358" font-size="14" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">MyMaybe&lt;b&gt;</text>
+  <text x="660" y="378" font-size="11" fill="#0c3a5e" text-anchor="middle">G&lt;b&gt;</text>
+
+  <!-- Top arrow F.Map(f) -->
+  <line x1="332" y1="131" x2="568" y2="131" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="450" y="120" font-size="12" fill="#1f1f1f" text-anchor="middle" font-family="'Consolas', monospace">F.Map(f)  — 값 변환</text>
+
+  <!-- Bottom arrow G.Map(f) -->
+  <line x1="332" y1="361" x2="568" y2="361" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="450" y="385" font-size="12" fill="#1f1f1f" text-anchor="middle" font-family="'Consolas', monospace">G.Map(f)  — 값 변환</text>
+
+  <!-- Left arrow Transform -->
+  <line x1="240" y1="164" x2="240" y2="328" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <text x="160" y="250" font-size="12" fill="#1f77b4" text-anchor="middle" font-family="'Consolas', monospace">Transform</text>
+  <text x="160" y="268" font-size="11" fill="#1f77b4" text-anchor="middle">컨테이너 교체</text>
+
+  <!-- Right arrow Transform -->
+  <line x1="660" y1="164" x2="660" y2="328" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <text x="742" y="250" font-size="12" fill="#1f77b4" text-anchor="middle" font-family="'Consolas', monospace">Transform</text>
+  <text x="742" y="268" font-size="11" fill="#1f77b4" text-anchor="middle">컨테이너 교체</text>
+
+  <text x="450" y="250" font-size="13" fill="#38761d" text-anchor="middle" font-weight="bold">어느 경로로 돌아도</text>
+  <text x="450" y="270" font-size="13" fill="#38761d" text-anchor="middle" font-weight="bold">같은 결과</text>
+
+  <text x="450" y="438" font-size="12" fill="#5a4400" text-anchor="middle">값을 들여다보는 변환은 두 경로가 갈려 이 사각형이 닫히지 않습니다 (§11.5.1)</text>
+</svg>

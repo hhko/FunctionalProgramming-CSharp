@@ -6,7 +6,7 @@
   </defs>
   <rect width="980" height="400" fill="#ffffff"/>
 
-  <text x="490" y="34" font-size="17" fill="#1f1f1f" text-anchor="middle" font-weight="bold">단위원의 항등 — Empty 는 사슬에서 사라지고, 빈 입력의 답이 된다</text>
+  <text x="490" y="34" font-size="17" fill="#1f1f1f" text-anchor="middle" font-weight="bold">항등원의 항등 — Empty 는 사슬에서 사라지고, 빈 입력의 답이 된다</text>
 
   <!-- Top: Empty vanishes in chain -->
   <rect x="30" y="60" width="920" height="120" fill="#fffdf3" rx="12"/>

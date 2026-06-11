@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 560" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+  </defs>
+
+  <rect width="920" height="560" fill="#ffffff"/>
+
+  <!-- Elevated World band (top) — 함수형 설계 -->
+  <rect x="40" y="56" width="840" height="208" fill="#f4f9ff" rx="12"/>
+  <text x="62" y="82" font-size="13" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.5">Elevated World — 비결정의 효과를 값으로 가둔 설계</text>
+
+  <!-- four effect-as-value boxes -->
+  <rect x="62" y="104" width="190" height="138" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="157" y="132" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">Atom&lt;T&gt;</text>
+  <text x="157" y="160" font-size="12" fill="#0c3a5e" text-anchor="middle">순수 갱신 T → T</text>
+  <text x="157" y="182" font-size="12" fill="#0c3a5e" text-anchor="middle">CAS 재시도</text>
+  <text x="157" y="216" font-size="12" fill="#8a6a00" text-anchor="middle" font-style="italic">레이스</text>
+
+  <rect x="272" y="104" width="190" height="138" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="367" y="132" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">Schedule.Retry</text>
+  <text x="367" y="160" font-size="12" fill="#0c3a5e" text-anchor="middle">시간을 인자로</text>
+  <text x="367" y="182" font-size="12" fill="#0c3a5e" text-anchor="middle">시도 횟수만 셈</text>
+  <text x="367" y="216" font-size="12" fill="#8a6a00" text-anchor="middle" font-style="italic">시간</text>
+
+  <rect x="482" y="104" width="190" height="138" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="577" y="132" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">Resource.Use</text>
+  <text x="577" y="160" font-size="12" fill="#0c3a5e" text-anchor="middle">자원을 bracket 으로</text>
+  <text x="577" y="182" font-size="12" fill="#0c3a5e" text-anchor="middle">LIFO 해제</text>
+  <text x="577" y="216" font-size="12" fill="#8a6a00" text-anchor="middle" font-style="italic">수명</text>
+
+  <rect x="692" y="104" width="190" height="138" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="787" y="132" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">Source</text>
+  <text x="787" y="160" font-size="12" fill="#0c3a5e" text-anchor="middle">effect 를 trace 로</text>
+  <text x="787" y="182" font-size="12" fill="#0c3a5e" text-anchor="middle">lazy 스트림</text>
+  <text x="787" y="216" font-size="12" fill="#8a6a00" text-anchor="middle" font-style="italic">조기 정지</text>
+
+  <!-- four lower arrows down to Normal -->
+  <line x1="157" y1="246" x2="157" y2="334" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <line x1="367" y1="246" x2="367" y2="334" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <line x1="577" y1="246" x2="577" y2="334" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <line x1="787" y1="246" x2="787" y2="334" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <text x="460" y="296" font-size="15" fill="#1f77b4" font-weight="bold" font-family="'Consolas', monospace">불변식으로 단언</text>
+
+  <!-- Normal World band (bottom) — 결정적 단언 -->
+  <rect x="40" y="350" width="840" height="186" fill="#fffdf3" rx="12"/>
+  <text x="62" y="376" font-size="13" fill="#bf9000" font-style="italic" font-weight="bold" letter-spacing="0.5">Normal World — 항상 같은 결과 (결정적 단언)</text>
+
+  <rect x="62" y="396" width="190" height="116" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="157" y="442" font-size="20" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">== 1000</text>
+  <text x="157" y="470" font-size="12" fill="#5a4400" text-anchor="middle">최종값은 증가 횟수</text>
+
+  <rect x="272" y="396" width="190" height="116" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="367" y="442" font-size="20" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">== 3</text>
+  <text x="367" y="470" font-size="12" fill="#5a4400" text-anchor="middle">시도 횟수</text>
+
+  <rect x="482" y="396" width="190" height="116" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="577" y="436" font-size="15" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">B, A 순서</text>
+  <text x="577" y="470" font-size="12" fill="#5a4400" text-anchor="middle">예외에도 해제</text>
+
+  <rect x="692" y="396" width="190" height="116" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="787" y="436" font-size="15" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">[0,1,2]</text>
+  <text x="787" y="470" font-size="12" fill="#5a4400" text-anchor="middle">생성 시퀀스 골든</text>
+</svg>

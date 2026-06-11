@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 420" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+  </defs>
+
+  <rect width="940" height="420" fill="#ffffff"/>
+
+  <text x="470" y="34" font-size="15" fill="#1f1f1f" text-anchor="middle" font-weight="bold">trait 가족의 평행 — 인자 하나가 인자 둘로 늘어날 뿐</text>
+
+  <!-- Row 1 — 1-인자 -->
+  <text x="60" y="120" font-size="13" fill="#1f77b4" font-weight="bold">1-인자</text>
+  <text x="60" y="140" font-size="11" fill="#0c3a5e" font-family="'Consolas', monospace">K&lt;F, A&gt;</text>
+
+  <rect x="180" y="95" width="160" height="58" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="260" y="122" font-size="14" fill="#0c3a5e" text-anchor="middle" font-weight="bold">Functor</text>
+  <text x="260" y="142" font-size="11" fill="#0c3a5e" text-anchor="middle">Map</text>
+
+  <line x1="342" y1="124" x2="438" y2="124" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+
+  <rect x="440" y="95" width="160" height="58" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="520" y="122" font-size="14" fill="#0c3a5e" text-anchor="middle" font-weight="bold">Applicative</text>
+  <text x="520" y="142" font-size="11" fill="#0c3a5e" text-anchor="middle">Pure + Apply</text>
+
+  <line x1="602" y1="124" x2="698" y2="124" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+
+  <rect x="700" y="95" width="160" height="58" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="780" y="122" font-size="14" fill="#0c3a5e" text-anchor="middle" font-weight="bold">Monad</text>
+  <text x="780" y="142" font-size="11" fill="#0c3a5e" text-anchor="middle">Bind</text>
+
+  <!-- vertical 평행 connectors -->
+  <line x1="260" y1="153" x2="260" y2="262" stroke="#1f77b4" stroke-width="1.6" stroke-dasharray="5 5"/>
+  <line x1="520" y1="153" x2="520" y2="262" stroke="#1f77b4" stroke-width="1.6" stroke-dasharray="5 5"/>
+  <line x1="780" y1="153" x2="780" y2="262" stroke="#1f77b4" stroke-width="1.6" stroke-dasharray="5 5"/>
+  <text x="295" y="212" font-size="11" fill="#1f77b4" font-style="italic">평행</text>
+
+  <!-- Row 2 — 2-인자 -->
+  <text x="60" y="297" font-size="13" fill="#1f77b4" font-weight="bold">2-인자</text>
+  <text x="60" y="317" font-size="11" fill="#0c3a5e" font-family="'Consolas', monospace">K&lt;F, L, A&gt;</text>
+
+  <rect x="180" y="262" width="160" height="58" fill="#e8f4fd" stroke="#1f77b4" stroke-width="3" rx="6"/>
+  <text x="260" y="289" font-size="14" fill="#0c3a5e" text-anchor="middle" font-weight="bold">Bifunctor</text>
+  <text x="260" y="309" font-size="11" fill="#0c3a5e" text-anchor="middle">BiMap</text>
+
+  <line x1="342" y1="291" x2="438" y2="291" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+
+  <rect x="440" y="262" width="160" height="58" fill="#e8f4fd" stroke="#1f77b4" stroke-width="3" rx="6"/>
+  <text x="520" y="289" font-size="14" fill="#0c3a5e" text-anchor="middle" font-weight="bold">Biapplicative</text>
+  <text x="520" y="309" font-size="11" fill="#0c3a5e" text-anchor="middle">BiPure + BiApply</text>
+
+  <line x1="602" y1="291" x2="698" y2="291" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+
+  <rect x="700" y="262" width="160" height="58" fill="#e8f4fd" stroke="#1f77b4" stroke-width="3" rx="6"/>
+  <text x="780" y="289" font-size="14" fill="#0c3a5e" text-anchor="middle" font-weight="bold">Bimonad</text>
+  <text x="780" y="309" font-size="11" fill="#0c3a5e" text-anchor="middle">BiBind</text>
+
+  <text x="470" y="378" font-size="12" fill="#5a4400" text-anchor="middle">MapSecond 가 곧 Functor 의 Map — Bifunctor 는 Functor 를 포함합니다</text>
+</svg>

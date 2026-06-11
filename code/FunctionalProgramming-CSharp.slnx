@@ -3,62 +3,66 @@
     <Project Path="Part01-Foundations/Ch01-Paradigm-Shift/Ch01.csproj" />
     <Project Path="Part01-Foundations/Ch02-HigherKinds/Ch02.csproj" />
     <Project Path="Part01-Foundations/Ch03-Monoid/Ch03.csproj" />
-    <Project Path="Part01-Foundations/Ch04-Functor/Ch04.csproj" />
-    <Project Path="Part01-Foundations/Ch05-Applicative/Ch05.csproj" />
-    <Project Path="Part01-Foundations/Ch06-Foldable/Ch06.csproj" />
-    <Project Path="Part01-Foundations/Ch07-Monad/Ch07.csproj" />
-    <Project Path="Part01-Foundations/Ch08-Validation/Ch08.csproj" />
-    <Project Path="Part01-Foundations/Ch09-Traversable/Ch09.csproj" />
-    <Project Path="Part01-Foundations/Ch10-Bifunctor/Ch10.csproj" />
-    <Project Path="Part01-Foundations/Ch11-NaturalTransformation/Ch11.csproj" />
   </Folder>
-  <Folder Name="/Part02-Collections/">
-    <Project Path="Part02-Collections/Ch09-Sequences/Ch09.csproj" />
-    <Project Path="Part02-Collections/Ch10-Maps-and-Sets/Ch10.csproj" />
-    <Project Path="Part02-Collections/Ch11-Alternative/Ch11.csproj" />
+  <Folder Name="/Part02-CoreTraits/">
+    <Project Path="Part02-CoreTraits/Ch04-Functor/Ch04.csproj" />
+    <Project Path="Part02-CoreTraits/Ch05-Applicative/Ch05.csproj" />
+    <Project Path="Part02-CoreTraits/Ch06-Foldable/Ch06.csproj" />
+    <Project Path="Part02-CoreTraits/Ch07-Monad/Ch07.csproj" />
   </Folder>
-  <Folder Name="/Part03-EffectMonads/">
-    <Project Path="Part03-EffectMonads/Ch12-Reader/Ch12.csproj" />
-    <Project Path="Part03-EffectMonads/Ch13-State/Ch13.csproj" />
-    <Project Path="Part03-EffectMonads/Ch14-Writer/Ch14.csproj" />
-    <Project Path="Part03-EffectMonads/Ch15-Why-Transformers/Ch15.csproj" />
+  <Folder Name="/Part03-Composition/">
+    <Project Path="Part03-Composition/Ch08-Validation/Ch08.csproj" />
+    <Project Path="Part03-Composition/Ch09-Traversable/Ch09.csproj" />
+    <Project Path="Part03-Composition/Ch10-Bifunctor/Ch10.csproj" />
+    <Project Path="Part03-Composition/Ch11-NaturalTransformation/Ch11.csproj" />
   </Folder>
-  <Folder Name="/Part04-MonadTransformers/">
-    <Project Path="Part04-MonadTransformers/Ch16-Transformer-Idea/Ch16.csproj" />
-    <Project Path="Part04-MonadTransformers/Ch17-ReaderT-StateT-WriterT/Ch17.csproj" />
-    <Project Path="Part04-MonadTransformers/Ch18-OptionT-EitherT/Ch18.csproj" />
-    <Project Path="Part04-MonadTransformers/Ch19-MonadIO/Ch19.csproj" />
+  <Folder Name="/Part04-Collections/">
+    <Project Path="Part04-Collections/Ch12-Sequences/Ch12.csproj" />
+    <Project Path="Part04-Collections/Ch13-Maps-and-Sets/Ch13.csproj" />
+    <Project Path="Part04-Collections/Ch14-Alternative/Ch14.csproj" />
   </Folder>
-  <Folder Name="/Part05-EffectSystem/">
-    <Project Path="Part05-EffectSystem/Ch20-IO/Ch20.csproj" />
-    <Project Path="Part05-EffectSystem/Ch21-Error-Fin-Fallible/Ch21.csproj" />
-    <Project Path="Part05-EffectSystem/Ch22-Eff/Ch22.csproj" />
-    <Project Path="Part05-EffectSystem/Ch23-Eff-Runtime/Ch23.csproj" />
+  <Folder Name="/Part05-EffectMonads/">
+    <Project Path="Part05-EffectMonads/Ch15-Reader/Ch15.csproj" />
+    <Project Path="Part05-EffectMonads/Ch16-State/Ch16.csproj" />
+    <Project Path="Part05-EffectMonads/Ch17-Writer/Ch17.csproj" />
+    <Project Path="Part05-EffectMonads/Ch18-Why-Transformers/Ch18.csproj" />
   </Folder>
-  <Folder Name="/Part06-RobustEffects/">
-    <Project Path="Part06-RobustEffects/Ch24-Schedule/Ch24.csproj" />
-    <Project Path="Part06-RobustEffects/Ch25-Resource/Ch25.csproj" />
-    <Project Path="Part06-RobustEffects/Ch26-Observability/Ch26.csproj" />
+  <Folder Name="/Part06-MonadTransformers/">
+    <Project Path="Part06-MonadTransformers/Ch19-Transformer-Idea/Ch19.csproj" />
+    <Project Path="Part06-MonadTransformers/Ch20-ReaderT-StateT-WriterT/Ch20.csproj" />
+    <Project Path="Part06-MonadTransformers/Ch21-OptionT-EitherT/Ch21.csproj" />
+    <Project Path="Part06-MonadTransformers/Ch22-MonadIO/Ch22.csproj" />
   </Folder>
-  <Folder Name="/Part07-Concurrency/">
-    <Project Path="Part07-Concurrency/Ch27-Atom/Ch27.csproj" />
-    <Project Path="Part07-Concurrency/Ch28-STM/Ch28.csproj" />
-    <Project Path="Part07-Concurrency/Ch29-Concurrent-Collections/Ch29.csproj" />
+  <Folder Name="/Part07-EffectSystem/">
+    <Project Path="Part07-EffectSystem/Ch23-IO/Ch23.csproj" />
+    <Project Path="Part07-EffectSystem/Ch24-Error-Fin-Fallible/Ch24.csproj" />
+    <Project Path="Part07-EffectSystem/Ch25-Eff/Ch25.csproj" />
+    <Project Path="Part07-EffectSystem/Ch26-Eff-Runtime/Ch26.csproj" />
   </Folder>
-  <Folder Name="/Part08-Streaming/">
-    <Project Path="Part08-Streaming/Ch30-StreamT/Ch30.csproj" />
-    <Project Path="Part08-Streaming/Ch31-Pipes/Ch31.csproj" />
-    <Project Path="Part08-Streaming/Ch32-Conduit/Ch32.csproj" />
+  <Folder Name="/Part08-RobustEffects/">
+    <Project Path="Part08-RobustEffects/Ch27-Schedule/Ch27.csproj" />
+    <Project Path="Part08-RobustEffects/Ch28-Resource/Ch28.csproj" />
+    <Project Path="Part08-RobustEffects/Ch29-Observability/Ch29.csproj" />
   </Folder>
-  <Folder Name="/Part09-FunctionalTesting/">
-    <Project Path="Part09-FunctionalTesting/Ch33-Law-Verification/Ch33.csproj" />
-    <Project Path="Part09-FunctionalTesting/Ch34-Property-Based/Ch34.csproj" />
-    <Project Path="Part09-FunctionalTesting/Ch35-Testing-Effects/Ch35.csproj" />
+  <Folder Name="/Part09-Concurrency/">
+    <Project Path="Part09-Concurrency/Ch30-Atom/Ch30.csproj" />
+    <Project Path="Part09-Concurrency/Ch31-STM/Ch31.csproj" />
+    <Project Path="Part09-Concurrency/Ch32-Concurrent-Collections/Ch32.csproj" />
   </Folder>
-  <Folder Name="/Part10-RealWorld/">
-    <Project Path="Part10-RealWorld/Ch36-Domain-Modeling/Ch36.csproj" />
-    <Project Path="Part10-RealWorld/Ch37-Effectful-Application/Ch37.csproj" />
-    <Project Path="Part10-RealWorld/Ch38-Streaming-Pipeline/Ch38.csproj" />
-    <Project Path="Part10-RealWorld/Ch39-Capstone/Ch39.csproj" />
+  <Folder Name="/Part10-Streaming/">
+    <Project Path="Part10-Streaming/Ch33-StreamT/Ch33.csproj" />
+    <Project Path="Part10-Streaming/Ch34-Pipes/Ch34.csproj" />
+    <Project Path="Part10-Streaming/Ch35-Conduit/Ch35.csproj" />
+  </Folder>
+  <Folder Name="/Part11-FunctionalTesting/">
+    <Project Path="Part11-FunctionalTesting/Ch36-Effect-Testing/Ch36.csproj" />
+    <Project Path="Part11-FunctionalTesting/Ch37-Concurrent-Streaming/Ch37.csproj" />
+    <Project Path="Part11-FunctionalTesting/Ch38-Property-Based/Ch38.csproj" />
+  </Folder>
+  <Folder Name="/Part12-RealWorld/">
+    <Project Path="Part12-RealWorld/Ch39-Domain-Modeling/Ch39.csproj" />
+    <Project Path="Part12-RealWorld/Ch40-Effectful-Application/Ch40.csproj" />
+    <Project Path="Part12-RealWorld/Ch41-Streaming-Pipeline/Ch41.csproj" />
+    <Project Path="Part12-RealWorld/Ch42-Capstone/Ch42.csproj" />
   </Folder>
 </Solution>

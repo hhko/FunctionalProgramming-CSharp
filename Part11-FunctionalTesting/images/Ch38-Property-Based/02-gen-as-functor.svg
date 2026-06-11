@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+    <marker id="arrow-lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+  </defs>
+  <rect width="900" height="520" fill="#ffffff"/>
+
+  <!-- Elevated World 띠 (위) -->
+  <rect x="40" y="70" width="820" height="190" fill="#f4f9ff" stroke="none" rx="12"/>
+  <text x="60" y="98" font-size="13" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.5">Elevated World — Gen 이 사는 곳</text>
+
+  <!-- Gen<List<int>> 박스 -->
+  <rect x="120" y="135" width="220" height="80" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="230" y="172" font-size="17" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">Gen&lt;List&lt;int&gt;&gt;</text>
+  <text x="230" y="197" font-size="11" fill="#0c3a5e" text-anchor="middle" font-style="italic">무작위 리스트 생성기</text>
+
+  <!-- Gen<MyList<int>> 박스 -->
+  <rect x="560" y="135" width="220" height="80" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="670" y="172" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">Gen&lt;MyList&lt;int&gt;&gt;</text>
+  <text x="670" y="197" font-size="11" fill="#0c3a5e" text-anchor="middle" font-style="italic">무작위 MyList 생성기</text>
+
+  <!-- Select 화살표 (Elevated 안 가로) -->
+  <line x1="342" y1="175" x2="558" y2="175" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="450" y="163" font-size="16" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">Select(xs =&gt; new MyList&lt;int&gt;(xs))</text>
+
+  <!-- Normal World 띠 (아래) -->
+  <rect x="40" y="320" width="820" height="160" fill="#fffdf3" stroke="none" rx="12"/>
+  <text x="60" y="348" font-size="13" fill="#bf9000" font-style="italic" font-weight="bold" letter-spacing="0.5">Normal World — 평범한 변환 함수</text>
+
+  <!-- List<int> 박스 -->
+  <rect x="150" y="380" width="160" height="64" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="230" y="418" font-size="16" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">List&lt;int&gt;</text>
+
+  <!-- MyList<int> 박스 -->
+  <rect x="590" y="380" width="160" height="64" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="670" y="418" font-size="15" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">MyList&lt;int&gt;</text>
+
+  <!-- Normal 함수 화살표 -->
+  <line x1="312" y1="412" x2="588" y2="412" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="450" y="400" font-size="15" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">xs =&gt; new MyList&lt;int&gt;(xs)</text>
+
+  <!-- lift 화살표 (왼쪽, Normal → Elevated) -->
+  <line x1="230" y1="378" x2="230" y2="217" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <!-- lift 화살표 (오른쪽) -->
+  <line x1="670" y1="378" x2="670" y2="217" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+
+  <text x="490" y="34" font-size="17" fill="#1f1f1f" text-anchor="middle" font-weight="bold">Gen 은 사실 Functor — Select 가 생성기 안의 결과를 갈아 끼움</text>
+  <text x="490" y="56" font-size="12" fill="#666" text-anchor="middle" font-style="italic">Normal 의 변환 함수가 Select 로 끌어올려져 Gen 안에서 작동 (모양 보존)</text>
+
+  <text x="490" y="506" font-size="12" fill="#1f1f1f" text-anchor="middle" font-style="italic">Gen 모양은 그대로, 안에서 나올 값의 타입만 바뀜 — 4장 map 의 끌어올림 그대로</text>
+</svg>

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 340" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+    <marker id="arrow-lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+  </defs>
+
+  <rect width="1080" height="340" fill="#ffffff"/>
+
+  <text x="540" y="46" font-size="16" font-weight="bold" fill="#1f1f1f" text-anchor="middle">traverse f = map f 다음 sequence — Functor 단계 + Applicative 단계</text>
+
+  <!-- Box 1: [2, 4] -->
+  <rect x="40" y="130" width="170" height="90" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.4" rx="8"/>
+  <text x="125" y="170" font-size="13" fill="#1f77b4" text-anchor="middle" font-style="italic">MyList&lt;int&gt;</text>
+  <text x="125" y="197" font-size="20" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">[2, 4]</text>
+
+  <!-- map f 화살표 (Functor, 함수 화살표) -->
+  <line x1="216" y1="175" x2="372" y2="175" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="294" y="163" font-size="14" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">map f</text>
+  <text x="294" y="200" font-size="12" fill="#1f1f1f" text-anchor="middle" font-family="'Consolas', monospace">n =&gt; Just(n)</text>
+
+  <!-- Box 2: [Just(2), Just(4)] -->
+  <rect x="378" y="130" width="300" height="90" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.4" rx="8"/>
+  <text x="528" y="167" font-size="13" fill="#1f77b4" text-anchor="middle" font-style="italic">MyList&lt;MyMaybe&lt;int&gt;&gt; (효과가 원소마다)</text>
+  <text x="528" y="197" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">[Just(2), Just(4)]</text>
+
+  <!-- sequence 화살표 (세계 이동 — 층 swap) -->
+  <line x1="684" y1="175" x2="840" y2="175" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <text x="762" y="163" font-size="14" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">sequence</text>
+  <text x="762" y="200" font-size="12" fill="#1f77b4" text-anchor="middle" font-style="italic">층 swap</text>
+
+  <!-- Box 3: Just([2, 4]) -->
+  <rect x="846" y="130" width="200" height="90" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.4" rx="8"/>
+  <text x="946" y="167" font-size="13" fill="#1f77b4" text-anchor="middle" font-style="italic">MyMaybe&lt;MyList&lt;int&gt;&gt;</text>
+  <text x="946" y="197" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">Just([2, 4])</text>
+
+  <text x="540" y="290" font-size="13" fill="#1f1f1f" text-anchor="middle" font-style="italic">map f (Functor) 가 각 원소를 a → E&lt;b&gt; 로 바꾸고, sequence (Applicative) 가 한 번의 층 swap 으로 효과를 바깥에 모읍니다.</text>
+</svg>

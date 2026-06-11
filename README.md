@@ -75,22 +75,24 @@ LanguageExt v5 의 핵심 발상인 **`K<F, A>` 마커 인터페이스 + self-bo
 
 ## 목차
 
-이 책은 10 개 Part 로 구성됩니다. **10 개 Part 의 실행 코드 (`code/`) 가 모두 구현** 되어 있고, 이 책은 모든 Part 가 **`K<F, A>` 직접 구현과 Elevated World 비유** 두 축 위에서 자란다는 점이 차별점입니다.
+이 책은 12 개 Part 로 구성됩니다. **기초 3 개 Part (1 ~ 3) 의 실행 코드 (`code/`) 가 모두 구현** 되어 있고, 이 책은 모든 Part 가 **`K<F, A>` 직접 구현과 Elevated World 비유** 두 축 위에서 자란다는 점이 차별점입니다.
 
-Part 1 ~ 4 는 함수형의 어휘와 동작 원리를 쌓습니다 (Foundations → 실제 컬렉션 → 효과 모나드 → 변환기 순). Part 5 ~ 8 은 부작용 (side-effect) 을 순수하게 다루는 고급 주제를 직접 구현합니다. 효과를 값으로 인코딩하고 (IO / Eff), 견고하게 다루고 (Schedule / Resource), 안전하게 동시 처리하고 (STM), 메모리 안전하게 스트리밍합니다. Part 9 ~ 10 은 함수형 테스트 표준과 실무 예제로 마무리합니다.
+Part 1 ~ 3 (기초) 은 함수형의 어휘와 동작 원리를 쌓습니다 (사고·기계장치 → 핵심 trait → 조합·확장). Part 4 ~ 6 은 실제 컬렉션 / 효과 모나드 / 변환기로 이어지고, Part 7 ~ 10 은 부작용 (side-effect) 을 순수하게 다루는 고급 주제를 직접 구현합니다. 효과를 값으로 인코딩하고 (IO / Eff), 견고하게 다루고 (Schedule / Resource), 안전하게 동시 처리하고 (STM), 메모리 안전하게 스트리밍합니다. Part 11 ~ 12 는 함수형 테스트 표준과 실무 예제로 마무리합니다.
 
 | Part | 주제 | 상태 |
 |---|---|---|
-| **[Part 1. Foundations](./Part01-Foundations/README.md)** | 함수형 기초 — 두 평행 세계 비유 정착 + Functor / Foldable / Applicative / Monad / Traversable + Validation 실전. 5개 trait + 4 가지 함수 유형(`a -> b`, `a -> E<b>`, `E<a> -> b`, `E<a> -> E<b>`). | **진행 중** |
-| **Part 2. Collections** | 불변 컬렉션 — Part 1 의 toy 추상을 실제 `Seq` / `Map` / `HashMap` 에 적용. `Alternative` / `SemigroupK` / `MonoidK` (선택과 결합). | 예정 |
-| **Part 3. Effect Monads** | 효과를 담는 모나드 — `Reader` / `State` / `Writer` 와 `Readable` / `Stateful` / `Writable` trait. 효과를 타입으로 인코딩. | 예정 |
-| **Part 4. Monad Transformers** | 세계를 쌓다 — `ReaderT` / `StateT` / `WriterT` / `OptionT` / `EitherT` + `MonadIO`. 여러 효과를 한 스택에. | 예정 |
-| **Part 5. Effect System** | IO 와 효과 런타임 — `IO<A>` DSL 인코딩 + `EnvIO`, `Error` / `Fin` / `Fallible`, `Eff<A>`, `Eff<RT, A> = ReaderT<RT, IO, A>`. | 예정 |
-| **Part 6. Robust Effects** | 견고한 효과 — `Schedule` (재시도 / 반복), `Resource` / bracket (자원 수명), `Activity` (OpenTelemetry 관측성). | 예정 |
-| **Part 7. Concurrency** | 동시성 — `Atom` (CAS), `STM` / `Ref` (트랜잭션 메모리), `AtomHashMap` / `VectorClock` (동시 컬렉션 · 인과성). | 예정 |
-| **Part 8. Streaming** | 스트리밍 — `StreamT` (효과적 스트림), Pipes `Producer` / `Consumer` / `Pipe`, `Conduit` 실전 파이프라인. | 예정 |
-| **Part 9. Functional Testing** | 함수형 테스트 표준 — 합법칙 검증 (xUnit), property-based 테스트, 테스트 더블 (`MemoryConsole`) 로 `Eff<RT>` 결정성 테스트. | 예정 |
-| **Part 10. Real-world** | 실무 예제 — 도메인 모델링 + 검증 파이프라인, `Eff<RT>` + `LanguageExt.Sys` + `Has` DI 애플리케이션, 종합 capstone. | 예정 |
+| **[Part 1. Foundations](./Part01-Foundations/README.md)** | 함수형 사고와 기계장치 — 두 평행 세계 비유 + Higher Kinds (`K<F, A>` + 3-tuple) + Monoid (Order 0). 4 가지 함수 유형(`a -> b`, `a -> E<b>`, `E<a> -> b`, `E<a> -> E<b>`) 의 지도. (Ch01 ~ 03) | **진행 중** |
+| **[Part 2. Core Traits](./Part02-CoreTraits/README.md)** | 네 자리의 다리 — Functor (`map`) / Applicative (`pure`+`apply`) / Foldable (`fold`) / Monad (`bind`). 4 가지 함수 유형 위 끌어올림 · 끌어내림 · 합성. (Ch04 ~ 07) | **진행 중** |
+| **[Part 3. Composition](./Part03-Composition/README.md)** | 조합 · 실전 · 확장 — Validation 누적 vs 단락 + Traversable 층 swap (세 trait 합성) + Bifunctor / NaturalTransformation 확장. (Ch08 ~ 11) | **진행 중** |
+| **Part 4. Collections** | 불변 컬렉션 — 기초의 toy 추상을 실제 `Seq` / `Map` / `HashMap` 에 적용. `Alternative` / `SemigroupK` / `MonoidK` (선택과 결합). | 예정 |
+| **Part 5. Effect Monads** | 효과를 담는 모나드 — `Reader` / `State` / `Writer` 와 `Readable` / `Stateful` / `Writable` trait. 효과를 타입으로 인코딩. | 예정 |
+| **Part 6. Monad Transformers** | 세계를 쌓다 — `ReaderT` / `StateT` / `WriterT` / `OptionT` / `EitherT` + `MonadIO`. 여러 효과를 한 스택에. | 예정 |
+| **Part 7. Effect System** | IO 와 효과 런타임 — `IO<A>` DSL 인코딩 + `EnvIO`, `Error` / `Fin` / `Fallible`, `Eff<A>`, `Eff<RT, A> = ReaderT<RT, IO, A>`. | 예정 |
+| **Part 8. Robust Effects** | 견고한 효과 — `Schedule` (재시도 / 반복), `Resource` / bracket (자원 수명), `Activity` (OpenTelemetry 관측성). | 예정 |
+| **Part 9. Concurrency** | 동시성 — `Atom` (CAS), `STM` / `Ref` (트랜잭션 메모리), `AtomHashMap` / `VectorClock` (동시 컬렉션 · 인과성). | 예정 |
+| **Part 10. Streaming** | 스트리밍 — `StreamT` (효과적 스트림), Pipes `Producer` / `Consumer` / `Pipe`, `Conduit` 실전 파이프라인. | 예정 |
+| **Part 11. Functional Testing** | 효과·전문성 테스트 — 효과 코드 결정적 테스트 (`Sys.Test` / `MemoryConsole`), 동시·스트리밍·자원 효과, property-based 심화. 법칙 검증은 각 trait 장에서 `ForAll` 로 수행. | 예정 |
+| **Part 12. Real-world** | 실무 예제 — 도메인 모델링 + 검증 파이프라인, `Eff<RT>` + `LanguageExt.Sys` + `Has` DI 애플리케이션, 종합 capstone. | 예정 |
 
 ---
 
@@ -99,55 +101,75 @@ Part 1 ~ 4 는 함수형의 어휘와 동작 원리를 쌓습니다 (Foundations
 ```
 FunctionalProgramming-CSharp/
 ├── README.md                           : 이 문서 (책 전체 안내)
-├── Part01-Foundations/                 : 1부 본문 (진행 중)
-│   ├── README.md                       : 1부 배경과 목표
-│   ├── Ch01-Paradigm-Shift.md
-│   ├── Ch02-Higher-Kinds.md
-│   ├── Ch03-Monoid.md
-│   ├── Ch04-Functor.md
-│   ├── Ch05-Applicative.md
-│   ├── Ch06-Foldable.md
-│   ├── Ch07-Monad.md
-│   ├── Ch08-Validation.md
-│   ├── Ch09-Traversable.md
-│   ├── Ch10-Bifunctor.md
-│   ├── Ch11-NaturalTransformation.md
-│   └── images/                         : 본문 SVG 도식
-├── Part02-Collections/                 : 2부 예정 — 불변 컬렉션 — 추상의 실전 적용
-├── Part03-EffectMonads/                : 3부 예정 — 효과를 담는 모나드 (Reader / State / Writer)
-├── Part04-MonadTransformers/           : 4부 예정 — 세계를 쌓다 — 모나드 변환기
-├── Part05-EffectSystem/                : 5부 예정 — IO 와 효과 런타임 (IO / Eff)
-├── Part06-RobustEffects/               : 6부 예정 — 견고한 효과 (Schedule / Resource / Observability)
-├── Part07-Concurrency/                 : 7부 예정 — 동시성 (Atom / STM / Ref)
-├── Part08-Streaming/                   : 8부 예정 — 스트리밍 (StreamT / Pipes / Conduit)
-├── Part09-FunctionalTesting/           : 9부 예정 — 함수형 테스트 표준
-├── Part10-RealWorld/                   : 10부 예정 — 실무 예제
-└── code/                               : 학습용 실행 코드
-    ├── FunctionalProgramming-CSharp.slnx
-    ├── Part01-Foundations/             : 11 챕터 모두 완성 (빌드·실행 가능)
-    │   ├── Ch01-Paradigm-Shift/
-    │   ├── Ch02-HigherKinds/
-    │   ├── Ch03-Monoid/
-    │   ├── Ch04-Functor/
-    │   ├── Ch05-Applicative/
-    │   ├── Ch06-Foldable/
-    │   ├── Ch07-Monad/
-    │   ├── Ch08-Validation/
-    │   ├── Ch09-Traversable/
-    │   ├── Ch10-Bifunctor/
-    │   └── Ch11-NaturalTransformation/
-    ├── Part02-Collections/             : 예정 (Ch12 ~ Ch14)
-    ├── Part03-EffectMonads/            : 예정 (Ch15 ~ Ch18)
-    ├── Part04-MonadTransformers/       : 예정 (Ch19 ~ Ch22)
-    ├── Part05-EffectSystem/            : 예정 (Ch23 ~ Ch26)
-    ├── Part06-RobustEffects/           : 예정 (Ch27 ~ Ch29)
-    ├── Part07-Concurrency/             : 예정 (Ch30 ~ Ch32)
-    ├── Part08-Streaming/               : 예정 (Ch33 ~ Ch35)
-    ├── Part09-FunctionalTesting/       : 예정 (Ch36 ~ Ch38)
-    └── Part10-RealWorld/               : 예정 (Ch39 ~ Ch42)
+│
+├── Part01-Foundations/                 : 1부 (완성) — 함수형 사고와 기계장치
+│   ├── Ch01-Paradigm-Shift.md          : 함수형 사고로의 전환 (두 평행 세계)
+│   ├── Ch02-Higher-Kinds.md            : Higher Kinds (K<F, A> 직접 구현)
+│   └── Ch03-Monoid.md                  : Monoid / Semigroup (Order 0 결합)
+│
+├── Part02-CoreTraits/                  : 2부 (완성) — 네 자리의 다리
+│   ├── Ch04-Functor.md                 : Functor / map (1인자 lift)
+│   ├── Ch05-Applicative.md             : Applicative / pure · apply (N인자 lift)
+│   ├── Ch06-Foldable.md                : Foldable / fold (끌어내림)
+│   └── Ch07-Monad.md                   : Monad / bind (World-crossing 합성)
+│
+├── Part03-Composition/                 : 3부 (완성) — 조합 · 실전 · 확장
+│   ├── Ch08-Validation.md              : Validation (applicative 누적 vs monadic 단락)
+│   ├── Ch09-Traversable.md             : Traversable / traverse · sequence (층 swap)
+│   ├── Ch10-Bifunctor.md               : Bifunctor / BiMap (2-인자 변환)
+│   └── Ch11-NaturalTransformation.md   : NaturalTransformation (컨테이너 교체)
+│
+├── Part04-Collections/                 : 4부 (예정) — 불변 컬렉션, 추상의 실전 적용
+│   ├── Ch12 — Sequences / Seq · Lst
+│   ├── Ch13 — Maps & Sets / Map · Set
+│   └── Ch14 — Alternative & MonoidK / 선택과 결합
+│
+├── Part05-EffectMonads/                : 5부 (예정) — 효과를 담는 모나드
+│   ├── Ch15 — Reader / 환경 의존
+│   ├── Ch16 — State / 상태 스레딩
+│   ├── Ch17 — Writer / 누적 로그
+│   └── Ch18 — 왜 변환기가 필요한가
+│
+├── Part06-MonadTransformers/           : 6부 (예정) — 세계를 쌓다, 모나드 변환기
+│   ├── Ch19 — 변환기 발상 & lift
+│   ├── Ch20 — ReaderT · StateT · WriterT
+│   ├── Ch21 — OptionT · EitherT
+│   └── Ch22 — MonadIO & LiftIO
+│
+├── Part07-EffectSystem/                : 7부 (예정) — IO 와 효과 런타임
+│   ├── Ch23 — IO (지연 효과의 인코딩)
+│   ├── Ch24 — Error · Fin · Fallible
+│   ├── Ch25 — Eff (런타임 없는 효과)
+│   └── Ch26 — Eff<RT> = ReaderT<RT, IO>
+│
+├── Part08-RobustEffects/               : 8부 (예정) — 견고한 효과
+│   ├── Ch27 — Schedule / 재시도와 반복
+│   ├── Ch28 — Resource & bracket / 자원 수명
+│   └── Ch29 — Observability / Activity · OpenTelemetry
+│
+├── Part09-Concurrency/                 : 9부 (예정) — 동시성
+│   ├── Ch30 — Atom / CAS 원자성
+│   ├── Ch31 — STM & Ref / 트랜잭션 메모리
+│   └── Ch32 — 동시 컬렉션 & 인과성
+│
+├── Part10-Streaming/                   : 10부 (예정) — 스트리밍
+│   ├── Ch33 — StreamT / 효과적 스트림
+│   ├── Ch34 — Pipes / Producer · Consumer · Pipe
+│   └── Ch35 — Conduit & 실전 파이프라인
+│
+├── Part11-FunctionalTesting/           : 11부 (예정) — 효과·전문성 테스트
+│   ├── Ch36 — 효과 코드의 결정적 테스트
+│   ├── Ch37 — 동시·스트리밍·자원 효과 테스트
+│   └── Ch38 — property-based 심화 + 테스트 아키텍처
+│
+└── Part12-RealWorld/                   : 12부 (예정) — 실무 예제
+    ├── Ch39 — 도메인 모델링 & 검증 파이프라인
+    ├── Ch40 — 효과 기반 애플리케이션
+    ├── Ch41 — 동시성·스트리밍 실전
+    └── Ch42 — 종합 capstone
 ```
 
-본문 (`PartN-…/*.md`) 과 코드 (`code/PartN-…/*`) 가 시그니처 단계에서 정합합니다. 본문을 읽으면서 해당 코드를 IDE 에서 직접 실행 / 수정해 볼 수 있습니다.
+본문 (`Part…/*.md`) 과 코드 (`code/Part…/Ch…/*`) 가 시그니처 단계에서 정합합니다. 본문을 읽으면서 해당 코드를 IDE 에서 직접 실행 / 수정해 볼 수 있습니다 (위 트리에서는 코드 계층을 생략했습니다. Part 4 ~ 12 는 예정).
 
 ---
 
@@ -160,11 +182,11 @@ cd code
 dotnet build FunctionalProgramming-CSharp.slnx          # 전체 프로젝트 빌드
 
 # 각 챕터는 독립 실행 가능한 콘솔 데모 — 데모가 모든 법칙/검증 결과를 출력
-dotnet run --project Part01-Foundations/Ch04-Functor/Ch04.csproj
-dotnet run --project Part01-Foundations/Ch11-NaturalTransformation/Ch11.csproj
+dotnet run --project Part02-CoreTraits/Ch04-Functor/Ch04.csproj
+dotnet run --project Part03-Composition/Ch11-NaturalTransformation/Ch11.csproj
 ```
 
-각 챕터 코드는 `code/Part01-Foundations/ChNN-…/` (1부는 완성, 2 ~ 10부는 예정) 에 독립적으로 들어 있어 한 챕터만 따로 실행해 볼 수 있습니다. 검증은 `Tests/` 의 콘솔 `bool` 헬퍼로 이뤄지며, 9부 (Ch36 ~ Ch38) 에서 이를 xUnit + Shouldly / property-based 표준으로 옮기는 법을 다룹니다. 각 챕터의 `Challenges/` 에는 직접 해보기 정답 코드가 들어 있습니다.
+각 챕터 코드는 `code/PartNN-…/ChNN-…/` (기초 Part 1 ~ 3 은 완성, Part 4 ~ 12 는 예정) 에 독립적으로 들어 있어 한 챕터만 따로 실행해 볼 수 있습니다. 검증은 `Tests/` 의 콘솔 `bool` 헬퍼로 이뤄지며 (각 trait 장이 3 장 §3.7.1 의 `ForAll` 로 법칙을 임의 입력에 검증), 11부 (Ch36 ~ Ch38) 에서 효과 코드의 결정적 테스트와 xUnit + Shouldly / property-based 심화로 옮기는 법을 다룹니다. 각 챕터의 `Challenges/` 에는 직접 해보기 정답 코드가 들어 있습니다.
 
 ---
 
@@ -172,7 +194,7 @@ dotnet run --project Part01-Foundations/Ch11-NaturalTransformation/Ch11.csproj
 
 - **.NET SDK** — **10.0 권장** (코드 프로젝트의 `<TargetFramework>` 가 `net10.0` 으로 설정). 최소 .NET 8 SDK 가 필요 (C# 11 의 `static abstract` 멤버 지원).
 - **C# 언어 버전** — **14 권장** (`<LangVersion>14</LangVersion>` 설정). 최소 C# 11 (`static abstract` 멤버 필수).
-- **테스트 도구** — 9부에서 실무 표준 (xUnit + Shouldly, property-based: CsCheck / FsCheck) 으로 옮기는 법을 다룹니다.
+- **테스트 도구** — 11부에서 실무 표준 (xUnit + Shouldly, property-based: CsCheck / FsCheck) 으로 옮기는 법을 다룹니다.
 
 ---
 

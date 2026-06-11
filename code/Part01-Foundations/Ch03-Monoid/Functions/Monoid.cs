@@ -9,7 +9,7 @@ namespace Ch03.Functions;
 // 학습용 별칭으로 FoldAll.Of<M> 도 보존 (Foldable 의 디딤돌 어휘).
 public static class Monoid
 {
-    // 단위원 — 일반 함수 어법.
+    // 항등원 — 일반 함수 어법.
     [Pure]
     public static A empty<A>() where A : Monoid<A> =>
         A.Empty;

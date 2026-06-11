@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 500" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+  </defs>
+
+  <rect width="920" height="500" fill="#ffffff"/>
+
+  <!-- Elevated World band (top) — bracket 구조 -->
+  <rect x="40" y="48" width="840" height="150" fill="#f4f9ff" rx="12"/>
+  <text x="62" y="74" font-size="13" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.5">Elevated World — bracket 가 묶는 수명 (열림 ⊂ 사용 ⊂ 닫힘)</text>
+
+  <!-- nested bracket boxes — A outer, B inner -->
+  <rect x="120" y="96" width="680" height="86" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="150" y="120" font-size="14" fill="#0c3a5e" font-family="'Consolas', monospace" font-weight="bold">A</text>
+  <rect x="200" y="118" width="520" height="48" fill="#d4ecfb" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="228" y="147" font-size="14" fill="#0c3a5e" font-family="'Consolas', monospace" font-weight="bold">B</text>
+  <text x="460" y="147" font-size="14" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">use (예외가 나도 …)</text>
+
+  <!-- Normal World band (bottom) — 종료 로그 (LIFO) -->
+  <rect x="40" y="246" width="840" height="218" fill="#fffdf3" rx="12"/>
+  <text x="62" y="272" font-size="13" fill="#bf9000" font-style="italic" font-weight="bold" letter-spacing="0.5">Normal World — 종료 로그 (열림 A→B, 닫힘 B→A)</text>
+
+  <!-- four log boxes in sequence -->
+  <rect x="80" y="300" width="170" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="165" y="336" font-size="15" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">acquire A</text>
+
+  <rect x="290" y="300" width="170" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="375" y="336" font-size="15" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">acquire B</text>
+
+  <rect x="500" y="300" width="170" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="585" y="336" font-size="15" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">release B</text>
+
+  <rect x="710" y="300" width="170" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="795" y="336" font-size="15" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">release A</text>
+
+  <!-- sequence arrows -->
+  <line x1="250" y1="330" x2="288" y2="330" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <line x1="460" y1="330" x2="498" y2="330" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <line x1="670" y1="330" x2="708" y2="330" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+
+  <!-- LIFO pairing braces -->
+  <path d="M 375 300 C 375 280, 585 280, 585 300" fill="none" stroke="#1f77b4" stroke-width="2" stroke-dasharray="4 3"/>
+  <text x="480" y="278" font-size="12" fill="#1f77b4" text-anchor="middle" font-style="italic">B 짝</text>
+  <path d="M 165 372 C 165 408, 795 408, 795 372" fill="none" stroke="#1f77b4" stroke-width="2" stroke-dasharray="4 3"/>
+  <text x="480" y="428" font-size="12" fill="#1f77b4" text-anchor="middle" font-style="italic">A 짝 (가장 먼저 열려 가장 나중에 닫힘)</text>
+</svg>
