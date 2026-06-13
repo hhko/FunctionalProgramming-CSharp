@@ -4,13 +4,13 @@
 
 > **이 장의 핵심 어휘**
 >
-> - `MyValidation<E, A>` (성공이면 값을 담은 `Valid`, 실패면 오류 목록을 담은 `Invalid` 두 케이스를 가진 Elevated 시민)
-> - **Applicative-but-not-Monad** (`Apply` 만 두고 `Bind` 를 일부러 막아 단락 대신 누적을 택하는 의도된 설계)
-> - **누적 (accumulate)** (네 칸을 모두 평가해 틀린 칸의 오류를 한 목록에 모으는 applicative style 의 결과)
-> - **단락 (short-circuit)** (첫 `Invalid` 에서 멈춰 나머지를 평가하지 않는 monadic style 의 결과)
-> - `Apply` 의 `Invalid + Invalid` 분기 (함수 측과 값 측이 둘 다 실패면 두 오류 목록을 이어붙이는, 누적이 일어나는 자리)
-> - **독립 결합 / 의존 결합** (서로 모르는 칸을 함께 평가하는 `Apply` 와 앞 성공에 뒤가 의존하는 `Bind` 의 차이)
-> - `MapFail` (값은 그대로 두고 에러 채널만 변환하는 함수. 값 채널의 `Map` 과 대칭)
+> - **`MyValidation<E, A>`**: 성공이면 값을 담은 `Valid`, 실패면 오류 목록을 담은 `Invalid` 두 케이스를 가진 Elevated 시민
+> - **Applicative-but-not-Monad**: `Apply` 만 두고 `Bind` 를 일부러 막아 단락 대신 누적을 택하는 의도된 설계
+> - **누적 (accumulate)**: 네 칸을 모두 평가해 틀린 칸의 오류를 한 목록에 모으는 applicative style 의 결과
+> - **단락 (short-circuit)**: 첫 `Invalid` 에서 멈춰 나머지를 평가하지 않는 monadic style 의 결과
+> - `Apply` 의 `Invalid + Invalid` 분기: 함수 측과 값 측이 둘 다 실패면 두 오류 목록을 이어붙이는, 누적이 일어나는 자리
+> - **독립 결합 / 의존 결합**: 서로 모르는 칸을 함께 평가하는 `Apply` 와 앞 성공에 뒤가 의존하는 `Bind` 의 차이
+> - **`MapFail`**: 값은 그대로 두고 에러 채널만 변환하는 함수. 값 채널의 `Map` 과 대칭
 
 > 이 장을 마치면 할 수 있게 되는 것
 > - [ ] `MyValidation` 이 왜 Applicative 자리이고 Monad 자리가 아닌지 설명할 수 있습니다.
@@ -23,51 +23,9 @@
 
 ---
 
-## 8.1 1장 비유로 출발 — Validation 은 Elevated World 의 어느 자리인가
+## 8.1 왜 필요한가 — 첫 실패에서 멈추는 폼
 
-8장의 핵심은 한 줄로 압축됩니다. 5장 ~ 7장에서 손에 쥔 도구 (Applicative 의 `Apply`, Monad 의 `Bind`) 를 같은 도메인에 나란히 적용해, **어느 어법이 어느 상황에 맞는가** 를 실전으로 가립니다. 새 trait 을 배우는 장이 아니라, 이미 배운 두 trait 의 차이가 실무에서 어떻게 결과를 가르는지 보는 장입니다.
-
-> 8장의 5부 구조 — 5장 ~ 7장과 같은 narrative arc 로 구성됩니다.
->
-> - **§8.1 ~ §8.2 목적** — 폼 검증의 불편 (첫 실패에서 멈추면 사용자가 번거롭습니다).
-> - **§8.3 ~ §8.5 기능** — 도메인 셋업, 작은 검증자, `Pure → Apply` 다인자 조립.
-> - **§8.6 ~ §8.8 기능 (누적의 핵심)** — `Apply` 의 누적 분기, applicative vs monadic, `MapFail`.
-> - **§8.9 ~ §8.14 예제·마무리** — 4 사례 데모 · 챌린지 · 다시 읽기 · Q&A · 요약 · 9장 다리.
-
-### 8.1.1 5장에서 만든 `MyValidation` 자리 복습
-
-`MyValidation<E, A>` 는 5장에서 Applicative 의 인스턴스로 부착했습니다. 두 케이스를 가집니다. 성공이면 값을 담은 `Valid`, 실패면 오류 목록을 담은 `Invalid` 입니다.
-
-```csharp
-public abstract record MyValidation<E, A> : K<MyValidationF<E>, A>
-{
-    public sealed record Valid(A Value) : MyValidation<E, A>;
-    public sealed record Invalid(IReadOnlyList<E> Errors) : MyValidation<E, A>;
-}
-```
-
-오류가 단수가 아니라 **목록** (`IReadOnlyList<E>`) 이라는 점이 이 장의 모든 것을 결정합니다. 오류를 하나가 아니라 여러 개 담을 수 있어야 누적이 가능합니다. 5장에서는 이 타입의 시그니처를 봤고, 8장에서는 그 시그니처가 실전에서 무엇을 할 수 있게 하는지 봅니다.
-
-### 8.1.2 Applicative 자리, Monad 자리 아님
-
-`MyValidationF<E>` 는 `Applicative<MyValidationF<E>>` 만 구현합니다. `Bind` 는 정의하지 않습니다. 이것이 의도된 설계입니다.
-
-```csharp
-public sealed class MyValidationF<E> : Applicative<MyValidationF<E>>
-{
-    // Map / Pure / Apply 만 — Bind 는 없습니다 (의도적).
-}
-```
-
-7장에서 `Bind` 가 의존 결합 (앞 단계의 성공에 뒤 단계가 의존) 이라 단락을 일으킨다고 봤습니다. Validation 이 `Bind` 를 일부러 두지 않는 이유가 바로 그것입니다. 폼 검증은 네 칸이 서로 독립이므로, 의존 결합이 아니라 독립 결합 (`Apply`) 으로 모든 칸을 함께 평가해 오류를 누적하려는 것입니다. 이 의도적 선택을 **Applicative-but-not-Monad** 라 부릅니다.
-
-`MyValidation` 은 5장에서 부착한 Applicative 그대로이므로, Applicative 의 다섯 법칙 (5장) 을 그대로 따릅니다. 새 trait 을 더하지 않으니 이 장에는 별도의 법칙 절을 두지 않고, 5장에서 검증한 다섯 법칙을 그대로 물려받습니다.
-
-> **실무 노트** — LanguageExt v5 의 실제 `Validation<FAIL, A>` 는 단락 `Bind` 도 제공해, 같은 타입에서 누적 (`Apply`) 과 단락 (`Bind`) 두 경로를 모두 씁니다. 라이브러리 `Validation` 이 Monad 가 아니어서 `Bind` 가 없는 것이 아닙니다. 이 책의 학습용 `MyValidation` 은 누적이 왜 `Apply` 에서 일어나는지를 단락 경로에 방해받지 않고 보이려고 `Bind` 를 일부러 비운 것입니다.
-
----
-
-## 8.2 왜 필요한가 — 첫 실패에서 멈추는 폼
+8장은 기초에서 처음으로 이론을 실전에 붙이는 장입니다. 새 trait 을 배우지 않습니다. 5장 ~ 7장에서 손에 쥔 두 도구 (Applicative 의 `Apply`, Monad 의 `Bind`) 를 같은 도메인에 나란히 적용해, **어느 어법이 어느 상황에 맞는가** 를 실전으로 가립니다.
 
 `Bind` 만으로 폼을 검증하면 무엇이 번거로운지 먼저 겪어 봅니다. 회원가입 폼에 이메일 · 비밀번호 · 나이 · 등급 네 칸이 있습니다. 7장의 `Bind` 사슬로 검증을 이으면, 첫 칸이 틀리는 순간 단락이 일어나 나머지는 평가조차 되지 않습니다.
 
@@ -82,7 +40,40 @@ ValidateEmail(email).Bind(e =>
 
 > **흔한 함정** — "그러면 `try-catch` 로 각 칸을 따로 검사해 오류를 리스트에 모으면 되지" 로 넘기면, 모으는 코드와 조립하는 코드가 본문에 섞여 칸이 늘 때마다 복제됩니다. 필요한 것은 **검증을 독립으로 수행하면서 오류를 자동으로 누적하고, 모두 통과했을 때만 값을 조립하는** 도구입니다. 그 도구가 Applicative 의 `Apply` 입니다.
 
-폼 검증이 원하는 것은 단락이 아니라 누적입니다. 네 칸을 모두 평가하고, 틀린 칸의 오류를 모두 모아 한 번에 보여 주는 것입니다. 7장의 의존 결합 (`Bind`) 이 아니라 5장의 독립 결합 (`Apply`) 이 맞는 자리입니다.
+폼 검증이 원하는 것은 단락이 아니라 누적입니다. 네 칸을 모두 평가해, 틀린 칸의 오류를 모두 모아 한 번에 보여 줍니다. 7장의 의존 결합 (`Bind`) 이 아니라 5장의 독립 결합 (`Apply`) 이 맞는 자리입니다.
+
+---
+
+## 8.2 도구 선택 — 5장의 `MyValidation`, 그리고 `Bind` 를 비운 까닭
+
+### 8.2.1 5장에서 만든 `MyValidation` 자리 복습
+
+`MyValidation<E, A>` 는 5장에서 Applicative 의 인스턴스로 부착했습니다. 두 케이스를 가집니다. 성공이면 값을 담은 `Valid`, 실패면 오류 목록을 담은 `Invalid` 입니다.
+
+```csharp
+public abstract record MyValidation<E, A> : K<MyValidationF<E>, A>
+{
+    public sealed record Valid(A Value) : MyValidation<E, A>;
+    public sealed record Invalid(IReadOnlyList<E> Errors) : MyValidation<E, A>;
+}
+```
+
+오류가 단수가 아니라 **목록** (`IReadOnlyList<E>`) 이라는 점이 이 장의 모든 것을 결정합니다. 오류를 하나가 아니라 여러 개 담을 수 있어야 누적이 가능합니다. 5장에서는 이 타입의 시그니처를 봤고, 8장에서는 그 시그니처가 실전에서 무엇을 할 수 있게 하는지 봅니다.
+
+### 8.2.2 Applicative 자리, Monad 자리 아님
+
+앞 절의 불편 (§8.1) 이 도구를 정해 줍니다. `MyValidationF<E>` 는 `Applicative<MyValidationF<E>>` 만 구현하고, `Bind` 는 정의하지 않습니다.
+
+```csharp
+public sealed class MyValidationF<E> : Applicative<MyValidationF<E>>
+{
+    // Map / Pure / Apply 만 — Bind 는 없습니다 (의도적).
+}
+```
+
+7장에서 `Bind` 가 의존 결합 (앞 단계의 성공에 뒤 단계가 의존) 이라 단락을 일으킨다고 봤습니다. Validation 이 `Bind` 를 일부러 두지 않는 이유가 바로 그것입니다. 폼 검증은 네 칸이 서로 독립이므로, 의존 결합이 아니라 독립 결합 (`Apply`) 으로 모든 칸을 함께 평가해 오류를 누적하려는 것입니다. 이 의도적 선택을 **Applicative-but-not-Monad** 라 부릅니다.
+
+`MyValidation` 은 5장에서 부착한 Applicative 그대로이므로, Applicative 의 다섯 법칙 (5장) 을 그대로 따릅니다. 새 trait 을 더하지 않으니 이 장에는 별도의 법칙 절을 두지 않고, 5장에서 검증한 다섯 법칙을 그대로 물려받습니다.
 
 ---
 
@@ -134,36 +125,6 @@ public static K<MyValidationF<DomainError>, Email> Email(string raw) =>
 
 통과하면 `Pure` 로 값을 `Valid` 에 끌어올리고, 실패하면 `Invalid` 에 오류 한 건을 담습니다. 비밀번호 (8 자 이상) · 나이 (14 ~ 120) · 등급 (`Enum.TryParse`) 도 같은 모양입니다. 네 검증자가 서로를 전혀 모릅니다. 이 **독립성** 이 누적의 전제입니다. 서로 의존하지 않으므로 넷을 함께 평가할 수 있습니다.
 
-### 8.4.1 칸 하나에 규칙 여럿 — 같은 누적이 한 칸 안에서도
-
-지금까지 한 검증자가 한 칸을 한 번 검사했습니다. 그런데 한 칸에 규칙이 여럿일 때가 있습니다. 비밀번호는 8 자 이상이면서, 숫자를 포함하고, 대문자를 포함해야 한다고 합니다. 세 규칙 중 하나만 어겨도 나머지를 마저 알려 주는 게 친절합니다. 칸과 칸 사이에서 쓰는 `Apply` 누적이 한 칸 안에서도 그대로 작동합니다. (여기서는 운반 값이 필요 없어 통과 규칙이 `Pure("")` 로 자리만 채우고 실제로는 오류 채널의 누적만 씁니다. 값을 실제로 모으는 정상 조립은 §8.5 에서 봅니다.)
-
-```csharp
-// 규칙 하나 — 통과면 Valid, 실패면 오류 1 건. 운반 값은 쓰지 않습니다.
-static K<MyValidationF<DomainError>, string> Rule(bool ok, string msg) =>
-    ok ? MyValidationF<DomainError>.Pure("")
-       : new MyValidation<DomainError, string>.Invalid([new DomainError("password", msg)]);
-
-public static K<MyValidationF<DomainError>, Password> Strong(string raw)
-{
-    Func<string, string, string, Password> keep = (_, _, _) => new Password(raw);
-    return MyValidationF<DomainError>.Pure(Curry.Of(keep))
-        .Apply(Rule(raw.Length >= 8,       "8 자 이상"))
-        .Apply(Rule(raw.Any(char.IsDigit), "숫자 1 자 이상"))
-        .Apply(Rule(raw.Any(char.IsUpper), "대문자 1 자 이상"));
-}
-```
-
-세 규칙을 `Apply` 로 잇고, 마지막에 통과한 `raw` 로 `Password` 를 조립합니다. `Rule` 이 통과 시 `Pure("")` 로 빈 문자열을 내는 까닭은, 여기서 필요한 것이 운반 값이 아니라 에러 채널의 누적뿐이기 때문입니다. 세 규칙의 운반 값은 `keep` 이 세 자리를 모두 `_` 로 버리고, `Password` 는 바깥의 `raw` 로 조립합니다. 값 채널은 자리만 채우고 실제 검증은 에러 채널에서 일어납니다. `"abc"` 처럼 세 규칙을 모두 어기는 입력이면 오류 세 건이 한 번에 모입니다.
-
-```csharp
-PasswordRules.Strong("abc");        // → Invalid [8 자 이상, 숫자 1 자 이상, 대문자 1 자 이상]  (3 건)
-PasswordRules.Strong("password1");  // → Invalid [대문자 1 자 이상]                            (1 건)
-PasswordRules.Strong("Passw0rd");   // → Valid(Password)                                       (통과)
-```
-
-칸과 칸 사이의 누적과 토씨 하나 다르지 않습니다. `Apply` 는 결합 대상이 서로 다른 칸이든 같은 칸의 여러 규칙이든 가리지 않고, `Invalid` 를 만나면 오류 채널에 누적합니다. 누적의 단위는 칸이 아니라 독립 검증입니다.
-
 ---
 
 ## 8.5 다인자 끌어올림 — `Curry → Pure → Apply` 사슬
@@ -189,7 +150,7 @@ var result = step3.Apply(tierV);       // Tier 적용 → MyValidation<…, User
 
 **그림 8-3. 다인자 Apply 사슬: curried 함수를 한 칸씩 채웁니다** — `Pure(curried)` 가 4인자 함수를 Elevated 로 올려 출발점을 만들고, `Apply` 가 검증 결과를 하나씩 먹일 때마다 남은 인자가 줄어듭니다. 네 번째 `Apply(tier)` 가 마지막 인자를 채우면 `Valid(User)` 가 됩니다. 어느 칸이든 `Invalid` 면 그 단계의 `Apply` 가 에러 채널에 오류를 누적하므로 (그림 8-1), 네 칸이 모두 통과해야 `Valid(User)`, 하나라도 틀리면 누적된 오류의 `Invalid` 입니다.
 
-> **여기까지의 안전망** — `Curry → Pure → Apply` 사슬이 처음엔 복잡해 보여도 괜찮습니다. 지금 가져갈 직감은 하나입니다. `Apply` 가 검증을 한 칸씩 먹이며, 성공이면 값 채널을 채우고 실패면 에러 채널에 쌓는다는 것입니다. 이는 5장에서 익힌 `Pure → Apply` 다인자 끌어올림 그대로입니다.
+> **여기까지의 안전망** — `Curry → Pure → Apply` 사슬이 처음엔 복잡해 보여도 괜찮습니다. 지금 가져갈 직감은 하나입니다. `Apply` 가 검증을 한 칸씩 먹이며, 성공이면 값 채널을 채우고 실패면 에러 채널에 쌓습니다. 이는 5장에서 익힌 `Pure → Apply` 다인자 끌어올림 그대로입니다.
 
 ---
 
@@ -233,7 +194,7 @@ Apply(age):    age 도 Invalid → 이어붙임   오류 [email, pw, age]
 Apply(tier):   tier 도 Invalid → 이어붙임  오류 [email, pw, age, tier]
 ```
 
-`Valid` 였던 함수 측이 첫 `Invalid` (email) 를 만나면 네 번째 분기 (값 측만 실패) 로 오류 한 건을 담고, 그 뒤로는 함수 측도 값 측도 `Invalid` 라 둘째 분기 (둘 다 실패) 가 두 목록을 계속 이어붙입니다. 단락이 없으므로 네 칸을 끝까지 평가해 오류 네 건이 한 목록에 모입니다. 이것이 §8.9 사례 3 에서 보는 오류 4 건의 정체입니다.
+`Valid` 였던 함수 측이 첫 `Invalid` (email) 를 만나면 네 번째 분기 (값 측만 실패) 로 오류 한 건을 담고, 그 뒤로는 함수 측도 값 측도 `Invalid` 라 둘째 분기 (둘 다 실패) 가 두 목록을 계속 이어붙입니다. 단락이 없으므로 네 칸을 끝까지 평가해 오류 네 건이 한 목록에 모입니다. 이 누적이 §8.9 사례 3 의 오류 4 건으로 나타납니다.
 
 ---
 
@@ -254,6 +215,8 @@ if (passwordV.As() is Invalid pi) return new Invalid(pi.Errors);
 ```
 
 이 `switch` 의 이른 `return` 이 7장 `Bind` 단락 (§7.3.3) 과 같은 일을 합니다. 단락은 `Bind` 의 시그니처 `K<F, A> → (A → E<B>) → E<B>` 에서 **구조적으로** 따라옵니다. 둘째 인자가 `A → E<B>` 함수인데, 앞이 `Invalid` 면 그 함수에 건넬 `A` 값 자체가 없습니다. 그래서 `Bind` 는 다음 함수를 호출할 수가 없어 첫 오류에서 멈출 수밖에 없습니다. 여기 `switch` 도 첫 `Invalid` 에서 `return` 해 뒤 검증을 실행조차 하지 않으니 같은 단락입니다. 그래서 `MyValidation` 에 `Bind` 를 두지 않은 것은 단순한 누락이 아니라, 이 단락을 피해 누적을 택하려는 의도입니다. (직접 `Bind` 를 정의해 누적이 사라지는 것을 확인하는 것이 §8.10 챌린지 3 입니다.)
+
+> **실무 노트** — LanguageExt v5 의 실제 `Validation<FAIL, A>` 는 단락 `Bind` 도 제공해, 같은 타입에서 누적 (`Apply`) 과 단락 (`Bind`) 두 경로를 모두 씁니다. 라이브러리 `Validation` 이 Monad 가 아니어서 `Bind` 가 없는 것이 아닙니다. 이 책의 학습용 `MyValidation` 은 누적이 왜 `Apply` 에서 일어나는지를 단락 경로에 방해받지 않고 보이려고 `Bind` 를 일부러 비운 것입니다.
 
 네 칸이 모두 틀린 같은 입력 (`"noatsign", "1234", -5, "Premium"`) 에 두 어법을 적용하면 결과가 갈립니다.
 
@@ -296,7 +259,7 @@ public static K<MyValidationF<E>, A> MapFail<A>(Func<E, E> f, K<MyValidationF<E>
     };
 ```
 
-`Map` 이 값 채널을 다룬다면 `MapFail` 은 에러 채널을 다룹니다. 예를 들어 누적된 네 오류 각각에 `"[가입 폼] "` 접두어를 붙일 수 있습니다. 두 채널 (값 / 에러) 을 각각 변환하는 이 대칭은 10장 Bifunctor 의 `BiMap` 으로 일반화됩니다. 지금은 값과 오류가 각자의 변환 함수를 가진다는 직감만 가져가면 충분합니다.
+`Map` 이 값 채널을 다룬다면 `MapFail` 은 에러 채널을 다룹니다. 예를 들어 누적된 네 오류 각각에 `"[가입 폼] "` 접두어를 붙일 수 있습니다. 8장의 흐름 안에서 `MapFail` 의 자리는 분명합니다. 누적 (§8.6) 이 오류를 **모으는** 도구라면, `MapFail` 은 모인 오류를 사용자에게 내보내기 전에 **다듬는** 마지막 손질입니다 (§8.9 사례 4 가 그 자리). 두 채널 (값 / 에러) 을 각각 변환하는 이 대칭은 10장 Bifunctor 의 `BiMap` 으로 일반화됩니다.
 
 ---
 
@@ -325,7 +288,7 @@ public static K<MyValidationF<E>, A> MapFail<A>(Func<E, E> f, K<MyValidationF<E>
     - ...
 ```
 
-사례 3 이 이 장의 payoff 입니다. 네 칸이 모두 틀렸을 때 오류 네 건이 한 번에 나옵니다. monadic 이었다면 한 건만 봤을 자리입니다. 사례 4 는 `MapFail` 이 값은 그대로 두고 오류 각각에만 접두어를 입히는 모습입니다.
+사례 3 이 이 장의 payoff 입니다. 네 칸이 모두 틀렸을 때 오류 네 건이 한 번에 나옵니다. monadic 이었다면 한 건만 봤을 자리입니다. 사례 4 에서는 `MapFail` 이 값은 그대로 두고 오류 각각에만 접두어를 입힙니다.
 
 ### 8.9.1 또 다른 도메인 — 서버 설정 검증
 
@@ -354,6 +317,36 @@ ConfigValidator.Parse("api.example.com", 8080, 30);
 
 도메인이 회원가입에서 설정으로 바뀌었어도 코드 골격은 똑같습니다. `Curry.Of` 로 생성자를 굽고, `Pure` 로 올리고, 칸마다 `Apply` 를 잇습니다. 누적은 도메인이 아니라 `Apply` 의 `Invalid + Invalid` 분기 (§8.6) 가 책임지므로, 독립 검증이 있는 어느 도메인에든 그대로 옮겨집니다. 폼·API 요청·설정 파일이 실무에서 모두 이 한 패턴을 공유합니다.
 
+### 8.9.2 칸 하나에 규칙 여럿 — 같은 누적이 한 칸 안에서도
+
+누적의 단위가 "칸" 이 아니라는 변형 하나를 더 봅니다. 한 칸에 규칙이 여럿일 때가 있습니다. 비밀번호는 8 자 이상이면서, 숫자를 포함하고, 대문자를 포함해야 한다고 합니다. 세 규칙 중 하나만 어겨도 나머지를 마저 알려 주는 게 친절합니다. 칸과 칸 사이에서 쓰던 `Apply` 누적이 한 칸 안에서도 그대로 작동합니다. (여기서는 §8.5 의 정상 조립과 달리 운반 값이 필요 없어, 통과 규칙이 `Pure("")` 로 자리만 채우고 실제로는 오류 채널의 누적만 씁니다.)
+
+```csharp
+// 규칙 하나 — 통과면 Valid, 실패면 오류 1 건. 운반 값은 쓰지 않습니다.
+static K<MyValidationF<DomainError>, string> Rule(bool ok, string msg) =>
+    ok ? MyValidationF<DomainError>.Pure("")
+       : new MyValidation<DomainError, string>.Invalid([new DomainError("password", msg)]);
+
+public static K<MyValidationF<DomainError>, Password> Strong(string raw)
+{
+    Func<string, string, string, Password> keep = (_, _, _) => new Password(raw);
+    return MyValidationF<DomainError>.Pure(Curry.Of(keep))
+        .Apply(Rule(raw.Length >= 8,       "8 자 이상"))
+        .Apply(Rule(raw.Any(char.IsDigit), "숫자 1 자 이상"))
+        .Apply(Rule(raw.Any(char.IsUpper), "대문자 1 자 이상"));
+}
+```
+
+세 규칙을 `Apply` 로 잇고, 마지막에 통과한 `raw` 로 `Password` 를 조립합니다. `Rule` 이 통과 시 `Pure("")` 로 빈 문자열을 내는 까닭은, 여기서 필요한 것이 운반 값이 아니라 에러 채널의 누적뿐이기 때문입니다. 세 규칙의 운반 값은 `keep` 이 세 자리를 모두 `_` 로 버리고, `Password` 는 바깥의 `raw` 로 조립합니다. 값 채널은 자리만 채우고 실제 검증은 에러 채널에서 일어납니다. `"abc"` 처럼 세 규칙을 모두 어기는 입력이면 오류 세 건이 한 번에 모입니다.
+
+```csharp
+PasswordRules.Strong("abc");        // → Invalid [8 자 이상, 숫자 1 자 이상, 대문자 1 자 이상]  (3 건)
+PasswordRules.Strong("password1");  // → Invalid [대문자 1 자 이상]                            (1 건)
+PasswordRules.Strong("Passw0rd");   // → Valid(Password)                                       (통과)
+```
+
+칸과 칸 사이의 누적과 토씨 하나 다르지 않습니다. `Apply` 는 결합 대상이 서로 다른 칸이든 같은 칸의 여러 규칙이든 가리지 않고, `Invalid` 를 만나면 오류 채널에 누적합니다. 누적의 단위는 칸이 아니라 독립 검증입니다.
+
 ---
 
 ## 8.10 직접 해보기 — 챌린지
@@ -371,11 +364,11 @@ ConfigValidator.Parse("api.example.com", 8080, 30);
 > 1. `Apply` 의 네 분기 (§8.6) — `(Valid 함수, Invalid 값)` 분기가 값 측 오류를 담는다는 것.
 > 2. 한 칸만 틀리면 누적 결과가 1 건임을 사슬 추적으로 확인할 수 있는가.
 >
-> **해보기**
+> **해보기** (§8.6.2 의 네-칸-모두-틀림 추적을 보지 않고, 종이에 직접)
 >
-> 1. `Pure(curried)` 는 `Valid`. 첫 `Apply(email)` 에서 email 이 `Invalid` 라 `(Valid 함수, Invalid 값)` 분기 → 오류 1 건을 담은 `Invalid`.
-> 2. 이후 password·age·tier 는 `Valid` 라 `(Invalid, Valid)` 분기 → 기존 1 건을 그대로 유지.
-> 3. 최종 결과는 `Invalid [email 오류]` (1 건).
+> 1. `Pure(curried)` 에서 출발해 `Apply` 네 번의 각 단계마다, 함수 측과 값 측이 네 분기 중 어느 분기에 떨어지는지 적습니다.
+> 2. 각 단계 직후의 오류 목록 내용을 적습니다.
+> 3. 최종 결과가 몇 건의 `Invalid` 인지 적은 뒤, 데모를 돌려 자기 추적과 비교합니다.
 >
 > **검증 포인트**
 >
@@ -455,7 +448,7 @@ ConfigValidator.Parse("api.example.com", 8080, 30);
 
 ## 8.12 Q&A — 자기 점검
 
-> **Q1. `MyValidation` 은 왜 Applicative 자리이고 Monad 자리가 아닙니까?** (§8.1.2)
+> **Q1. `MyValidation` 은 왜 Applicative 자리이고 Monad 자리가 아닙니까?** (§8.2.2)
 
 `Apply` (독립 결합) 만 정의하고 `Bind` (의존 결합) 는 일부러 두지 않기 때문입니다. 7장에서 `Bind` 는 앞이 실패하면 단락한다고 봤습니다. 폼의 네 칸 (이메일·비밀번호·나이·등급) 은 서로 독립이라 모두 평가해 오류를 누적해야 하므로, 단락을 일으키는 `Bind` 를 일부러 비웁니다. 이 의도적 선택이 Applicative-but-not-Monad 입니다. 참고로 LanguageExt v5 의 실제 `Validation` 은 `Bind` 도 제공하지만, 학습용 `MyValidation` 은 누적이 왜 `Apply` 에서 일어나는지를 또렷이 보이려 비워 둡니다.
 
@@ -487,8 +480,10 @@ ConfigValidator.Parse("api.example.com", 8080, 30);
 
 ## 8.13 요약
 
-- **불편에서 출발했습니다.** `Bind` 단락으로 폼을 검증하면 첫 칸 오류만 보여, 사용자가 칸마다 다시 제출해야 했습니다 (§8.2).
-- **Validation 은 Applicative-but-not-Monad 입니다.** `Bind` 를 일부러 두지 않아 단락 대신 누적을 택합니다 (§8.1.2).
+8장의 한 문장은 이렇습니다. **누적이냐 단락이냐는 도구가 아니라 도메인이 고르고, 그 갈림은 `Apply` (독립 결합) 와 `Bind` (의존 결합) 의 시그니처에서 옵니다.**
+
+- **불편에서 출발했습니다.** `Bind` 단락으로 폼을 검증하면 첫 칸 오류만 보여, 사용자가 칸마다 다시 제출해야 했습니다 (§8.1).
+- **Validation 은 Applicative-but-not-Monad 입니다.** `Bind` 를 일부러 두지 않아 단락 대신 누적을 택합니다 (§8.2.2).
 - **누적의 핵심은 `Apply` 의 `Invalid + Invalid` 분기입니다.** 두 오류 목록을 이어붙여 모든 오류를 모읍니다 (§8.6).
 - **누적은 3장 Monoid 의 결합입니다.** `IReadOnlyList` 이어붙임 (`++`), 항등원은 빈 목록 (§8.6.1).
 - **다인자 검증은 `Curry → Pure → Apply` 사슬로 조립합니다.** 5장 패턴 그대로입니다 (§8.5).

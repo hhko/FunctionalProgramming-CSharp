@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+    <marker id="arrow-gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#9aa5b1"/>
+    </marker>
+  </defs>
+
+  <!-- 두 세계 띠 — 1장 그림 1-2 와 같은 좌표 -->
+  <rect x="40" y="60" width="720" height="230" fill="#f4f9ff" stroke="none" rx="12"/>
+  <text x="60" y="88" font-size="13" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.5">Elevated World</text>
+  <rect x="40" y="330" width="720" height="130" fill="#fffdf3" stroke="none" rx="12"/>
+  <text x="60" y="358" font-size="13" fill="#bf9000" font-style="italic" font-weight="bold" letter-spacing="0.5">Normal World</text>
+
+  <!-- 기본 네 이동 (1장) — 좌측, 흐림 -->
+  <g opacity="0.5">
+    <rect x="70" y="195" width="100" height="60" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+    <text x="120" y="233" font-size="20" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;a&gt;</text>
+    <rect x="70" y="375" width="100" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+    <text x="120" y="413" font-size="20" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">a</text>
+    <line x1="120" y1="368" x2="120" y2="262" stroke="#9aa5b1" stroke-width="2.4" stroke-dasharray="6 5" marker-end="url(#arrow-gray)" marker-start="url(#arrow-gray)"/>
+    <text x="134" y="310" font-size="12" fill="#6b7280">기본 네 이동</text>
+    <text x="134" y="326" font-size="12" fill="#6b7280">(그림 1-2)</text>
+  </g>
+
+  <!-- 다섯 번째 이동 — Elevated World 안의 층 swap (가로) -->
+  <text x="497" y="118" font-size="20" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">traverse</text>
+
+  <rect x="240" y="130" width="215" height="80" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="347" y="180" font-size="22" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">List&lt;E&lt;a&gt;&gt;</text>
+
+  <rect x="540" y="130" width="215" height="80" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="647" y="180" font-size="22" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;List&lt;a&gt;&gt;</text>
+
+  <line x1="462" y1="170" x2="532" y2="170" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+
+  <text x="347" y="240" font-size="12" fill="#6b7280" text-anchor="middle">효과가 원소마다 흩어짐</text>
+  <text x="647" y="240" font-size="12" fill="#6b7280" text-anchor="middle">효과가 바깥에 한 번</text>
+  <text x="497" y="272" font-size="13" fill="#1f77b4" text-anchor="middle" font-weight="bold">다섯 번째 이동 — Elevated World 안의 가로 이동 (층 swap)</text>
+
+  <text x="497" y="402" font-size="13" fill="#8a7a33" text-anchor="middle">층 swap 은 Normal World 로 내려오지 않습니다 — 두 층 모두 Elevated 의 시민</text>
+</svg>

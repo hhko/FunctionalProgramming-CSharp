@@ -50,9 +50,9 @@ Check("챌린지 1 — email 만 Invalid → 1 건",   ApplyTrace.FinalErrorCoun
 Check("챌린지 2 — 5 칸 모두 Invalid → 5 건",  NicknameForm.AllFiveInvalidErrorCount() == 5);
 Check("챌린지 3 — Bind 단락 → 1 건 (누적 사라짐)", BindLosesAccumulation.BindErrorCount() == 1);
 
-// 사례 5 — 칸 하나에 규칙 여럿 (§8.4.1). "abc" 는 세 규칙 모두 위반 → 3 건.
+// 사례 5 — 칸 하나에 규칙 여럿 (§8.9.2). "abc" 는 세 규칙 모두 위반 → 3 건.
 Console.WriteLine();
-Console.WriteLine("== 사례 5 — 칸 하나에 규칙 여럿 (비밀번호 §8.4.1) ==");
+Console.WriteLine("== 사례 5 — 칸 하나에 규칙 여럿 (비밀번호 §8.9.2) ==");
 ShowP("\"abc\"      ", PasswordRules.Strong("abc"));
 ShowP("\"password1\"", PasswordRules.Strong("password1"));
 ShowP("\"Passw0rd\" ", PasswordRules.Strong("Passw0rd"));

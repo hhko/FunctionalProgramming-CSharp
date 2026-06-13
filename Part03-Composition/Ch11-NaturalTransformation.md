@@ -4,12 +4,12 @@
 
 > **이 장의 핵심 어휘**
 >
-> - **NaturalTransformation** (값 타입 `A` 는 그대로 두고 컨테이너 `F` 를 컨테이너 `G` 로 옮기는 변환)
-> - `Transform : K<F, A> → K<G, A>` (NaturalTransformation 의 유일한 멤버. 값 타입 `A` 는 입력과 출력에서 같고 컨테이너만 `F` 에서 `G` 로 바뀜)
-> - `Natural<out F, in G>` (변환을 한 trait 으로 묶는 약속. `F` 가 출발 컨테이너, `G` 가 도착 컨테이너)
-> - **자연성 법칙** (`Transform(map(f, fa)) == map(f, Transform(fa))`, 값을 먼저 바꾸든 컨테이너를 먼저 옮기든 결과가 같다는 약속)
-> - **가짜 변환** (값을 들여다보고 값에 따라 다르게 작동해 자연성 법칙을 깨는 변환)
-> - `sequence : MyList<E<a>> → E<MyList<a>>` (9장 Traversable 의 층 순서 뒤집기. 컨테이너만 옮기고 값을 유지하므로 NaturalTransformation 의 한 형태)
+> - **NaturalTransformation**: 값 타입 `A` 는 그대로 두고 컨테이너 `F` 를 컨테이너 `G` 로 옮기는 변환
+> - **`Transform : K<F, A> → K<G, A>`**: NaturalTransformation 의 유일한 멤버. 값 타입 `A` 는 입력과 출력에서 같고 컨테이너만 `F` 에서 `G` 로 바뀜
+> - **`Natural<out F, in G>`**: 변환을 한 trait 으로 묶는 약속. `F` 가 출발 컨테이너, `G` 가 도착 컨테이너
+> - **자연성 법칙**: `Transform(map(f, fa)) == map(f, Transform(fa))`, 값을 먼저 바꾸든 컨테이너를 먼저 옮기든 결과가 같다는 약속
+> - **가짜 변환**: 값을 들여다보고 값에 따라 다르게 작동해 자연성 법칙을 깨는 변환
+> - **`sequence : MyList<E<a>> → E<MyList<a>>`**: 9장 Traversable 의 층 순서 뒤집기. 컨테이너만 옮기고 값을 유지하므로 NaturalTransformation 의 한 형태
 
 > 이 장을 마치면 할 수 있게 되는 것
 > - [ ] 값을 바꾸는 `map` 과 컨테이너를 바꾸는 NaturalTransformation 의 차이를 시그니처로 구분할 수 있습니다.
@@ -47,7 +47,7 @@ headOrNone : MyList<a>  → MyMaybe<a>     값 a 는 그대로, 컨테이너만 
 toList     : MyMaybe<a> → MyList<a>      값 a 는 그대로, 컨테이너만 Maybe → List
 ```
 
-두 변환 모두 안의 값 타입 `a` 는 손대지 않습니다. 바뀌는 것은 컨테이너 (`F`) 자체입니다. 이것이 NaturalTransformation 입니다. 시그니처로 보면 `map` 은 `K<F, A> → K<F, B>` (컨테이너 `F` 를 고정하고 값을 바꿈) 이고, NaturalTransformation 은 `K<F, A> → K<G, A>` (값 `A` 를 고정하고 컨테이너를 바꿈) 입니다. 한쪽이 고정하는 것을 다른 쪽이 바꾸므로 둘은 서로 간섭하지 않습니다. 이렇게 **한쪽을 바꿔도 다른 쪽이 영향받지 않는** 두 방향을 **직교** 라고 합니다. `map` 으로 값을 아무리 바꿔도 컨테이너 종류는 그대로이고, 컨테이너를 옮겨도 안의 값은 그대로입니다.
+두 변환 모두 안의 값 타입 `a` 는 손대지 않습니다. 바뀌는 것은 컨테이너 (`F`) 자체입니다. 이 변환이 NaturalTransformation 입니다. 시그니처로 보면 `map` 은 `K<F, A> → K<F, B>` (컨테이너 `F` 를 고정하고 값을 바꿈) 이고, NaturalTransformation 은 `K<F, A> → K<G, A>` (값 `A` 를 고정하고 컨테이너를 바꿈) 입니다. 한쪽이 고정하는 것을 다른 쪽이 바꾸므로 둘은 서로 간섭하지 않습니다. 이렇게 **한쪽을 바꿔도 다른 쪽이 영향받지 않는** 두 방향을 **직교** 라고 합니다. `map` 으로 값을 아무리 바꿔도 컨테이너 종류는 그대로이고, 컨테이너를 옮겨도 안의 값은 그대로입니다.
 
 ---
 
@@ -68,11 +68,17 @@ Transform : K<F, A> → K<G, A>
 | **Functor `map`** | 컨테이너 안의 값 | `K<F, A> → K<F, B>` | 컨테이너 `F` |
 | **NaturalTransformation** | 컨테이너 자체 | `K<F, A> → K<G, A>` | 값 타입 `A` |
 
-`map` 은 컨테이너를 세로축으로 고정하고 값을 가로로 바꾸고, NaturalTransformation 은 값을 가로축으로 고정하고 컨테이너를 세로로 바꿉니다. 기초에서 다룬 trait 이 가로축의 어휘였다면, NaturalTransformation 은 세로축의 어휘입니다. 1장의 4 가지 함수 유형 (`a → b` / `a → E<b>` / `E<a> → b` / `E<a> → E<b>`) 은 모두 한 컨테이너 안에서의 이동이었습니다. NaturalTransformation 은 그 넷 어디에도 없는, 컨테이너 자체를 바꾸는 다섯 번째 축입니다.
+`map` 은 컨테이너를 세로축으로 고정하고 값을 가로로 바꾸고, NaturalTransformation 은 값을 가로축으로 고정하고 컨테이너를 세로로 바꿉니다. 기초에서 다룬 trait 이 가로축의 어휘였다면, NaturalTransformation 은 세로축의 어휘입니다.
+
+1장 지도 위에 놓으면 이 변환의 자리가 또렷합니다. 기본 4 가지 함수 유형 (§1.7.1) 은 모두 한 컨테이너 안에서의 이동이었고, 층 swap (9장, 다섯 번째 이동) 도 컨테이너의 겹침 순서만 다뤘습니다. NaturalTransformation 은 1장 지도가 예약해 둔 마지막 칸, **컨테이너 자체를 바꾸는 여섯 번째 이동** 입니다. 이 이동으로 기초의 지도가 완성됩니다.
+
+![1장 지도의 확장 — 컨테이너 교체](./images/Ch11-NaturalTransformation/00-map-extension.svg)
+
+**그림 11-1. 1장 지도의 여섯 번째 이동: 컨테이너 교체** — 1장 그림 1-2 와 같은 두 세계 좌표 위입니다. `Transform` 이 값 `a` 를 고정한 채 컨테이너만 `F` 에서 `G` 로 옮기는 Elevated World 안의 가로 이동입니다. 아래 Normal World 의 값 `a` 가 양쪽 컨테이너에 점선으로 그대로 이어져, 변환이 값과 무관하다는 자연성의 직감을 보여 줍니다.
 
 ![map 은 가로축 값, NaturalTransformation 은 세로축 컨테이너](./images/Ch11-NaturalTransformation/02-natural-vs-map.svg)
 
-**그림 11-1. map 과 NaturalTransformation 의 직교** — 가로 화살표 (`F.map(f)`, `G.map(f)`) 는 컨테이너를 고정한 채 값을 `a` 에서 `b` 로 바꿉니다. 세로 화살표 (`Transform`) 는 값을 고정한 채 컨테이너를 `F` 에서 `G` 로 바꿉니다. 두 축이 직교하고, 두 경로가 만나는 자리가 다음 절의 자연성 법칙입니다.
+**그림 11-2. map 과 NaturalTransformation 의 직교** — 가로 화살표 (`F.map(f)`, `G.map(f)`) 는 컨테이너를 고정한 채 값을 `a` 에서 `b` 로 바꿉니다. 세로 화살표 (`Transform`) 는 값을 고정한 채 컨테이너를 `F` 에서 `G` 로 바꿉니다. 두 축이 직교하고, 두 경로가 만나는 자리가 다음 절의 자연성 법칙입니다.
 
 ---
 
@@ -103,7 +109,7 @@ public interface Natural<out F, in G>
 
 variance 표기 `out F, in G` 는 `F` 가 변환의 출발 (source), `G` 가 도착 (target) 임을 나타냅니다. `in` / `out` 은 2장에서 `K<in F, A>` 마커의 반공변 표시로 직감만 짚고 미뤄 둔 자리입니다. 지금도 그 한 줄 직감만 가져가면 충분하고, 이 표기가 어떻게 C# 컴파일러 검사를 통과하는지의 메커니즘은 아래 선택 읽기로 미룹니다.
 
-> **variance 의 깊이 (선택 읽기)** — 일반 C# variance 규칙은 `out` 이 반환 자리, `in` 이 매개변수 자리입니다. `Transform` 은 `F` 가 매개변수, `G` 가 반환이라 일반 규칙으로는 `<in F, out G>` 가 자연스러운데, v5 는 반대로 `<out F, in G>` 로 적습니다. 카테고리 이론의 source / target 비대칭 (Haskell 의 `Nat f g = forall a. f a -> g a` 에서 `f` 가 source, `g` 가 target) 을 어휘로 보존하기 위해서입니다. 이 표기가 컴파일을 통과하는 까닭은 마커가 `K<in F, A>` (F 가 contravariant) 로 정의되기 때문입니다. K 안에서 contravariant 인 `F` 가 매개변수 위치에 오면 반전되어 `out F` 로, 반환 위치의 `G` 는 `in G` 로 정합합니다. 이 메커니즘을 외우지 않아도 됩니다. 본질은 `F` 컨테이너에서 `G` 컨테이너로 옮기는 변환이고, 값 `A` 는 유지된다는 것입니다.
+> **variance 의 깊이 (선택 읽기)** — 일반 C# variance 규칙은 `out` 이 반환 자리, `in` 이 매개변수 자리입니다. `Transform` 은 `F` 가 매개변수, `G` 가 반환이라 일반 규칙으로는 `<in F, out G>` 가 자연스러운데, v5 는 반대로 `<out F, in G>` 로 적습니다. 카테고리 이론의 source / target 비대칭 (Haskell 의 `Nat f g = forall a. f a -> g a` 에서 `f` 가 source, `g` 가 target) 을 어휘로 보존하기 위해서입니다. 이 표기가 컴파일을 통과하는 까닭은 마커가 `K<in F, A>` (F 가 contravariant) 로 정의되기 때문입니다. K 안에서 contravariant 인 `F` 가 매개변수 위치에 오면 반전되어 `out F` 로, 반환 위치의 `G` 는 `in G` 로 정합합니다. 이 메커니즘을 외우지 않아도 됩니다. 본질은 `F` 컨테이너에서 `G` 컨테이너로 옮기는 변환이고, 값 `A` 는 유지됩니다.
 
 ---
 
@@ -155,7 +161,7 @@ MaybeToList.Transform(MyMaybe<int>.Nothing);       // []
 
 ![MyList 를 MyMaybe 로 — 값은 그대로, 컨테이너만 교체](./images/Ch11-NaturalTransformation/01-container-swap.svg)
 
-**그림 11-2. 컨테이너 교체: `MyList<a>` → `MyMaybe<a>`** — 왼쪽 `MyList<a>` 의 값 `a` (여기서는 `int`) 가 오른쪽 `MyMaybe<a>` 로 옮겨집니다. 값 타입 `a` 는 입력과 출력에서 같고, 바뀌는 것은 컨테이너 (`MyList` → `MyMaybe`) 뿐입니다.
+**그림 11-3. 컨테이너 교체: `MyList<a>` → `MyMaybe<a>`** — 왼쪽 `MyList<a>` 의 값 `a` (여기서는 `int`) 가 오른쪽 `MyMaybe<a>` 로 옮겨집니다. 값 타입 `a` 는 입력과 출력에서 같고, 바뀌는 것은 컨테이너 (`MyList` → `MyMaybe`) 뿐입니다.
 
 ---
 
@@ -171,7 +177,7 @@ Transform(F.Map(f, fa)) == G.Map(f, Transform(fa))
 
 ![자연성 사각형 — 두 경로가 같은 결과로 만난다](./images/Ch11-NaturalTransformation/03-naturality-square.svg)
 
-**그림 11-3. 자연성 사각형: 두 경로가 같은 결과** — 가로 화살표 (`F.Map(f)`, `G.Map(f)`) 는 컨테이너를 고정한 채 값을 `a` 에서 `b` 로 바꾸고, 세로 화살표 (`Transform`) 는 값을 고정한 채 컨테이너를 `F` 에서 `G` 로 바꿉니다. 왼쪽 위에서 오른쪽 아래로 가는 두 경로 (가로 먼저 또는 세로 먼저) 가 같은 결과로 만나는 것이 자연성 법칙입니다. 값을 들여다보는 변환은 이 사각형이 닫히지 않습니다.
+**그림 11-4. 자연성 사각형: 두 경로가 같은 결과** — 가로 화살표 (`F.Map(f)`, `G.Map(f)`) 는 컨테이너를 고정한 채 값을 `a` 에서 `b` 로 바꾸고, 세로 화살표 (`Transform`) 는 값을 고정한 채 컨테이너를 `F` 에서 `G` 로 바꿉니다. 왼쪽 위에서 오른쪽 아래로 가는 두 경로 (가로 먼저 또는 세로 먼저) 가 같은 결과로 만나는 것이 자연성 법칙입니다. 값을 들여다보는 변환은 이 사각형이 닫히지 않습니다.
 
 `ListToMaybe` 로 확인하면, 리스트에 `f` 를 적용한 뒤 첫 원소를 꺼내든, 첫 원소를 꺼낸 뒤 `f` 를 적용하든 같은 `Just(f(head))` 가 나옵니다. 이 법칙이 성립해야 변환이 값과 무관하게 컨테이너 구조만 다룬다는 것이 보장됩니다. 앞서 `Transform` 의 타입 매개변수가 `A` 하나뿐이었던 이유가 이것입니다.
 
@@ -272,7 +278,7 @@ SequenceNat.Transform([Just(1), Nothing]);    // → Nothing
 
 ![sequence 는 합성 컨테이너 사이의 NaturalTransformation](./images/Ch11-NaturalTransformation/04-sequence-as-nt.svg)
 
-**그림 11-4. `sequence` 는 합성 컨테이너 사이의 NaturalTransformation** — 왼쪽 `MyList<MyMaybe<int>>` (F = List∘Maybe) 의 `[Just(1), Just(2)]` 가 `sequence` 로 오른쪽 `MyMaybe<MyList<int>>` (G = Maybe∘List) 의 `Just([1, 2])` 가 됩니다. 값 `1`, `2` 는 그대로이고 두 층의 안팎만 뒤집힙니다. `sequence` 가 곧 `Transform : K<F, a> → K<G, a>` 입니다.
+**그림 11-5. `sequence` 는 합성 컨테이너 사이의 NaturalTransformation** — 왼쪽 `MyList<MyMaybe<int>>` (F = List∘Maybe) 의 `[Just(1), Just(2)]` 가 `sequence` 로 오른쪽 `MyMaybe<MyList<int>>` (G = Maybe∘List) 의 `Just([1, 2])` 가 됩니다. 값 `1`, `2` 는 그대로이고 두 층의 안팎만 뒤집힙니다. `sequence` 가 곧 `Transform : K<F, a> → K<G, a>` 입니다.
 
 기초의 마지막 자리에서 앞의 어휘들이 한데 모입니다. Functor 의 `map` (가로축, 값 변환) 과 NaturalTransformation (세로축, 컨테이너 변환) 이 직교축을 이루고, Traversable 의 `sequence` 가 그 교차점에 놓입니다. 기초에서 모은 모든 도구가 컨테이너 사이의 다리로 마무리됩니다.
 

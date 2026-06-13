@@ -4,13 +4,13 @@
 
 > **이 장의 핵심 어휘**
 >
-> - `Pure` (Normal 값을 Elevated World 의 가장 단순한 시민으로 올리는 최소 끌어올림, `a → E<a>`)
-> - `Apply` (컨테이너 안 함수 `K<F, a → b>` 를 컨테이너 안 값 `K<F, a>` 에 먹여 `K<F, b>` 를 내는 결합. `Map` 과 달리 첫 자리가 Elevated 시민)
-> - `Curry` (`(a, b) → c` 같은 다인자 함수를 `a → b → c` 의 1인자 체인으로 비트는 변환)
-> - `Lift2` / `Lift3` / `Lift4` (다인자 Normal 함수를 `Curry → Pure → N×Apply` 사슬로 다인자 Elevated 함수로 끌어올리는 헬퍼)
-> - **lift1 = map** (1인자 끌어올림은 4장 `Map` 과 같은 함수의 두 어휘)
-> - **누적** (두 컨테이너를 양쪽 다 꺼내 두 실패 정보를 모두 모으는 `MyValidation.Apply` 의 결합)
-> - **단락** (한쪽이 비면 나머지를 보지 않고 멈추는 `MyMaybe.Apply` 의 결합)
+> - **`Pure`**: Normal 값을 Elevated World 의 가장 단순한 시민으로 올리는 최소 끌어올림, `a → E<a>`
+> - **`Apply`**: 컨테이너 안 함수 `K<F, a → b>` 를 컨테이너 안 값 `K<F, a>` 에 먹여 `K<F, b>` 를 내는 결합. `Map` 과 달리 첫 자리가 Elevated 시민
+> - **`Curry`**: `(a, b) → c` 같은 다인자 함수를 `a → b → c` 의 1인자 체인으로 비트는 변환
+> - `Lift2` / `Lift3` / `Lift4`: 다인자 Normal 함수를 `Curry → Pure → N×Apply` 사슬로 다인자 Elevated 함수로 끌어올리는 헬퍼
+> - **lift1 = map**: 1인자 끌어올림은 4장 `Map` 과 같은 함수의 두 어휘
+> - **누적**: 두 컨테이너를 양쪽 다 꺼내 두 실패 정보를 모두 모으는 `MyValidation.Apply` 의 결합
+> - **단락**: 한쪽이 비면 나머지를 보지 않고 멈추는 `MyMaybe.Apply` 의 결합
 
 > 이 장을 마치면 할 수 있게 되는 것
 > - [ ] `map` 만으로는 못 푸는 한 예 (`Some(2) + Some(3)`) 의 시그니처를 그릴 수 있습니다.
@@ -28,16 +28,6 @@
 ## 5.1 `map` 만으로는 풀 수 없는 다인자 함수 — 목적
 
 5장의 핵심은 한 줄로 압축됩니다. Normal World 의 N 인자 함수를 Elevated World 에서 그대로 쓰게 해 주는 끌어올림 함수가 `pure` 와 `apply` 입니다. 4장 `map` 이 1 인자 끌어올림이었다면, 5장 *pure + apply* 는 N 인자 끌어올림입니다. 두 멤버 위에서 `Lift2`, `Lift3`, `Lift4` 같은 다인자 헬퍼가 자랍니다.
-
-> 5장의 5부 구조 — 4장과 같은 narrative arc 로 구성됩니다.
->
-> - **§5.1 목적** — §1.6.1 의 N 인자 끌어올림 자리. `map` 의 1 인자 한계 + 다인자 함수를 Elevated 결합하는 패턴을 *pure + apply* 한 번 정의로 해소.
-> - **§5.2 기능** — `Applicative<F>` trait 의 시그니처와 `Pure` + `Apply` 두 멤버. Functor 상속 + 시그니처가 다인자 결합을 컴파일 타임에 강제.
-> - **§5.3 ~ §5.5 예제** — `MyMaybe Applicative` / `MyValidation Applicative` + 어떤 Applicative 든 받는 일반 함수 (`Curry + Lift`).
-> - **§5.6 ~ §5.7 기능 (법칙·합성)** — 다섯 법칙 (Identity / Homomorphism / Interchange / Composition / Functor 정합) + Functor 와의 상속 정합.
-> - **§5.8 ~ §5.9 예제 (경계·챌린지)** — Applicative 가 아닌 변환들 + 직접 풀어 보는 챌린지.
-> - **§5.10 ~ §5.13 마무리** — 다시 읽기 · Q&A · 요약 · 6장 Foldable (반대 방향 lower) 다리.
-
 ### 5.1.1 4 가지 함수 유형의 `E<a> → E<b>` 가 다인자로 넓어지는 자리
 
 1장 §1.7 에서 두 세계 사이의 함수 유형을 4 가지 함수 유형으로 정리했습니다. 4장의 `map` 은 그중 `E<a> → E<b>` 의 1 인자 끌어올림이고, `a → b` 한 개를 받습니다. 그런데 실세계의 함수는 2 인자 이상인 경우가 더 많습니다.
@@ -61,7 +51,7 @@ K<MyMaybeF, int> sum   = ???;          // Just(5) 가 나와야 합니다
 
 `map` 한 개로는 이 자리를 풀 수 없습니다. 왜 그런지 단계별 시그니처 추적으로 봅니다.
 
-#### 첫 번째 단계 — `Map` 의 시그니처는 1 인자 함수만 받습니다
+#### 1 단계 — `Map` 의 시그니처는 1 인자 함수만 받습니다
 
 4장에서 본 `Map` 의 첫 자리는 1 인자 Normal 함수입니다.
 
@@ -80,9 +70,11 @@ Func<int, Func<int, int>> addC = x => y => x + y;     // int → (int → int)  
 
 `x => y => x + y` 는 **`x` 를 받으면 `y => x + y` 라는 새 함수를 돌려주는** 람다입니다. `addC(2)` 의 결과가 `y => 2 + y` 이고, 거기에 `(3)` 을 또 주면 `5` 입니다. 1 장 §1.6.5 의 `a → b → c` (오른쪽 결합) 타입이 값으로 나타난 모양으로, 화살표가 둘이면 "한 인자씩 받아 다음 함수를 돌려준다" 로 읽습니다.
 
+> **타입 변수와 매개변수 이름** — 시그니처의 `a, b, c` 는 `int`, `string` 같은 **타입** 을 가리키는 타입 변수이고, 람다 안의 `x`, `y` 는 호출 시 **값** 이 들어갈 매개변수 이름입니다. 둘은 다른 카테고리입니다. `addC : int → (int → int)` 에서 타입 변수를 읽고, `x => y => x + y` 에서 매개변수 이름을 읽습니다.
+
 **한 줄 정리** — `Map` 의 첫 자리는 1 인자 Normal 함수만 받으므로, 2 인자 이상 함수는 Curry 로 1 인자 체인으로 비틀어야 들어갑니다.
 
-#### 두 번째 단계 — 첫 인자만 `Map` 으로 적용해 봅니다
+#### 2 단계 — 첫 인자만 `Map` 으로 적용해 봅니다
 
 ```csharp
 K<MyMaybeF, Func<int, int>> step1 = MyMaybeF.Map(addC, two);
@@ -94,13 +86,13 @@ K<MyMaybeF, Func<int, int>> step1 = MyMaybeF.Map(addC, two);
 
 **한 줄 정리** — Curry 한 함수의 첫 인자만 `Map` 으로 적용하면, 다음 인자를 기다리는 함수가 Elevated 한 칸 안에 갇힌 모양 `K<F, a → b>` 가 됩니다.
 
-**두 단계 정리** — 두 단계로 문제의 모양이 드러났습니다. `Map` 의 첫 자리가 1 인자 Normal 함수만 받는다는 한계 (첫 번째 단계), 첫 인자 적용 후 Elevated 한 칸 안에 함수가 갇힌다는 결과 (두 번째 단계) 입니다. 다음 두 단계에서 갇힌 함수를 풀어낼 새 도구를 시그니처로 유도합니다.
+**두 단계 정리** — 두 단계로 문제의 모양이 드러났습니다. `Map` 의 첫 자리가 1 인자 Normal 함수만 받는다는 한계 (1 단계), 첫 인자 적용 후 Elevated 한 칸 안에 함수가 갇힌다는 결과 (2 단계) 입니다. 다음 두 단계에서 갇힌 함수를 풀어낼 새 도구를 시그니처로 유도합니다.
 
 ### 5.1.2 갇힌 함수를 풀어낼 새 도구 — `Apply` 의 시그니처 유도
 
 앞 두 단계에서 갇힌 함수 `K<F, a → b>` 와 두 번째 Elevated 값 `K<F, a>` 의 결합 자리가 남았습니다. 이 자리를 어떤 시그니처의 도구로 풀어야 하는지, 그 도구가 `Map` 으로 환원되지 않는 이유를 두 단계로 확인합니다.
 
-#### 세 번째 단계 (a) — 두 번째 인자 `three` 는 무엇으로 합치나?
+#### 3 단계 (a) — 두 번째 인자 `three` 는 무엇으로 합치나?
 
 `step1` 안에 갇힌 함수를 풀어내 `three : K<MyMaybeF, int>` 와 합치려면 다음 모양의 도구가 필요합니다.
 
@@ -125,7 +117,7 @@ wrapped(5);                // ✗ 컴파일 에러. wrapped 는 함수가 아니
 
 **한 줄 정리** — 필요한 도구의 시그니처 모양은 `K<F, a → b> → K<F, a> → K<F, b>` 이며, 첫 자리가 컨테이너 안 함수 (Elevated 시민) 라는 점이 일반 함수 (Normal 시민) 와의 한 겹 차이입니다.
 
-#### 세 번째 단계 (b) — `Map` 첫 자리는 Normal 함수만, `Apply` 가 필요합니다
+#### 3 단계 (b) — `Map` 첫 자리는 Normal 함수만, `Apply` 가 필요합니다
 
 이제 `Map` 의 시그니처에 두 타입을 각각 넣어 봅니다.
 
@@ -162,13 +154,13 @@ K<MyMaybeF, int> sum = MyMaybeF.Apply<int, int>(step1, three);   // → Just(5)
 
 **한 줄 정리** — `Map` 은 첫 자리에 Normal 함수만 받으므로 갇힌 함수 `K<F, a → b>` 를 그대로 결합할 수 없고, 첫 자리에 컨테이너 안 함수를 받는 새 도구 `Apply` 가 필요합니다.
 
-#### 네 번째 단계 — 그래서 `apply` 가 필요합니다
+#### 4 단계 — 그래서 `apply` 가 필요합니다
 
 위 필요한 시그니처 `K<F, a → b> → K<F, a> → K<F, b>` 가 정확히 **`Apply` 의 시그니처**입니다. `Pure` 는 Normal 함수를 Elevated 로 올려 `Apply` 가 풀어낼 갇힌 함수 `K<F, a → b>` 를 만드는 출발점이고 (`a → E<a>` 의 최소 끌어올림), `Apply` 는 그 갇힌 함수를 두 번째 이후 Elevated 값과 차례로 결합합니다. 그래서 `Pure` 와 `Apply` 가 한 쌍입니다.
 
-> Raab 의 진단 인용 — "map only can work with one-argument functions! The definition of map expects a function `'a -> 'b` as its first argument." 두 인자 이상 함수에 `map` 을 적용하면 `option<('a -> 'b)>` 같은 함수가 컨테이너 안에 갇힌 어색한 모양만 남습니다.
+> F# 저술가 David Raab 의 진단 — "map only can work with one-argument functions! The definition of map expects a function `'a -> 'b` as its first argument." 두 인자 이상 함수에 `map` 을 적용하면 `option<('a -> 'b)>` 같은 함수가 컨테이너 안에 갇힌 어색한 모양만 남습니다. (Raab 의 fold 통찰은 6장에서 다시 만납니다.)
 
-**네 단계 정리** — 네 단계 통일 논증의 결론은 한 줄입니다. `Map` 의 1 인자 한계 (첫 번째 단계 ~ 두 번째 단계) 가 `Apply` 라는 새 시그니처를 자연스럽게 유도하고 (세 번째 단계), `Pure + Apply` 두 멤버가 그 자리를 닫습니다 (네 번째 단계). 다음 절은 이 새 도구가 4 가지 함수 유형의 어디에 자리잡는지 보여줍니다.
+**네 단계 정리** — 네 단계 통일 논증의 결론은 한 줄입니다. `Map` 의 1 인자 한계 (1 ~ 2 단계) 가 `Apply` 라는 새 시그니처를 자연스럽게 유도하고 (3 단계), `Pure + Apply` 두 멤버가 그 자리를 닫습니다 (4 단계). 다음 절은 이 새 도구가 4 가지 함수 유형의 어디에 자리잡는지 보여줍니다.
 
 ### 5.1.3 4 가지 함수 유형 — 시그니처와 기초 매핑
 
@@ -193,7 +185,7 @@ map 으로 부족한 자리:    (a, b) → c    +    E<a>, E<b>    ─►   E<c>
 
 ![다인자 함수의 끌어올림](./images/Ch05-Applicative/01-multi-arg-lift.svg)
 
-**그림 5-1. `Map` 의 한계와 `Apply` 의 필요성: 단계 ① → ② → ③** — 단계별 시그니처 추적 (§5.1.1) 과 일대일 대응합니다. **① 시작**: 두 Elevated 값 `K<F, a>`, `K<F, b>` 는 Elevated 에 있고 2 인자 함수 `f : (a, b) → c` 는 Normal 에 따로 있어 결합 길이 없습니다. **② Map 후**: `addC = curry(f)` 로 비튼 뒤 첫 인자 `fa` 를 Map 으로 적용. 결과는 **`K<F, b → c>`** (두 번째 인자를 기다리는 갇힌 함수). `K<F, b>` 는 여전히 결합 대기 중. **③ Apply 후**: `Apply` (§5.2.3) 가 갇힌 함수를 풀어내 `K<F, b>` 와 결합 → `K<F, c>` 완성. **`Map` 한 개로는 갇힌 함수만 남길 뿐**, 두 번째 Elevated 값과의 결합은 새 도구 `Apply` 가 필요합니다.
+**그림 5-1. `Map` 의 한계와 `Apply` 의 필요성: 단계 ① → ② → ③** — 본문의 네 단계 (§5.1.1 ~ §5.1.2) 와 다음과 같이 대응합니다. ① 이 1 단계 이전의 시작 상태, ② 가 1 ~ 2 단계 (Curry + `Map`) 의 결과, ③ 이 3 ~ 4 단계 (`Apply`) 의 결과입니다. **① 시작**: 두 Elevated 값 `K<F, a>`, `K<F, b>` 는 Elevated 에 있고 2 인자 함수 `f : (a, b) → c` 는 Normal 에 따로 있어 결합 길이 없습니다. **② Map 후**: `addC = curry(f)` 로 비튼 뒤 첫 인자 `fa` 를 Map 으로 적용. 결과는 **`K<F, b → c>`** (두 번째 인자를 기다리는 갇힌 함수). `K<F, b>` 는 여전히 결합 대기 중. **③ Apply 후**: `Apply` (§5.2.3) 가 갇힌 함수를 풀어내 `K<F, b>` 와 결합 → `K<F, c>` 완성. **`Map` 한 개로는 갇힌 함수만 남길 뿐**, 두 번째 Elevated 값과의 결합은 새 도구 `Apply` 가 필요합니다.
 
 ---
 
@@ -229,7 +221,7 @@ static abstract                       // 정적 + 추상
 | 자리 | 의미 |
 |---|---|
 | `Applicative<F> : Functor<F>` | Applicative 는 Functor 의 능력 위에 두 멤버를 추가. `Map` 을 자동으로 갖습니다 |
-| `where F : Applicative<F>` | F 가 자기 자신을 구현체로 갖습니다 (2장 §2.8 의 self-bound) |
+| `where F : Applicative<F>` | F 가 자기 자신을 구현체로 갖습니다 (2장 §2.5 의 self-bound) |
 | 두 멤버 모두 `static abstract` | trait 에 사는 능력. 호출은 `MyMaybeF.Pure(...)`, `MyMaybeF.Apply(...)` |
 | `Apply` 의 첫 인자 `K<F, Func<A, B>>` | **함수도 컨테이너 안에 삽니다** — `map` 과의 결정적 차이 |
 
@@ -342,25 +334,7 @@ Ch05-Applicative/
 └── Challenges/PairApplicative.cs … ← §5.9 정답
 ```
 
-`Traits` / `Functions` / `Tests` 세 폴더가 실제 LanguageExt 라이브러리의 파일 배치를 닮았습니다 (interface + 헬퍼 + 법칙).
-
-#### 세 가지 호출 어법 — 같은 `MyMaybeF.Apply` 로 흘러갑니다
-
-```csharp
-K<MyMaybeF, Func<int, int>> mf = MyMaybeF.Pure<Func<int, int>>(n => n * 100);
-K<MyMaybeF, int>            ma = MyMaybeF.Pure(10);
-
-// ① trait 정적 호출 — F 를 명시적으로 적습니다 (가장 정직한 자리)
-var r1 = MyMaybeF.Apply<int, int>(mf, ma);
-
-// ② 모듈 어법 — Applicative.apply<F, A, B> (소문자 a), generic 디스패치
-var r2 = Applicative.apply<MyMaybeF, int, int>(mf, ma);
-
-// ③ 확장 어법 — K<F, Func<A, B>> 위 점 호출, F 추론 (가장 간결)
-var r3 = mf.Apply(ma);
-```
-
-세 어법 모두 `where F : Applicative<F>` 제약으로 자동 디스패치됩니다. 호출 측은 어느 쪽을 골라도 같은 `MyMaybeF.Apply` 로 흘러갑니다. `r1`, `r2`, `r3` 의 값은 동일합니다.
+`Traits` / `Functions` / `Tests` 세 폴더가 실제 LanguageExt 라이브러리의 파일 배치를 닮았습니다 (interface + 헬퍼 + 법칙). 세 가지 호출 어법 (trait 정적 / 모듈 / 확장) 은 첫 인스턴스를 부착한 뒤 §5.3.4 에서 실제 코드로 봅니다.
 
 ---
 
@@ -469,52 +443,11 @@ K<MyMaybeF, int> r3 = mf.Apply(three);
 
 `Map(첫 인자 소비) → Apply(두 번째 인자 소비)` 의 2 단계 사슬로 `add(5, 3) = 8` 의 Elevated 결과를 얻습니다. **"두 Elevated 값을 한 Normal 함수로 결합" 이라는 약속이 비로소 풀린 자리**입니다. 이 패턴이 `Lift2` 로 한 줄에 압축됩니다.
 
+두 자리만 더 또렷이 해 둡니다. 첫째, `mf` 안의 함수 `y => 5 + y` 는 **1 인자** 입니다. `Map` 이 첫 인자 `5` 를 이미 소비해, 2 인자였던 `add` 가 타입 `int → int` (즉 `a → b`) 의 함수로 줄었고, 그 모양이 `Apply` 의 첫 자리 `K<F, a → b>` 에 정확히 맞습니다. 둘째, `Apply(mf, three)` 가 마지막 인자를 소비해 결합이 끝납니다.
+
 > 참고 — 실전 코드는 `Lift2` 한 줄
 >
-> 위 2 단계 사슬은 학습 명료성을 위해 단계를 펼친 형태입니다. 실전에서는 `Lift2` 한 줄로 같은 결과를 냅니다. 2 인자 함수를 원래 모양 그대로 넘기고, Curry 와 Apply 사슬은 헬퍼가 알아서 합니다.
->
-> ```csharp
-> // 실전 압축형 — Curry 도 Apply 사슬도 헬퍼 안으로
-> K<MyMaybeF, int> r = Lift.Lift2<MyMaybeF, int, int, int>(
->     (x, y) => x + y,    // 2 인자 Normal 함수 그대로 (수동 Curry 불필요)
->     five, three);
-> // → Just(8)              (= add(5, 3) 의 Elevated 결과, 위 r1/r2/r3 와 동일)
-> ```
->
-> 두 형태의 관계:
->
-> | 학습용 펼친 형태 (§5.3.4) | 실전 압축형 (§5.5.2 의 `Lift2`) |
-> |---|---|
-> | `Map(addC, five).Apply(three)` | `Lift2((x, y) => x + y, five, three)` |
-> | 사용자가 직접 curried 함수를 만들어 넘김 | 2 인자 함수 그대로 넘김 — Curry 가 내부 자동 |
-> | 2 단계 (Map + Apply) 가 코드에 노출 | 1 단계 (Lift2) — Curry → Pure → Apply 사슬을 캡슐화 |
-> | 각 단계의 시그니처 변화가 보임 | 결과만 보임 (단계는 헬퍼 안) |
->
-> 두 코드 모두 시그니처와 결과 (`Just(8)`) 가 동일합니다. **학습 단계에서는 펼친 형태로 무엇이 일어나는지 보고, 실무 코드에서는 압축형을 씁니다**. `Lift2` 의 4 단계 분해 (§5.5.2) `Curry → Pure → Apply → Apply` 가 바로 이 압축의 내부입니다.
-
-> 참고 — `a, b` 는 무엇이고 `n` (또는 `y`) 은 무엇인가요?
->
-> 독자가 자주 혼동하는 두 자리를 정리합니다.
->
-> **첫째, 타입 변수 vs 매개변수 이름** — 시그니처의 `a, b, c` 는 **타입 변수** (`int`, `string` 같은 타입을 가리킴). 람다 안의 `x`, `y` 는 **매개변수 이름** (호출 시 값이 들어갈 자리). 둘은 다른 카테고리입니다.
->
-> **둘째, `mf` 안의 함수는 1 인자** — `Map(addC, five)` 의 결과인 `y => 5 + y` 는 매개변수 `y` 한 개, 출력 `5 + y` 한 개. 타입은 `int → int` (즉 `a → b`). `Apply` 의 시그니처 `K<F, a → b>` 에 정확히 맞습니다.
->
-> Apply 호출의 타입 변수가 어떻게 결정되는지 펼치면:
->
-> ```
-> Apply : K<F, a → b>     →   K<F, a>     →   K<F, b>
->         ──────┬───────       ────┬────       ────┬────
->         K<F, int → int>     K<F, int>       K<F, int>
->            (= mf)            (= three)      (= 결과)
->
->       a = int   (3 의 타입, three 안에 든 값의 타입)
->       b = int   (8 의 타입, 결과 값의 타입)
->       mf : K<F, a → b> = Just(y => 5 + y)    ← y 는 매개변수 이름 (a 타입 자리)
->       호출 시:  y 자리에 three 안의 값 3 이 들어와 5 + 3 = 8
-> ```
->
-> **2 인자 `(a, b) → c` (§5.1.1) 는 어디로 갔나요?** — `addC` 가 그 `add` 의 curried 형태입니다. `Map(addC, five)` 가 첫 인자 `5` 를 소비해 2 인자가 1 인자로 줄어든 wrapped 함수 (`mf`) 를 만듭니다. 이 자리에서 시그니처가 `(a, b) → c` 에서 `a → b` 로 바뀐 셈입니다. `Apply(mf, three)` 가 마지막 1 인자를 소비해 결합 완성. **`Lift2` (§5.5.2) 는 이 2 단계 (`Map → Apply`) 를 `Pure → Apply → Apply` 의 3 단계로 일반화** 합니다. 어떤 N 인자 함수든 같은 패턴입니다.
+> 위 2 단계 사슬 (`Map → Apply`) 은 무엇이 일어나는지 보려고 단계를 펼친 학습용 형태입니다. 실전은 `Lift.Lift2((x, y) => x + y, five, three)` 한 줄로 같은 `Just(8)` 을 냅니다. 2 인자 함수를 그대로 넘기면 Curry 와 `Apply` 사슬은 헬퍼가 알아서 합니다. 그 내부 분해 (`Curry → Pure → N×Apply`) 는 §5.5.2 에서 펼칩니다.
 
 ### 5.3.5 단락 동작 — 한 측이 Nothing 이면 결과 Nothing
 
@@ -533,7 +466,7 @@ var r = nothingF.Apply(three);
 
 ### 5.4.1 같은 trait 시그니처, 다른 결합 동작
 
-같은 trait 을 완전히 다른 결합 의미를 가진 자료 구조에 부착합니다. `MyValidation<E, A>` 는 성공 + 실패 두 케이스인데, 실패 케이스가 에러 리스트를 들고 있고 `Apply` 가 양쪽 에러를 누적합니다.
+같은 trait 을 완전히 다른 결합 의미를 가진 자료 구조에 부착합니다. `MyValidation<E, A>` 는 성공과 실패 두 케이스인데, 실패 케이스가 에러 리스트를 들고 있고 `Apply` 가 양쪽 에러를 누적합니다.
 
 ```csharp
 // ① 자료 타입 — Valid 의 값, Invalid 의 에러 리스트.
@@ -629,9 +562,9 @@ K<MyValidationF<string>, User> user = Lift.Lift4<MyValidationF<string>, string, 
 
 ### 5.4.5 회원가입 폼 검증 예제 — 세 책임 분리의 N 인자 확장
 
-두 필드 (`CustomerId`, `EmailAddress`) 의 검증 결과로 `CustomerInfo` 를 만드는 자리는 효과 인코딩 + 일반 연산 합성의 정통 N 인자 확장 예제입니다. *Lift2 / Lift3 / Lift4* 의 결정적 가치는 N 회 Apply 라는 문법적 형태가 아니라 **세 책임의 깔끔한 분리** 에 있습니다. 효과는 타입, 연산은 함수, 합성은 Lift 입니다. 4장 `Map` 이 하나의 효과 위에서 1 인자 일반 함수를 끌어올렸다면, 여기서는 두 (또는 N 개) 효과 위에서 N 인자 일반 함수를 끌어올립니다.
+두 필드 (`CustomerId`, `EmailAddress`) 의 검증 결과로 `CustomerInfo` 를 만드는 자리는 효과 인코딩과 일반 연산 합성의 정통 N 인자 확장 예제입니다. *Lift2 / Lift3 / Lift4* 의 결정적 가치는 N 회 Apply 라는 문법적 형태가 아니라 **세 책임의 깔끔한 분리** 에 있습니다. 효과는 타입, 연산은 함수, 합성은 Lift 입니다. 4장 `Map` 이 하나의 효과 위에서 1 인자 일반 함수를 끌어올렸다면, 여기서는 두 (또는 N 개) 효과 위에서 N 인자 일반 함수를 끌어올립니다.
 
-- **효과 인코딩 — `MyValidation<E, A>`** — 각 필드의 검증은 통과할 수도 있고 실패할 수도 있습니다 (`42` 는 통과, `-1` 은 실패). 이 통과/실패 가능성 + 에러 누적 자체를 **타입에 인코딩** 하는 자리가 `MyValidation<string, T>` 입니다. 호출자가 분기 검사를 잊을 수 없도록 시그니처가 강제합니다. 효과는 타입의 책임입니다.
+- **효과 인코딩 — `MyValidation<E, A>`** — 각 필드의 검증은 통과할 수도 있고 실패할 수도 있습니다 (`42` 는 통과, `-1` 은 실패). 이 통과/실패 가능성과 에러 누적 자체를 **타입에 인코딩** 하는 자리가 `MyValidation<string, T>` 입니다. 호출자가 분기 검사를 잊을 수 없도록 시그니처가 강제합니다. 효과는 타입의 책임입니다.
 - **일반 연산 — `createCustomer = (id, email) => new CustomerInfo(id, email)`** — 두 필드로 고객 정보를 생성한다는 평범한 2 인자 생성자는 효과를 모릅니다. 시그니처는 `(CustomerId, EmailAddress) → CustomerInfo` 한 줄이고 `MyValidation` 어휘는 들어가지 않습니다. 데이터가 이미 검증된 상태 하의 단순 함수입니다. 연산은 함수의 책임입니다.
 - **합성 — `Lift2(createCustomer, …, …)`** — *Lift2* 한 줄이 2 인자 일반 함수를 효과 두 분기 위로 끌어올립니다. 둘 다 성공 (`Valid`) 이면 결합 결과 생성, 한 측이라도 실패 (`Invalid`) 면 에러 누적입니다. 분기 코드 `if (id.IsValid && email.IsValid) ...` 자체가 사라집니다. 합성은 Lift 의 책임입니다.
 
@@ -658,7 +591,7 @@ static K<MyValidationF<string>, EmailAddress> ValidateEmail(string e) =>
 Func<CustomerId, EmailAddress, CustomerInfo> createCustomer =
     (id, email) => new CustomerInfo(id, email);
 
-// Lift2 로 효과 인코딩 + 일반 연산 합성 — 분기와 에러 누적은 컴파일러가 알아서
+// Lift2 로 효과 인코딩과 일반 연산 합성 — 분기와 에러 누적은 컴파일러가 알아서
 K<MyValidationF<string>, CustomerInfo> goodCustomer = Lift.Lift2<
     MyValidationF<string>, CustomerId, EmailAddress, CustomerInfo>(
     createCustomer, ValidateId(42), ValidateEmail("alice@example.com"));
@@ -680,21 +613,13 @@ K<MyValidationF<string>, CustomerInfo> badCustomer = Lift.Lift2<
 
 1 단계의 두 효과 인코딩 (각 필드의 검증 가능성) 위에서 2 단계의 2 인자 일반 함수 (`createCustomer`) 가 자유롭게 합성됩니다. 두 단계가 어법 일치 (입력·출력 모두 `MyValidation<E, T>`) 라 Lift2 한 줄로 직접 연결됩니다.
 
-#### 효과 + 일반 연산 분리의 가치 — N 인자 확장
-
-| 분리 | 사슬에 어떻게 나타나는가 |
-|---|---|
-| **효과는 시그니처가 책임** | `MyValidation<E, T>` 타입 자체가 통과/실패 가능성을 명시. 호출자가 분기 검사를 잊을 수 없습니다 (컴파일러가 강제). 두 측 실패의 에러 누적 (`[..fe.Errors, ..ae.Errors]`) 도 자료 구조의 `Apply` 가 책임. |
-| **일반 연산은 N 인자 평범한 함수** | `createCustomer = (id, email) => new CustomerInfo(id, email)` 는 효과를 모르는 단순한 2 인자 생성자. Lift3 / Lift4 도 같은 발상의 확장 — `(n, e, a, t) => new User(...)` 같은 N 인자 생성자에 `LiftN` 한 줄로 끌어올림 적용 (4 인자 회원가입 예제 (§5.4.3)). 생성자 코드는 검증 어법 없이 한 번만 작성. |
-| **합성은 Lift 한 줄** | `Lift2(f, x, y)` 가 효과 (통과/실패) 두 분기 처리 + 두 측 에러 누적과 2 인자 일반 연산 적용을 한 줄로 합칩니다. 명령형의 `if (x.IsValid && y.IsValid) …` / 두 에러 합치는 boilerplate 가 사라짐. |
-
-명령형 코드라면 두 검증 결과의 조합 + 에러 누적 + 생성자 호출이 함수 본문 안에 섞여서 작성됩니다. 함수형은 **효과는 타입, 연산은 N 인자 함수, 합성은 Lift** 의 세 책임이 깔끔히 나뉩니다. 독자가 작성하는 건 늘 효과를 모르는 N 인자 일반 함수뿐, N 개 효과의 결합 + 에러 누적 어법은 trait 의 `Apply` 가 자동으로 입혀 줍니다. 1장에서 정리한 결정적 통찰이 N 인자 자리로 확장되는 자리입니다.
+세 책임 분리의 가치 자체는 4장에서 본 그대로입니다 (효과는 타입 / 연산은 함수 / 합성은 trait, §4.4.5). 달라진 것은 규모뿐입니다. 효과가 N 개로, 일반 함수가 N 인자로 늘어도 분리가 그대로 유지되고, 명령형이라면 함수 본문 안에 섞였을 두 검증 결과의 조합과 에러 누적과 생성자 호출 (`if (x.IsValid && y.IsValid) …` boilerplate) 을 `Lift2` 한 줄이 대신합니다. 1장에서 정리한 결정적 통찰이 N 인자 자리로 확장되는 자리입니다.
 
 ![Lift2 — 2 인자 함수의 curried 사슬 끌어올림](./images/Ch05-Applicative/05-customer-validation.svg)
 
-**그림 5-5. Lift2: 2 인자 함수의 curried 사슬 끌어올림** — 4장의 1 인자 끌어올림 (`Map : (a → b) → (E<a> → E<b>)`) 가 N 인자로 확장된 형태입니다. 아래 행 Normal World 에 `createCustomer : CustomerId → Email → CustomerInfo` 의 curried 사슬 (세 박스 + 두 가로 화살표). 위 행 Elevated World 에 끌어올린 curried 사슬 `MyValidation<…, CustomerId> → MyValidation<…, Email> → MyValidation<…, CustomerInfo>` (세 박스 + 두 가로 화살표). 좌·우 파란 lift 실선 화살표가 양 끝 박스 (`CustomerId` 와 `CustomerInfo`) 의 lift 자리를 표시합니다. 가운데 점선 lift 화살표가 Lift2 함수 자체로, 2 인자 Normal 함수 `createCustomer` 를 받아 두 MyValidation 결합 함수로 끌어올립니다. **Lift2 의 가치는 인자 수가 늘어도 lift 패턴이 한 줄로 유지된다는 점에 있습니다**. 효과 결합 + 에러 누적은 trait 의 `Apply` 가 자동으로 처리합니다.
+**그림 5-5. Lift2: 2 인자 함수의 curried 사슬 끌어올림** — 4장의 1 인자 끌어올림 (`Map : (a → b) → (E<a> → E<b>)`) 가 N 인자로 확장된 형태입니다. 아래 행 Normal World 에 `createCustomer : CustomerId → Email → CustomerInfo` 의 curried 사슬 (세 박스 + 두 가로 화살표). 위 행 Elevated World 에 끌어올린 curried 사슬 `MyValidation<…, CustomerId> → MyValidation<…, Email> → MyValidation<…, CustomerInfo>` (세 박스 + 두 가로 화살표). 좌·우 파란 lift 실선 화살표가 양 끝 박스 (`CustomerId` 와 `CustomerInfo`) 의 lift 자리를 표시합니다. 가운데 점선 lift 화살표가 Lift2 함수 자체로, 2 인자 Normal 함수 `createCustomer` 를 받아 두 MyValidation 결합 함수로 끌어올립니다. **Lift2 의 가치는 인자 수가 늘어도 lift 패턴이 한 줄로 유지된다는 점에 있습니다**. 효과 결합과 에러 누적은 trait 의 `Apply` 가 자동으로 처리합니다.
 
-4장의 ParseInt + Map(f) 가 하나의 효과 위 1 인자 끌어올림이었다면, 여기 ValidateId × ValidateEmail + Lift2(createCustomer) 는 두 효과 위 2 인자 끌어올림입니다. 효과 개수 + 일반 함수 인자 수가 같이 늘어나도 세 책임의 분리는 그대로 유지됩니다. `LiftN` 한 줄이 N 개의 분기 + 에러 누적을 자동으로 입혀 줍니다.
+4장의 ParseInt + Map(f) 가 하나의 효과 위 1 인자 끌어올림이었다면, 여기 ValidateId × ValidateEmail + Lift2(createCustomer) 는 두 효과 위 2 인자 끌어올림입니다. 효과 개수와 일반 함수 인자 수가 같이 늘어나도 세 책임의 분리는 그대로 유지됩니다. `LiftN` 한 줄이 N 개의 분기와 에러 누적을 자동으로 입혀 줍니다.
 
 ---
 
@@ -776,9 +701,7 @@ K<F, c>
 
 **그림 5-6. `Lift2`: curried 함수를 두 번의 `apply` 로 결합** — Elevated World 안에서 `Pure` 로 올린 curried 함수 `K<F, a → b → c>` 가 `apply` 로 `K<F, a>` 와 결합해 `K<F, b → c>` 가 되고, 다시 `apply` 로 `K<F, b>` 와 결합해 `K<F, c>` 가 됩니다. `Lift2 = pure(curry(f))` 다음 `apply` 두 번이라는 분해가 한 줄로 드러납니다. 인자가 한 개씩 들어올 때마다 갇힌 함수 사슬이 한 칸씩 줄어듭니다.
 
-> 참고 — 실전 LanguageExt 의 구현 방향은 다릅니다
->
-> 위 4 단계 분해는 학습 명료성을 위해 `Curry.Of` 를 컨테이너 밖에서 명시적으로 호출합니다. 실전 LanguageExt v5 의 `Applicative.lift<F, A, B, C>` 는 같은 결과를 컨테이너 안 currying 으로 압축한 한 줄입니다.
+> 참고 — 실전 LanguageExt v5 는 같은 결과를 한 줄로 압축합니다
 >
 > ```csharp
 > // LanguageExt v5 — Applicative.Module.Lift.cs 의 실제 구현
@@ -787,20 +710,7 @@ K<F, c>
 >     F.Pure(f).Apply(fa).Apply(fb);
 > ```
 >
-> 두 가지가 결정적으로 다릅니다.
-> - **Currying 의 자리** — 이 책은 `Curry.Of(f)` 를 Normal World 에서 먼저 적용한 뒤 `F.Pure` 로 올립니다. 라이브러리는 Multi-arg `Func<A, B, C>` 그대로 `F.Pure(f)` 로 올린 뒤, `.Apply(fa)` 의 multi-arg 확장 메서드가 내부에서 `F.Map(curry, mf)` 로 Elevated World 안에서 currying 을 수행합니다.
-> - **사용자 어법** — 이 책은 `Lift2` 가 4 단계 분해를 그대로 보입니다. 라이브러리는 `lift(f, fa, fb)` 한 줄이 실무 어법으로 압축됩니다.
->
-> ```csharp
-> // LanguageExt v5 — Applicative.Extensions.Apply.cs 의 multi-arg Apply
-> extension<AF, A, B, C>(K<AF, Func<A, B, C>> mf) where AF : Applicative<AF>
-> {
->     public K<AF, Func<B, C>> Apply(K<AF, A> ma) =>
->         AF.Apply(AF.Map(curry, mf), ma);              // ← 컨테이너 안 Currying
-> }
-> ```
->
-> 결과·의미는 이 책의 4 단계 분해와 동일합니다. Pure ∘ Curry → Apply → Apply 의 등식이 두 방향에서 모두 성립합니다. 이 책의 명시적 4 단계는 어떤 일이 일어나는지의 학습용 펼침이고, 라이브러리 한 줄은 실무 어법으로의 압축입니다. 두 접근이 시그니처 단계에서 같은 함수임을 5장 코드의 `Lift.Lift2` 와 LanguageExt 의 `Applicative.lift` 를 나란히 호출해 검증할 수 있습니다.
+> 차이는 currying 의 자리뿐입니다. 이 책은 `Curry.Of(f)` 를 Normal World 에서 먼저 적용해 단계를 보이고, 라이브러리는 multi-arg 확장 `Apply` 가 컨테이너 안에서 currying 을 수행합니다. 결과와 의미는 동일합니다. 이 책의 4 단계는 학습용 펼침, 라이브러리 한 줄은 실무 압축입니다.
 
 ### 5.5.3 `Lift3 / Lift4` — 같은 패턴 N 회 반복
 
@@ -902,6 +812,8 @@ Functor 만 정의      ─►  Map, Lift1, ...                                 
 
 > elevated-world 글 인용 — "`apply` 와 `return` 의 올바른 구현은 Elevated World 마다 다르지만, 항상 만족해야 할 성질이 있습니다." Functor 의 두 법칙 (4장 §4.6) 의 자연스러운 확장이 Applicative 의 다섯 법칙입니다.
 
+두 세계 그림으로 읽으면 다섯 법칙의 정체는 하나입니다. `Pure` 사다리 (그림 5-2) 와 `Apply` 결합 (그림 5-3) 이 **Normal World 의 함수 적용과 똑같이 동작한다** 는 약속입니다. 사다리가 값을 비틀지 않고 (Identity · Homomorphism), 결합의 순서가 결과를 바꾸지 않습니다 (Interchange · Composition).
+
 ### 5.6.2 첫 번째 법칙 — 항등 (Identity Law)
 
 ```
@@ -939,7 +851,7 @@ F.Pure(((Func<int, int>)(n => n * 2))(7))              ─►   Just(14)
 F.Apply(mf, F.Pure(a))  ≡  F.Apply(F.Pure(f => f(a)), mf)
 ```
 
-Elevated 함수 + 끌어올린 Normal 값의 결합이, 그 값을 미리 묶은 적용 함수 + Elevated 함수의 결합과 같습니다. **`Apply` 의 좌우 비대칭이 사라지는 자리** 입니다. 함수 측과 값 측이 어디 있든 결과가 일치합니다.
+Elevated 함수와 끌어올린 Normal 값의 결합이, 그 값을 미리 묶은 적용 함수 + Elevated 함수의 결합과 같습니다. **`Apply` 의 좌우 비대칭이 사라지는 자리** 입니다. 함수 측과 값 측이 어디 있든 결과가 일치합니다.
 
 **구체 예** — `mf = Just(n => n + 100)`, `a = 7` 이면 양변 모두 `Just(107)` 입니다. 왼쪽은 `Just` 안의 함수에 `7` 을 적용해 `107`, 오른쪽은 "`7` 을 먹이는 함수" `g => g(7)` 를 끌어올려 `mf` 와 결합해 다시 `107`. 두 경로가 같은 `Just(107)` 로 만납니다.
 
@@ -996,34 +908,6 @@ public void Homomorphism_law_holds()
 }
 
 [Fact]
-public void Interchange_law_holds()
-{
-    K<MyMaybeF, Func<int, int>> mf = MyMaybeF.Pure<Func<int, int>>(n => n + 100);
-    int a = 7;
-    var lhs = MyMaybeF.Apply(mf, MyMaybeF.Pure(a));
-    var rhs = MyMaybeF.Apply(
-        MyMaybeF.Pure<Func<Func<int, int>, int>>(f => f(a)), mf);
-    lhs.As().ShouldBe(rhs.As());
-}
-
-[Fact]
-public void Composition_law_holds()
-{
-    Func<int, Func<int, Func<int, int>>> compose = g => f => x => g(f(x));
-    K<MyMaybeF, Func<int, int>> mf = MyMaybeF.Pure<Func<int, int>>(n => n + 1);
-    K<MyMaybeF, Func<int, int>> mg = MyMaybeF.Pure<Func<int, int>>(n => n * 10);
-    K<MyMaybeF, int>            fa = new MyMaybe<int>.Just(7);
-
-    var lhs = MyMaybeF.Apply(
-        MyMaybeF.Apply(
-            MyMaybeF.Apply(MyMaybeF.Pure(compose), mg),
-            mf),
-        fa);
-    var rhs = MyMaybeF.Apply(mg, MyMaybeF.Apply(mf, fa));
-    lhs.As().ShouldBe(rhs.As());
-}
-
-[Fact]
 public void Functor_consistency_law_holds()
 {
     Func<int, string> f = n => $"#{n}";
@@ -1035,7 +919,7 @@ public void Functor_consistency_law_holds()
 }
 ```
 
-다섯 [Fact] 가 모두 통과하면 `MyMaybeF` 는 **제대로 된 Applicative** 입니다. 같은 검증을 `MyValidationF<E>` 에도 한 벌 더 적으면 두 인스턴스의 법칙 검증이 끝납니다.
+입문 단계의 핵심 세 법칙 (Identity · Homomorphism · Functor 정합) 의 [Fact] 만 본문에 실었습니다. 나머지 두 법칙 (Interchange · Composition) 도 같은 패턴의 [Fact] 로 `Tests/ApplicativeLaws.cs` 에 들어 있습니다. 다섯 [Fact] 가 모두 통과하면 `MyMaybeF` 는 **제대로 된 Applicative** 입니다. 같은 검증을 `MyValidationF<E>` 에도 한 벌 더 적으면 두 인스턴스의 법칙 검증이 끝납니다.
 
 법칙은 고른 몇 값이 아니라 **모든 입력의 약속** 입니다. 3 장 (§3.7.1) 의 `ForAll` 로 임의의 `MyMaybe<int>` 100 건에 검증합니다. 컨테이너 입력만으로 변주되는 항등 법칙을 그대로 넘기고, 함수 인자 표본 (`x => x + 1`) 은 고정합니다.
 
@@ -1108,7 +992,7 @@ DupApplicativeF.Pure(f(a))                ─►   [f(a), f(a)]                (
 | `DupApplicativeF` | ✓ | ✓ | ✗ | `Lift2` 결과 크기가 예상과 다름 |
 | 진짜 Applicative | ✓ | ✓ | ✓ (Interchange / Composition 도 함께) | (없음 — 모든 추론이 안전) |
 
-시그니처가 같은 모양인데 결과 의미가 달라지는 자리입니다. Identity 는 `Pure(id)` 의 단순화를, Homomorphism 은 `Pure` 의 기준점을, Interchange / Composition 은 `Apply` 의 결합 형태 자유도를, Functor 정합은 상속한 `Map` 의 일관성을 각각 책임집니다. **다섯 법칙 모두 만족할 때만** `Apply` 가 **진짜 Applicative** 입니다. 시그니처를 통과한 모든 추론이 안전한 trait 입니다.
+시그니처가 같은 모양인데 결과 의미가 달라지는 자리입니다. Identity 는 `Pure(id)` 의 단순화를, Homomorphism 은 `Pure` 의 기준점을, Interchange / Composition 은 `Apply` 의 결합 형태 자유도를, Functor 정합은 상속한 `Map` 의 일관성을 각각 책임집니다. **다섯 법칙을 모두 만족할 때만** `Apply` 가 **진짜 Applicative** 가 되고, 그제야 시그니처를 통과한 모든 추론이 안전합니다.
 
 ---
 
@@ -1124,7 +1008,7 @@ Applicative   — Map + Pure + Apply          (N 인자 끌어올림 + 사다리
 Monad         — Map + Pure + Apply + Bind   (7장. World-crossing 합성)
 ```
 
-`Applicative<F> : Functor<F>` 의 상속이 시그니처 단계에서 의미하는 것은 `Map` 이 자동으로 따라온다는 점입니다. `Map ≡ Apply ∘ Pure` 의 등식이 그 한 줄 증명입니다. 새 자료 타입에 `Pure + Apply` 를 정의하면 `Map` 의 동작이 자동으로 일관됩니다.
+`Applicative<F> : Functor<F>` 의 상속이 시그니처 단계에서 뜻하는 것은 하나입니다. `Map` 이 자동으로 따라옵니다. `Map ≡ Apply ∘ Pure` 의 등식이 그 한 줄 증명입니다. 새 자료 타입에 `Pure + Apply` 를 정의하면 `Map` 의 동작이 자동으로 일관됩니다.
 
 ### 5.7.2 시그니처 평행 — Map / Pure / Apply
 
@@ -1136,7 +1020,7 @@ Applicative.Apply: K<F, Func<A, B>>      → K<F, A>  → K<F, B>
                    Func<A,B> 의 Elevated 판
 ```
 
-Apply 가 Map 의 일반화입니다. 함수가 Elevated 한 칸 위로 올라간 모양입니다. Pure 가 Apply 의 좌측 입력 (`K<F, Func<A, B>>`) 을 만들 수 있게 해주는 보조 도구입니다. 세 시그니처가 한 가족입니다.
+Apply 는 함수가 Elevated 한 칸 위로 올라간 모양으로 Map 을 일반화하고, Pure 는 그 좌측 입력 (`K<F, Func<A, B>>`) 을 만들어 줍니다. 세 시그니처가 한 가족입니다.
 
 ### 5.7.3 도구 분류표
 
@@ -1298,16 +1182,19 @@ public sealed class ConstApplicativeF<M> : Applicative<ConstApplicativeF<M>>
 
 ## 5.10 Elevated World 어휘로 다시 읽기
 
-이 장의 결정을 Wlaschin 시리즈 흐름과 정렬합니다.
+이 장은 `map` 의 1 인자 한계 (§5.1) 에서 출발해 N 인자 끌어올림 (§5.5) 으로 끝났습니다. 익힌 도구를 1장의 두 평행 세계 / 4 가지 함수 유형에 다시 매핑하면, 5장이 그 지도의 어느 자리를 넓혔는지 드러납니다.
 
-| 시리즈 흐름 | 이 책에서의 위치 |
+| 1장의 비유 | 5장이 준 C# 어휘 |
 |---|---|
-| Part 1 — Lifting to the elevated world (`map`, `return`, `apply`, `liftN`) | 4장 (Map), **이 장 (Pure + Apply + Lift2/3/4)** |
-| Part 2 — How to compose world-crossing functions (`bind`) | 7장 Monad |
-| Part 3 — Using the core functions in practice (validation) | 8장 Validation |
-| Part 4 — Mixing lists and elevated values (`traverse`, `sequence`) | 9장 Traversable |
+| 끌어올림 사다리의 가장 짧은 한 칸 (`a → E<a>`) | `Pure` — Normal 값을 Elevated 의 가장 단순한 시민으로 (그림 5-2) |
+| 갇힌 함수 — Elevated 한 칸 안에서 다음 인자를 기다림 | `K<F, Func<A, B>>` — `Apply` 의 첫 자리 (그림 5-3) |
+| `E<a> → E<b>` 유형의 다인자 확장 | `Lift2 / Lift3 / Lift4` = `Curry → Pure → N×Apply` 사슬 |
+| Normal 의 함수 적용 (공백) 이 Elevated 에도 그대로 | `add x y` ↔ `Pure(add).Apply(fx).Apply(fy)` (overloaded whitespace) |
+| trait 의 약속 | 다섯 법칙 — 사다리와 결합이 Normal 의 함수 적용과 같게 동작 (§5.6) |
 
-5장이 다루는 네 자리 중 하나는 `E<a> → E<b>` 의 다인자 확장 + pure 사다리 (`a → E<a>`). 두 Elevated 시민을 비로소 결합할 수 있는 자리 — Wlaschin 의 용어로는 *unpacking a wrapped function*, *combining lifted values* 입니다.
+핵심을 한 줄로 누르면 이렇습니다. **1장 지도의 `E<a> → E<b>` 자리는 인자 수가 N 으로 늘어도 한 어법 (`Curry → Pure → N×Apply`) 으로 닫힙니다.** 비유는 여기까지가 역할입니다. 정확한 결합 규칙은 다섯 법칙이 정합니다.
+
+> 참고 — Wlaschin 시리즈와의 정렬: Part 1 "Lifting to the elevated world" 의 `apply` · `liftN` 절이 이 장의 직접 대응 글입니다 (4장 = `map`, 7장 = Part 2 의 `bind`, 8장 = Part 3 의 validation, 9장 = Part 4 의 `traverse`).
 
 ---
 
@@ -1315,7 +1202,7 @@ public sealed class ConstApplicativeF<M> : Applicative<ConstApplicativeF<M>>
 
 > **Q1. `map` 으로 두 Elevated 값의 덧셈은 정말 못 합니까?** (§5.1)
 
-부분적으로는 가능합니다. `Map(add, two)` 의 결과 `K<F, Func<int, int>>` 에 세 번째 함수 (`Apply`) 를 한 번 더 적용하면 됩니다. 그 한 번 더가 정확히 `Apply` 의 시그니처 (컨테이너 안 함수와 컨테이너 안 값의 결합) 입니다. 즉 `Lift2(f, fa, fb) = Map(f, fa).Apply(fb)` 가 같은 등식입니다. `Map` 만으로는 끌어올림이 반쪽입니다. `Apply` 가 그 반쪽을 닫는 도구입니다.
+부분적으로는 가능합니다. `Map(add, two)` 의 결과 `K<F, Func<int, int>>` 에 세 번째 함수 (`Apply`) 를 한 번 더 적용하면 됩니다. 그 한 번 더가 정확히 `Apply` 의 시그니처 (컨테이너 안 함수와 컨테이너 안 값의 결합) 입니다. 즉 `Lift2(f, fa, fb) = Map(f, fa).Apply(fb)` 가 같은 등식입니다. `Map` 만으로는 끌어올림이 반쪽에 그치고, `Apply` 가 그 반쪽을 닫습니다.
 
 > **Q2. `Pure` 와 `Map(_, ...)` 가 비슷해 보이는데 시그니처가 어떻게 다릅니까?** (§5.2)
 
@@ -1327,7 +1214,7 @@ public sealed class ConstApplicativeF<M> : Applicative<ConstApplicativeF<M>>
 
 > **Q4. `Apply` 의 첫 인자가 왜 `K<F, Func<A, B>>` 입니까? 일반 `Func<A, B>` 면 안 됩니까?** (§5.2)
 
-일반 `Func<A, B>` 라면 그 시그니처는 `Func<A, B> → K<F, A> → K<F, B>` 가 되어 정확히 Functor 의 Map 과 같습니다. 같은 trait 의 두 멤버가 되는 셈입니다. 함수가 컨테이너 안에 들어가야 그 함수 자체의 Elevated 효과 (Maybe 의 Nothing, Validation 의 Invalid) 를 표현할 수 있고, 다인자 함수의 부분 적용 결과 (`Map` 한 번 적용한 후의 모양) 가 자연스럽게 `Apply` 의 입력이 됩니다. **효과의 대칭성 + 다인자 결합** 이 함수가 컨테이너 안에 있어야 하는 이유입니다.
+일반 `Func<A, B>` 라면 그 시그니처는 `Func<A, B> → K<F, A> → K<F, B>` 가 되어 정확히 Functor 의 Map 과 같습니다. 같은 trait 의 두 멤버가 되는 셈입니다. 함수가 컨테이너 안에 들어가야 그 함수 자체의 Elevated 효과 (Maybe 의 Nothing, Validation 의 Invalid) 를 표현할 수 있고, 다인자 함수의 부분 적용 결과 (`Map` 한 번 적용한 후의 모양) 가 자연스럽게 `Apply` 의 입력이 됩니다. 함수가 컨테이너 안에 있어야 하는 까닭은 **효과의 대칭성과 다인자 결합** 두 가지입니다.
 
 > **Q5. Applicative 가 Functor 를 상속한다는 게 코드에 어떤 영향을 줍니까?** (§5.7)
 

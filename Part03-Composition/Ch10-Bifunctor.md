@@ -4,12 +4,12 @@
 
 > **이 장의 핵심 어휘**
 >
-> - **Bifunctor** (타입 인자가 둘인 컨테이너의 양쪽을 변환하는 trait. `MapSecond` 가 곧 Functor 의 `map` 이라 Functor 를 포함합니다)
-> - `K<F, L, A>` (인자가 둘인 컨테이너를 분류하는 2-인자 마커. 2장의 `K<F, A>` 가 인자 하나 늘어난 모양)
-> - `BiMap` (두 함수 `L → M` 과 `A → B` 를 받아 두 인자를 동시에 변환하고 모양은 보존하는 핵심 멤버)
-> - `MapFirst` (둘째 자리에 항등 함수를 넣어 첫 인자만 변환하는 `BiMap` 의 특수한 경우)
-> - `MapSecond` (첫 자리에 항등 함수를 넣어 둘째 인자만 변환하는, 곧 4장 Functor 의 `map` 에 해당하는 자리)
-> - **Biapplicative / Bimonad** (1-인자 가족 Functor → Applicative → Monad 가 2-인자에서 평행하게 반복되는 가족)
+> - **Bifunctor**: 타입 인자가 둘인 컨테이너의 양쪽을 변환하는 trait. `MapSecond` 가 곧 Functor 의 `map` 이라 Functor 를 포함합니다
+> - **`K<F, L, A>`**: 인자가 둘인 컨테이너를 분류하는 2-인자 마커. 2장의 `K<F, A>` 가 인자 하나 늘어난 모양
+> - **`BiMap`**: 두 함수 `L → M` 과 `A → B` 를 받아 두 인자를 동시에 변환하고 모양은 보존하는 핵심 멤버
+> - **`MapFirst`**: 둘째 자리에 항등 함수를 넣어 첫 인자만 변환하는 `BiMap` 의 특수한 경우
+> - **`MapSecond`**: 첫 자리에 항등 함수를 넣어 둘째 인자만 변환하는, 곧 4장 Functor 의 `map` 에 해당하는 자리
+> - **Biapplicative / Bimonad**: 1-인자 가족 Functor → Applicative → Monad 가 2-인자에서 평행하게 반복되는 가족
 
 > 이 장을 마치면 할 수 있게 되는 것
 > - [ ] 타입 인자가 둘인 컨테이너에서 Functor 의 한계를 시그니처로 설명할 수 있습니다.
