@@ -5,7 +5,7 @@ using Ch13.Traits;
 using Ch13.Types;
 
 Console.WriteLine("================================================");
-Console.WriteLine("10장 — Maps & Sets (키-값 / 집합 컨테이너)");
+Console.WriteLine("13장 — Maps & Sets (키-값 / 집합 컨테이너)");
 Console.WriteLine("================================================");
 Console.WriteLine();
 
@@ -75,8 +75,34 @@ Console.WriteLine($"  Functor 항등 : {Pass(idOk)}");
 Console.WriteLine($"  Functor 합성 : {Pass(compOk)}");
 Console.WriteLine();
 
-Console.WriteLine(idOk && compOk ? "모든 법칙 통과 [OK]" : "법칙 위반 발생 [FAIL]");
+Console.WriteLine(idOk && compOk ? "Functor 법칙 통과 [OK]" : "법칙 위반 발생 [FAIL]");
+Console.WriteLine();
+
+// ── 예제 5 — Map Traverse: 모든 값이 통과해야 전체 성공 ──────────────
+Console.WriteLine("== 예제 5 — Map Traverse: 값 검증, 모두 통과해야 Just ==");
+
+Func<int, K<MaybeF, int>> validate = v =>
+    v > 0 ? new MyMaybe<int>.Just(v) : MyMaybe<int>.Nothing.Instance;
+
+K<MapF<string>, int> badMap = new MyMap<string, int>(new Dictionary<string, int>
+{
+    ["apple"] = 1000, ["banana"] = -50, ["cherry"] = 3000,
+});
+
+var goodT = Traverse.traverse<MapF<string>, MaybeF, int, int>(validate, prices).As();
+var badT  = Traverse.traverse<MapF<string>, MaybeF, int, int>(validate, badMap).As();
+
+Console.WriteLine($"  모두 양수  traverse = {DescribeMap(goodT)}   (키 보존, 전체 Just)");
+Console.WriteLine($"  음수 포함  traverse = {DescribeMap(badT)}              (하나 실패 → 전체 Nothing)");
+Console.WriteLine();
 
 return;
 
 static string Pass(bool b) => b ? "통과" : "위반";
+
+// traverse 결과는 MyMaybe<K<MapF<string>, int>> — 안쪽 Map 을 As() 로 풀어 출력.
+static string DescribeMap(MyMaybe<K<MapF<string>, int>> m) => m switch
+{
+    MyMaybe<K<MapF<string>, int>>.Just j => $"Just({j.Value.As()})",
+    _                                    => "Nothing"
+};

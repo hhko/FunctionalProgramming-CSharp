@@ -1,4 +1,4 @@
-# Part 2 — Collections (불변 컬렉션)
+# Part 4 — Collections (불변 컬렉션)
 
 ## 4부의 배경
 

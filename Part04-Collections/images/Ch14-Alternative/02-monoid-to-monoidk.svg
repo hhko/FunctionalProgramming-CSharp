@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 450" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+  </defs>
+
+  <rect width="760" height="450" fill="#ffffff"/>
+
+  <text x="380" y="28" font-size="15" fill="#1f1f1f" text-anchor="middle" font-weight="bold">Monoid 의 결합이 Elevated World 로 — MonoidK</text>
+
+  <!-- Elevated World 띠 (위) -->
+  <rect x="40" y="50" width="680" height="170" fill="#f4f9ff" stroke="none" rx="12"/>
+  <text x="58" y="72" font-size="12" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.5">Elevated World</text>
+
+  <rect x="120" y="92" width="520" height="50" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="380" y="123" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">Combine : K&lt;M, a&gt; → K&lt;M, a&gt; → K&lt;M, a&gt;</text>
+  <text x="380" y="172" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">[1, 2] ++ [3, 4] = [1, 2, 3, 4]</text>
+  <text x="380" y="196" font-size="12" fill="#5a6b7a" text-anchor="middle">두 시퀀스 이어붙이기 · 항등원 Empty = 빈 시퀀스</text>
+
+  <!-- 끌어올림 화살표 -->
+  <line x1="380" y1="340" x2="380" y2="222" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <text x="400" y="288" font-size="15" fill="#1f77b4" font-weight="bold" font-family="'Consolas', monospace">끌어올림</text>
+  <text x="400" y="308" font-size="12" fill="#1f77b4" font-style="italic">Normal → Elevated</text>
+
+  <!-- Normal World 띠 (아래) -->
+  <rect x="40" y="340" width="680" height="92" fill="#fffdf3" stroke="none" rx="12"/>
+  <text x="58" y="362" font-size="12" fill="#bf9000" font-style="italic" font-weight="bold" letter-spacing="0.5">Normal World</text>
+
+  <rect x="120" y="372" width="520" height="46" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="290" y="400" font-size="16" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">Combine : a → a → a</text>
+  <text x="520" y="400" font-size="15" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace">2 + 3 = 5</text>
+</svg>

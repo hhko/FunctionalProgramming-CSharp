@@ -20,6 +20,12 @@ public static class Alternatives
     public static K<F, A> oneOf<F, A>(params K<F, A>[] options)
         where F : Alternative<F> =>
         F.OneOf(options);
+
+    // fallback — fa 가 성공하면 그 값, 실패(Empty)면 기본값을 Pure 로 올려 돌려준다.
+    // x ?? value 의 Elevated 일반형. v5 Alternative.Option 과 정합 (fa | Pure(value)).
+    public static K<F, A> option<F, A>(A value, K<F, A> fa)
+        where F : Alternative<F> =>
+        F.Choose(fa, F.Pure(value));
 }
 
 // 확장 어법 — fa.Choose(fb), fa.Combine(fb).

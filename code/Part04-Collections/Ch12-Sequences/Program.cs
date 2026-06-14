@@ -5,7 +5,7 @@ using Ch12.Traits;
 using Ch12.Types;
 
 Console.WriteLine("================================================");
-Console.WriteLine("9장 — Sequences (불변 시퀀스에 1부 추상 부착)");
+Console.WriteLine("12장 — Sequences (불변 시퀀스에 1부 추상 부착)");
 Console.WriteLine("================================================");
 Console.WriteLine();
 

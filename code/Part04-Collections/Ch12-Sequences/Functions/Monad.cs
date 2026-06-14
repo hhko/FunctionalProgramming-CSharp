@@ -2,7 +2,7 @@ using Ch12.Traits;
 
 namespace Ch12.Functions;
 
-// Monad 모듈 — generic 헬퍼 (6장과 동일). 어떤 Monad M 든 받는다.
+// Monad 모듈 — generic 헬퍼 (7장과 동일). 어떤 Monad M 든 받는다.
 public static class Monad
 {
     public static K<M, A> pure<M, A>(A value)

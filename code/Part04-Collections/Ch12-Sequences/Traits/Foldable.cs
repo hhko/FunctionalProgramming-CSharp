@@ -1,6 +1,6 @@
 namespace Ch12.Traits;
 
-// Foldable — 5장 정의 그대로 (FoldRight + FoldLeft + virtual 자유 함수들).
+// Foldable — 6장 정의 그대로 (FoldRight + FoldLeft + virtual 자유 함수들).
 //
 // 실무 시퀀스에서 Sum / Count / Any / ToList 가 모두 이 두 abstract 위에서 자란다.
 public interface Foldable<F> where F : Foldable<F>

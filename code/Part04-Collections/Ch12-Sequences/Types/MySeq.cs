@@ -74,7 +74,7 @@ public sealed class SeqF : Monad<SeqF>, Traversable<SeqF>
         return acc;
     }
 
-    // Traversable.Traverse — List<F<B>> 을 F<List<B>> 로 swap (8장 패턴).
+    // Traversable.Traverse — List<F<B>> 을 F<List<B>> 로 swap (9장 패턴).
     public static K<F, K<SeqF, B>> Traverse<F, A, B>(Func<A, K<F, B>> f, K<SeqF, A> ta)
         where F : Applicative<F>
     {

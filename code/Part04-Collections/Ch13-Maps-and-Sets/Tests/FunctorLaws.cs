@@ -3,7 +3,7 @@ using Ch13.Traits;
 
 namespace Ch13.Tests;
 
-// Functor 두 법칙의 학습용 검증 헬퍼 (3장과 동일, 콘솔 bool 방식).
+// Functor 두 법칙의 학습용 검증 헬퍼 (4장과 동일, 콘솔 bool 방식).
 //
 // MyMap 에 대한 probe 는 값들의 시퀀스 (fa => fa.As().Values).
 public static class FunctorLaws

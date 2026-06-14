@@ -72,7 +72,7 @@ static MyMaybe<MyList<int>> SequenceByHand(MyList<MyMaybe<int>> source)
 
 ### 9.1.2 1장 지도의 다섯 번째 이동 — 층 swap
 
-9장의 `traverse` 는 1장의 기본 4 가지 함수 유형 (§1.7.1) 어디에도 들어맞지 않습니다. 두 Elevated 세계 (`List` 와 `E`) 가 동시에 등장하고, 그 둘의 층 순서를 바꾸기 때문입니다. 1장 지도가 예약해 둔 첫 확장 자리가 바로 여기입니다. 기본 네 이동이 두 세계 **사이** 를 오갔다면, 다섯 번째 이동은 Elevated World **안** 에서 겹친 두 층을 교환합니다.
+9장의 `traverse` 는 1장의 기본 4 가지 함수 유형 어디에도 들어맞지 않습니다. 두 Elevated 세계 (`List` 와 `E`) 가 동시에 등장하고, 그 둘의 층 순서를 바꾸기 때문입니다. 1장 지도가 예약해 둔 첫 확장 자리가 바로 여기입니다. 기본 네 이동이 두 세계 **사이** 를 오갔다면, 다섯 번째 이동은 Elevated World **안** 에서 겹친 두 층을 교환합니다.
 
 ![1장 지도의 확장 — Elevated World 안의 층 swap](./images/Ch09-Traversable/00-map-extension.svg)
 
@@ -148,7 +148,7 @@ public interface Traversable<T> : Functor<T>, Foldable<T> where T : Traversable<
 
 `F` 가 `Applicative` 여야 하는 이유가 시그니처에 박혀 있습니다. 층을 뒤집은 결과를 **조립** 하려면 빈 결과에서 시작할 `Pure` 와, 원소를 하나씩 결합할 `Apply` 가 필요하기 때문입니다. 5장의 다인자 끌어올림이 바로 여기서 쓰입니다. 두 세계 중 바깥으로 끌어올려지는 효과 `F` 가 결과를 조립하는 쪽이라 Applicative 역할을 맡고, 안으로 내려가 순회되는 `T` 가 Traversable 역할을 맡습니다. 어느 세계가 위로 오느냐가 곧 어느 trait 의 자리인지를 정합니다.
 
-여기서 `Apply` 면 충분하고 `Bind` 까지는 필요 없다는 점이 중요합니다. 목록의 원소들은 서로 독립이기 때문입니다. 각 원소는 같은 변환 함수 `f` 로 따로 처리되고, 한 원소의 효과가 다른 원소의 값에 의존하지 않습니다. 7장에서 `Apply` 는 독립 결합, `Bind` 는 의존 결합이라고 갈랐습니다 (§7.4). traverse 는 원소끼리 의존이 없는 독립 결합이므로 정확히 `Apply` 자리입니다. 앞 원소의 결과를 봐야 다음 원소의 처리가 정해지는 의존이 있다면 그때 비로소 `Bind` 가 필요하지만, 층 swap 에는 그런 의존이 없습니다. 그래서 `Traverse` 의 제약이 `where F : Applicative<F>` 까지만이고 `Monad<F>` 를 요구하지 않습니다.
+여기서 `Apply` 면 충분하고 `Bind` 까지는 필요 없다는 점이 중요합니다. 목록의 원소들은 서로 독립이기 때문입니다. 각 원소는 같은 변환 함수 `f` 로 따로 처리되고, 한 원소의 효과가 다른 원소의 값에 의존하지 않습니다. 7장에서 `Apply` 는 독립 결합, `Bind` 는 의존 결합이라고 갈랐습니다. traverse 는 원소끼리 의존이 없는 독립 결합이므로 정확히 `Apply` 자리입니다. 앞 원소의 결과를 봐야 다음 원소의 처리가 정해지는 의존이 있다면 그때 비로소 `Bind` 가 필요하지만, 층 swap 에는 그런 의존이 없습니다. 그래서 `Traverse` 의 제약이 `where F : Applicative<F>` 까지만이고 `Monad<F>` 를 요구하지 않습니다.
 
 > **더 들어가면 (지금은 `Apply` 면 충분하다는 결론만 가져가도 됩니다)** — 이 차이는 단순한 제약 절약이 아니라 실질적 이득입니다. 원소들의 효과가 서로 독립이므로 정해진 순서 없이 다뤄도 되고, 원리상 병렬로 모아도 같은 결과가 나옵니다. 반대로 `Bind` 가 필요한 결합은 앞 효과가 끝나야 다음을 정할 수 있어 순차로 묶일 수밖에 없습니다. 그래서 효과 사이에 의존이 생기는 자리에서는 `Monad` 를 요구하는 순차 버전 (LanguageExt v5 의 `TraverseM`) 이 따로 필요하고, 이는 효과 모나드를 다루는 후속 Part 의 몫입니다.
 
@@ -214,7 +214,7 @@ Ch09-Traversable/
 ├── Types/MyList.cs · MyMaybe.cs · MyValidation.cs   ← 자료 (안쪽 효과: 단락/누적)
 ├── Functions/Traversable.cs · Sequence.cs   ← traverse · sequence
 ├── Tests/TraversableLaws.cs · TraversableCounterexample.cs · ValidationTraverse.cs   ← 법칙 · 가짜 반례 · 누적 검증
-└── Challenges/TraversableChallenges.cs   ← §9.11 정답
+└── Challenges/TraversableChallenges.cs   ← 9.11절 정답
 ```
 
 `MyListF` 가 `Traversable<MyListF>` 를 구현합니다. `Map` (4장) 과 `Fold` (6장) 는 익숙하므로, 핵심인 `Traverse` 를 한 줄씩 봅니다.
@@ -250,7 +250,7 @@ public static K<F, K<MyListF, B>> Traverse<F, A, B>(Func<A, K<F, B>> f, K<MyList
 
 `Pure(빈 리스트)` 로 시작해 (Applicative), 목록을 뒤에서 앞으로 순회하며 (Foldable 식 누적), 각 원소를 `f` 로 변환하고 (Functor 식 변환), `prepend` 를 `Pure` 로 올린 뒤 두 번 `Apply` 해 (Applicative 다인자 끌어올림) 머리를 꼬리 앞에 붙입니다. `Reverse()` 로 뒤에서 앞으로 도는 까닭은 `prepend` 가 앞에 붙이는 연산이라 원래 순서가 보존되기 때문입니다. 5장에서 본 `Pure → Apply` 사슬이 그대로 재등장합니다.
 
-앞의 손코딩 `SequenceByHand` (§9.1.1) 와 나란히 두면, 한 덩어리로 뒤섞였던 세 가지 일이 `Traverse` 에서 어디로 갔는지 보입니다.
+앞의 손코딩 `SequenceByHand` 와 나란히 두면, 한 덩어리로 뒤섞였던 세 가지 일이 `Traverse` 에서 어디로 갔는지 보입니다.
 
 | 손코딩의 세 가지 일 | `SequenceByHand` (직접) | `Traverse` (trait) |
 |---|---|---|
@@ -399,7 +399,7 @@ public static K<F, K<T, B>> traverse<T, F, A, B>(Func<A, K<F, B>> f, K<T, A> ta)
     T.Traverse<F, A, B>(f, ta);
 ```
 
-`traverse` 는 `T` 가 무엇이든 동작합니다. `MyListF`, 그리고 미래의 어떤 Traversable 든 같은 함수가 처리합니다. 안쪽 효과 `F` 도 마찬가지로 열려 있습니다. 같은 함수에 `F = MyMaybeF` 를 넣으면 첫 실패에서 단락하고 (§9.7), `F = MyValidationF<string>` 를 넣으면 오류를 모두 누적합니다 (§9.7.1). `Traverse` 멤버 한 개를 정의하면 그 위의 일반 함수가 공짜로 따라옵니다.
+`traverse` 는 `T` 가 무엇이든 동작합니다. `MyListF`, 그리고 미래의 어떤 Traversable 든 같은 함수가 처리합니다. 안쪽 효과 `F` 도 마찬가지로 열려 있습니다. 같은 함수에 `F = MyMaybeF` 를 넣으면 첫 실패에서 단락하고, `F = MyValidationF<string>` 를 넣으면 오류를 모두 누적합니다. `Traverse` 멤버 한 개를 정의하면 그 위의 일반 함수가 공짜로 따라옵니다.
 
 > elevated-world 글 인용 — "매 Elevated World 마다 이름을 붙인 패턴은 존재하나 구현은 다릅니다. 그러나 다루는 방식의 공통성이 존재합니다." 그 공통성을 trait 시그니처 한 줄 (`Traverse`) 로 표현한 것이 `Traversable<T>` 입니다.
 
@@ -434,16 +434,16 @@ Functor 만 정의        ─►  Map, Lift1, ...                       (소수)
 
 `Traverse` 도 시그니처만으로는 강제되지 않는 약속을 가집니다. 입문 단계에서 손에 잡히는 것은 항등 (identity) 과 합성 (composition) 두 법칙입니다 (더 정밀한 자연성 법칙은 11부에서 다룹니다). 항등 법칙은 `traverse` 에 항등 효과를 걸면 원본이 그대로 나온다는 약속이고, 합성 법칙은 두 효과를 차례로 traverse 한 결과가 한 번에 합성한 효과로 traverse 한 결과와 같다는 약속입니다.
 
-항등 법칙은 §9.6.2 의 `[2, 4]` 추적을 그대로 재사용해 구체 값으로 확인할 수 있습니다. 항등 효과 `n => Pure(n)` 로 `[2, 4]` 를 traverse 한 좌변과, 목록을 통째로 한 번 끌어올린 우변이 같은 값을 냅니다.
+항등 법칙은 앞서 본 `[2, 4]` 추적을 그대로 재사용해 구체 값으로 확인할 수 있습니다. 항등 효과 `n => Pure(n)` 로 `[2, 4]` 를 traverse 한 좌변과, 목록을 통째로 한 번 끌어올린 우변이 같은 값을 냅니다.
 
 ```text
-좌변  Traverse(n => Pure(n), [2, 4])  =  Just([2, 4])    // §9.6.2 추적 결과 그대로
+좌변  Traverse(n => Pure(n), [2, 4])  =  Just([2, 4])    // 9.6.2절 추적 결과 그대로
 우변  Pure([2, 4])                    =  Just([2, 4])
                                          ─────┬─────
                                          좌변 = 우변 — 항등 법칙 성립
 ```
 
-`[2, 4]` 라는 한 값에서 성립하는 것을 확인했지만, 항등 법칙은 그 한 값이 아니라 모든 목록에 대한 약속입니다. 그래서 3장 §3.7.1 의 `ForAll` 로 임의 입력 100 건에 항등 법칙을 검증합니다. 생성기는 길이가 임의인 int 리스트를 만들고, 그 각각에서 좌변과 우변이 같은지를 검사합니다.
+`[2, 4]` 라는 한 값에서 성립하는 것을 확인했지만, 항등 법칙은 그 한 값이 아니라 모든 목록에 대한 약속입니다. 그래서 3 장에서 본 `ForAll` 로 임의 입력 100 건에 항등 법칙을 검증합니다. 생성기는 길이가 임의인 int 리스트를 만들고, 그 각각에서 좌변과 우변이 같은지를 검사합니다.
 
 ```csharp
 // 항등 법칙을 임의의 MyList 100 건으로 — 모두 통과 (항등 효과는 IdentityHolds 안에서 a => Pure(a))
@@ -452,7 +452,7 @@ Property.ForAll(
     ta => TraversableLaws.IdentityHolds<MyListF, MyMaybeF, int>(ta, TraversableLaws.ProbeList));
 ```
 
-코드로는 `Tests/TraversableLaws.cs` 의 `IdentityHolds` 헬퍼가 항등 법칙을, `SequenceEqualsTraverseId` 헬퍼가 `sequence = traverse id` 등식 (§9.8) 을 검증하고, `Program.cs` 콘솔이 `MyListF` 에 대해 두 법칙을 통과로 표시합니다. 임의 입력 검증은 위 `ForAll` 로 이 장에서 수행하고, shrinking·자연성 법칙의 정식 검증은 11부로 넘어갑니다 (§9.15 테스트 디딤돌). 지금은 `traverse` 가 층을 뒤집되 원소의 순서와 효과를 충실히 보존한다는 직감만 가져가도 충분합니다.
+코드로는 `Tests/TraversableLaws.cs` 의 `IdentityHolds` 헬퍼가 항등 법칙을, `SequenceEqualsTraverseId` 헬퍼가 `sequence = traverse id` 등식을 검증하고, `Program.cs` 콘솔이 `MyListF` 에 대해 두 법칙을 통과로 표시합니다. 임의 입력 검증은 위 `ForAll` 로 이 장에서 수행하고, shrinking·자연성 법칙의 정식 검증은 11부로 넘어갑니다 (뒤의 테스트 디딤돌 참조). 지금은 `traverse` 가 층을 뒤집되 원소의 순서와 효과를 충실히 보존한다는 직감만 가져가도 충분합니다.
 
 ### 9.10.1 가짜 Traversable — 순서를 뒤집는 반례
 
@@ -492,8 +492,8 @@ public static K<F, K<MyListF, B>> BogusTraverse<F, A, B>(Func<A, K<F, B>> f, K<M
 >
 > **본문 어느 자리의 이해도를 묻는가**
 >
-> 1. `Traverse` 의 `Pure → Apply` 조립 (§9.6) 을 단계별로 따라갈 수 있는가.
-> 2. 안쪽 효과 `MyMaybe` 의 `Apply` 가 한 `Nothing` 에 결과 전체를 `Nothing` 으로 만드는 단락 (§9.7).
+> 1. `Traverse` 의 `Pure → Apply` 조립을 단계별로 따라갈 수 있는가.
+> 2. 안쪽 효과 `MyMaybe` 의 `Apply` 가 한 `Nothing` 에 결과 전체를 `Nothing` 으로 만드는 단락.
 >
 > **해보기**
 >
@@ -516,7 +516,7 @@ public static K<F, K<MyListF, B>> BogusTraverse<F, A, B>(Func<A, K<F, B>> f, K<M
 >
 > **본문 어느 자리의 이해도를 묻는가**
 >
-> 1. 단락 vs 누적을 정하는 것이 `Traverse` 가 아니라 안쪽 `F` 의 `Apply` (§9.7) 라는 것.
+> 1. 단락 vs 누적을 정하는 것이 `Traverse` 가 아니라 안쪽 `F` 의 `Apply` 라는 것.
 > 2. 같은 `Traverse` 코드가 `F` 만 바꾸면 다르게 동작한다는 것.
 >
 > **해보기**
@@ -540,7 +540,7 @@ public static K<F, K<MyListF, B>> BogusTraverse<F, A, B>(Func<A, K<F, B>> f, K<M
 >
 > **본문 어느 자리의 이해도를 묻는가**
 >
-> 1. `sequence` 가 변환 함수에 항등을 넣은 `traverse` (§9.8) 임을 코드로 보일 수 있는가.
+> 1. `sequence` 가 변환 함수에 항등을 넣은 `traverse` 임을 코드로 보일 수 있는가.
 >
 > **해보기**
 >
@@ -570,37 +570,37 @@ public static K<F, K<MyListF, B>> BogusTraverse<F, A, B>(Func<A, K<F, B>> f, K<M
 | 바깥 `T` / 안쪽 `F` | 순회 가능한 구조와 조립 가능한 효과 |
 | 단락 vs 누적 | 안쪽 효과 `F` 의 `Apply` 가 정함 |
 
-`map` (4장) 이 끌어올림, `fold` (6장) 가 끌어내림, `bind` (7장) 가 합성이었다면, `traverse` 는 두 Elevated 세계가 동시에 있을 때 그 층 순서를 바꾸는 도구입니다. 기초에서 모은 모든 어휘가 이 한 도구에 동원됩니다. 비유는 여기까지가 역할입니다. 정확한 보존 규칙은 세 법칙 (§9.10) 이 정합니다.
+`map` (4장) 이 끌어올림, `fold` (6장) 가 끌어내림, `bind` (7장) 가 합성이었다면, `traverse` 는 두 Elevated 세계가 동시에 있을 때 그 층 순서를 바꾸는 도구입니다. 기초에서 모은 모든 어휘가 이 한 도구에 동원됩니다. 비유는 여기까지가 역할입니다. 정확한 보존 규칙은 세 법칙이 정합니다.
 
 ---
 
 ## 9.13 Q&A — 자기 점검
 
-> **Q1. `traverse` 의 시그니처는?** (§9.3)
+> **Q1. `traverse` 의 시그니처는?** (9.3절)
 
 `(a → E<b>) → List<a> → E<List<b>>` 입니다. 변환 함수 (`a → E<b>`, World-crossing) 와 입력 목록 (`List<a>`) 을 받아, 원소를 변환하면서 `List<E<b>>` 의 층을 `E<List<b>>` 로 뒤집습니다. 예를 들어 `traverse(parseInt, ["2", "4"])` 는 `Just([2, 4])` 를, 하나라도 파싱이 실패하면 `Nothing` 을 냅니다.
 
-> **Q2. `Map` 만으로는 왜 층이 안 뒤집힙니까?** (§9.2)
+> **Q2. `Map` 만으로는 왜 층이 안 뒤집힙니까?** (9.2절)
 
 `Map` 의 약속이 모양 보존이기 때문입니다. 바깥 `List` 의 모양을 그대로 두므로, `List<E<a>>` 에 `Map` 을 걸어도 결과는 `List<무엇인가>` 로 바깥이 여전히 `List` 입니다. 4장에서 강점이던 모양 보존이, 층을 뒤집어야 하는 이 자리에서는 오히려 걸림돌이 됩니다. 층 순서를 바꾸는 능력은 `Map` 에 없습니다.
 
-> **Q3. Traversable 은 어떤 trait 들의 합성입니까?** (§9.5)
+> **Q3. Traversable 은 어떤 trait 들의 합성입니까?** (9.5절)
 
 Functor (원소 변환) + Foldable (순회 골격) + Applicative (시작점과 결합) 입니다. trait 선언 `Traversable<T> : Functor<T>, Foldable<T>` 가 두 능력을 상속으로 요구하고, `Traverse` 의 매개변수 `F` 가 세 번째 `Applicative` 를 요구합니다. 새 메커니즘을 발명하는 게 아니라 4장 ~ 6장의 세 도구를 합성합니다.
 
-> **Q4. `Traverse` 의 `F` 는 왜 Applicative 여야 합니까?** (§9.4)
+> **Q4. `Traverse` 의 `F` 는 왜 Applicative 여야 합니까?** (9.4절)
 
 층을 뒤집은 결과를 조립하려면 빈 결과에서 시작할 `Pure` 와 원소를 하나씩 결합할 `Apply` 가 필요하기 때문입니다. 원소들이 서로 독립이라 `Apply` 면 충분하고 `Bind` (의존 결합) 까지는 필요 없습니다. 그래서 제약이 `where F : Applicative<F>` 까지만이고, 이는 원소를 순서에 매이지 않고 다룰 수 있다는 약속이기도 합니다.
 
-> **Q5. `sequence` 와 `traverse` 의 관계는?** (§9.8)
+> **Q5. `sequence` 와 `traverse` 의 관계는?** (9.8절)
 
 `sequence = traverse id` 입니다. `traverse` 의 변환 함수 자리에 항등 함수를 넣으면 변환이 사라지고 층 swap 만 남아 `sequence` 가 됩니다. 거꾸로 `traverse f = sequence ∘ map f` 라, 두 표기가 한 쌍으로 맞물립니다. 별도 함수가 아닙니다.
 
-> **Q6. 단락과 누적은 무엇이 정합니까?** (§9.7)
+> **Q6. 단락과 누적은 무엇이 정합니까?** (9.7절)
 
 안쪽 효과 `F` 의 `Apply` 가 정합니다. `F` 가 `MyMaybe` 면 한 원소 실패에 전체가 `Nothing` (단락) 이고, 8장의 `MyValidation` 이면 실패한 원소의 오류가 모두 모입니다 (누적). `Traverse` 본문에는 둘을 구분하는 코드가 한 줄도 없고, 분기는 `F.Apply` 가 담당합니다. 그래서 같은 `Traverse` 가 `F` 만 바꾸면 다르게 동작합니다.
 
-> **Q7. Traversable 이 기초 마지막 핵심 trait 인 이유는?** (§9.5)
+> **Q7. Traversable 이 기초 마지막 핵심 trait 인 이유는?** (9.5절)
 
 Functor · Foldable · Applicative 세 도구의 합성이라, 그 셋이 모두 손에 잡힌 뒤에야 만들 수 있기 때문입니다. 앞선 trait 이 모두 갖춰져야 하므로 기초의 마지막에 옵니다. 새 메커니즘이 아니라 앞선 도구의 결합이라는 점이 핵심입니다.
 
@@ -608,13 +608,13 @@ Functor · Foldable · Applicative 세 도구의 합성이라, 그 셋이 모두
 
 ## 9.14 요약
 
-- **불편에서 출발했습니다.** `List<E<a>>` 처럼 효과가 원소마다 흩어진 자리에서, 효과를 바깥으로 한 번에 모으고 싶었습니다 (§9.1).
-- **`Map` 은 층을 뒤집지 못합니다.** 모양 보존이 오히려 걸림돌이 됩니다 (§9.2).
-- **`traverse` 가 층을 뒤집습니다.** `(a → E<b>) → List<a> → E<List<b>>` 가 변환과 층 swap 을 한 번에 합니다 (§9.3).
-- **Traversable 은 세 trait 의 합성입니다.** Functor + Foldable + Applicative 를 한자리에 동원하는 기초 최정상 추상입니다 (§9.5).
-- **`sequence = traverse id` 입니다.** 변환 함수에 항등 함수를 넣은 특수한 경우입니다 (§9.8).
-- **항등 법칙이 순서·효과 보존을 약속합니다.** `Traverse(Pure, t) ≡ Pure(t)`, 곧 항등 효과를 걸면 원본이 그대로 나와야 한다는 약속이 `traverse` 가 층을 뒤집되 원소 순서와 효과를 충실히 보존함을 보장합니다 (§9.10).
-- **단락과 누적은 안쪽 효과 `F` 가 정합니다.** `MyMaybe` 면 단락, `MyValidation` 이면 누적 (§9.7).
+- **불편에서 출발했습니다.** `List<E<a>>` 처럼 효과가 원소마다 흩어진 자리에서, 효과를 바깥으로 한 번에 모으고 싶었습니다 (9.1절).
+- **`Map` 은 층을 뒤집지 못합니다.** 모양 보존이 오히려 걸림돌이 됩니다 (9.2절).
+- **`traverse` 가 층을 뒤집습니다.** `(a → E<b>) → List<a> → E<List<b>>` 가 변환과 층 swap 을 한 번에 합니다 (9.3절).
+- **Traversable 은 세 trait 의 합성입니다.** Functor + Foldable + Applicative 를 한자리에 동원하는 기초 최정상 추상입니다 (9.5절).
+- **`sequence = traverse id` 입니다.** 변환 함수에 항등 함수를 넣은 특수한 경우입니다 (9.8절).
+- **항등 법칙이 순서·효과 보존을 약속합니다.** `Traverse(Pure, t) ≡ Pure(t)`, 곧 항등 효과를 걸면 원본이 그대로 나와야 한다는 약속이 `traverse` 가 층을 뒤집되 원소 순서와 효과를 충실히 보존함을 보장합니다 (9.10절).
+- **단락과 누적은 안쪽 효과 `F` 가 정합니다.** `MyMaybe` 면 단락, `MyValidation` 이면 누적 (9.7절).
 
 ---
 
@@ -634,4 +634,4 @@ Functor · Foldable · Applicative 세 도구의 합성이라, 그 셋이 모두
 
 > **실무 디딤돌** — `traverse` 는 `Eff` / `IO` 두 Elevated 세계를 동시에 이동하는 실무의 핵심 도구입니다. 목록의 각 항목을 비동기로 조회해 결과를 한 번에 모으거나, 여러 검증을 거쳐 전체 성공 여부를 판단하는 자리에 그대로 쓰입니다.
 >
-> **테스트 디딤돌** — traverse / sequence 의 항등·합성 법칙은 이 장에서 3장 §3.7.1 의 `ForAll` 로 임의 입력에 검증했습니다. 무작위 생성기를 Functor·Monad 로 키우고 실패를 최소 반례로 줄이는 (shrinking) 본격 도구, 그리고 더 정밀한 자연성 법칙·실무 도구 (CsCheck / FsCheck) 로의 이행은 11부입니다.
+> **테스트 디딤돌** — traverse / sequence 의 항등·합성 법칙은 이 장에서 3장 3.7.1절의 `ForAll` 로 임의 입력에 검증했습니다. 무작위 생성기를 Functor·Monad 로 키우고 실패를 최소 반례로 줄이는 (shrinking) 본격 도구, 그리고 더 정밀한 자연성 법칙·실무 도구 (CsCheck / FsCheck) 로의 이행은 11부입니다.

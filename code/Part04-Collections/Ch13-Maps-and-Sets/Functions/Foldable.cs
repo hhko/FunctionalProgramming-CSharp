@@ -2,7 +2,7 @@ using Ch13.Traits;
 
 namespace Ch13.Functions;
 
-// Foldable 모듈 + 확장 (5장과 동일). Map 의 값들, Set 의 원소들을 한 값으로.
+// Foldable 모듈 + 확장 (6장과 동일). Map 의 값들, Set 의 원소들을 한 값으로.
 public static class Foldable
 {
     public static B foldLeft<F, A, B>(Func<B, A, B> f, B seed, K<F, A> fa)

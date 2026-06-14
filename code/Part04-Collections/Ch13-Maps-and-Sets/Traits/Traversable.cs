@@ -1,11 +1,9 @@
-namespace Ch12.Traits;
+namespace Ch13.Traits;
 
 // Traversable — 9장 정의 그대로 (Functor + Foldable 상속 + Traverse / Sequence).
 //
-//   Traverse : (A → K<F, B>) → K<T, A> → K<F, K<T, B>>
-//
-// 시퀀스에서 가장 쓸모 있는 자리 — List<Maybe<A>> → Maybe<List<A>> 같은 층 뒤집기.
-// 예: 입력 문자열 시퀀스를 모두 파싱했을 때만 성공 시퀀스를 돌려준다.
+// Map 에서는 값들을 한꺼번에 effect 로 변환한다: Map<K, F<V>> → F<Map<K, V>>.
+// 키는 보존되고, 안쪽 effect (Maybe / Validation) 만 바깥으로 모인다.
 public interface Traversable<T> : Functor<T>, Foldable<T> where T : Traversable<T>
 {
     static abstract K<F, K<T, B>> Traverse<F, A, B>(Func<A, K<F, B>> f, K<T, A> ta)

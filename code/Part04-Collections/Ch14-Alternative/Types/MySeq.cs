@@ -2,7 +2,7 @@ using Ch14.Traits;
 
 namespace Ch14.Types;
 
-// MySeq — 9장의 시퀀스에 *선택·결합* 추상을 부착.
+// MySeq — 12장의 시퀀스에 *선택·결합* 추상을 부착.
 //
 // 결정적 대비 — 시퀀스에서 Combine 과 Choose 가 *다르다*:
 //   Combine (MonoidK) = 두 시퀀스 concat (모두 모음).

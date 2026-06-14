@@ -38,5 +38,5 @@
   <text x="478" y="305" font-size="22" fill="#1f77b4" font-weight="bold" font-family="'Consolas', monospace">fold</text>
   <text x="478" y="328" font-size="12" fill="#1f77b4" font-style="italic">끌어내림</text>
 
-  <text x="450" y="500" font-size="13" fill="#1f1f1f" text-anchor="middle" font-style="italic">fold 는 컨테이너의 원소들을 단계별로 접어 normal 한 값으로 압축합니다</text>
+  <text x="450" y="500" font-size="13" fill="#1f1f1f" text-anchor="middle" font-style="italic">fold 는 컨테이너의 원소들을 단계별로 접어 Normal World 의 한 값으로 압축합니다</text>
 </svg>

@@ -20,8 +20,8 @@ public sealed class MyMap<Key, V>(IEnumerable<KeyValuePair<Key, V>> pairs) : K<M
         $"{{{string.Join(", ", Pairs.Select(p => $"{p.Key}: {p.Value}"))}}}";
 }
 
-// 태그 타입 — 키 Key 를 고정한 채 값에 대한 Functor / Foldable 을 호스트.
-public sealed class MapF<Key> : Functor<MapF<Key>>, Foldable<MapF<Key>>
+// 태그 타입 — 키 Key 를 고정한 채 값에 대한 Functor / Foldable / Traversable 을 호스트.
+public sealed class MapF<Key> : Functor<MapF<Key>>, Foldable<MapF<Key>>, Traversable<MapF<Key>>
     where Key : notnull
 {
     // Functor — 값에만 f 적용, 키는 보존.
@@ -43,6 +43,32 @@ public sealed class MapF<Key> : Functor<MapF<Key>>, Foldable<MapF<Key>>
         var acc = seed;
         for (var i = pairs.Count - 1; i >= 0; i--)
             acc = f(pairs[i].Value, acc);
+        return acc;
+    }
+
+    // Traversable.Traverse — 값들을 한꺼번에 effect 로 변환. Map<K, F<V>> → F<Map<K, V>>.
+    // 키는 보존하고 안쪽 effect (Maybe / Validation) 만 바깥으로 모은다.
+    // 12장 MySeq.Traverse 와 골격이 같되, 값 자리에 (key, b) 쌍을 다시 끼워 넣는 부분만 다르다.
+    public static K<F, K<MapF<Key>, B>> Traverse<F, A, B>(Func<A, K<F, B>> f, K<MapF<Key>, A> ta)
+        where F : Applicative<F>
+    {
+        var pairs = ta.As().Pairs;
+        K<F, K<MapF<Key>, B>> acc = F.Pure<K<MapF<Key>, B>>(new MyMap<Key, B>([]));
+
+        for (var i = pairs.Count - 1; i >= 0; i--)
+        {
+            var key = pairs[i].Key;
+            var fb  = f(pairs[i].Value);
+
+            // (key, b) 를 누적 Map 앞에 끼워 넣는 함수 — Apply 두 번으로 effect 안에서 수행.
+            Func<B, Func<K<MapF<Key>, B>, K<MapF<Key>, B>>> insert =
+                b => rest => new MyMap<Key, B>(
+                    rest.As().Pairs.Prepend(new KeyValuePair<Key, B>(key, b)));
+
+            var lifted = F.Pure(insert);
+            var step1  = F.Apply<B, Func<K<MapF<Key>, B>, K<MapF<Key>, B>>>(lifted, fb);
+            acc        = F.Apply<K<MapF<Key>, B>, K<MapF<Key>, B>>(step1, acc);
+        }
         return acc;
     }
 }

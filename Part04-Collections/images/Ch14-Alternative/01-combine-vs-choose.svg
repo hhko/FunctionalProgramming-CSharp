@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 380" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+  </defs>
+
+  <rect width="920" height="380" fill="#ffffff"/>
+
+  <text x="460" y="26" font-size="15" fill="#1f1f1f" text-anchor="middle" font-weight="bold">같은 시그니처, 다른 의미 — Combine vs Choose</text>
+
+  <!-- ═══════ 왼쪽: Combine ═══════ -->
+  <rect x="30" y="48" width="410" height="312" fill="#f4f9ff" stroke="none" rx="12"/>
+  <text x="46" y="68" font-size="11" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.4">Elevated World</text>
+  <text x="235" y="92" font-size="13" fill="#0c3a5e" text-anchor="middle" font-weight="bold">Combine — 둘을 모두 모음 (concat)</text>
+
+  <rect x="70" y="116" width="120" height="48" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="130" y="146" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">[1, 2]</text>
+
+  <rect x="280" y="116" width="120" height="48" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="340" y="146" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">[3, 4]</text>
+
+  <line x1="130" y1="166" x2="200" y2="284" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <line x1="340" y1="166" x2="270" y2="284" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+
+  <rect x="120" y="286" width="230" height="50" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="235" y="318" font-size="17" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">[1, 2, 3, 4]</text>
+
+  <!-- ═══════ 오른쪽: Choose ═══════ -->
+  <rect x="480" y="48" width="410" height="312" fill="#f4f9ff" stroke="none" rx="12"/>
+  <text x="496" y="68" font-size="11" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.4">Elevated World</text>
+  <text x="685" y="92" font-size="13" fill="#0c3a5e" text-anchor="middle" font-weight="bold">Choose — 첫 비어있지 않은 쪽 하나</text>
+
+  <rect x="520" y="116" width="120" height="48" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.6" rx="6"/>
+  <text x="580" y="146" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">[1, 2]</text>
+
+  <rect x="730" y="116" width="120" height="48" fill="#eef2f5" stroke="#9fb3c0" stroke-width="2.2" rx="6"/>
+  <text x="790" y="146" font-size="16" fill="#9fb3c0" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">[3, 4]</text>
+
+  <line x1="580" y1="166" x2="640" y2="284" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="700" y="210" font-size="12" fill="#9fb3c0">버려짐</text>
+
+  <rect x="585" y="286" width="120" height="50" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.6" rx="6"/>
+  <text x="645" y="318" font-size="17" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">[1, 2]</text>
+</svg>

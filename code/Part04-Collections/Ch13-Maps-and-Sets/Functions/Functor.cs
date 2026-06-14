@@ -2,7 +2,7 @@ using Ch13.Traits;
 
 namespace Ch13.Functions;
 
-// Functor 모듈 + 확장 (3장과 동일). 어떤 Functor F 든 받는다.
+// Functor 모듈 + 확장 (4장과 동일). 어떤 Functor F 든 받는다.
 public static class Functor
 {
     public static K<F, B> map<F, A, B>(Func<A, B> f, K<F, A> fa)

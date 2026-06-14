@@ -17,10 +17,10 @@
   <text x="240" y="138" font-size="17" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">F&lt;a&gt;</text>
   <rect x="570" y="100" width="180" height="64" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
   <text x="660" y="138" font-size="17" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">F&lt;b&gt;</text>
-  <rect x="150" y="360" width="180" height="64" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
-  <text x="240" y="398" font-size="17" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace">G&lt;a&gt;</text>
-  <rect x="570" y="360" width="180" height="64" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
-  <text x="660" y="398" font-size="17" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace">G&lt;b&gt;</text>
+  <rect x="150" y="360" width="180" height="64" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="240" y="398" font-size="17" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">G&lt;a&gt;</text>
+  <rect x="570" y="360" width="180" height="64" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="660" y="398" font-size="17" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">G&lt;b&gt;</text>
 
   <!-- 가로 map -->
   <line x1="332" y1="132" x2="568" y2="132" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>

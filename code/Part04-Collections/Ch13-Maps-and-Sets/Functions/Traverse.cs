@@ -1,8 +1,8 @@
-using Ch12.Traits;
+using Ch13.Traits;
 
-namespace Ch12.Functions;
+namespace Ch13.Functions;
 
-// Traversable 모듈 (9장과 동일). 시퀀스의 traverse / sequence.
+// Traversable 모듈 (9장과 동일). Map 의 traverse / sequence.
 public static class Traverse
 {
     public static K<F, K<T, B>> traverse<T, F, A, B>(Func<A, K<F, B>> f, K<T, A> ta)

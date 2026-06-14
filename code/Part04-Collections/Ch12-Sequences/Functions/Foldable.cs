@@ -2,7 +2,7 @@ using Ch12.Traits;
 
 namespace Ch12.Functions;
 
-// Foldable 모듈 + 확장 (5장과 동일). 실무 시퀀스의 Sum / Count / Any 등이 여기서 자란다.
+// Foldable 모듈 + 확장 (6장과 동일). 실무 시퀀스의 Sum / Count / Any 등이 여기서 자란다.
 public static class Foldable
 {
     public static B foldLeft<F, A, B>(Func<B, A, B> f, B seed, K<F, A> fa)

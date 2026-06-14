@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 430" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+  </defs>
+
+  <rect width="1000" height="430" fill="#ffffff"/>
+
+  <text x="500" y="26" font-size="15" fill="#1f1f1f" text-anchor="middle" font-weight="bold">한 시퀀스에 두 Applicative — 같은 입력, 다른 의미</text>
+
+  <!-- ═══════ 왼쪽: 데카르트 곱 ═══════ -->
+  <rect x="30" y="48" width="450" height="362" fill="#f4f9ff" stroke="none" rx="12"/>
+  <text x="46" y="68" font-size="11" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.4">Elevated World</text>
+  <text x="255" y="92" font-size="13" fill="#0c3a5e" text-anchor="middle" font-weight="bold">데카르트 곱 — MySeq.Apply</text>
+
+  <rect x="60" y="120" width="160" height="50" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="140" y="151" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">[+1, ×10]</text>
+
+  <text x="247" y="151" font-size="20" fill="#1f77b4" text-anchor="middle" font-weight="bold">⊛</text>
+
+  <rect x="275" y="120" width="160" height="50" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="355" y="151" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">[1, 2]</text>
+
+  <line x1="140" y1="172" x2="220" y2="298" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <line x1="355" y1="172" x2="270" y2="298" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+
+  <rect x="90" y="300" width="300" height="52" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="240" y="333" font-size="17" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">[2, 3, 10, 20]</text>
+
+  <text x="240" y="384" font-size="12" fill="#5a6b7a" text-anchor="middle">모든 조합 (2 × 2 = 4)</text>
+
+  <!-- ═══════ 오른쪽: zip ═══════ -->
+  <rect x="520" y="48" width="450" height="362" fill="#f4f9ff" stroke="none" rx="12"/>
+  <text x="536" y="68" font-size="11" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.4">Elevated World</text>
+  <text x="745" y="92" font-size="13" fill="#0c3a5e" text-anchor="middle" font-weight="bold">zip — ZipSeq.Apply</text>
+
+  <rect x="550" y="120" width="160" height="50" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="630" y="151" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">[+1, ×10]</text>
+
+  <text x="737" y="151" font-size="20" fill="#1f77b4" text-anchor="middle" font-weight="bold">⊛</text>
+
+  <rect x="765" y="120" width="160" height="50" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="845" y="151" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">[1, 2]</text>
+
+  <line x1="600" y1="172" x2="690" y2="298" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <line x1="845" y1="172" x2="800" y2="298" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+
+  <rect x="645" y="300" width="200" height="52" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="745" y="333" font-size="17" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">[2, 20]</text>
+
+  <text x="745" y="384" font-size="12" fill="#5a6b7a" text-anchor="middle">같은 자리끼리 (i 번째 → i 번째)</text>
+</svg>

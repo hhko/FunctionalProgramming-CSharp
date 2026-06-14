@@ -103,7 +103,7 @@ Ch10-Bifunctor/
 ├── Types/Either.cs · Pair.cs    ← 자료: 인자 둘인 두 컨테이너
 ├── Functions/BifunctorExtensions.cs   ← BiMap 점 호출
 ├── Tests/BifunctorLaws.cs · BifunctorCounterexample.cs · LayerMapping.cs   ← 법칙 + 가짜 반례 + 계층 매핑
-└── Challenges/BifunctorChallenges.cs  ← §10.8 정답
+└── Challenges/BifunctorChallenges.cs  ← 10.8절 정답
 ```
 
 2장의 `K<in F, A>` 는 인자가 하나인 컨테이너의 마커였습니다. 인자가 둘이면 마커도 인자가 둘인 `K<in F, L, A>` 로 늘어납니다. `F` 앞의 `in` 은 2장의 그 마커에 이미 있던 변성 (variance) 표시 그대로이고, 학습용 코드를 읽고 쓰는 데에는 영향을 주지 않습니다. 지금은 학습 코드를 그대로 따라가면 된다는 직감만 가져가도 충분합니다. 나머지 패턴 (self-bound + `static abstract`) 은 4장과 그대로입니다.
@@ -207,7 +207,7 @@ public sealed class EitherF : Bifunctor<EitherF>
 
 ### 10.4.1 실전 — 계층 사이 오류 매핑
 
-앞 절 (§10.1.1) 의 손분해를 `BiMap` 한 줄로 닫습니다. 인프라 계층이 `Either<DbError, Row>` 를 돌려주고, 응용 계층은 `Either<DomainError, Dto>` 를 원한다고 합니다. 오류는 `DbError → DomainError` 로, 성공값은 `Row → Dto` 로 바꿔야 합니다. 두 변환이 한 번에 필요한 자리입니다.
+앞 절의 손분해를 `BiMap` 한 줄로 닫습니다. 인프라 계층이 `Either<DbError, Row>` 를 돌려주고, 응용 계층은 `Either<DomainError, Dto>` 를 원한다고 합니다. 오류는 `DbError → DomainError` 로, 성공값은 `Row → Dto` 로 바꿔야 합니다. 두 변환이 한 번에 필요한 자리입니다.
 
 ```csharp
 // 인프라 오류는 도메인 오류로, 성공 행은 Dto 로 — 한 줄에 양쪽 변환
@@ -312,7 +312,7 @@ public static bool CompositionHolds<F, L1, A1, L2, A2, L3, A3>(
 
 데모는 `Pair` 와 `Either` 의 두 갈래 (`Left` / `Right`) 모두에서 두 법칙이 `true` 임을 출력합니다.
 
-특정 값 몇 개로는 우연히 통과하는 가짜를 놓칠 수 있습니다. 그래서 3장 §3.7.1 의 `ForAll` 로 임의 입력 100 건을 검사합니다. 양쪽 인자 표본 함수는 고정하고 컨테이너 입력만 변주해, 항등·합성이 양쪽 인자 각각에서 성립하는지 확인합니다.
+특정 값 몇 개로는 우연히 통과하는 가짜를 놓칠 수 있습니다. 그래서 3 장에서 본 `ForAll` 로 임의 입력 100 건을 검사합니다. 양쪽 인자 표본 함수는 고정하고 컨테이너 입력만 변주해, 항등·합성이 양쪽 인자 각각에서 성립하는지 확인합니다.
 
 ```csharp
 // 컨테이너만 무작위로. 양쪽 자리 표본 함수는 고정 (n => n + 1, n => n * 2).
@@ -358,7 +358,7 @@ static Pair<int, int> BogusBiMapTwice(Func<int, int> first, Func<int, int> secon
 
 | 가짜 | 항등 법칙 | 합성 법칙 | 무너지는 약속 |
 |---|---|---|---|
-| swap (§10.7.1) | ✗ | ✗ | 자리 보존 |
+| swap (앞 절) | ✗ | ✗ | 자리 보존 |
 | first 두 번 (위) | ✓ | ✗ | 함수 적용 횟수·순서 보존 |
 | 진짜 `BiMap` | ✓ | ✓ | 없음 (둘 다 지킴) |
 
@@ -378,8 +378,8 @@ static Pair<int, int> BogusBiMapTwice(Func<int, int> first, Func<int, int> secon
 >
 > **본문 어느 자리의 이해도를 묻는가**
 >
-> 1. `MapFirst` 가 `BiMap` 의 둘째 자리에 항등을 넣은 특수 경우 (§10.2) 라는 것.
-> 2. `Either` 는 담긴 갈래의 함수만 호출 (§10.4) 한다는 것.
+> 1. `MapFirst` 가 `BiMap` 의 둘째 자리에 항등을 넣은 특수 경우라는 것.
+> 2. `Either` 는 담긴 갈래의 함수만 호출한다는 것.
 >
 > **해보기**
 >
@@ -400,7 +400,7 @@ static Pair<int, int> BogusBiMapTwice(Func<int, int> first, Func<int, int> secon
 >
 > **본문 어느 자리의 이해도를 묻는가**
 >
-> 1. `BiMap` 이 두 함수로 두 인자를 동시에 변환 (§10.2) 한다는 것.
+> 1. `BiMap` 이 두 함수로 두 인자를 동시에 변환한다는 것.
 > 2. `MapSecond` 가 둘째 인자만 변환해 Functor 의 `map` 과 같다는 것 (Bifunctor ⊃ Functor).
 >
 > **해보기**
@@ -418,11 +418,11 @@ static Pair<int, int> BogusBiMapTwice(Func<int, int> first, Func<int, int> secon
 
 > 챌린지: 두 자리를 뒤바꾸는 가짜를 돌려 항등 위반 확인하기
 >
-> §10.7.1 의 가짜 `BogusBiMap` 을 직접 돌려 `Pair(3, 5)` 가 `Pair(5, 3)` 으로 바뀌는 것을 확인하고, 진짜 `PairF.BiMap` 과 달리 왜 항등 법칙을 깨는지 한 줄로 적습니다.
+> 앞서 본 가짜 `BogusBiMap` 을 직접 돌려 `Pair(3, 5)` 가 `Pair(5, 3)` 으로 바뀌는 것을 확인하고, 진짜 `PairF.BiMap` 과 달리 왜 항등 법칙을 깨는지 한 줄로 적습니다.
 >
 > **본문 어느 자리의 이해도를 묻는가**
 >
-> 1. 항등 법칙 (`BiMap(id, id) == 그대로`, §10.7) 이 시그니처로 강제되지 않는다는 것.
+> 1. 항등 법칙 (`BiMap(id, id) == 그대로`) 이 시그니처로 강제되지 않는다는 것.
 >
 > **해보기**
 >
@@ -439,11 +439,11 @@ static Pair<int, int> BogusBiMapTwice(Func<int, int> first, Func<int, int> secon
 
 > 챌린지: 항등은 지키고 합성만 깨는 가짜를 손계산으로 짚기
 >
-> §10.7.2 의 `BogusBiMapTwice` 가 왜 항등은 통과하고 합성은 깨는지 `first = n => n + 1`, `g = n => n * 2` 로 직접 계산합니다. 한 번에 합성한 첫 자리 (`18`) 와 나눠 적용한 첫 자리 (`20`) 가 갈리는 자리를 짚고, 두 법칙을 따로 확인해야 하는 이유를 설명합니다.
+> 앞서 본 `BogusBiMapTwice` 가 왜 항등은 통과하고 합성은 깨는지 `first = n => n + 1`, `g = n => n * 2` 로 직접 계산합니다. 한 번에 합성한 첫 자리 (`18`) 와 나눠 적용한 첫 자리 (`20`) 가 갈리는 자리를 짚고, 두 법칙을 따로 확인해야 하는 이유를 설명합니다.
 >
 > **본문 어느 자리의 이해도를 묻는가**
 >
-> 1. 항등을 통과해도 합성을 깰 수 있어, 두 법칙을 각각 검증해야 한다는 것 (§10.7).
+> 1. 항등을 통과해도 합성을 깰 수 있어, 두 법칙을 각각 검증해야 한다는 것.
 >
 > **해보기**
 >
@@ -464,35 +464,35 @@ static Pair<int, int> BogusBiMapTwice(Func<int, int> first, Func<int, int> secon
 
 ## 10.9 Q&A — 자기 점검
 
-> **Q1. Bifunctor 와 Functor 의 관계는 무엇입니까?** (§10.2)
+> **Q1. Bifunctor 와 Functor 의 관계는 무엇입니까?** (10.2절)
 
 Bifunctor 는 Functor 를 포함합니다. `Either<L, R>` 의 둘째 인자 `R` 만 보면 `MapSecond` 가 평범한 Functor 의 `map` 입니다. 한 인자만 변환하면 Functor, 두 인자를 함께 변환하면 Bifunctor 입니다. 마커도 `K<F, A>` 에서 인자가 하나 더 붙은 `K<F, L, A>` 로 늘어납니다.
 
-> **Q2. 왜 `BiMap` 하나만 `static abstract` 입니까?** (§10.3)
+> **Q2. 왜 `BiMap` 하나만 `static abstract` 입니까?** (10.3절)
 
 `MapFirst` 와 `MapSecond` 는 `BiMap` 의 한 자리에 항등 함수를 넣은 특수한 경우라, `BiMap` 위에서 기본 구현으로 자동으로 따라오기 때문입니다. 자료 타입은 `BiMap` 한 개만 정의하면 한쪽 변환 둘이 공짜로 생깁니다. 4장 Functor 가 `Map` 하나로 충분했던 것과 같은 구조입니다.
 
-> **Q3. `Either<L, R>` 에서 두 함수가 모두 호출됩니까?** (§10.4)
+> **Q3. `Either<L, R>` 에서 두 함수가 모두 호출됩니까?** (10.4절)
 
 아닙니다. `Either` 는 두 갈래 중 하나만 담으므로, `BiMap` 은 담긴 쪽의 함수만 실제로 호출합니다. `Left` 면 첫 함수만, `Right` 면 둘째 함수만 적용됩니다. `Pair` 처럼 두 값을 모두 담는 컨테이너에서는 두 함수가 모두 호출됩니다.
 
-> **Q4. Bifoldable 은 왜 별도 장이 없습니까?** (§10.6)
+> **Q4. Bifoldable 은 왜 별도 장이 없습니까?** (10.6절)
 
 LanguageExt v5 의 trait 으로 제공되지 않기 때문입니다. 이 책의 학습용 trait 은 v5 의 공식 trait 와 시그니처를 맞추는 것을 원칙으로 하므로, v5 에 없는 Bifoldable 은 정식 챕터로 두지 않고 Bifunctor 의 대칭 자리로만 짚습니다. 반면 Bifunctor / Biapplicative / Bimonad 는 v5 에 정식으로 있어 이 장에서 다룹니다.
 
-> **Q5. Bifunctor 가 기초 흐름에서 어디에 놓입니까?** (§10.1)
+> **Q5. Bifunctor 가 기초 흐름에서 어디에 놓입니까?** (10.1절)
 
 핵심 5 trait (4 ~ 9장) 을 모두 익힌 뒤, 그 일반화를 보는 자리입니다. Functor (4장) 의 2-인자 확장이라 핵심 trait 흐름이 끝난 10장에 놓입니다. 마지막 11장 NaturalTransformation 과 함께 기초의 확장 추상을 이룹니다.
 
-> **Q6. Bifunctor 가 없으면 무엇이 번거롭습니까?** (§10.1.1)
+> **Q6. Bifunctor 가 없으면 무엇이 번거롭습니까?** (10.1.1절)
 
-`Either<L, R>` 의 오류 타입을 바꾸려면 `Left` / `Right` 를 손으로 분해해 다시 조립해야 하고, 그 코드가 도메인마다 복제됩니다 (§10.1.1). `BiMap` 한 멤버가 두 함수를 받아 양쪽을 변환하므로 그 보일러플레이트가 사라집니다.
+`Either<L, R>` 의 오류 타입을 바꾸려면 `Left` / `Right` 를 손으로 분해해 다시 조립해야 하고, 그 코드가 도메인마다 복제됩니다 (10.1.1절). `BiMap` 한 멤버가 두 함수를 받아 양쪽을 변환하므로 그 보일러플레이트가 사라집니다.
 
-> **Q7. 두 법칙은 어떻게 검증합니까?** (§10.7)
+> **Q7. 두 법칙은 어떻게 검증합니까?** (10.7절)
 
-`where F : Bifunctor<F>` 제약의 일반 함수 (`IdentityHolds` / `CompositionHolds`) 로 검증합니다 (§10.7). `Pair` 와 `Either` 의 두 갈래 모두에서 확인하며, 시그니처만 맞으면 안 되고 두 법칙이 양쪽 인자 각각에서 성립해야 합니다.
+`where F : Bifunctor<F>` 제약의 일반 함수 (`IdentityHolds` / `CompositionHolds`) 로 검증합니다 (10.7절). `Pair` 와 `Either` 의 두 갈래 모두에서 확인하며, 시그니처만 맞으면 안 되고 두 법칙이 양쪽 인자 각각에서 성립해야 합니다.
 
-> **Q8. 실무에서 Bifunctor 는 어디에 쓰입니까?** (§10.4.1)
+> **Q8. 실무에서 Bifunctor 는 어디에 쓰입니까?** (10.4.1절)
 
 `Either<L, R>` 의 오류 타입과 성공값을 한 번에 변환하는 자리입니다. 계층 사이에서 인프라 오류를 도메인 오류로 매핑하면서 성공값도 함께 변환할 때 `BiMap` 한 줄이면 됩니다.
 
@@ -500,13 +500,13 @@ LanguageExt v5 의 trait 으로 제공되지 않기 때문입니다. 이 책의 
 
 ## 10.10 요약
 
-- **Bifunctor 는 타입 인자가 둘인 컨테이너의 양쪽을 변환합니다.** `Either<L, R>`, `Pair<A, B>` 처럼 인자가 둘인 컨테이너를 다루며, 마커는 `K<in F, L, A>` 입니다 (§10.2, §10.3).
-- **핵심 멤버는 `BiMap` 하나입니다.** `(L → M) → (A → B) → F<L, A> → F<M, B>` 가 두 인자를 동시에 변환하고, `MapFirst` / `MapSecond` 는 한 자리에 항등 함수를 넣은 기본 구현으로 따라옵니다 (§10.2).
-- **`MapSecond` 가 곧 4장 Functor 의 `map` 입니다.** 둘째 인자만 변환하고 첫 인자는 그대로 두므로, Bifunctor 는 Functor 를 포함합니다 (§10.2).
-- **1-인자 가족이 2-인자 가족으로 평행하게 반복됩니다.** Functor → Applicative → Monad 가 Bifunctor → Biapplicative → Bimonad 로 같은 사다리를 그립니다 (§10.5).
-- **Bifoldable 은 v5 에 없어 대칭 자리로만 짚습니다.** Bifunctor 의 대칭 자리이지만 LanguageExt v5 에 구현이 없습니다 (§10.6).
-- **두 법칙은 4장 Functor 법칙이 인자 둘로 늘어난 것입니다.** 항등 법칙과 합성 법칙이 양쪽 인자에서 성립해야 합니다 (§10.7).
-- **시그니처는 맞지만 법칙을 깨는 가짜 Bifunctor 가 있습니다.** 두 자리를 뒤바꾸는 `BogusBiMap` (항등 위반) 과 첫 함수를 두 번 적용하는 `BogusBiMapTwice` (합성 위반) 가 법칙이 시그니처와 별도인 계약임을 보입니다 (§10.7.1, §10.7.2).
+- **Bifunctor 는 타입 인자가 둘인 컨테이너의 양쪽을 변환합니다.** `Either<L, R>`, `Pair<A, B>` 처럼 인자가 둘인 컨테이너를 다루며, 마커는 `K<in F, L, A>` 입니다 (10.2절, 10.3절).
+- **핵심 멤버는 `BiMap` 하나입니다.** `(L → M) → (A → B) → F<L, A> → F<M, B>` 가 두 인자를 동시에 변환하고, `MapFirst` / `MapSecond` 는 한 자리에 항등 함수를 넣은 기본 구현으로 따라옵니다 (10.2절).
+- **`MapSecond` 가 곧 4장 Functor 의 `map` 입니다.** 둘째 인자만 변환하고 첫 인자는 그대로 두므로, Bifunctor 는 Functor 를 포함합니다 (10.2절).
+- **1-인자 가족이 2-인자 가족으로 평행하게 반복됩니다.** Functor → Applicative → Monad 가 Bifunctor → Biapplicative → Bimonad 로 같은 사다리를 그립니다 (10.5절).
+- **Bifoldable 은 v5 에 없어 대칭 자리로만 짚습니다.** Bifunctor 의 대칭 자리이지만 LanguageExt v5 에 구현이 없습니다 (10.6절).
+- **두 법칙은 4장 Functor 법칙이 인자 둘로 늘어난 것입니다.** 항등 법칙과 합성 법칙이 양쪽 인자에서 성립해야 합니다 (10.7절).
+- **시그니처는 맞지만 법칙을 깨는 가짜 Bifunctor 가 있습니다.** 두 자리를 뒤바꾸는 `BogusBiMap` (항등 위반) 과 첫 함수를 두 번 적용하는 `BogusBiMapTwice` (합성 위반) 가 법칙이 시그니처와 별도인 계약임을 보입니다 (10.7.1절, 10.7.2절).
 
 ---
 
@@ -516,4 +516,4 @@ LanguageExt v5 의 trait 으로 제공되지 않기 때문입니다. 이 책의 
 
 > **실무 디딤돌** — `Either<L, R>` 의 양쪽 끌어올림 (`BiMap`) 은 계층 사이 오류 매핑에 그대로 쓰입니다. 인프라 오류를 도메인 오류로 바꾸면서 성공값도 함께 변환하는 자리에 한 줄로 적용됩니다.
 >
-> **테스트 디딤돌** — Bifunctor 의 두 법칙 (항등 / 합성) 은 이 장에서 3장 §3.7.1 의 `ForAll` 로 임의의 `Pair` · `Either` 에 검증했습니다. 무작위 생성기를 Functor·Monad 로 키우고 실패를 최소 반례로 줄이는 (shrinking) 본격 도구, 그리고 실무 도구 (CsCheck / FsCheck) 로의 이행은 11부입니다.
+> **테스트 디딤돌** — Bifunctor 의 두 법칙 (항등 / 합성) 은 이 장에서 3장 3.7.1절의 `ForAll` 로 임의의 `Pair` · `Either` 에 검증했습니다. 무작위 생성기를 Functor·Monad 로 키우고 실패를 최소 반례로 줄이는 (shrinking) 본격 도구, 그리고 실무 도구 (CsCheck / FsCheck) 로의 이행은 11부입니다.

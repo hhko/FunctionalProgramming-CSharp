@@ -1,8 +1,8 @@
-namespace Ch12.Traits;
+namespace Ch13.Traits;
 
 // Applicative — 5장 정의 그대로 (Pure + Apply).
 //
-// 시퀀스의 Apply 는 *데카르트 곱* — 함수 시퀀스의 각 함수를 값 시퀀스의 각 값에 적용.
+// Map 의 Traverse 에서 *목표 세계 F* 의 제약으로 쓰인다 (Map<K, F<V>> → F<Map<K, V>>).
 public interface Applicative<F> : Functor<F> where F : Applicative<F>
 {
     static abstract K<F, A> Pure<A>(A value);

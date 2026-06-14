@@ -1,6 +1,6 @@
 namespace Ch12.Traits;
 
-// Monad — 6장 정의 그대로 (Bind + LINQ 유도).
+// Monad — 7장 정의 그대로 (Bind + LINQ 유도).
 //
 // 시퀀스의 Bind 가 곧 LINQ 의 SelectMany (flatMap) 다.
 // from x in xs from y in f(x) select ... 가 이 Bind 로 변환된다.

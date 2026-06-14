@@ -2,7 +2,7 @@ using Ch12.Traits;
 
 namespace Ch12.Tests;
 
-// Foldable 일관성 법칙의 학습용 검증 헬퍼 (5장과 동일, 콘솔 bool 방식).
+// Foldable 일관성 법칙의 학습용 검증 헬퍼 (6장과 동일, 콘솔 bool 방식).
 public static class FoldableLaws
 {
     // ① 가환·결합 연산이면 FoldLeft 와 FoldRight 의 결과가 같다.

@@ -1,14 +1,15 @@
-using Ch12.Traits;
+using Ch13.Traits;
 
-namespace Ch12.Types;
+namespace Ch13.Types;
 
-// MyMaybe — Traverse 의 *목표 Applicative F* 로 쓰기 위해 함께 둔다.
+// MyMaybe — Map 의 Traverse 목표 Applicative F 로 쓰기 위해 둔다.
 //
-// 12장의 주인공은 MySeq 지만, traverse 는 두 번째 Elevated 세계 (여기선 Maybe) 를 필요로 한다.
-// MySeq<int> 를 "모두 파싱 성공해야 성공" 으로 traverse 하면 MyMaybe<MySeq<int>> 가 나온다.
+// Map<K, V> 의 각 값을 검증하면 MyMaybe<MyMap<K, V>> 가 나온다 — 모두 통과해야 Just,
+// 하나라도 실패하면 Nothing (키는 보존). 13.8절 Map Traversable 의 두 번째 세계.
 public abstract record MyMaybe<A> : K<MaybeF, A>
 {
     public sealed record Just(A Value) : MyMaybe<A>;
+
     public sealed record Nothing : MyMaybe<A>
     {
         public static readonly Nothing Instance = new();
@@ -16,8 +17,8 @@ public abstract record MyMaybe<A> : K<MaybeF, A>
 
     public override string ToString() => this switch
     {
-        Just j  => $"Just({j.Value})",
-        _       => "Nothing"
+        Just j => $"Just({j.Value})",
+        _      => "Nothing"
     };
 }
 

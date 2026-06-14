@@ -5,7 +5,7 @@ using Ch14.Traits;
 using Ch14.Types;
 
 Console.WriteLine("================================================");
-Console.WriteLine("11장 — Alternative & MonoidK (선택과 결합)");
+Console.WriteLine("14장 — Alternative & MonoidK (선택과 결합)");
 Console.WriteLine("================================================");
 Console.WriteLine();
 
@@ -62,7 +62,34 @@ Console.WriteLine($"  우 항등원 Combine(x, Empty) ≡ x : {Pass(rightId)}");
 Console.WriteLine($"  결합법칙                        : {Pass(assoc)}");
 Console.WriteLine();
 
-Console.WriteLine(leftId && rightId && assoc ? "모든 법칙 통과 [OK]" : "법칙 위반 발생 [FAIL]");
+Console.WriteLine(leftId && rightId && assoc ? "MonoidK 법칙 통과 [OK]" : "법칙 위반 발생 [FAIL]");
+Console.WriteLine();
+
+// ── 예제 5 — option: 실패면 기본값 (x ?? value 의 Elevated 일반형) ───
+Console.WriteLine("== 예제 5 — option: 실패면 기본값으로 떨어짐 ==");
+
+var withVal = Alternatives.option<MaybeF, int>(99, some3).As();   // some3 성공 → Just 3
+var withDef = Alternatives.option<MaybeF, int>(99, none).As();    // none 실패 → Just 99
+
+Console.WriteLine($"  option(99, Just 3)  = {withVal}");
+Console.WriteLine($"  option(99, Nothing) = {withDef}");
+Console.WriteLine();
+
+// ── 법칙 검증 (Alternative 세 법칙 — v5 Alternative.Laws 정합) ─────
+Console.WriteLine("== 법칙 검증 (Alternative) ==");
+
+Func<K<MaybeF, int>, IEnumerable<int>> aprobe =
+    fa => fa.As() is MyMaybe<int>.Just j ? new[] { j.Value } : Array.Empty<int>();
+
+var lz = AlternativeLaws.LeftZeroHolds<MaybeF, int>(7, aprobe);
+var rz = AlternativeLaws.RightZeroHolds<MaybeF, int>(7, aprobe);
+var lc = AlternativeLaws.LeftCatchHolds<MaybeF, int>(3, 9, aprobe);
+
+Console.WriteLine($"  좌 zero  Choose(Empty, Pure b) ≡ Pure b : {Pass(lz)}");
+Console.WriteLine($"  우 zero  Choose(Pure a, Empty) ≡ Pure a : {Pass(rz)}");
+Console.WriteLine($"  좌 catch Choose(Pure a, Pure b) ≡ Pure a: {Pass(lc)}");
+Console.WriteLine();
+Console.WriteLine(lz && rz && lc ? "Alternative 법칙 통과 [OK]" : "법칙 위반 발생 [FAIL]");
 
 return;
 
