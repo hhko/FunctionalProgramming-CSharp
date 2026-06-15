@@ -14,7 +14,7 @@
 
 > 이 장을 마치면 할 수 있게 되는 것
 > - [ ] `map` 만으로는 못 푸는 한 예 (`Some(2) + Some(3)`) 의 시그니처를 그릴 수 있습니다.
-> - [ ] `Applicative<F>` 의 두 멤버 (`Pure`, `Apply`) 의 시그니처를 외울 수 있습니다.
+> - [ ] `Applicative<F>` 의 두 멤버 (`Pure`, `Apply`) 가 각각 어느 자리를 닫는지 시그니처로 읽어낼 수 있습니다.
 > - [ ] Applicative 의 핵심 세 법칙 (Identity / Homomorphism / Functor 정합) 을 시그니처와 코드로 검증하고, 나머지 둘 (Interchange / Composition) 의 역할을 설명할 수 있습니다.
 > - [ ] 새 자료 타입에 3-tuple 패턴으로 Applicative 를 부착할 수 있습니다.
 > - [ ] `Lift2 / Lift3 / Lift4` 의 정의 (`Curry → Pure → N×Apply`) 를 한 식으로 적을 수 있습니다.
@@ -863,6 +863,8 @@ F.Apply(F.Apply(F.Apply(F.Pure(compose), mg), mf), fa)
 ```
 
 여기서 `compose = g => f => x => g(f(x))` 는 함수 합성을 끌어올린 형태입니다. 두 Elevated 함수의 합성이 각각 적용한 합성과 같습니다. Functor 의 합성 법칙 (`Map(g, Map(f, fa)) ≡ Map(g ∘ f, fa)`) 의 다인자 확장입니다.
+
+**구체 예** — `mf = Just(n => n + 1)`, `mg = Just(n => n * 2)`, `fa = Just(10)` 이면 양변 모두 `Just(22)` 입니다. 왼쪽은 두 함수를 `compose` 로 먼저 합성해 끌어올린 뒤 `fa` 와 결합하고, 오른쪽은 `mf` 를 `fa` 에 적용해 `Just(11)` 을 얻은 뒤 `mg` 와 결합합니다. 두 경로 모두 `g(f(10)) = (10 + 1) * 2 = 22` 라 같은 `Just(22)` 로 만납니다.
 
 ### 5.6.6 다섯 번째 법칙 — Functor 정합 (Functor Consistency Law)
 

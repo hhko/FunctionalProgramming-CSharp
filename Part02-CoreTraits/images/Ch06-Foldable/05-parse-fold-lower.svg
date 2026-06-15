@@ -14,10 +14,10 @@
   <text x="60" y="66" font-size="13" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.5">Elevated World</text>
 
   <rect x="140" y="115" width="180" height="70" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
-  <text x="230" y="158" font-size="17" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">MyMaybe&lt;int&gt;</text>
+  <text x="230" y="158" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">Just(42)</text>
 
   <rect x="580" y="115" width="180" height="70" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
-  <text x="670" y="158" font-size="17" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">MyMaybe&lt;int&gt;</text>
+  <text x="670" y="158" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">Nothing</text>
 
   <line x1="322" y1="150" x2="578" y2="150" stroke="#1f1f1f" stroke-width="2.4"/>
   <text x="450" y="138" font-size="15" fill="#1f1f1f" text-anchor="middle" font-style="italic" font-family="'Consolas', monospace">(있음/없음 두 분기)</text>

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 520" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+  </defs>
+
+  <rect width="880" height="520" fill="#ffffff"/>
+
+  <!-- 두 세계 띠 -->
+  <rect x="40" y="45" width="800" height="205" fill="#f4f9ff" stroke="none" rx="12"/>
+  <text x="60" y="73" font-size="13" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.5">Elevated World — Functor 합성</text>
+  <rect x="40" y="300" width="800" height="205" fill="#fffdf3" stroke="none" rx="12"/>
+  <text x="60" y="328" font-size="13" fill="#bf9000" font-style="italic" font-weight="bold" letter-spacing="0.5">Normal World — 순수 합성</text>
+
+  <!-- Elevated 박스 -->
+  <rect x="90" y="100" width="120" height="52" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="150" y="132" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">K&lt;F, a&gt;</text>
+  <rect x="380" y="100" width="120" height="52" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="440" y="132" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">K&lt;F, b&gt;</text>
+  <rect x="670" y="100" width="120" height="52" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="730" y="132" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">K&lt;F, c&gt;</text>
+
+  <text x="295" y="116" font-size="14" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">Map(f)</text>
+  <line x1="210" y1="126" x2="378" y2="126" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="585" y="116" font-size="14" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">Map(g)</text>
+  <line x1="500" y1="126" x2="668" y2="126" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+
+  <path d="M150,152 Q440,238 730,152" stroke="#1f1f1f" stroke-width="2.4" fill="none" marker-end="url(#arrow-fn)"/>
+  <text x="440" y="232" font-size="14" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">Map(g ∘ f)</text>
+
+  <!-- Normal 박스 (Elevated 와 같은 x 정렬) -->
+  <rect x="90" y="360" width="120" height="52" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="150" y="392" font-size="20" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">a</text>
+  <rect x="380" y="360" width="120" height="52" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="440" y="392" font-size="20" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">b</text>
+  <rect x="670" y="360" width="120" height="52" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="730" y="392" font-size="20" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">c</text>
+
+  <text x="295" y="376" font-size="14" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">f</text>
+  <line x1="210" y1="386" x2="378" y2="386" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="585" y="376" font-size="14" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">g</text>
+  <line x1="500" y1="386" x2="668" y2="386" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+
+  <path d="M150,412 Q440,498 730,412" stroke="#1f1f1f" stroke-width="2.4" fill="none" marker-end="url(#arrow-fn)"/>
+  <text x="440" y="492" font-size="14" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">g ∘ f</text>
+
+  <!-- 두 세계 정렬 점선 -->
+  <line x1="150" y1="250" x2="150" y2="300" stroke="#cccccc" stroke-width="1.2" stroke-dasharray="4 4"/>
+  <line x1="440" y1="250" x2="440" y2="300" stroke="#cccccc" stroke-width="1.2" stroke-dasharray="4 4"/>
+  <line x1="730" y1="250" x2="730" y2="300" stroke="#cccccc" stroke-width="1.2" stroke-dasharray="4 4"/>
+  <text x="585" y="280" font-size="13" fill="#555555" text-anchor="middle" font-style="italic">두 세계에서 합성의 모양이 같습니다 (같은 x 로 정렬)</text>
+</svg>

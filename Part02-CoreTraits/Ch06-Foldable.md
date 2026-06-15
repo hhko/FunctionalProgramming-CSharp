@@ -34,7 +34,7 @@
 합 (`Sum`), 개수 (`Count`), 전부 만족 (`All`) 을 구하는 코드는 컨테이너마다 어김없이 같은 모양으로 반복됩니다. 변수 하나를 선언하고, 원소를 돌며, 변수를 갱신합니다. 새 추상을 만나기 전에 그 반복의 정체부터 손에 쥡니다. `fold` 는 명령형 for-loop 의 함수형 대응이고, 두 코드가 완전히 같은 일을 합니다.
 
 ```csharp
-// 명령형 for-loop — state mutation
+// 명령형 for-loop — 상태 변경 (state mutation)
 int acc = 0;                          // ← seed (시작 누적값)
 foreach (var x in nums)               // ← 컨테이너 순회
     acc = acc + x;                    // ← step 함수 (누적 갱신)
@@ -170,7 +170,7 @@ static abstract                  // 정적 + 추상
 | 출력 `B` (`K<F, B>` 가 아님!) | F 가 결과에서 사라집니다 — 끌어내림의 시그니처 강제 |
 | `B seed`, `Func<A, B, B> f` | Normal 의 두 도구 — 시작 값과 한 단계 누적 함수 |
 
-핵심은 결과 타입에 F 가 없다는 점. 4장의 Functor 는 `K<F, A>` 입력 / `K<F, B>` 출력으로 F 가 같습니다가 시그니처에 박혀 있었습니다 (모양 보존). 이 장의 Foldable 은 `K<F, A>` 입력 / `B` 출력으로 F 가 사라집니다가 시그니처에 박혀 있습니다 (끌어내림).
+핵심은 결과 타입에 F 가 없다는 점입니다. 4장의 Functor 는 `K<F, A>` 입력 / `K<F, B>` 출력으로 F 가 같습니다가 시그니처에 박혀 있었습니다 (모양 보존). 이 장의 Foldable 은 `K<F, A>` 입력 / `B` 출력으로 F 가 사라집니다가 시그니처에 박혀 있습니다 (끌어내림).
 
 ### 6.2.2 두 abstract 의 차이 — `FoldRight` vs `FoldLeft`
 
@@ -997,14 +997,14 @@ nothing.Count();            // → 0     (Nothing 이면 0)
 
 nums.All(n => n > 0);       // → true   (모든 원소 양수)
 just.All(n => n > 0);       // → true   (Just 의 값이 양수)
-nothing.All(n => n > 0);    // → true   (vacuously true — 빈 컨테이너의 ∀)
+nothing.All(n => n > 0);    // → true   (빈 컨테이너 — 반례가 없어 "모두 만족" 은 참)
 
 nums.Any(n => n > 4);       // → true   (5 가 만족)
 just.Any(n => n > 100);     // → false  (42 < 100)
-nothing.Any(n => n > 0);    // → false  (vacuously false — 빈 컨테이너의 ∃)
+nothing.Any(n => n > 0);    // → false  (빈 컨테이너 — 만족하는 원소가 하나도 없음)
 ```
 
-자료 구조마다 원소가 몇 개 어떻게 들어 있는지만 다를 뿐, 순회 + 누적의 추상은 동일. 그래서 같은 자유 함수가 각자 의미 있는 답을 냅니다.
+자료 구조마다 원소가 몇 개 어떻게 들어 있는지만 다를 뿐, 순회 + 누적의 추상은 같습니다. 그래서 같은 자유 함수가 각자 의미 있는 답을 냅니다.
 
 ### 6.7.4 기초의 자유 함수 누적
 
@@ -1016,11 +1016,11 @@ Functor 만 정의        ─►  Map, Lift1, ...                               
 + Monad                ─►  + Bind, liftM, mapM, foldM, replicateM              (다수)
 ```
 
-새 자료 타입이 trait 한두 개 만족으로 수십 개 함수가 자동 적용됩니다. 함수형 prelude 의 가장 큰 가치. Foldable 의 이득이 결정적이라 기초의 두 번째 정통 trait 자리를 차지합니다.
+새 자료 타입이 trait 한두 개 만족으로 수십 개 함수가 자동 적용되는 것이 함수형 prelude 의 가장 큰 가치입니다. Foldable 의 이득이 결정적이라 기초의 두 번째 정통 trait 자리를 차지합니다.
 
 ### 6.7.5 LanguageExt v5 의 abstract 선택 — FoldWhile 로 일반화
 
-이 책은 `FoldRight` / `FoldLeft` 를 `static abstract` 로 두었습니다. Haskell 의 `foldr` / `foldl` 어휘를 그대로 매핑한, 순수 catamorphism 정통입니다. 학습 단계에서는 fold = 재귀 방향의 본질을 어휘로 정착시키는 것이 우선입니다.
+이 책은 `FoldRight` / `FoldLeft` 를 `static abstract` 로 두었습니다. Haskell 의 `foldr` / `foldl` 어휘를 그대로 매핑한, 순수 catamorphism (재귀 자료를 한 값으로 접는 표준 형태) 정통입니다. 학습 단계에서는 fold = 재귀 방향의 본질을 어휘로 정착시키는 것이 우선입니다.
 
 LanguageExt v5 의 실무 어법은 다릅니다. v5 의 `Foldable<T>` 는 `FoldWhile` / `FoldBackWhile` 두 개를 `static abstract` 로 두고, 이 책의 `FoldRight` / `FoldLeft` 에 해당하는 일반 fold (v5 의 이름은 `Fold` / `FoldBack`) 는 그 위에서 default 로 파생됩니다.
 
