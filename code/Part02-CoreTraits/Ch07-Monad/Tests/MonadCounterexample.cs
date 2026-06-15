@@ -6,7 +6,7 @@ namespace Ch07.Tests;
 // 본문 §7.9.4 가짜 Monad 반례 — 실행 가능한 버전.
 //
 // BogusBind 는 진짜 Bind 와 시그니처가 한 글자도 다르지 않다.
-// 다만 꺼낸 값을 다음 함수에 먹이지 않고 *버린다* (f 를 호출하지 않고 늘 Nothing).
+// 다만 꺼낸 값을 다음 함수에 넘기지 않고 *버린다* (f 를 호출하지 않고 늘 Nothing).
 // 컴파일은 통과하지만 좌항등 법칙 Bind(Pure(a), f) ≡ f(a) 를 깬다.
 // 타입이 막지 못하는 약속을 세 법칙이 막는다는 것을 코드로 보인다.
 public static class MonadCounterexample

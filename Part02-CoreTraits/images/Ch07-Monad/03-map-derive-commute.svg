@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 480" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+    <marker id="arrow-lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+  </defs>
+
+  <rect width="820" height="480" fill="#ffffff"/>
+
+  <!-- 두 세계 띠 -->
+  <rect x="40" y="52" width="740" height="176" fill="#f4f9ff" stroke="none" rx="12"/>
+  <text x="60" y="80" font-size="13" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.5">Elevated World</text>
+  <rect x="40" y="292" width="740" height="156" fill="#fffdf3" stroke="none" rx="12"/>
+  <text x="60" y="320" font-size="13" fill="#bf9000" font-style="italic" font-weight="bold" letter-spacing="0.5">Normal World</text>
+
+  <!-- 박스 -->
+  <rect x="100" y="118" width="128" height="66" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="164" y="159" font-size="22" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;a&gt;</text>
+
+  <rect x="552" y="118" width="128" height="66" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="616" y="159" font-size="22" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;b&gt;</text>
+
+  <rect x="110" y="356" width="108" height="62" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="164" y="395" font-size="22" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">a</text>
+
+  <rect x="562" y="356" width="108" height="62" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="616" y="395" font-size="22" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">b</text>
+
+  <!-- 좌항: Map(f) — Elevated 안에서 곧장 E<a> → E<b> -->
+  <text x="390" y="113" font-size="12" fill="#888888" text-anchor="middle" font-style="italic">좌항 (Functor 직접)</text>
+  <line x1="228" y1="151" x2="552" y2="151" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="390" y="142" font-size="17" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">Map(f)</text>
+
+  <!-- 우항 경로 ① bind 꺼냄 (내림) E<a> → a -->
+  <line x1="164" y1="184" x2="164" y2="356" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <text x="178" y="274" font-size="13" fill="#1f77b4" font-weight="bold" font-style="italic">bind 꺼냄 (내림)</text>
+
+  <!-- 우항 경로 ② f : a → b (Normal 안의 평범한 함수) -->
+  <line x1="218" y1="387" x2="562" y2="387" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="390" y="378" font-size="16" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">f : a → b</text>
+  <text x="390" y="424" font-size="12" fill="#888888" text-anchor="middle" font-style="italic">우항 (Monad 유도: 내림 → f → 올림)</text>
+
+  <!-- 우항 경로 ③ Pure (올림) b → E<b> -->
+  <line x1="616" y1="356" x2="616" y2="184" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <text x="602" y="274" font-size="13" fill="#1f77b4" text-anchor="end" font-weight="bold" font-style="italic">Pure (올림)</text>
+
+  <!-- 결론 등식 -->
+  <text x="410" y="466" font-size="14" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">Map(f, ma)  =  Bind(ma, a =&gt; Pure(f(a)))</text>
+  <text x="744" y="113" font-size="12" fill="#2e7d32" text-anchor="end" font-style="italic">두 경로가 같은 E&lt;b&gt; 로 만남</text>
+</svg>

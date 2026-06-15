@@ -48,7 +48,7 @@ public static class Bank
     // bind 사슬 — 세 단계를 의존 결합으로 잇는다.
     public static K<MyMaybeF, Receipt> WithdrawByBind(UserId id, int amount) =>
         FindUser(id).Bind(user =>
-        FindAccount(user).Bind<MyMaybeF, Account, Receipt>(account =>
+        FindAccount(user).Bind(account =>
         Withdraw(account, amount)));
 
     // LINQ 사슬 — 같은 파이프라인의 from-from-select 표기.

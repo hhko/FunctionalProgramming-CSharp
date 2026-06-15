@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 300" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+  </defs>
+
+  <rect width="820" height="300" fill="#ffffff"/>
+
+  <!-- ── Apply: 독립 결합 ── -->
+  <text x="72" y="102" font-size="16" fill="#0c3a5e" font-weight="bold">Apply</text>
+  <text x="72" y="122" font-size="12" fill="#888888" font-style="italic">독립</text>
+
+  <rect x="150" y="74" width="96" height="52" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="198" y="107" font-size="19" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;f&gt;</text>
+
+  <text x="268" y="108" font-size="20" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">⊛</text>
+
+  <rect x="290" y="74" width="96" height="52" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="338" y="107" font-size="19" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;a&gt;</text>
+
+  <text x="468" y="92" font-size="13" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">apply</text>
+  <line x1="394" y1="100" x2="532" y2="100" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+
+  <rect x="538" y="74" width="96" height="52" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="586" y="107" font-size="19" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;b&gt;</text>
+
+  <text x="392" y="152" font-size="12" fill="#777777" text-anchor="middle" font-style="italic">둘째 인자 E&lt;a&gt; 는 독립된 값 — 미리 정해짐 (서로 모름)</text>
+
+  <line x1="60" y1="184" x2="760" y2="184" stroke="#e5e5e5" stroke-width="1"/>
+
+  <!-- ── Bind: 의존 결합 ── -->
+  <text x="72" y="226" font-size="16" fill="#0c3a5e" font-weight="bold">Bind</text>
+  <text x="72" y="246" font-size="12" fill="#2e7d32" font-style="italic">의존</text>
+
+  <rect x="150" y="198" width="96" height="52" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="198" y="231" font-size="19" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;a&gt;</text>
+
+  <rect x="270" y="198" width="132" height="52" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2.2" rx="6"/>
+  <text x="336" y="231" font-size="17" fill="#1b5e20" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">a =&gt; E&lt;b&gt;</text>
+
+  <text x="468" y="216" font-size="13" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">bind</text>
+  <line x1="408" y1="224" x2="532" y2="224" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+
+  <rect x="538" y="198" width="96" height="52" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="586" y="231" font-size="19" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;b&gt;</text>
+
+  <text x="392" y="276" font-size="12" fill="#777777" text-anchor="middle" font-style="italic">둘째 인자 a =&gt; E&lt;b&gt; 는 꺼낸 a 를 받는 함수 — a 에 의존</text>
+</svg>

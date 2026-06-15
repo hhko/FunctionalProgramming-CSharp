@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 360" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+    <marker id="arrow-lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+  </defs>
+
+  <rect width="760" height="360" fill="#ffffff"/>
+
+  <!-- E<a> (좌하) -->
+  <rect x="55" y="238" width="120" height="60" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="115" y="276" font-size="20" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;a&gt;</text>
+
+  <!-- E<E<b>> 중첩 (상중) — 박스 안의 박스 -->
+  <text x="375" y="52" font-size="14" fill="#0c3a5e" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">E&lt;E&lt;b&gt;&gt;  (한 겹 더 겹침)</text>
+  <rect x="275" y="66" width="200" height="94" fill="#d4e9f7" stroke="#1f77b4" stroke-width="2.2" rx="8"/>
+  <rect x="312" y="96" width="126" height="52" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/>
+  <text x="375" y="131" font-size="19" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;b&gt;</text>
+
+  <!-- E<b> (우하) -->
+  <rect x="585" y="238" width="120" height="60" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="645" y="276" font-size="20" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;b&gt;</text>
+
+  <!-- Map(f): E<a> → E<E<b>> (한 겹 더) -->
+  <line x1="178" y1="250" x2="290" y2="162" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="200" y="196" font-size="15" fill="#1f1f1f" font-weight="bold" font-family="'Consolas', monospace">Map(f)</text>
+
+  <!-- flatten: E<E<b>> → E<b> (한 겹 폄) -->
+  <line x1="460" y1="162" x2="582" y2="250" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="558" y="196" font-size="15" fill="#1f1f1f" font-weight="bold" font-family="'Consolas', monospace">flatten</text>
+
+  <!-- Bind(f): E<a> → E<b> 한 걸음 (Map + flatten 합친 지름길) -->
+  <line x1="178" y1="284" x2="582" y2="284" stroke="#1f77b4" stroke-width="2.5" stroke-linecap="round" marker-end="url(#arrow-lift)" stroke-dasharray="6 5"/>
+  <text x="380" y="274" font-size="16" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">Bind(f)</text>
+
+  <!-- 하단 설명 -->
+  <text x="380" y="336" font-size="13" fill="#8a7a33" text-anchor="middle">Map 으로 한 겹 겹친 뒤 flatten 으로 펴기 = Bind 한 걸음 — 둘 다 같은 E&lt;b&gt; 에 도착</text>
+</svg>

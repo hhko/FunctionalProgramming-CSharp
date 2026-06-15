@@ -1,12 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
   <defs>
-    <marker id="arrow-lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
     </marker>
     <marker id="arrow-gap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/>
     </marker>
   </defs>
+
+  <rect width="800" height="520" fill="#ffffff"/>
 
   <!-- 두 세계 띠 -->
   <rect x="40" y="70" width="720" height="180" fill="#f4f9ff" stroke="none" rx="12"/>
@@ -30,17 +32,17 @@
   <rect x="610" y="126" width="118" height="58" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
   <text x="669" y="162" font-size="22" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;c&gt;</text>
 
-  <!-- f : a → E<b> 올라가는 사선 -->
-  <line x1="178" y1="392" x2="350" y2="184" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
-  <text x="200" y="300" font-size="17" fill="#1f77b4" font-weight="bold" font-family="'Consolas', monospace">f : a → E&lt;b&gt;</text>
+  <!-- f : a → E<b> (World-crossing 함수 = 검정 함수 화살표) -->
+  <line x1="178" y1="392" x2="350" y2="184" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="205" y="300" font-size="16" fill="#1f1f1f" font-weight="bold" font-family="'Consolas', monospace">f : a → E&lt;b&gt;</text>
 
   <!-- 어긋남: E<b> (위) 와 g 가 받아야 할 b (아래) 는 같은 b 인데 한 층 다름 — 수직 점선 -->
   <line x1="395" y1="186" x2="395" y2="386" stroke="#c0392b" stroke-width="2.4" stroke-dasharray="3 6" marker-end="url(#arrow-gap)"/>
   <text x="367" y="298" font-size="26" fill="#c0392b" font-weight="bold" font-family="'Consolas', monospace">?</text>
 
-  <!-- g : b → E<c> 올라가는 사선 -->
-  <line x1="441" y1="392" x2="624" y2="184" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
-  <text x="512" y="258" font-size="17" fill="#1f77b4" font-weight="bold" font-family="'Consolas', monospace">g : b → E&lt;c&gt;</text>
+  <!-- g : b → E<c> (World-crossing 함수 = 검정 함수 화살표) -->
+  <line x1="441" y1="392" x2="624" y2="184" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="512" y="258" font-size="16" fill="#1f1f1f" font-weight="bold" font-family="'Consolas', monospace">g : b → E&lt;c&gt;</text>
 
   <!-- 하단 설명 -->
   <text x="400" y="466" font-size="13" fill="#8a7a33" text-anchor="middle">f 는 a 를 위층 E&lt;b&gt; 로 올리지만, g 의 입력 b 는 아래층 — 같은 b 인데 한 층 어긋나 곧장 잇지 못합니다</text>

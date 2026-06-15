@@ -18,7 +18,7 @@ static K<MyMaybeF, int> ParseInt(string s) =>
 Console.WriteLine("== 예제 1 — Bind 명시 호출 ==");
 
 K<MyMaybeF, int> byBind = ParseInt("3").Bind(a =>
-    ParseInt("4").Bind<MyMaybeF, int, int>(b =>
+    ParseInt("4").Bind(b =>
         MyMaybeF.Pure(a + b)));
 Console.WriteLine($"  ParseInt(\"3\") + ParseInt(\"4\") = {Show(byBind)}");
 

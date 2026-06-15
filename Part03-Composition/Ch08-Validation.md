@@ -144,13 +144,13 @@ var step3  = step2.Apply(ageV);        // Age 적용
 var result = step3.Apply(tierV);       // Tier 적용 → MyValidation<…, User>
 ```
 
-5장에서 본 `Pure → Apply` 사슬과 정확히 같은 골격입니다. `Pure` 가 함수를 Elevated 로 올려 출발점을 만들고, `Apply` 가 검증 결과를 하나씩 먹입니다. 네 검증이 모두 `Valid` 면 `Valid(User(…))` 가, 하나라도 `Invalid` 면 오류가 모인 `Invalid` 가 나옵니다. 그 누적이 일어나는 자리가 `Apply` 입니다. (`lifted.Apply(emailV)` 는 `Apply(lifted, emailV)` 의 확장 메서드 표기로, 함수 측 `lifted` 가 첫 인자, 검증 결과 `emailV` 가 둘째 인자입니다. 이 둘을 받는 것이 뒤에서 볼 `Apply` 정의입니다.)
+5장에서 본 `Pure → Apply` 사슬과 정확히 같은 골격입니다. `Pure` 가 함수를 Elevated 로 올려 출발점을 만들고, `Apply` 가 검증 결과를 하나씩 넘깁니다. 네 검증이 모두 `Valid` 면 `Valid(User(…))` 가, 하나라도 `Invalid` 면 오류가 모인 `Invalid` 가 나옵니다. 그 누적이 일어나는 자리가 `Apply` 입니다. (`lifted.Apply(emailV)` 는 `Apply(lifted, emailV)` 의 확장 메서드 표기로, 함수 측 `lifted` 가 첫 인자, 검증 결과 `emailV` 가 둘째 인자입니다. 이 둘을 받는 것이 뒤에서 볼 `Apply` 정의입니다.)
 
 ![Pure 로 올린 4인자 함수를 Apply 가 한 칸씩 채워 Valid(User) 로](./images/Ch08-Validation/03-apply-chain.svg)
 
-**그림 8-3. 다인자 Apply 사슬: curried 함수를 한 칸씩 채웁니다** — `Pure(curried)` 가 4인자 함수를 Elevated 로 올려 출발점을 만들고, `Apply` 가 검증 결과를 하나씩 먹일 때마다 남은 인자가 줄어듭니다. 네 번째 `Apply(tier)` 가 마지막 인자를 채우면 `Valid(User)` 가 됩니다. 어느 칸이든 `Invalid` 면 그 단계의 `Apply` 가 에러 채널에 오류를 누적하므로 (그림 8-1), 네 칸이 모두 통과해야 `Valid(User)`, 하나라도 틀리면 누적된 오류의 `Invalid` 입니다.
+**그림 8-3. 다인자 Apply 사슬: curried 함수를 한 칸씩 채웁니다** — `Pure(curried)` 가 4인자 함수를 Elevated 로 올려 출발점을 만들고, `Apply` 가 검증 결과를 하나씩 넘길 때마다 남은 인자가 줄어듭니다. 네 번째 `Apply(tier)` 가 마지막 인자를 채우면 `Valid(User)` 가 됩니다. 어느 칸이든 `Invalid` 면 그 단계의 `Apply` 가 에러 채널에 오류를 누적하므로 (그림 8-1), 네 칸이 모두 통과해야 `Valid(User)`, 하나라도 틀리면 누적된 오류의 `Invalid` 입니다.
 
-> **여기까지의 안전망** — `Curry → Pure → Apply` 사슬이 처음엔 복잡해 보여도 괜찮습니다. 지금 가져갈 직감은 하나입니다. `Apply` 가 검증을 한 칸씩 먹이며, 성공이면 값 채널을 채우고 실패면 에러 채널에 쌓습니다. 이는 5장에서 익힌 `Pure → Apply` 다인자 끌어올림 그대로입니다.
+> **여기까지의 안전망** — `Curry → Pure → Apply` 사슬이 처음엔 복잡해 보여도 괜찮습니다. 지금 가져갈 직감은 하나입니다. `Apply` 가 검증을 한 칸씩 넘기며, 성공이면 값 채널을 채우고 실패면 에러 채널에 쌓습니다. 이는 5장에서 익힌 `Pure → Apply` 다인자 끌어올림 그대로입니다.
 
 ---
 
