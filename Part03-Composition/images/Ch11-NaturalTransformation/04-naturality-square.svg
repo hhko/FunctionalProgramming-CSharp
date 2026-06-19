@@ -54,5 +54,5 @@
   <text x="450" y="250" font-size="13" fill="#38761d" text-anchor="middle" font-weight="bold">어느 경로로 돌아도</text>
   <text x="450" y="270" font-size="13" fill="#38761d" text-anchor="middle" font-weight="bold">같은 결과</text>
 
-  <text x="450" y="438" font-size="12" fill="#5a4400" text-anchor="middle">값을 들여다보는 변환은 두 경로가 갈려 이 사각형이 닫히지 않습니다 (§11.5.1)</text>
+  <text x="450" y="438" font-size="12" fill="#5a4400" text-anchor="middle">값을 들여다보는 변환은 두 경로가 갈려 이 사각형이 닫히지 않습니다</text>
 </svg>

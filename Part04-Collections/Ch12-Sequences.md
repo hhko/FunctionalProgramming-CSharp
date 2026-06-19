@@ -141,7 +141,15 @@ public static K<SeqF, B> Apply<A, B>(K<SeqF, Func<A, B>> mf, K<SeqF, A> ma)
 }
 ```
 
-함수 `[+1, ×10]` 을 값 `[1, 2]` 에 `Apply` 하면 `+1` 을 `1`, `2` 에 적용한 `[2, 3]` 과 `×10` 을 `1`, `2` 에 적용한 `[10, 20]` 이 이어붙어 `[2, 3, 10, 20]` 이 됩니다. 이 "모든 조합" 이 시퀀스 Apply 의 기본 의미입니다. 한 자리에 다른 의미의 Apply 도 가능하다는 사실은 뒤에서 다시 봅니다.
+함수 `[+1, ×10]` 을 값 `[1, 2]` 에 `Apply` 하면 함수마다 두 값에 적용한 결과가 이어붙습니다.
+
+```
++1  을 [1, 2] 에  → [2, 3]
+×10 을 [1, 2] 에  → [10, 20]
+이어붙임           → [2, 3, 10, 20]
+```
+
+이 "모든 조합" 이 시퀀스 Apply 의 기본 의미입니다. 한 자리에 다른 의미의 Apply 도 둘 수 있는데, 그 두 번째 Applicative 는 뒤에서 다시 봅니다.
 
 ### 12.4.3 Monad — Bind, 그리고 LINQ 의 정체
 
@@ -198,11 +206,11 @@ public static B FoldLeft<A, B>(Func<B, A, B> f, B seed, K<SeqF, A> fa)
 | 일상 함수 | 두 멤버 위의 정의 | 의미 |
 |---|---|---|
 | `Count` | `FoldLeft((acc, _) => acc + 1, 0)` | 원소 개수 |
-| `Any(p)` | `FoldRight((a, acc) => p(a) ‖ acc, false)` | 하나라도 만족 |
+| `Any(p)` | `FoldRight((a, acc) => p(a) || acc, false)` | 하나라도 만족 |
 | `All(p)` | `FoldRight((a, acc) => p(a) && acc, true)` | 모두 만족 |
 | `IsEmpty` | `FoldRight((_, _) => false, true)` | 비었는가 |
 | `First` | `FoldRight((a, _) => a, default)` | 첫 원소 |
-| `ToList` | `FoldRight((a, acc) => 앞에 붙임, [])` | 리스트로 |
+| `ToList` | `FoldRight((a, acc) => [a, ..acc], [])` | 리스트로 |
 
 ```csharp
 var sum     = nums.FoldLeft((acc, n) => acc + n, 0);   // 15
@@ -239,7 +247,16 @@ public static K<F, K<SeqF, B>> Traverse<F, A, B>(Func<A, K<F, B>> f, K<SeqF, A> 
 }
 ```
 
-`prepend` 은 머리 하나를 앞에 붙여 새 시퀀스를 만드는 함수 (`head → tail → [head, ..tail]`) 이고, `Apply` 두 번이 그 한 칸 붙이기를 Elevated 세계 안에서 수행합니다. `Pure([])` 에서 시작해 뒤에서 앞으로 한 원소씩 붙여 나가는 이 골격은 9장의 `Traverse` 와 한 글자도 다르지 않습니다. 예를 들어 `["1", "2"]` 는 `Pure([])` 에서 `prepend(2)`, 그다음 `prepend(1)` 순으로 `Just([1, 2])` 가 조립됩니다. 문자열 시퀀스를 정수로 파싱하는 예에서, 두 번째 Elevated 세계 `F` 자리에 7장에서 본 `MyMaybe` 가 들어갑니다 (`MaybeF` 는 그 태그 타입입니다).
+`prepend` 은 머리 하나를 앞에 붙여 새 시퀀스를 만드는 함수 (`head → tail → [head, ..tail]`) 이고, `Apply` 두 번이 그 한 칸 붙이기를 Elevated 세계 안에서 수행합니다 (첫 `Apply` 가 `head` 자리, 둘째 `Apply` 가 `tail` 자리를 채웁니다). `Pure([])` 에서 시작해 뒤에서 앞으로 한 원소씩 붙여 나가는 이 골격은 9장의 `Traverse` 와 한 글자도 다르지 않습니다. 아래 `["1", "2", "3"]` 을 파싱하면 뒤에서 앞으로 한 칸씩 조립됩니다.
+
+```
+Pure([])     → Just([])
+prepend(3)   → Just([3])
+prepend(2)   → Just([2, 3])
+prepend(1)   → Just([1, 2, 3])
+```
+
+문자열 시퀀스를 정수로 파싱하는 이 예에서, 두 번째 Elevated 세계 `F` 자리에 7장에서 본 `MyMaybe` 가 들어갑니다 (태그 타입 `MaybeF`).
 
 ```csharp
 Func<string, K<MaybeF, int>> parse = s =>
@@ -306,7 +323,7 @@ var lstSum   = Foldable.foldLeft<LstF, int, int>((acc, n) => acc + n, 0, lst);
 var lstBound = Monad.bind<LstF, int, int>(lst, n => LstF.Pure(n * 100));
 ```
 
-여기서 이 장의 첫 결정적 통찰이 나옵니다. **추상은 자료의 표현이 아니라 시그니처가 약속하는 동작에 달려 있습니다.** `IEnumerable` 이든 cons 든, 시그니처의 약속만 지키면 같은 trait 의 시민입니다. toy 와 실무 사이에 벽이 처음부터 없었음을 보여 줍니다.
+여기서 이 장의 첫 결정적 통찰이 나옵니다. **추상은 자료의 표현이 아니라 시그니처가 약속하는 동작에 달려 있습니다.** `IEnumerable` 이든 cons 든, 시그니처의 약속만 지키면 같은 trait 의 시민입니다. toy 와 실무 사이에 경계가 처음부터 없었음을 보여 줍니다.
 
 ---
 
@@ -397,7 +414,7 @@ zip        Apply : [+1, ×10] ⊛ [1, 2]  =  [2, 20]           (i 번째끼리)
 
 > **Q6. cons 구조 `MyLst` 에 같은 trait 이 붙는다는 사실이 왜 중요합니까?** (12.5절)
 >
-> 추상이 자료의 **표현** 이 아니라 **시그니처가 약속하는 동작** 에 달려 있음을 증명하기 때문입니다. `IEnumerable` 이든 cons 든, 약속만 지키면 같은 trait 의 시민입니다. toy 와 실무 사이에 벽이 없었다는 뜻입니다.
+> 추상이 자료의 **표현** 이 아니라 **시그니처가 약속하는 동작** 에 달려 있음을 증명하기 때문입니다. `IEnumerable` 이든 cons 든, 약속만 지키면 같은 trait 의 시민입니다. toy 와 실무 사이에 경계가 없었다는 뜻입니다.
 
 > **Q7. 데카르트 곱 `Apply` 와 zip `Apply` 는 어떻게 다릅니까?** (12.6절)
 >

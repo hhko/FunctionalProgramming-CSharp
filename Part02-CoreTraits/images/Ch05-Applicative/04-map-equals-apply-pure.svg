@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 520" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 816 360" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
   <defs>
     <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
@@ -8,48 +8,59 @@
     </marker>
   </defs>
 
-  <rect width="1100" height="520" fill="#ffffff"/>
+  <rect width="816" height="360" fill="#ffffff"/>
 
-  <text x="550" y="32" font-size="15" fill="#1f1f1f" text-anchor="middle" font-weight="bold">Map ≡ Apply ∘ Pure — 같은 결과의 두 경로</text>
+  <text x="408" y="30" font-size="15" fill="#1f1f1f" text-anchor="middle" font-weight="bold">Map ≡ Apply ∘ Pure — apply(Pure(f)) 가 Map(f) 와 같다</text>
 
-  <!-- Left panel: Map path -->
-  <rect x="40" y="60" width="490" height="430" fill="#f4f9ff" stroke="none" rx="12"/>
-  <text x="60" y="86" font-size="13" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.5">왼쪽 경로 — Map(f) 한 번</text>
+  <!-- 두 세계 띠 -->
+  <rect x="25" y="48" width="766" height="120" fill="#f4f9ff" stroke="none" rx="12"/>
+  <text x="45" y="66" font-size="13" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.5">Elevated World</text>
+  <rect x="25" y="205" width="766" height="108" fill="#fffdf3" stroke="none" rx="12"/>
+  <text x="45" y="223" font-size="13" fill="#bf9000" font-style="italic" font-weight="bold" letter-spacing="0.5">Normal World</text>
 
-  <rect x="180" y="130" width="160" height="70" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
-  <text x="260" y="172" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">K&lt;F, a&gt;</text>
+  <!-- ── 왼쪽: apply ∘ Pure ── -->
+  <rect x="48" y="80" width="128" height="48" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="112" y="110" font-size="14" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">K&lt;F, a→b&gt;</text>
 
-  <line x1="260" y1="205" x2="260" y2="285" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
-  <text x="285" y="250" font-size="16" fill="#1f1f1f" font-weight="bold" font-family="'Consolas', monospace">Map(f)</text>
+  <text x="204" y="86" font-size="14" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace" font-style="italic">Apply</text>
+  <line x1="176" y1="104" x2="230" y2="104" stroke="#1f77b4" stroke-width="2.6" marker-end="url(#arrow-lift)"/>
 
-  <rect x="180" y="295" width="160" height="70" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
-  <text x="260" y="337" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">K&lt;F, b&gt;</text>
+  <rect x="232" y="80" width="84" height="48" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="274" y="110" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">K&lt;F, a&gt;</text>
 
-  <text x="260" y="440" font-size="13" fill="#666" text-anchor="middle" font-style="italic">4 장 Functor 의 단일 사다리</text>
+  <line x1="316" y1="104" x2="370" y2="104" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
 
-  <!-- Equality sign -->
-  <text x="555" y="290" font-size="50" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">≡</text>
+  <rect x="372" y="80" width="84" height="48" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="414" y="110" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">K&lt;F, b&gt;</text>
 
-  <!-- Right panel: Apply ∘ Pure path -->
-  <rect x="580" y="60" width="490" height="430" fill="#f4f9ff" stroke="none" rx="12"/>
-  <text x="600" y="86" font-size="13" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.5">오른쪽 경로 — Pure(f) 후 Apply</text>
+  <rect x="48" y="237" width="128" height="48" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="112" y="267" font-size="16" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">a → b</text>
 
-  <rect x="620" y="130" width="160" height="70" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
-  <text x="700" y="172" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">K&lt;F, a → b&gt;</text>
+  <line x1="112" y1="237" x2="112" y2="130" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <text x="124" y="190" font-size="14" fill="#1f77b4" font-weight="bold" font-style="italic">Pure</text>
 
-  <rect x="860" y="130" width="160" height="70" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
-  <text x="940" y="172" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">K&lt;F, a&gt;</text>
+  <!-- ── 등호 (양쪽 그룹에서 44px 등간격 — 왼쪽 박스 간격보다 좁게) ── -->
+  <text x="500" y="120" font-size="44" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">=</text>
 
-  <text x="820" y="170" font-size="28" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">⊛</text>
+  <!-- ── 오른쪽: Map ── -->
+  <rect x="544" y="80" width="84" height="48" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="586" y="110" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">K&lt;F, a&gt;</text>
 
-  <line x1="820" y1="205" x2="820" y2="285" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
-  <text x="845" y="250" font-size="14" fill="#1f1f1f" font-weight="bold" font-family="'Consolas', monospace">apply</text>
+  <line x1="628" y1="104" x2="682" y2="104" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
 
-  <rect x="740" y="295" width="160" height="70" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
-  <text x="820" y="337" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">K&lt;F, b&gt;</text>
+  <rect x="684" y="80" width="84" height="48" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="726" y="110" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">K&lt;F, b&gt;</text>
 
-  <!-- pure label on K<F, a→b> -->
-  <text x="700" y="118" font-size="13" fill="#1f77b4" text-anchor="middle" font-style="italic">↑ pure(f)</text>
+  <rect x="544" y="237" width="84" height="48" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="586" y="267" font-size="18" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">a</text>
 
-  <text x="820" y="440" font-size="13" fill="#666" text-anchor="middle" font-style="italic">5 장 Applicative 의 두 도구로 같은 자리 도달</text>
+  <line x1="628" y1="261" x2="682" y2="261" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+
+  <rect x="684" y="237" width="84" height="48" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="726" y="267" font-size="18" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">b</text>
+
+  <line x1="656" y1="237" x2="656" y2="130" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <text x="666" y="190" font-size="14" fill="#1f77b4" font-weight="bold" font-style="italic">Map</text>
+
+  <text x="408" y="338" font-size="13" fill="#555555" text-anchor="middle" font-style="italic">Normal 함수 a→b 를 Pure 로 올려 apply 한 결과(왼쪽)가, 그대로 Map 한 결과(오른쪽)와 같습니다</text>
 </svg>

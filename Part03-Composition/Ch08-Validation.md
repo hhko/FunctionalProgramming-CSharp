@@ -58,7 +58,7 @@ public abstract record MyValidation<E, A> : K<MyValidationF<E>, A>
 }
 ```
 
-오류가 단수가 아니라 **목록** (`IReadOnlyList<E>`) 이라는 점이 이 장의 모든 것을 결정합니다. 오류를 하나가 아니라 여러 개 담을 수 있어야 누적이 가능합니다. 5장에서는 이 타입의 시그니처를 봤고, 8장에서는 그 시그니처가 실전에서 무엇을 할 수 있게 하는지 봅니다.
+여기서 타입 자리 `E` 는 1장의 Elevated 컨테이너 `E<a>` 가 아니라 오류 (Error) 의 머리글자로, `MyValidation` 이 담는 오류 타입 (여기서는 `DomainError`) 을 가리킵니다. 오류가 단수가 아니라 **목록** (`IReadOnlyList<E>`) 이라는 점이 이 장의 모든 것을 결정합니다. 오류를 하나가 아니라 여러 개 담을 수 있어야 누적이 가능합니다. 5장에서는 이 타입의 시그니처를 봤고, 8장에서는 그 시그니처가 실전에서 무엇을 할 수 있게 하는지 봅니다.
 
 ### 8.2.2 Applicative 자리, Monad 자리 아님
 
@@ -138,17 +138,18 @@ var curried = Curry.Of(ctor);
 
 // Pure 로 함수를 올리고, Apply 를 네 번
 var lifted = MyValidationF<DomainError>.Pure(curried);   // Valid(curried)
+// emailV·passwordV·ageV·tierV = 8.4 의 검증 결과 네 개 (예: emailV = Validators.Email(emailRaw))
 var step1  = lifted.Apply(emailV);     // Email 적용
 var step2  = step1.Apply(passwordV);   // Password 적용
 var step3  = step2.Apply(ageV);        // Age 적용
 var result = step3.Apply(tierV);       // Tier 적용 → MyValidation<…, User>
 ```
 
-5장에서 본 `Pure → Apply` 사슬과 정확히 같은 골격입니다. `Pure` 가 함수를 Elevated 로 올려 출발점을 만들고, `Apply` 가 검증 결과를 하나씩 넘깁니다. 네 검증이 모두 `Valid` 면 `Valid(User(…))` 가, 하나라도 `Invalid` 면 오류가 모인 `Invalid` 가 나옵니다. 그 누적이 일어나는 자리가 `Apply` 입니다. (`lifted.Apply(emailV)` 는 `Apply(lifted, emailV)` 의 확장 메서드 표기로, 함수 측 `lifted` 가 첫 인자, 검증 결과 `emailV` 가 둘째 인자입니다. 이 둘을 받는 것이 뒤에서 볼 `Apply` 정의입니다.)
+5장에서 본 `Pure → Apply` 사슬과 정확히 같은 골격입니다. `Pure` 가 함수를 Elevated 로 끌어올려 출발점을 만들고, `Apply` 가 검증 결과를 하나씩 넘깁니다. 네 검증이 모두 `Valid` 면 `Valid(User(…))` 가, 하나라도 `Invalid` 면 오류가 모인 `Invalid` 가 나옵니다. 그 누적이 일어나는 자리가 `Apply` 입니다. (`lifted.Apply(emailV)` 는 `Apply(lifted, emailV)` 의 확장 메서드 표기로, 함수 측 `lifted` 가 첫 인자, 검증 결과 `emailV` 가 둘째 인자입니다. 이 둘을 받는 것이 뒤에서 볼 `Apply` 정의입니다.)
 
-![Pure 로 올린 4인자 함수를 Apply 가 한 칸씩 채워 Valid(User) 로](./images/Ch08-Validation/03-apply-chain.svg)
+![Pure 로 올린 4인자 함수를 Apply 가 한 칸씩 채워 Valid(User) 로](./images/Ch08-Validation/01-apply-chain.svg)
 
-**그림 8-3. 다인자 Apply 사슬: curried 함수를 한 칸씩 채웁니다** — `Pure(curried)` 가 4인자 함수를 Elevated 로 올려 출발점을 만들고, `Apply` 가 검증 결과를 하나씩 넘길 때마다 남은 인자가 줄어듭니다. 네 번째 `Apply(tier)` 가 마지막 인자를 채우면 `Valid(User)` 가 됩니다. 어느 칸이든 `Invalid` 면 그 단계의 `Apply` 가 에러 채널에 오류를 누적하므로 (그림 8-1), 네 칸이 모두 통과해야 `Valid(User)`, 하나라도 틀리면 누적된 오류의 `Invalid` 입니다.
+**그림 8-1. 다인자 Apply 사슬: curried 함수를 한 칸씩 채웁니다** — `Pure(curried)` 가 4인자 함수를 Elevated 로 끌어올려 출발점을 만들고, `Apply` 가 검증 결과를 하나씩 넘길 때마다 남은 인자가 줄어듭니다. 네 번째 `Apply(tier)` 가 마지막 인자를 채우면 `Valid(User)` 가 됩니다. 어느 칸이든 `Invalid` 면 그 단계의 `Apply` 가 에러 채널에 오류를 누적하므로 (그림 8-2), 네 칸이 모두 통과해야 `Valid(User)`, 하나라도 틀리면 누적된 오류의 `Invalid` 입니다.
 
 > **여기까지의 안전망** — `Curry → Pure → Apply` 사슬이 처음엔 복잡해 보여도 괜찮습니다. 지금 가져갈 직감은 하나입니다. `Apply` 가 검증을 한 칸씩 넘기며, 성공이면 값 채널을 채우고 실패면 에러 채널에 쌓습니다. 이는 5장에서 익힌 `Pure → Apply` 다인자 끌어올림 그대로입니다.
 
@@ -178,7 +179,7 @@ public static K<MyValidationF<E>, B> Apply<A, B>(
 
 ![Apply 의 두 채널: 값은 함수 적용, 에러는 결합](./images/Ch08-Validation/02-monoid-error-merge.svg)
 
-**그림 8-1. `Apply` 의 두 채널: 값은 함수 적용, 에러는 Monoid 결합** — 위 행 값 채널은 둘 다 `Valid` 일 때 함수 `f` 를 값 `a` 에 적용해 `Valid(f(a))` 를 냅니다. 아래 행 에러 채널은 둘 다 `Invalid` 일 때 두 오류 목록 `[e1]`, `[e2]` 를 이어붙여 `[e1, e2]` 를 냅니다. 이 이어붙임이 3장의 `IReadOnlyList` Monoid 결합 (항등원은 빈 목록) 입니다. `Apply` 한 번이 두 채널을 동시에 진행합니다.
+**그림 8-2. `Apply` 의 두 채널: 값은 함수 적용, 에러는 Monoid 결합** — 위 행 값 채널은 둘 다 `Valid` 일 때 함수 `f` 를 값 `a` 에 적용해 `Valid(f(a))` 를 냅니다. 아래 행 에러 채널은 둘 다 `Invalid` 일 때 두 오류 목록 `[e1]`, `[e2]` 를 이어붙여 `[e1, e2]` 를 냅니다. 이 이어붙임이 3장의 `IReadOnlyList` Monoid 결합 (항등원은 빈 목록) 입니다. `Apply` 한 번이 두 채널을 동시에 진행합니다.
 
 > **한 줄 정리** — `Apply` 는 값 채널에는 함수를 적용하고, 에러 채널에는 Monoid 결합을 적용합니다. 3장의 결합이 검증의 오류 누적으로 다시 쓰입니다.
 
@@ -225,9 +226,9 @@ if (passwordV.As() is Invalid pi) return new Invalid(pi.Errors);
 | applicative | `Apply` 사슬 (독립, 모두 평가) | `Invalid` — 오류 **4 건** |
 | monadic | `switch` 단락 (의존, 첫 실패에서 멈춤) | `Invalid` — 오류 **1 건** |
 
-![applicative 는 4 건 누적, monadic 은 1 건 단락](./images/Ch08-Validation/01-accumulate-vs-shortcircuit.svg)
+![applicative 는 4 건 누적, monadic 은 1 건 단락](./images/Ch08-Validation/03-accumulate-vs-shortcircuit.svg)
 
-**그림 8-2. 누적 vs 단락: 같은 입력, 다른 결과** — 왼쪽 applicative style 은 네 칸을 모두 평가해 오류 4 건을 누적합니다. 오른쪽 monadic style 은 첫 칸 (`email`) 실패에서 멈춰 나머지 세 칸을 평가하지 않고 오류 1 건만 냅니다. 어느 쪽이 옳은가가 아니라, 도메인이 어느 의미를 고르는가의 문제입니다.
+**그림 8-3. 누적 vs 단락: 같은 입력, 다른 결과** — 왼쪽 applicative style 은 네 칸을 모두 평가해 오류 4 건을 누적합니다. 오른쪽 monadic style 은 첫 칸 (`email`) 실패에서 멈춰 나머지 세 칸을 평가하지 않고 오류 1 건만 냅니다. 옳고 그름이 아니라 도메인이 의미를 고릅니다.
 
 어느 어법이 더 옳은 것은 아닙니다. **도메인이 의미를 고릅니다.** 회원가입 폼처럼 칸이 서로 독립이면 모든 오류를 한 번에 보여 주는 누적 (applicative) 이 친절합니다. 사용자 조회 다음 권한 조회 다음 데이터 조회처럼 앞이 성공해야 뒤가 의미를 갖는 의존 사슬이면, 첫 실패에서 멈추는 단락 (monadic) 이 자연스럽습니다. 5장 `Apply` 와 7장 `Bind` 의 차이가 도메인 선택의 기준이 됩니다.
 
@@ -242,7 +243,7 @@ flowchart TB
     MOR --> MOE["예: 조회 → 권한 → 데이터 (의존 사슬)"]
 ```
 
-**그림 8-4. 누적이냐 단락이냐: 도메인이 고르는 갈림길** — 검증할 칸들이 서로 독립이면 모든 오류를 모으는 applicative 누적 (`Apply` 사슬) 이, 앞 단계가 성공해야 다음이 의미를 갖는 의존 사슬이면 첫 오류에서 멈추는 monadic 단락 (`Bind`) 이 자연스럽습니다. 어느 쪽이 옳은 것이 아니라 도메인이 의미를 고르는 선택입니다.
+**그림 8-4. 누적이냐 단락이냐: 도메인이 고르는 갈림길** — 검증할 칸들이 서로 독립이면 모든 오류를 모으는 applicative 누적 (`Apply` 사슬) 이, 앞 단계가 성공해야 다음이 의미를 갖는 의존 사슬이면 첫 오류에서 멈추는 monadic 단락 (`Bind`) 이 자연스럽습니다. 도메인이 의미를 고르는 자리입니다.
 
 ---
 
@@ -315,11 +316,11 @@ ConfigValidator.Parse("api.example.com", 8080, 30);
 // → Valid(ServerConfig(api.example.com:8080, 30s))                    (통과)
 ```
 
-도메인이 회원가입에서 설정으로 바뀌었어도 코드 골격은 똑같습니다. `Curry.Of` 로 생성자를 굽고, `Pure` 로 올리고, 칸마다 `Apply` 를 잇습니다. 누적은 도메인이 아니라 `Apply` 의 `Invalid + Invalid` 분기가 책임지므로, 독립 검증이 있는 어느 도메인에든 그대로 옮겨집니다. 폼·API 요청·설정 파일이 실무에서 모두 이 한 패턴을 공유합니다.
+도메인이 회원가입에서 설정으로 바뀌었어도 코드 골격은 똑같습니다. `Curry.Of` 로 생성자를 굽고, `Pure` 로 끌어올리고, 칸마다 `Apply` 를 잇습니다. 누적은 도메인이 아니라 `Apply` 의 `Invalid + Invalid` 분기가 책임지므로, 독립 검증이 있는 어느 도메인에든 그대로 옮겨집니다. 폼·API 요청·설정 파일이 실무에서 모두 이 한 패턴을 공유합니다.
 
 ### 8.9.2 칸 하나에 규칙 여럿 — 같은 누적이 한 칸 안에서도
 
-누적의 단위가 "칸" 이 아니라는 변형 하나를 더 봅니다. 한 칸에 규칙이 여럿일 때가 있습니다. 비밀번호는 8 자 이상이면서, 숫자를 포함하고, 대문자를 포함해야 한다고 합니다. 세 규칙 중 하나만 어겨도 나머지를 마저 알려 주는 게 친절합니다. 칸과 칸 사이에서 쓰던 `Apply` 누적이 한 칸 안에서도 그대로 작동합니다. (여기서는 앞서 본 정상 조립과 달리 운반 값이 필요 없어, 통과 규칙이 `Pure("")` 로 자리만 채우고 실제로는 오류 채널의 누적만 씁니다.)
+누적의 단위가 "칸" 이 아니라는 변형 하나를 더 봅니다. 한 칸에 규칙이 여럿일 때가 있습니다. 비밀번호는 8 자 이상이면서, 숫자를 포함하고, 대문자를 포함해야 한다고 합니다. 세 규칙 중 하나만 어겨도 나머지를 마저 알려 주는 게 친절합니다. 칸과 칸 사이에서 쓰던 `Apply` 누적이 한 칸 안에서도 그대로 작동합니다. 다만 여기서는 앞서 본 정상 조립과 달리 운반 값이 필요 없어, 통과 규칙이 `Pure("")` 로 자리만 채우고 실제로는 오류 채널의 누적만 씁니다.
 
 ```csharp
 // 규칙 하나 — 통과면 Valid, 실패면 오류 1 건. 운반 값은 쓰지 않습니다.
@@ -466,7 +467,7 @@ PasswordRules.Strong("Passw0rd");   // → Valid(Password)                      
 
 > **Q5. 다인자 검증은 어떻게 조립합니까?** (8.5절)
 
-`User` 생성자를 `Curry.Of` 로 curry 하고, `Pure` 로 Elevated 에 올린 뒤 `Apply` 를 칸 수 (넷) 만큼 잇습니다. `Pure(curried).Apply(email).Apply(password).Apply(age).Apply(tier)` 사슬입니다. 5장의 `Curry → Pure → N×Apply` 다인자 끌어올림 패턴 그대로이고, 네 칸이 모두 `Valid` 일 때만 `User` 가 조립됩니다.
+`User` 생성자를 `Curry.Of` 로 curry 하고, `Pure` 로 Elevated 로 끌어올린 뒤 `Apply` 를 칸 수 (넷) 만큼 잇습니다. `Pure(curried).Apply(email).Apply(password).Apply(age).Apply(tier)` 사슬입니다. 5장의 `Curry → Pure → N×Apply` 다인자 끌어올림 패턴 그대로이고, 네 칸이 모두 `Valid` 일 때만 `User` 가 조립됩니다.
 
 > **Q6. 폼은 누적, 의존 사슬은 단락인 이유는?** (8.7절)
 

@@ -55,7 +55,7 @@ public static int SumImperative(int[] numbers)
 }
 ```
 
-`sum` 변수가 매 루프 반복마다 덮어쓰여집니다. 코드를 읽을 때 우리는 "sum 이 지금 얼마인가" 를 머릿속에서 따라가야 합니다. 짧은 함수에서는 어렵지 않지만, 함수가 길어지고 변수가 많아질수록 각 변수의 현재 값을 추적하는 인지 비용이 누적됩니다.
+매 루프 반복마다 `sum` 에 새 값을 덮어씁니다. 코드를 읽을 때 우리는 "sum 이 지금 얼마인가" 를 머릿속에서 따라가야 합니다. 짧은 함수에서는 어렵지 않지만, 함수가 길어지고 변수가 많아질수록 각 변수의 현재 값을 추적하는 인지 비용이 누적됩니다.
 
 ### 1.2.2 명령형의 강점
 
@@ -106,7 +106,7 @@ counter.Value = counter.Value + 1;   // ① 읽기 → ② 더하기 → ③ 쓰
 counter.Value = counter.Value + 1;
 ```
 
-두 스레드가 동시에 ① 을 실행하면 둘 다 같은 값을 읽습니다. 그 후 둘 다 그 값 + 1 을 ③ 쓰기. 결과는 2 가 아니라 1. 카운터가 한 번만 증가했습니다. 한 번의 증가가 유실됩니다.
+두 스레드가 동시에 ① 을 실행하면 둘 다 같은 값을 읽습니다. 그 후 둘 다 그 값에 1 을 더해 ③ 에서 씁니다. 결과는 2 가 아니라 1 입니다. 카운터가 한 번만 증가했습니다. 한 번의 증가가 유실됩니다.
 
 명령형 패러다임으로는 이 함정을 원리적으로 막기 어렵습니다. 락 / `lock` / `Interlocked` 같은 도구로 부분적으로 풀 수 있지만, 큰 코드에서는 어디 락이 빠졌는지를 모두 추적하기가 매우 어렵습니다. 그래서 큰 시스템에서는 명령형과 동시성의 조합이 가장 큰 비용을 낳습니다.
 
@@ -382,11 +382,11 @@ int SumOfSquaresOfEvensFunctional(int[] numbers) =>
 - 객체 다형성 (subtype polymorphism) — 능력이 객체에 묶이고 런타임에 해소됩니다. 결과로 `List.Sum`, `Set.Sum`, `Tree.Sum` 을 컨테이너마다 각자 정의해야 합니다 (N × M 비용).
 - trait 다형성 (ad-hoc polymorphism via type class) — 능력이 타입에 부착되고 컴파일 타임에 해소됩니다 (C# 11+ 의 static abstract)[^dispatch]. 결과로 `Sum` 을 한 번 정의 + Foldable trait 부착 N 번으로 모든 Foldable 에 자동 적용됩니다 (N + M 비용). 런타임 분기가 없어 컴파일 타임 안전성도 함께 확보됩니다.
 
-[^dispatch]: 객체 다형성의 런타임 dispatch 는 *vtable* (C# / Java 의 가상 메서드 테이블) 또는 *dictionary passing* (Haskell 의 type class 구현 기법) 으로 구현됩니다. trait 다형성의 컴파일 시 dispatch 는 *monomorphization* (단형화, Rust 의 구현 기법) 또는 C# 11+ 의 static abstract member 로 구현됩니다. 가상 호출 비용이 없습니다.
+[^dispatch]: 객체 다형성의 런타임 dispatch 는 *vtable* (C# / Java 의 가상 메서드 테이블) 또는 *dictionary passing* (Haskell 의 type class 구현 기법) 으로 구현됩니다. trait 다형성의 컴파일 시 dispatch 는 *monomorphization* (단형화, Rust 의 구현 기법) 또는 C# 11+ 의 static abstract member 로 구현됩니다. 가상 호출 비용이 없습니다. 이 구현 기법 이름들은 배경 지식일 뿐이라 지금 외울 필요가 없습니다. trait 부착이 런타임 분기 없이 컴파일 시 해소된다는 결론만 가져가면 충분합니다.
 
-앞 절에서 본 능력이 어디 사는가의 자연스러운 연속입니다.
+앞 절에서 능력이 어디 사는가를 물었습니다. 둘째 축은 그 물음을 자연스럽게 잇습니다.
 
-**셋째, 합성 가능성 (연산 차원)** — 위 두 축이 합쳐지면 두 세계 사이 끌어올림이 합성 법칙을 자연스럽게 만족합니다. 예를 들어 `Map(g ∘ f) = Map(g) ∘ Map(f)` 같은 등식이 효과 컨테이너 위에서도 그대로 성립합니다. 함수형 추상의 모든 법칙이 이 합성 가능성의 형식화입니다 (4장 Functor 의 두 법칙으로 이어집니다).
+**셋째, 합성 가능성 (연산 차원)** — 위 두 축이 합쳐지면 두 세계 사이 끌어올림이 합성 법칙을 자연스럽게 만족합니다. 예를 들어 `Map(g ∘ f) = Map(g) ∘ Map(f)` (여기서 `g ∘ f` 는 f 를 먼저 적용하고 그 결과에 g 를 적용하는 함수 합성) 같은 등식이 효과 컨테이너 위에서도 그대로 성립합니다. 함수형 추상의 모든 법칙이 이 합성 가능성의 형식화입니다 (4장 Functor 의 두 법칙으로 이어집니다).
 
 > **어휘 정리** — *type class* 는 Haskell 의 표준 명칭, *trait* 은 Scala·Rust·C# 11+ 의 명칭, *interface* 는 Java·C# 의 명칭입니다. 세 어휘 모두 같은 발상의 다른 표현입니다. 능력의 약속을 객체가 아닌 타입의 부착으로 정의합니다. 이 책의 본문은 LanguageExt v5 의 어휘를 따라 *trait* 으로 통일합니다 (코드의 `interface Functor<F>` 와 호환). 자세한 어휘 매핑은 [`style/fp-terminology.md`](../style/fp-terminology.md) 참조.
 

@@ -21,8 +21,6 @@
 > - [ ] `lift1 = map` 이 같은 함수의 두 어휘임을 시그니처로 답할 수 있습니다.
 > - [ ] applicative 누적과 monadic 단락이 왜 시그니처 단계에서 갈리는지 답할 수 있습니다.
 
-> 참고 — 이 장의 Elevated World 어휘는 Scott Wlaschin 의 "Map and Bind and Apply, Oh My!" 시리즈 (<https://fsharpforfunandprofit.com/posts/elevated-world/>) 의 어휘 분류를 따릅니다. 그 시리즈 1 부 "Lifting to the elevated world" 의 `apply` · `liftN` 절이 이 장의 직접 대응 글입니다.
-
 ---
 
 ## 5.1 `map` 만으로는 풀 수 없는 다인자 함수 — 목적

@@ -25,7 +25,7 @@
 
 ### 10.1.1 왜 필요한가 — 한쪽만 바꾸는 보일러플레이트
 
-`Either<L, R>` 에 4장의 Functor 만 부착하면 무엇이 번거로운지 먼저 겪어 봅니다. Functor 의 `map` 은 컨테이너 안의 값 하나만 변환합니다. `Either<string, int>` 를 성공값 `int` 에 대한 Functor 로 보면 성공값은 `map` 으로 바꿀 수 있지만, 오류 타입 `string` 을 다른 타입 (예: `ErrorCode`) 으로 바꾸려면 `map` 으로는 바꿀 수 없습니다. 손으로 `Left` / `Right` 를 분해해 다시 조립합니다.
+`Either<L, R>` 에 4장의 Functor 만 부착하면 무엇이 번거로운지 먼저 겪어 봅니다. `Either<L, R>` 는 두 갈래 중 하나를 담는 컨테이너로, 관례상 왼쪽 `L` 에 실패를, 오른쪽 `R` 에 성공을 둡니다. Functor 의 `map` 은 컨테이너 안의 값 하나만 변환합니다. `Either<string, int>` 를 성공값 `int` 에 대한 Functor 로 보면 성공값은 `map` 으로 바꿀 수 있지만, 오류 타입 `string` 을 다른 타입 (예: `ErrorCode`) 으로 바꾸려면 `map` 으로는 바꿀 수 없습니다. 손으로 `Left` / `Right` 를 분해해 다시 조립합니다.
 
 ```csharp
 // 오류 타입만 string → ErrorCode 로 바꾸려면 — 손으로 분해·재조립
@@ -189,7 +189,7 @@ public sealed class EitherF : Bifunctor<EitherF>
 }
 ```
 
-`Either<L, R>` 의 `MapSecond` 가 곧 성공값만 변환하는 평범한 Functor `map` 이고, `MapFirst` 는 오류 타입을 변환하는 자리입니다. 두 갈래를 한 번에 다루는 능력이 Bifunctor 입니다.
+여기서 자료 선언의 성공 자리 `R` 은, 2-인자 마커 `K<F, L, A>` 어휘를 따르는 `BiMap` 본문에서 `A` 로 나타납니다 (`Right<L, R>` 의 `R` 과 `Right<L, A>` 의 `A` 는 같은 둘째 자리입니다). `Either<L, R>` 의 `MapSecond` 가 곧 성공값만 변환하는 평범한 Functor `map` 이고, `MapFirst` 는 오류 타입을 변환하는 자리입니다. 두 갈래를 한 번에 다루는 능력이 Bifunctor 입니다.
 
 세 경우를 손으로 굴려 호출 횟수를 봅니다. `first = s => s.ToUpper()`, `second = n => n * 2` 라 합니다.
 
@@ -203,7 +203,7 @@ public sealed class EitherF : Bifunctor<EitherF>
 
 ![Functor 는 한쪽, Bifunctor 는 양쪽](./images/Ch10-Bifunctor/02-bifunctor-vs-functor.svg)
 
-**그림 10-2. Functor vs Bifunctor: 한쪽 변환과 양쪽 변환** — 위는 Functor 의 `map` 으로 `Either<L, R>` 의 둘째 인자 `R` 만 변환하고 `L` 은 손대지 못합니다. 아래는 Bifunctor 의 `BiMap` 으로 두 인자 `L`, `R` 을 모두 변환합니다. `MapSecond` 가 곧 Functor 의 `map` 이므로 Bifunctor 는 Functor 를 포함합니다.
+**그림 10-2. Functor vs Bifunctor: 한쪽 변환과 양쪽 변환** — 위는 Functor 의 `map` 으로 `Either<L, R>` 의 둘째 인자 `R` 만 변환하고 `L` 은 손대지 못합니다. 아래는 Bifunctor 의 `BiMap` 으로 두 인자 `L`, `R` 을 모두 변환합니다. 한쪽만 바꾸는 변환과 양쪽을 바꾸는 변환의 대비입니다.
 
 ### 10.4.1 실전 — 계층 사이 오류 매핑
 
@@ -238,7 +238,7 @@ Bifunctor 위에 두 인자 버전의 Applicative 와 Monad 가 쌓입니다. v5
 Biapplicative 는 5장 Applicative 의 `apply` 를 두 인자로 일반화합니다. 두 자리에 각각 함수를 담은 컨테이너로, 두 자리의 값을 동시에 적용합니다.
 
 ```text
-BiApply : F<(A → C), (B → D)> → F<A, B> → F<C, D>
+BiApply : F<(L → M), (A → B)> → F<L, A> → F<M, B>
 ```
 
 구체값으로 한 번 굴려 봅니다. 두 자리에 각각 함수를 담은 `Pair` 를 두 값을 담은 `Pair` 에 적용합니다. (아래 `BiPure` 는 두 값을 각 자리에 올리는 이 책의 보조 함수입니다. v5 trait 에는 없고 예제 입력을 만드는 용도로만 씁니다.)
@@ -255,23 +255,23 @@ PairF.BiApply(fns, vals);               // → Pair(11, 5)
 
 Bimonad 는 Bifunctor 를 상속해 두 갈래 각각에 `bind` 를 제공합니다. 1-인자 trait 의 가족 (Functor → Applicative → Monad) 이 2-인자에서 (Bifunctor → Biapplicative → Bimonad) 로 평행하게 반복됩니다. 학습 흐름은 같습니다. 한 인자에서 익힌 끌어올림이 두 인자로 늘어날 뿐입니다.
 
-> **여기까지의 안전망** — Bimonad 는 두 갈래 각각에 `BindFirst` / `BindSecond` 두 멤버로 `bind` 를 제공합니다 (LanguageExt v5 의 실제 멤버 이름). 두 갈래를 동시에 잇는 일이 까다로워 v5 에서도 제약이 많습니다. 지금은 1-인자 가족이 2-인자로 평행하게 늘어난다는 큰 그림만 가져가면 충분합니다. 세부 구현은 이 책의 범위를 넘습니다.
+> **여기까지의 안전망** — Bimonad 는 두 갈래 각각에 `BindFirst` / `BindSecond` 두 멤버로 `bind` 를 제공합니다 (LanguageExt v5 의 실제 멤버 이름). 7장 Monad 의 `bind` 가 한 갈래의 값을 꺼내 다음 단계 함수에 넘겨 이었듯, `BindFirst` 는 첫 갈래에서만, `BindSecond` 는 둘째 갈래에서만 그 잇기를 합니다. 두 갈래를 동시에 잇는 일이 까다로워 v5 에서도 제약이 많습니다. 지금은 1-인자 가족이 2-인자로 평행하게 늘어난다는 큰 그림만 가져가면 충분합니다. 세부 구현은 이 책의 범위를 넘습니다.
 
 ![1-인자 가족과 2-인자 가족의 평행](./images/Ch10-Bifunctor/03-family-parallel.svg)
 
-**그림 10-3. trait 가족의 평행: 인자 하나가 인자 둘로** — 위는 1-인자 마커 `K<F, A>` 위의 Functor → Applicative → Monad, 아래는 2-인자 마커 `K<F, L, A>` 위의 Bifunctor → Biapplicative → Bimonad 입니다. 세로 점선이 평행한 자리를 잇습니다. 기초에서 익힌 한 인자 가족이 두 인자로 그대로 늘어날 뿐, 새 메커니즘이 아닙니다. `MapSecond` 가 곧 Functor 의 `Map` 이라 Bifunctor 는 Functor 를 포함합니다.
+**그림 10-3. trait 가족의 평행: 인자 하나가 인자 둘로** — 위는 1-인자 마커 `K<F, A>` 위의 Functor → Applicative → Monad, 아래는 2-인자 마커 `K<F, L, A>` 위의 Bifunctor → Biapplicative → Bimonad 입니다. 세로 점선이 평행한 자리를 잇습니다. 기초에서 익힌 한 인자 가족이 두 인자로 그대로 늘어날 뿐, 새 메커니즘이 아닙니다.
 
 ---
 
 ## 10.6 Bifoldable — Foldable 의 2-인자 대칭
 
-4장 Functor 에 6장 Foldable 이 대응하듯, Bifunctor 에는 Bifoldable 이 대응합니다. 두 갈래를 각각 접어 한 값으로 끌어내리는 추상입니다. 아래 `BiFold` 는 v5 에 없어 빌드 대상이 아니라, 다른 절의 빌드 가능한 시그니처와 달리 평행 자리를 보이는 모양으로만 둡니다.
+4장 Functor 에 6장 Foldable 이 대응하듯, Bifunctor 에는 Bifoldable 이 대응합니다. 두 갈래를 각각 접어 한 값으로 끌어내리는 추상입니다.
 
 ```text
 BiFold : (S → L → S) → (S → A → S) → S → F<L, A> → S
 ```
 
-다만 Bifoldable 은 LanguageExt v5 의 trait 으로는 제공되지 않습니다. 그래서 이 책에서는 별도 챕터로 다루지 않고, Bifunctor 의 대칭 자리로만 짚습니다. `BiMap` 이 두 인자를 변환한다면 `BiFold` 는 두 인자를 끌어내린다는 평행만 기억하면 충분합니다.
+여기서 `S` 는 6장 Foldable 의 `fold` 에서 본 누적자 (seed) 로, 두 함수가 각각 `L` 갈래와 `A` 갈래를 그 누적자에 접어 넣습니다. `BiFold` 는 LanguageExt v5 trait 에는 없어 빌드 대상이 아니라, 시그니처로만 Bifunctor 의 대칭 자리를 짚고 넘어갑니다. `BiMap` 이 두 인자를 변환한다면 `BiFold` 는 두 인자를 끌어내린다는 평행만 기억하면 충분합니다.
 
 ---
 
@@ -347,11 +347,14 @@ static Pair<int, int> BogusBiMapTwice(Func<int, int> first, Func<int, int> secon
     new(first(first(p.First)), second(p.Second));   // first 를 두 번
 ```
 
-항등 함수를 넣으면 `id(id(x)) == x` 이므로 `Pair(3, 5)` 가 그대로 `Pair(3, 5)` 입니다. 항등 법칙은 통과합니다. 그런데 합성 법칙은 깨집니다. `first = n => n + 1`, `g = n => n * 2` 로 두 단계를 합성해 보면, 한 번에 합성한 결과와 두 번 나눠 적용한 결과가 첫 자리에서 갈립니다.
+항등 함수를 넣으면 `id(id(x)) == x` 이므로 `Pair(3, 5)` 가 그대로 `Pair(3, 5)` 입니다. 항등 법칙은 통과합니다. 그런데 합성 법칙은 깨집니다. `first = n => n + 1`, `g = n => n * 2` 로 두 단계를 합성해 보면, 한 번에 합성한 결과와 두 번 나눠 적용한 결과가 첫 자리에서 갈립니다. 여기서 `first` 는 합성 법칙의 `f1`, `g` 는 `g1` 에 해당합니다.
 
 ```text
-한 번에:  BiMap(g∘first, …)            첫 자리 = (g∘first)((g∘first)(3)) = 2 * ((2 * (3 + 1)) + 1) = 18
-나눠서:   BiMap(g, …, BiMap(first, …)) 첫 자리 = g(g(first(first(3))))     = 2 * (2 * ((3 + 1) + 1)) = 20
+한 번에:  BiMap((g∘first), …) — 합성 함수 (g∘first) 를 첫 자리에 두 번
+          (g∘first)(3) = g(3 + 1) = 8,   (g∘first)(8) = g(8 + 1) = 18
+
+나눠서:   BiMap(first, …) 먼저, 그 위에 BiMap(g, …) — 각 단계가 자기 함수를 두 번
+          first(first(3)) = first(4) = 5,   g(g(5)) = g(10) = 20
 ```
 
 `18 ≠ 20`. 항등 함수만으로는 드러나지 않던 결함이 합성에서 드러납니다. 그래서 두 법칙을 따로 확인합니다.
@@ -401,7 +404,7 @@ static Pair<int, int> BogusBiMapTwice(Func<int, int> first, Func<int, int> secon
 > **본문 어느 자리의 이해도를 묻는가**
 >
 > 1. `BiMap` 이 두 함수로 두 인자를 동시에 변환한다는 것.
-> 2. `MapSecond` 가 둘째 인자만 변환해 Functor 의 `map` 과 같다는 것 (Bifunctor ⊃ Functor).
+> 2. `MapSecond` 가 둘째 인자만 변환해 Functor 의 `map` 과 같다는 것 (Bifunctor 가 Functor 를 포함).
 >
 > **해보기**
 >

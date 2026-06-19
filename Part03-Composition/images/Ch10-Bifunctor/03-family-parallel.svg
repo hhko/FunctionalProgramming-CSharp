@@ -47,13 +47,13 @@
 
   <rect x="440" y="262" width="160" height="58" fill="#e8f4fd" stroke="#1f77b4" stroke-width="3" rx="6"/>
   <text x="520" y="289" font-size="14" fill="#0c3a5e" text-anchor="middle" font-weight="bold">Biapplicative</text>
-  <text x="520" y="309" font-size="11" fill="#0c3a5e" text-anchor="middle">BiPure + BiApply</text>
+  <text x="520" y="309" font-size="11" fill="#0c3a5e" text-anchor="middle">BiApply</text>
 
   <line x1="602" y1="291" x2="698" y2="291" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
 
   <rect x="700" y="262" width="160" height="58" fill="#e8f4fd" stroke="#1f77b4" stroke-width="3" rx="6"/>
   <text x="780" y="289" font-size="14" fill="#0c3a5e" text-anchor="middle" font-weight="bold">Bimonad</text>
-  <text x="780" y="309" font-size="11" fill="#0c3a5e" text-anchor="middle">BiBind</text>
+  <text x="780" y="309" font-size="11" fill="#0c3a5e" text-anchor="middle">BindFirst / BindSecond</text>
 
-  <text x="470" y="378" font-size="12" fill="#5a4400" text-anchor="middle">MapSecond 가 곧 Functor 의 Map — Bifunctor 는 Functor 를 포함합니다</text>
+  <text x="470" y="378" font-size="12" fill="#5a4400" text-anchor="middle">세로 점선이 1-인자 가족과 2-인자 가족의 평행한 자리를 잇습니다</text>
 </svg>

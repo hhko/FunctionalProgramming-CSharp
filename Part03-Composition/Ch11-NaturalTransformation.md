@@ -72,7 +72,7 @@ Transform : K<F, A> → K<G, A>
 
 1장 지도 위에 놓으면 이 변환의 자리가 또렷합니다. 기본 4 가지 함수 유형은 모두 한 컨테이너 안에서의 이동이었고, 층 swap (9장, 다섯 번째 이동) 도 컨테이너의 겹침 순서만 다뤘습니다. NaturalTransformation 은 1장 지도가 예약해 둔 마지막 칸, **컨테이너 자체를 바꾸는 여섯 번째 이동** 입니다. 이 이동으로 기초의 지도가 완성됩니다.
 
-![1장 지도의 확장 — 컨테이너 교체](./images/Ch11-NaturalTransformation/00-map-extension.svg)
+![1장 지도의 확장 — 컨테이너 교체](./images/Ch11-NaturalTransformation/01-map-extension.svg)
 
 **그림 11-1. 1장 지도의 여섯 번째 이동: 컨테이너 교체** — 1장 그림 1-2 와 같은 두 세계 좌표 위입니다. `Transform` 이 값 `a` 를 고정한 채 컨테이너만 `F` 에서 `G` 로 옮기는 Elevated World 안의 가로 이동입니다. 아래 Normal World 의 값 `a` 가 양쪽 컨테이너에 점선으로 그대로 이어져, 변환이 값과 무관하다는 자연성의 직감을 보여 줍니다.
 
@@ -159,7 +159,7 @@ MaybeToList.Transform(MyMaybe<int>.Nothing);       // []
 
 > **표기 안내** — 본문은 읽기 편하도록 변환 trait 을 `Natural<F, G>` 로 줄여 적지만, 실제 trait 선언은 variance 를 단 `Natural<out F, in G>` 입니다 (앞서 본 trait 코드). `out` / `in` 의 정확한 정의는 2장의 `K<in F, A>` 마커에서 짚은 변성 직감에 기대고, 여기서는 `F` 가 출발 컨테이너, `G` 가 도착 컨테이너라는 한 줄만 가져가면 충분합니다.
 
-![MyList 를 MyMaybe 로 — 값은 그대로, 컨테이너만 교체](./images/Ch11-NaturalTransformation/01-container-swap.svg)
+![MyList 를 MyMaybe 로 — 값은 그대로, 컨테이너만 교체](./images/Ch11-NaturalTransformation/03-container-swap.svg)
 
 **그림 11-3. 컨테이너 교체: `MyList<a>` → `MyMaybe<a>`** — 왼쪽 `MyList<a>` 의 값 `a` (여기서는 `int`) 가 오른쪽 `MyMaybe<a>` 로 옮겨집니다. 값 타입 `a` 는 입력과 출력에서 같고, 바뀌는 것은 컨테이너 (`MyList` → `MyMaybe`) 뿐입니다.
 
@@ -175,7 +175,7 @@ Transform(F.Map(f, fa)) == G.Map(f, Transform(fa))
 
 왼쪽은 출발 컨테이너 `F` 에서 `map(f)` 를 적용한 뒤 `G` 로 옮긴 것이고, 오른쪽은 먼저 `G` 로 옮긴 뒤 `G` 에서 `map(f)` 를 적용한 것입니다. 두 경로가 같은 결과를 낸다는 약속입니다.
 
-![자연성 사각형 — 두 경로가 같은 결과로 만난다](./images/Ch11-NaturalTransformation/03-naturality-square.svg)
+![자연성 사각형 — 두 경로가 같은 결과로 만난다](./images/Ch11-NaturalTransformation/04-naturality-square.svg)
 
 **그림 11-4. 자연성 사각형: 두 경로가 같은 결과** — 가로 화살표 (`F.Map(f)`, `G.Map(f)`) 는 컨테이너를 고정한 채 값을 `a` 에서 `b` 로 바꾸고, 세로 화살표 (`Transform`) 는 값을 고정한 채 컨테이너를 `F` 에서 `G` 로 바꿉니다. 왼쪽 위에서 오른쪽 아래로 가는 두 경로 (가로 먼저 또는 세로 먼저) 가 같은 결과로 만나는 것이 자연성 법칙입니다. 값을 들여다보는 변환은 이 사각형이 닫히지 않습니다.
 
@@ -276,7 +276,7 @@ SequenceNat.Transform([Just(1), Nothing]);    // → Nothing
 
 9장의 층 swap 이 11장의 `Transform` 과 같은 멤버임이 코드로 닫힙니다. 비유 (컨테이너 사이의 다리) 와 `K<F, A>` 어휘 (`Natural<F, G>`) 와 실행 (`Just([1, 2])`) 세 가지가 한 자리에서 만납니다.
 
-![sequence 는 합성 컨테이너 사이의 NaturalTransformation](./images/Ch11-NaturalTransformation/04-sequence-as-nt.svg)
+![sequence 는 합성 컨테이너 사이의 NaturalTransformation](./images/Ch11-NaturalTransformation/05-sequence-as-nt.svg)
 
 **그림 11-5. `sequence` 는 합성 컨테이너 사이의 NaturalTransformation** — 왼쪽 `MyList<MyMaybe<int>>` (F = List∘Maybe) 의 `[Just(1), Just(2)]` 가 `sequence` 로 오른쪽 `MyMaybe<MyList<int>>` (G = Maybe∘List) 의 `Just([1, 2])` 가 됩니다. 값 `1`, `2` 는 그대로이고 두 층의 안팎만 뒤집힙니다. `sequence` 가 곧 `Transform : K<F, a> → K<G, a>` 입니다.
 

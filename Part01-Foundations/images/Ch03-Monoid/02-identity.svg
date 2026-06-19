@@ -25,7 +25,7 @@
 
   <!-- Bottom: empty input fold -->
   <rect x="30" y="198" width="920" height="180" fill="#f4f9ff" rx="12"/>
-  <text x="52" y="224" font-size="13" fill="#1f77b4" font-weight="bold">② 빈 입력의 답이 된다  —  Empty 한 자리가 §3.2.3 의 어긋남을 없앤다</text>
+  <text x="52" y="224" font-size="13" fill="#1f77b4" font-weight="bold">② 빈 입력의 답이 된다  —  Empty 한 자리가 앞서 본 빈 입력 어긋남을 없앤다</text>
 
   <g font-family="'Consolas', monospace" font-size="14" fill="#0c3a5e">
     <text x="70" y="258">combine( [] )</text>
