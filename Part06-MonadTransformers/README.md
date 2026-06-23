@@ -91,7 +91,7 @@ dotnet run --project code/Part06-MonadTransformers/Ch21-OptionT-EitherT/Ch21.csp
 dotnet run --project code/Part06-MonadTransformers/Ch22-MonadIO/Ch22.csproj
 ```
 
-코드 예제 요약 — Ch19 은 `OptionT<ManyF, int>` (비결정성 + 실패) 로 `lift` 와 첫 변환기를, Ch20 은 `ReaderT<int, OptionF>` (18장 ReaderOption 이 공짜로) 와 `StateT<Stack, OptionF>` (상태 + 실패) 를, Ch21 은 `EitherT<string, ManyF>` 로 실패에 이유를 남기는 것과 스택 순서의 의미를, Ch22 는 `ReaderT<int, IOF>` 에서 `LiftIO` 로 IO 를 끌어올리며 `Run(env)` 가 IO 를 조립만 하고 `io.Run()` 에서야 부수 작용이 일어나는 지연을 보입니다. 이 스택이 곧 7부 `Eff<RT, A> = ReaderT<RT, IO, A>` 의 축소판입니다. 모든 변환기는 모나드 세 법칙 검증을 통과합니다.
+코드 예제 요약 — Ch19 은 `OptionT<ManyF, int>` (비결정성 + 실패) 로 `lift` 와 첫 변환기를, Ch20 은 `ReaderT<int, OptionF>` (18장 ReaderOption 이 공짜로) 와 `StateT<Stack, OptionF>` (상태 + 실패) 를, Ch21 은 `EitherT<string, ManyF>` 로 실패에 이유를 남기는 것과 스택 순서의 의미를, Ch22 는 `ReaderT<int, IOF>` 에서 `LiftIO` 로 IO 를 끌어올리며 `Run(env)` 가 IO 를 조립만 하고 `io.Run()` 에서야 부수 효과가 일어나는 지연을 보입니다. 이 스택이 곧 7부 `Eff<RT, A> = ReaderT<RT, IO, A>` 의 축소판입니다. 모든 변환기는 모나드 세 법칙 검증을 통과합니다.
 
 학습용 변환기는 LanguageExt v5 의 표현 (`ReaderT = Func<Env, K<M,A>>`, `OptionT = K<M, Option<A>>` 등) 과 정합합니다. 단, `MonadIO` 는 라이브러리의 런타임 "LiftIOMaybe" 방식 대신 내부 M 을 `MonadIO<M>` 로 제약하는 컴파일타임 안전 버전으로 단순화했습니다.
 

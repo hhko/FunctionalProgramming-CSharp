@@ -77,7 +77,7 @@ dotnet run --project code/Part10-Streaming/Ch34-Pipes/Ch34.csproj
 dotnet run --project code/Part10-Streaming/Ch35-Conduit/Ch35.csproj
 ```
 
-코드 예제 요약 — Ch33 은 당김 기반 lazy `StreamT` 로 무한 스트림을 `Take` 로 유한 소비하고, 당긴 만큼만 부수 작용이 일어남(무한 소수 체 포함)을 보입니다. Ch34 은 `Producer`/`Pipe`/`Consumer` 를 `Through`/`Then`/`Run`(= `producer | pipe | consumer`) 으로 합성하고, 무한 `Producer` + `Take` 로 역압(backpressure) 을 실증합니다. Ch35 는 `Conduit` 변환관과, 열고 반드시 닫는 자원 파이프라인 위 ETL(파싱→필터→합산, 예외에도 close 보장)을 8부 bracket 과 결합해 보입니다.
+코드 예제 요약 — Ch33 은 당김 기반 lazy `StreamT` 로 무한 스트림을 `Take` 로 유한 소비하고, 당긴 만큼만 부수 효과가 일어남(무한 소수 체 포함)을 보입니다. Ch34 은 `Producer`/`Pipe`/`Consumer` 를 `Through`/`Then`/`Run`(= `producer | pipe | consumer`) 으로 합성하고, 무한 `Producer` + `Take` 로 역압(backpressure) 을 실증합니다. Ch35 는 `Conduit` 변환관과, 열고 반드시 닫는 자원 파이프라인 위 ETL(파싱→필터→합산, 예외에도 close 보장)을 8부 bracket 과 결합해 보입니다.
 
 학습용 구현은 LanguageExt v5 의 발상과 정합합니다 (당김 기반 스트림, Producer/Consumer/Pipe 합성, Conduit). 단, 내부 모나드 M 을 지연 pull 로 고정하고 `Conduit` 을 `IEnumerable` 변환으로 단순화했습니다 (외부 의존 0).
 

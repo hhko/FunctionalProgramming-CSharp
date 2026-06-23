@@ -14,7 +14,7 @@ public sealed class Eff<A> : K<EffF, A>
 
     public Fin<A> Run() => run();
 
-    // 부수 작용 thunk — 예외가 나면 자동으로 Fail(Error) 로 포획.
+    // 부수 효과 thunk — 예외가 나면 자동으로 Fail(Error) 로 포획.
     public static Eff<A> Effect(Func<A> thunk) =>
         new(() =>
         {

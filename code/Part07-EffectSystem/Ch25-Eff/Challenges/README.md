@@ -6,7 +6,7 @@
 
 ### ① Eff 의 지연 + 오류 포획
 
-`Program.cs` — `Eff.Effect` 로 부수 작용을 조립하되 `Run` 전까지 실행되지 않고, 예외가 나면 자동으로 `Fail(Error)` 로 포획된다. `Bind` 는 첫 실패에서 단락한다.
+`Program.cs` — `Eff.Effect` 로 부수 효과를 조립하되 `Run` 전까지 실행되지 않고, 예외가 나면 자동으로 `Fail(Error)` 로 포획된다. `Bind` 는 첫 실패에서 단락한다.
 
 **노리는 능력** — `Eff<A> ≈ IO<Fin<A>>` — 20장 IO 의 지연과 21장 Fin 의 오류 포획이 한 타입에 합쳐짐을 본다.
 

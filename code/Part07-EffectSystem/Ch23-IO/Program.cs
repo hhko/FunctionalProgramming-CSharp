@@ -8,7 +8,7 @@ Console.WriteLine("20장 — IO (지연 효과 DSL + 스택 안전)");
 Console.WriteLine("================================================");
 Console.WriteLine();
 
-// ── 예제 1 — 지연: Run 전에는 부수 작용이 없다 ─────────────────────
+// ── 예제 1 — 지연: Run 전에는 부수 효과가 없다 ─────────────────────
 Console.WriteLine("== 예제 1 — IO 는 Run 전까지 아무 일도 안 한다 ==");
 
 var log = new List<string>();

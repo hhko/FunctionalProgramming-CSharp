@@ -4,7 +4,7 @@ namespace Ch33.Types;
 internal sealed record Cell<A>(A Head, StreamT<A> Tail);
 
 // StreamT<A> — *효과적 lazy 스트림*. 한 조각을 *당길 때마다* (Pull) 계산이 일어난다.
-// 여기서 효과는 "당길 때 실행되는 부수 작용" (= 내부 모나드 IO 의 한 스텝). Run 전엔 아무 일도 없다.
+// 여기서 효과는 "당길 때 실행되는 부수 효과" (= 내부 모나드 IO 의 한 스텝). Run 전엔 아무 일도 없다.
 //
 // 핵심 — Tail 은 *Pull 될 때만* 계산되므로, 무한/대용량 스트림도 끝까지 materialize 되지 않는다.
 // (LanguageExt v5 의 효과 스트림 발상 — 현행 타입은 SourceT<M,A>, StreamT 는 옛 이름. 내부 M 위에서 한 조각씩 흘림.)
@@ -13,7 +13,7 @@ public sealed class StreamT<A>
     readonly Func<Cell<A>?> pull;
     internal StreamT(Func<Cell<A>?> pull) => this.pull = pull;
 
-    // 한 조각 당기기 — null 이면 끝, 아니면 (머리, 나머지). 이때 부수 작용이 실행된다.
+    // 한 조각 당기기 — null 이면 끝, 아니면 (머리, 나머지). 이때 부수 효과가 실행된다.
     internal Cell<A>? Pull() => pull();
 
     public static StreamT<A> Empty => new(() => null);

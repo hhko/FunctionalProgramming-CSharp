@@ -23,7 +23,7 @@ public static class EffectTests
         return con.Output[^1] == "안녕하세요, 영희!";
     }
 
-    // 부수 작용이 전혀 없다 — 같은 입력은 항상 같은 출력 (결정적).
+    // 부수 효과가 전혀 없다 — 같은 입력은 항상 같은 출력 (결정적).
     public static bool DeterministicHolds()
     {
         string Run()

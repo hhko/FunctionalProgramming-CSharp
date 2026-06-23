@@ -40,7 +40,7 @@ public static class Eff
         from line in IOM.liftIO<ReaderTF<RT, IOF>, string>(new IO<string>(con.ReadLine))
         select line;
 
-    // 효과를 주어진 런타임으로 실행 (Run(rt) 가 IO 를 만들고, IO.Run() 이 부수 작용 수행).
+    // 효과를 주어진 런타임으로 실행 (Run(rt) 가 IO 를 만들고, IO.Run() 이 부수 효과 수행).
     public static A Run<RT, A>(K<ReaderTF<RT, IOF>, A> eff, RT rt) =>
         eff.As().Run(rt).As().Run();
 }

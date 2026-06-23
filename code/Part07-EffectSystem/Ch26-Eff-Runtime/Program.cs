@@ -16,7 +16,7 @@ static K<ReaderTF<RT, IOF>, string> Greet<RT>() where RT : Has<RT, IConsole> =>
     select name;
 
 // ── 예제 1 — 테스트 런타임으로 결정적 실행 ─────────────────────────
-Console.WriteLine("== 예제 1 — 같은 효과 코드 + TestConsole (부수 작용 없이 결정적) ==");
+Console.WriteLine("== 예제 1 — 같은 효과 코드 + TestConsole (부수 효과 없이 결정적) ==");
 
 var test = new TestConsole(["철수"]);
 var returned = Eff.Run(Greet<AppRT>(), new AppRT(test));

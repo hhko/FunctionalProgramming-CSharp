@@ -2,7 +2,7 @@ using Ch26.Traits;
 
 namespace Ch26.Types;
 
-// IO<A> — 지연 부수 작용 (20장의 최소 버전). Eff<RT,A> 스택 맨 안쪽 모나드.
+// IO<A> — 지연 부수 효과 (20장의 최소 버전). Eff<RT,A> 스택 맨 안쪽 모나드.
 public sealed class IO<A>(Func<A> thunk) : K<IOF, A>
 {
     public A Run() => thunk();

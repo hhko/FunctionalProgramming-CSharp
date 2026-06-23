@@ -2,7 +2,7 @@ using Ch22.Traits;
 
 namespace Ch22.Types;
 
-// IO<A> — *지연된 부수 작용*. 내부는 thunk `() → A`. Run() 하기 전엔 아무 일도 안 일어난다.
+// IO<A> — *지연된 부수 효과*. 내부는 thunk `() → A`. Run() 하기 전엔 아무 일도 안 일어난다.
 // (5부에서 본격 DSL/EnvIO 로 확장. 여기선 LiftIO 를 보이기 위한 최소 버전.)
 public sealed class IO<A>(Func<A> thunk) : K<IOF, A>
 {

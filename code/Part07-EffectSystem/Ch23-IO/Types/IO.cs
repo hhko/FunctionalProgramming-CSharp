@@ -10,7 +10,7 @@ public sealed record EnvIO(CancellationToken Token)
 }
 
 // ── 내부 DSL 노드 (object 로 타입 소거) ─────────────────────────────
-// 부수 작용을 *즉시 실행하지 않고* 노드 트리로 인코딩한다. Run 에서야 해석된다.
+// 부수 효과를 *즉시 실행하지 않고* 노드 트리로 인코딩한다. Run 에서야 해석된다.
 internal abstract record Node;
 internal sealed record PureNode(object? Value) : Node;
 internal sealed record EffectNode(Func<object?> Thunk) : Node;
@@ -40,7 +40,7 @@ internal static class Interpreter
                     break;
 
                 case EffectNode e:
-                    var v = e.Thunk();      // ← 부수 작용은 여기서 *비로소* 실행
+                    var v = e.Thunk();      // ← 부수 효과는 여기서 *비로소* 실행
                     if (conts.Count == 0) return v;
                     cur = conts.Pop()(v);
                     break;
@@ -61,7 +61,7 @@ public sealed class IO<A> : K<IOF, A>
     public A Run(EnvIO env) => (A)Interpreter.Run(Node, env)!;
     public A Run() => Run(EnvIO.Default);
 
-    // 부수 작용 thunk 로부터 IO 생성 (예: Console 출력).
+    // 부수 효과 thunk 로부터 IO 생성 (예: Console 출력).
     public static IO<A> Effect(Func<A> thunk) => new(new EffectNode(() => thunk()));
 }
 

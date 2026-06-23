@@ -39,7 +39,7 @@ public interface Has<RT, TRAIT> where RT : Has<RT, TRAIT>
 
 public readonly record struct Unit { public static readonly Unit Default = new(); }
 
-// IO — 지연 부수 작용.
+// IO — 지연 부수 효과.
 public sealed class IO<A>(Func<A> thunk) : K<IOF, A> { public A Run() => thunk(); }
 
 public sealed class IOF : MonadIO<IOF>

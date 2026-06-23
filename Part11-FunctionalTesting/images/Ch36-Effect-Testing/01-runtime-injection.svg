@@ -30,13 +30,13 @@
   <rect x="110" y="358" width="280" height="124" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
   <text x="250" y="388" font-size="16" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">AppRT(new LiveConsole())</text>
   <text x="250" y="416" font-size="13" fill="#5a4400" text-anchor="middle">실제 콘솔에 쓰고 읽음</text>
-  <text x="250" y="440" font-size="13" fill="#5a4400" text-anchor="middle">운영 (부수 작용 발생)</text>
+  <text x="250" y="440" font-size="13" fill="#5a4400" text-anchor="middle">운영 (부수 효과 발생)</text>
   <text x="250" y="466" font-size="12" fill="#8a6a00" text-anchor="middle" font-style="italic">비결정 · 느림 · 격리 안 됨</text>
 
   <!-- Test runtime -->
   <rect x="530" y="358" width="280" height="124" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
   <text x="670" y="388" font-size="16" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">AppRT(new MemoryConsole(…))</text>
   <text x="670" y="416" font-size="13" fill="#5a4400" text-anchor="middle">입력은 큐, 출력은 리스트로 잡음</text>
-  <text x="670" y="440" font-size="13" fill="#5a4400" text-anchor="middle">테스트 더블 (부수 작용 없음)</text>
+  <text x="670" y="440" font-size="13" fill="#5a4400" text-anchor="middle">테스트 더블 (부수 효과 없음)</text>
   <text x="670" y="466" font-size="12" fill="#8a6a00" text-anchor="middle" font-style="italic">결정적 · 빠름 · 격리됨</text>
 </svg>

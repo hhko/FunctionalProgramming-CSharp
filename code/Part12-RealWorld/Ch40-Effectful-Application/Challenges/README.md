@@ -14,7 +14,7 @@
 
 ### ② 테스트 런타임으로 앱 전체 검증
 
-`Tests/AppTests.cs` — `MemoryConsole`/`FixedClock`/`MemoryStore` 를 주입해 앱 워크플로를 *부수 작용 없이 결정적으로* 검증한다 (콘솔 출력 + 저장소 상태 + 반환값).
+`Tests/AppTests.cs` — `MemoryConsole`/`FixedClock`/`MemoryStore` 를 주입해 앱 워크플로를 *부수 효과 없이 결정적으로* 검증한다 (콘솔 출력 + 저장소 상태 + 반환값).
 
 **노리는 능력** — 9부 테스트 더블이 실무 앱 테스트로 이어짐을 본다.
 

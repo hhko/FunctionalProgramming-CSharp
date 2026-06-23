@@ -20,11 +20,11 @@ K<ReaderTF<int, IOF>, int> stack =
     from n in IOM.liftIO<ReaderTF<int, IOF>, int>(effect)
     select m * n;
 
-// Run(env) 는 IO 를 *조립만* 한다 — 아직 부수 작용 없음.
+// Run(env) 는 IO 를 *조립만* 한다 — 아직 부수 효과 없음.
 var io = stack.As().Run(6);
 Console.WriteLine($"  Run(env=6) 직후 — IO 미실행? sideLog 비었나 = {sideLog.Count == 0}");
 
-// io.Run() 에서야 부수 작용이 일어난다.
+// io.Run() 에서야 부수 효과가 일어난다.
 var result = io.As().Run();
 Console.WriteLine($"  io.Run() → {result}   (6 × 7)");
 Console.WriteLine($"  sideLog = [{string.Join(", ", sideLog)}]");

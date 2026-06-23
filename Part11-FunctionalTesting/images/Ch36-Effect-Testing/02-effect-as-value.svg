@@ -24,7 +24,7 @@
   <rect x="540" y="78" width="320" height="120" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
   <text x="700" y="108" font-size="15" fill="#5a4400" text-anchor="middle" font-weight="bold">② 실행 = Run 한 자리</text>
   <text x="700" y="136" font-size="13" fill="#5a4400" text-anchor="middle">런타임 RT 를 넣어야</text>
-  <text x="700" y="158" font-size="13" fill="#5a4400" text-anchor="middle">비로소 부수 작용이 일어남</text>
+  <text x="700" y="158" font-size="13" fill="#5a4400" text-anchor="middle">비로소 부수 효과가 일어남</text>
   <text x="700" y="182" font-size="12.5" fill="#8a6a00" text-anchor="middle" font-style="italic">RT 를 바꾸면 같은 효과의 결과가 바뀜</text>
 
   <!-- separator -->
@@ -34,7 +34,7 @@
   <text x="60" y="266" font-size="14" fill="#1f1f1f" font-weight="bold">대비 — 명령형 IO</text>
   <rect x="60" y="282" width="800" height="56" fill="#f7f7f7" stroke="#bbbbbb" stroke-width="1.6" rx="6"/>
   <text x="80" y="305" font-size="14" fill="#444444" font-family="'Consolas', monospace">Console.WriteLine(msg);</text>
-  <text x="80" y="326" font-size="12.5" fill="#777777">호출하는 순간 곧바로 부수 작용 발생 — 미룰 수도, 가짜로 바꿔 끼울 수도 없음</text>
+  <text x="80" y="326" font-size="12.5" fill="#777777">호출하는 순간 곧바로 부수 효과 발생 — 미룰 수도, 가짜로 바꿔 끼울 수도 없음</text>
 
   <!-- payoff -->
   <text x="60" y="376" font-size="14" fill="#1f1f1f" font-weight="bold">효과를 값으로 두면</text>
