@@ -924,7 +924,7 @@ public void Functor_consistency_law_holds()
 법칙은 고른 몇 값이 아니라 **모든 입력의 약속** 입니다. 3 장에서 본 `ForAll` 로 임의의 `MyMaybe<int>` 100 건에 검증합니다. 컨테이너 입력만으로 변주되는 항등 법칙을 그대로 넘기고, 함수 인자 표본 (`x => x + 1`) 은 고정합니다.
 
 ```csharp
-// 3장 3.7.1절의 ForAll — 항등 법칙을 임의의 MyMaybe<int> 100 건에
+// 3장 3.10.6절의 ForAll — 항등 법칙을 임의의 MyMaybe<int> 100 건에
 var idAll = Property.ForAll(
     r => r.Next(2) == 0
         ? new MyMaybe<int>.Just(r.Next(-1000, 1000))
@@ -1275,4 +1275,4 @@ LINQ `from a in fa from b in fb select f(a, b)` 는 Monad 의 SelectMany 의 syn
 
 > **실무 디딤돌** — Applicative 의 `Pure` / `Apply` 는 8 장 Validation 의 **오류 누적** 패턴과 7 부 `Eff` 의 효과 합성에서 **Monad 없이 N 인자 끌어올림** 이 필요한 자리의 원형입니다.
 >
-> **테스트 디딤돌** — 다섯 법칙 (5.6절) 은 이 장에서 3장 3.7.1절의 `ForAll` 로 임의 입력에 검증했습니다. 무작위 생성기를 Functor·Monad 로 키우고 실패를 최소 반례로 줄이는 (shrinking) 본격 도구, 그리고 실무 도구 (CsCheck / FsCheck) 로의 이행은 11부입니다.
+> **테스트 디딤돌** — 다섯 법칙 (5.6절) 은 이 장에서 3장 3.10.6절의 `ForAll` 로 임의 입력에 검증했습니다. 무작위 생성기를 Functor·Monad 로 키우고 실패를 최소 반례로 줄이는 (shrinking) 본격 도구, 그리고 실무 도구 (CsCheck / FsCheck) 로의 이행은 11부입니다.

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="440" fill="#ffffff"/>
+
+  <text x="450" y="30" font-size="15" fill="#1f1f1f" text-anchor="middle" font-weight="bold">lazy 조기 정지 — Take(3) 이 소비한 만큼만 effect 가 흐른다</text>
+
+  <!-- 두 세계 띠 -->
+  <rect x="25" y="52" width="850" height="170" fill="#f4f9ff" stroke="none" rx="12"/>
+  <text x="45" y="78" font-size="13" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.5">Elevated World</text>
+  <text x="155" y="78" font-size="12.5" fill="#0c3a5e">From(100) — 100 개까지 흘릴 수 있는 lazy 스트림</text>
+  <rect x="25" y="270" width="850" height="120" fill="#fffdf3" stroke="none" rx="12"/>
+  <text x="45" y="296" font-size="13" fill="#bf9000" font-style="italic" font-weight="bold" letter-spacing="0.5">Normal World</text>
+  <text x="155" y="296" font-size="12.5" fill="#5a4400">trace 골든 — 실제로 흐른 원소만 기록</text>
+
+  <!-- 흐른 3 칸 (채움) -->
+  <rect x="60" y="110" width="74" height="58" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="97" y="145" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">0</text>
+  <rect x="144" y="110" width="74" height="58" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="181" y="145" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">1</text>
+  <rect x="228" y="110" width="74" height="58" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="265" y="145" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">2</text>
+
+  <!-- Take(3) 경계선 -->
+  <line x1="316" y1="96" x2="316" y2="182" stroke="#bf9000" stroke-width="2.4" stroke-dasharray="6 4"/>
+  <text x="316" y="200" font-size="12.5" fill="#bf9000" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">Take(3) 경계</text>
+
+  <!-- 안 흐른 칸 (회색 빈칸) -->
+  <rect x="330" y="110" width="74" height="58" fill="#f4f4f4" stroke="#cccccc" stroke-width="2" stroke-dasharray="5 4" rx="6"/>
+  <text x="367" y="145" font-size="18" fill="#bbbbbb" text-anchor="middle" font-family="'Consolas', monospace">3</text>
+  <rect x="414" y="110" width="74" height="58" fill="#f4f4f4" stroke="#cccccc" stroke-width="2" stroke-dasharray="5 4" rx="6"/>
+  <text x="451" y="145" font-size="18" fill="#bbbbbb" text-anchor="middle" font-family="'Consolas', monospace">4</text>
+  <text x="560" y="145" font-size="14" fill="#999999" font-style="italic">… 4 번째 이후는 흐르지 않음 (계산도 안 됨)</text>
+
+  <!-- 끌어내림 화살표 3 개 (흐른 칸만) -->
+  <line x1="97" y1="270" x2="97" y2="170" stroke="#1f77b4" stroke-width="2.6" marker-end="url(#arrow-lift)"/>
+  <line x1="181" y1="270" x2="181" y2="170" stroke="#1f77b4" stroke-width="2.6" marker-end="url(#arrow-lift)"/>
+  <line x1="265" y1="270" x2="265" y2="170" stroke="#1f77b4" stroke-width="2.6" marker-end="url(#arrow-lift)"/>
+  <text x="181" y="250" font-size="12.5" fill="#1f77b4" text-anchor="middle" font-style="italic">소비된 만큼만 effect</text>
+
+  <!-- trace 골든 박스 -->
+  <rect x="60" y="318" width="244" height="48" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="182" y="348" font-size="16" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">trace == [0, 1, 2]</text>
+
+  <text x="450" y="424" font-size="13" fill="#555555" text-anchor="middle" font-style="italic">taken 도 trace 도 [0, 1, 2] 에서 멈춤 — 게으름이 trace 골든으로 관찰되는 결정적 사실</text>
+</svg>

@@ -43,7 +43,7 @@ Console.WriteLine($"NaturalityHolds<ListToMaybe> ([1,2,3], x*2) : {generalHolds}
 
 Console.WriteLine("\n=== 자연성 법칙 검증 (임의 입력 100 건, ForAll) ===\n");
 
-// 3장 §3.7.1 의 ForAll 을 그대로 재사용한다. 표본 함수 f = x => x + 1 은 고정하고
+// 3장 3.10.6절의 ForAll 을 그대로 재사용한다. 표본 함수 f = x => x + 1 은 고정하고
 // 컨테이너 입력만 변주해, 자연성 법칙이 특정 값이 아니라 *임의의 컨테이너* 에서 성립함을 검사한다.
 var randomList = Property.ForAll(
     RandomList,                                          // 임의 길이 0~5, 원소는 임의 int

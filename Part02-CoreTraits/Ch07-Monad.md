@@ -981,4 +981,4 @@ static K<MyMaybeF, B> BogusBind<A, B>(K<MyMaybeF, A> ma, Func<A, K<MyMaybeF, B>>
 
 > **실무 디딤돌** — `Bind` 는 7부 `Eff` / `IO`, 8장 `Validation` 의 World-crossing 합성으로 그대로 확장됩니다. 실패할 수 있는 단계, 환경을 읽는 단계, 비동기 단계를 `bind` 한 어휘로 잇는 것이 실무 효과 코드의 기본 골격입니다.
 >
-> **테스트 디딤돌** — Monad 의 세 법칙 (좌항등 / 우항등 / 결합) 은 이 장에서 3장 3.7.1절의 `ForAll` 로 임의 입력에 검증했습니다. 무작위 생성기를 Functor·Monad 로 키우고 실패를 최소 반례로 줄이는 (shrinking) 본격 도구, 그리고 실무 도구 (CsCheck / FsCheck) 로의 이행은 11부입니다.
+> **테스트 디딤돌** — Monad 의 세 법칙 (좌항등 / 우항등 / 결합) 은 이 장에서 3장 3.10.6절의 `ForAll` 로 임의 입력에 검증했습니다. 무작위 생성기를 Functor·Monad 로 키우고 실패를 최소 반례로 줄이는 (shrinking) 본격 도구, 그리고 실무 도구 (CsCheck / FsCheck) 로의 이행은 11부입니다.

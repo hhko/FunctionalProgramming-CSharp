@@ -45,7 +45,7 @@ Console.WriteLine($"Either 항등 법칙 (R)  : {BifunctorLaws.IdentityHolds<Eit
 
 Console.WriteLine($"Pair 합성 법칙        : {BifunctorLaws.CompositionHolds<PairF, int, string, int, string, int, string>(n => n + 1, n => n * 2, s => s + "!", s => s.ToUpper(), p)}");
 
-// ── 법칙을 임의 입력으로 (3장 §3.7.1 의 ForAll 재사용) ──
+// ── 법칙을 임의 입력으로 (3장 3.10.6절의 ForAll 재사용) ──
 // 양쪽 인자 표본 함수는 고정 (n => n + 1, n => n * 2), 컨테이너 입력만 변주.
 // 임의의 Pair · Either 100 건에서 항등·합성이 양쪽 인자 각각에 성립하는지 검사한다.
 Console.WriteLine();

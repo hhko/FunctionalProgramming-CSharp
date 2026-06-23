@@ -156,7 +156,7 @@ Console.WriteLine($"  ② 우항등 Bind(m, Pure)    ≡ m            : {(rightI
 Console.WriteLine($"  ③ 결합   Bind(Bind(m,f),g) ≡ Bind(m,..)  : {(assoc   ? "통과" : "실패")}");
 
 Console.WriteLine();
-Console.WriteLine("== §7.9.2 — 세 법칙을 임의 입력 100 건으로 (3장 §3.7.1 ForAll) ==");
+Console.WriteLine("== §7.9.2 — 세 법칙을 임의 입력 100 건으로 (3장 3.10.6절 ForAll) ==");
 
 // 법칙은 특정 값이 아니라 *모든 입력* 의 약속이므로, 임의의 MyMaybe<int> 100 건에 검증한다.
 // World-crossing 표본 함수 f, g 는 고정하고 입력 m 만 변주한다 (a → E<b> 유형).

@@ -96,7 +96,7 @@ bool compositionOnList = FunctorLaws.CompositionHolds<MyListF, int, int, int>(
 Console.WriteLine($"  MyList 합성 법칙: {(compositionOnList ? "통과" : "위반")}");
 
 Console.WriteLine();
-Console.WriteLine("== 예제 6b — 두 법칙을 임의 입력으로 (ForAll, 3장 §3.7.1) ==");
+Console.WriteLine("== 예제 6b — 두 법칙을 임의 입력으로 (ForAll, 3장 3.10.6절) ==");
 
 // 특정 값이 아니라 임의 입력 100 건으로 두 법칙을 검사한다.
 // 표본 함수는 f / g 로 고정하고, 컨테이너 입력만 무작위로 변주한다.

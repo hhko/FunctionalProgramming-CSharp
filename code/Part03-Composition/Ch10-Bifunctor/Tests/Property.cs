@@ -3,7 +3,7 @@ namespace Ch10.Tests;
 // 최소 property 검증 — 법칙은 특정 값이 아니라 *모든 입력* 에 대한 약속이므로,
 // 임의 입력 count 개로 성질(prop)이 성립하는지 검사한다. (의존성 0.)
 //
-// 3장 §3.7.1 의 ForAll 를 그대로 재사용한다. 생성기를 Functor·Monad 로 키우고
+// 3장 3.10.6절의 ForAll 를 그대로 재사용한다. 생성기를 Functor·Monad 로 키우고
 // 실패를 *최소 반례로 축소(shrinking)* 하는 본격 도구는 11부에서 다룬다.
 public static class Property
 {

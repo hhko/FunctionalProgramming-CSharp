@@ -136,7 +136,7 @@ Console.WriteLine($"  ④ Composition           : {(comp ? "통과" : "실패")}
 Console.WriteLine($"  ⑤ Functor 정합 (Map ≡ Apply∘Pure) : {(fnc ? "통과" : "실패")}");
 Console.WriteLine();
 
-// ─── §5.6.7 임의 입력 property — 3장 §3.7.1 의 ForAll 재사용 ─────────────
+// ─── §5.6.7 임의 입력 property — 3장 3.10.6절의 ForAll 재사용 ─────────────
 // 법칙은 특정 값이 아니라 모든 입력의 약속이므로, 임의의 MyMaybe<int> 100 건에
 // 검증한다. 컨테이너 입력만으로 변주 가능한 항등·Functor 정합 법칙을 우선한다.
 // (함수 인자 표본 x => x + 1 은 고정.)

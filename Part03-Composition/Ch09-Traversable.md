@@ -636,4 +636,4 @@ Functor · Foldable · Applicative 세 도구의 합성이라, 그 셋이 모두
 
 > **실무 디딤돌** — `traverse` 는 `Eff` / `IO` 두 Elevated 세계를 동시에 이동하는 실무의 핵심 도구입니다. 목록의 각 항목을 비동기로 조회해 결과를 한 번에 모으거나, 여러 검증을 거쳐 전체 성공 여부를 판단하는 자리에 그대로 쓰입니다.
 >
-> **테스트 디딤돌** — traverse / sequence 의 항등 법칙은 이 장에서 3장 3.7.1절의 `ForAll` 로 임의 입력에 검증했습니다. 합성 법칙의 정식 검증, 무작위 생성기를 Functor·Monad 로 키우고 실패를 최소 반례로 줄이는 (shrinking) 본격 도구, 그리고 더 정밀한 자연성 법칙·실무 도구 (CsCheck / FsCheck) 로의 이행은 11부입니다.
+> **테스트 디딤돌** — traverse / sequence 의 항등 법칙은 이 장에서 3장 3.10.6절의 `ForAll` 로 임의 입력에 검증했습니다. 합성 법칙의 정식 검증, 무작위 생성기를 Functor·Monad 로 키우고 실패를 최소 반례로 줄이는 (shrinking) 본격 도구, 그리고 더 정밀한 자연성 법칙·실무 도구 (CsCheck / FsCheck) 로의 이행은 11부입니다.

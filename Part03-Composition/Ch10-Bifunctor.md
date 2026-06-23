@@ -519,4 +519,4 @@ LanguageExt v5 의 trait 으로 제공되지 않기 때문입니다. 이 책의 
 
 > **실무 디딤돌** — `Either<L, R>` 의 양쪽 끌어올림 (`BiMap`) 은 계층 사이 오류 매핑에 그대로 쓰입니다. 인프라 오류를 도메인 오류로 바꾸면서 성공값도 함께 변환하는 자리에 한 줄로 적용됩니다.
 >
-> **테스트 디딤돌** — Bifunctor 의 두 법칙 (항등 / 합성) 은 이 장에서 3장 3.7.1절의 `ForAll` 로 임의의 `Pair` · `Either` 에 검증했습니다. 무작위 생성기를 Functor·Monad 로 키우고 실패를 최소 반례로 줄이는 (shrinking) 본격 도구, 그리고 실무 도구 (CsCheck / FsCheck) 로의 이행은 11부입니다.
+> **테스트 디딤돌** — Bifunctor 의 두 법칙 (항등 / 합성) 은 이 장에서 3장 3.10.6절의 `ForAll` 로 임의의 `Pair` · `Either` 에 검증했습니다. 무작위 생성기를 Functor·Monad 로 키우고 실패를 최소 반례로 줄이는 (shrinking) 본격 도구, 그리고 실무 도구 (CsCheck / FsCheck) 로의 이행은 11부입니다.

@@ -506,4 +506,4 @@ PasswordRules.Strong("Passw0rd");   // → Valid(Password)                      
 
 > **실무 디딤돌** — Validation 의 누적 검증은 후속 Part 의 입력 검증 표준입니다. 폼 · API 요청 · 설정 파일처럼 여러 필드를 독립으로 검사해 오류를 한 번에 보고하는 자리에 그대로 쓰입니다.
 >
-> **테스트 디딤돌** — `MyValidation` 의 applicative 법칙은 5장 (5.6절) 에서 3장 3.7.1절의 `ForAll` 로 임의 입력에 검증했습니다. 이 장의 누적 vs 단락 동작 차이 (`누적 = 4 건`, `단락 = 1 건`) 는 데모로 확인했고, xUnit + Shouldly 표준 테스트로의 이행은 11부입니다.
+> **테스트 디딤돌** — `MyValidation` 의 applicative 법칙은 5장 (5.6절) 에서 3장 3.10.6절의 `ForAll` 로 임의 입력에 검증했습니다. 이 장의 누적 vs 단락 동작 차이 (`누적 = 4 건`, `단락 = 1 건`) 는 데모로 확인했고, xUnit + Shouldly 표준 테스트로의 이행은 11부입니다.

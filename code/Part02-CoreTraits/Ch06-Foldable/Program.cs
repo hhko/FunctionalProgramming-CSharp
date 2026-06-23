@@ -77,7 +77,7 @@ Console.WriteLine($"  MyMaybeF 자유 함수 일관성: {(maybeFreeFn ? "통과"
 Console.WriteLine();
 Console.WriteLine("== 예제 6.5 — 법칙을 임의 입력으로: 최소 property 검증 (ForAll) ==");
 
-// 특정 값이 아니라 임의 입력 100 건으로 결과 일관성을 검사한다 (3장 §3.7.1 의 ForAll 재사용).
+// 특정 값이 아니라 임의 입력 100 건으로 결과 일관성을 검사한다 (3장 3.10.6절의 ForAll 재사용).
 // 생성기 — 길이 r.Next(5) 의 임의 int 리스트. 함수 인자 표본은 덧셈으로 고정 (가환·결합).
 static K<MyListF, int> RandomMyList(Random r)
 {
