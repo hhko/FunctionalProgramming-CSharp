@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 480" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+    <marker id="arrow-lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+    <marker id="arrow-none" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#d62728"/>
+    </marker>
+  </defs>
+
+  <rect width="1060" height="480" fill="#ffffff"/>
+
+  <!-- env 한 번 주입 -->
+  <text x="530" y="34" font-size="13" fill="#5a4400" text-anchor="middle" font-style="italic">env 를 한 번 주입</text>
+  <rect x="470" y="44" width="120" height="46" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="530" y="75" font-size="20" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">env</text>
+
+  <!-- Reader 층 띠 -->
+  <rect x="50" y="120" width="960" height="150" fill="#f4f9ff" stroke="none" rx="12"/>
+  <text x="66" y="142" font-size="13" fill="#1f77b4" font-style="italic" font-weight="bold">Reader 층 — 같은 env 를 두 단계에 흘림</text>
+
+  <rect x="150" y="165" width="280" height="74" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="290" y="208" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">단계 1: ma.Run(env)</text>
+
+  <rect x="630" y="165" width="300" height="74" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="780" y="208" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">단계 2: f(s.Value).Run(env)</text>
+
+  <!-- env 세로 주입 -->
+  <line x1="510" y1="90" x2="300" y2="163" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <text x="372" y="120" font-size="15" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">env</text>
+  <line x1="550" y1="90" x2="780" y2="163" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <text x="700" y="120" font-size="15" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">env</text>
+
+  <!-- Option 층: Some 갈래(검정, 값 전달) -->
+  <line x1="432" y1="202" x2="628" y2="202" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="530" y="192" font-size="14" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">Some s → s.Value</text>
+
+  <!-- Option 층: None 갈래(빨강, 단락) -->
+  <line x1="290" y1="241" x2="290" y2="338" stroke="#d62728" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="6 4" marker-end="url(#arrow-none)"/>
+  <text x="200" y="300" font-size="14" fill="#d62728" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">None</text>
+  <rect x="175" y="340" width="230" height="56" fill="#fdeaea" stroke="#d62728" stroke-width="2.2" rx="6"/>
+  <text x="290" y="367" font-size="16" fill="#7a1416" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">None.Instance</text>
+  <text x="290" y="385" font-size="11" fill="#7a1416" text-anchor="middle">단락 (나머지 평가 안 함)</text>
+
+  <!-- 결과 -->
+  <line x1="780" y1="241" x2="780" y2="338" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <text x="800" y="295" font-size="14" fill="#1f77b4" text-anchor="start" font-weight="bold" font-family="'Consolas', monospace">Run</text>
+  <rect x="690" y="340" width="180" height="56" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="780" y="374" font-size="18" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">Option&lt;B&gt;</text>
+
+  <text x="530" y="440" font-size="13" fill="#555555" text-anchor="middle" font-style="italic">Reader 층 = env 흘리기 (파랑) · Option 층 = Some → 다음 (검정) / None → 단락 (빨강)</text>
+</svg>

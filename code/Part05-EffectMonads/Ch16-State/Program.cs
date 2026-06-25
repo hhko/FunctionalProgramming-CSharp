@@ -5,7 +5,7 @@ using Ch16.Traits;
 using Ch16.Types;
 
 Console.WriteLine("================================================");
-Console.WriteLine("13장 — State (상태 스레딩 효과)");
+Console.WriteLine("16장 — State (상태 스레딩 효과)");
 Console.WriteLine("================================================");
 Console.WriteLine();
 

@@ -5,7 +5,7 @@ using Ch15.Traits;
 using Ch15.Types;
 
 Console.WriteLine("================================================");
-Console.WriteLine("12장 — Reader (환경 의존 효과)");
+Console.WriteLine("15장 — Reader (환경 의존 효과)");
 Console.WriteLine("================================================");
 Console.WriteLine();
 

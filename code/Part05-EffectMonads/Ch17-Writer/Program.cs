@@ -5,7 +5,7 @@ using Ch17.Traits;
 using Ch17.Types;
 
 Console.WriteLine("================================================");
-Console.WriteLine("14장 — Writer (누적 출력 효과)");
+Console.WriteLine("17장 — Writer (누적 출력 효과)");
 Console.WriteLine("================================================");
 Console.WriteLine();
 

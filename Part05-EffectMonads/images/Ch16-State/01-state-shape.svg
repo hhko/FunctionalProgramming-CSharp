@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+    <marker id="arrow-lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="500" fill="#ffffff"/>
+
+  <!-- Reader 행: 값 한 갈래 -->
+  <text x="70" y="96" font-size="14" fill="#555555" font-style="italic">Reader — 값 한 갈래만 나옴</text>
+  <rect x="70" y="110" width="110" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="125" y="147" font-size="20" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">Env</text>
+  <line x1="182" y1="140" x2="313" y2="140" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <rect x="315" y="105" width="210" height="70" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="420" y="147" font-size="20" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">Reader&lt;Env, A&gt;</text>
+  <line x1="527" y1="140" x2="653" y2="140" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <rect x="655" y="110" width="110" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="710" y="147" font-size="22" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">A</text>
+
+  <!-- State 행: 값 + 새 상태 두 갈래 -->
+  <text x="70" y="286" font-size="14" fill="#555555" font-style="italic">State — 값과 새 상태 두 갈래로 나옴</text>
+  <rect x="70" y="300" width="110" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="125" y="337" font-size="22" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">S</text>
+  <line x1="182" y1="330" x2="313" y2="330" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <rect x="315" y="295" width="210" height="70" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="420" y="337" font-size="20" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">State&lt;S, A&gt;</text>
+
+  <line x1="527" y1="320" x2="653" y2="292" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="585" y="296" font-size="13" fill="#1f1f1f" text-anchor="middle" font-weight="bold">값</text>
+  <rect x="655" y="264" width="110" height="56" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="710" y="300" font-size="22" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">A</text>
+
+  <line x1="527" y1="342" x2="653" y2="372" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="585" y="378" font-size="13" fill="#1f1f1f" text-anchor="middle" font-weight="bold">새 상태</text>
+  <rect x="655" y="360" width="110" height="56" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="710" y="396" font-size="22" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">S</text>
+
+  <line x1="710" y1="418" x2="710" y2="462" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 5" marker-end="url(#arrow-lift)"/>
+  <text x="730" y="448" font-size="14" fill="#1f77b4" text-anchor="start" font-style="italic">다음 단계로 실림</text>
+</svg>

@@ -4,7 +4,7 @@ using Ch18.Traits;
 using Ch18.Types;
 
 Console.WriteLine("================================================");
-Console.WriteLine("15장 — 왜 변환기가 필요한가 (합성의 벽)");
+Console.WriteLine("18장 — 왜 변환기가 필요한가 (합성의 벽)");
 Console.WriteLine("================================================");
 Console.WriteLine();
 
@@ -59,7 +59,7 @@ Console.WriteLine($"  결합    : {Pass(assoc)}");
 Console.WriteLine();
 
 Console.WriteLine("→ 결론: 이 Bind 배관을 효과 쌍마다 손으로 짜야 한다.");
-Console.WriteLine("  4부의 변환기 ReaderT<Env, M, A> 는 *임의의 내부 모나드 M* 에 대해 이 배관을 자동 생성한다.");
+Console.WriteLine("  6부의 변환기 ReaderT<Env, M, A> 는 *임의의 내부 모나드 M* 에 대해 이 배관을 자동 생성한다.");
 Console.WriteLine();
 
 Console.WriteLine(leftId && rightId && assoc ? "모든 법칙 통과 [OK]" : "법칙 위반 발생 [FAIL]");

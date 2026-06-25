@@ -3,7 +3,7 @@ using Ch18.Traits;
 namespace Ch18.Tests;
 
 // 손으로 짠 ReaderOption 도 *진짜 모나드* 임을 법칙으로 확인한다.
-// (배관이 번거로울 뿐, 모나드 법칙은 성립 — 그래서 4부 변환기로 자동화할 가치가 있다.)
+// (배관이 번거로울 뿐, 모나드 법칙은 성립 — 그래서 6부 변환기로 자동화할 가치가 있다.)
 public static class MonadLaws
 {
     public static bool LeftIdentityHolds<M, A, B, R>(

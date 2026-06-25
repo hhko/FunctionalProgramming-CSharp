@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 470" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+    <marker id="arrow-lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+  </defs>
+
+  <rect width="1060" height="470" fill="#ffffff"/>
+
+  <!-- 값 흐름 (검정, 위) -->
+  <text x="500" y="92" font-size="16" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">a</text>
+  <text x="500" y="110" font-size="12" fill="#1f1f1f" text-anchor="middle" font-style="italic">다음 계산 f(a) 를 만듦</text>
+  <line x1="410" y1="122" x2="600" y2="122" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+
+  <!-- 두 단계 (Elevated) -->
+  <rect x="230" y="135" width="180" height="72" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="320" y="168" font-size="17" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">단계 1: ma</text>
+  <text x="320" y="190" font-size="13" fill="#0c3a5e" text-anchor="middle">출력 ["start"] 를 쌓음</text>
+
+  <rect x="600" y="135" width="180" height="72" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="690" y="168" font-size="17" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">단계 2: f(a)</text>
+  <text x="690" y="190" font-size="13" fill="#0c3a5e" text-anchor="middle">출력 ["step"] 를 쌓음</text>
+
+  <!-- 출력 누적 사슬 (파랑, 아래) — Empty 에서 Combine 으로 -->
+  <rect x="40" y="300" width="120" height="52" fill="#ffffff" stroke="#1f77b4" stroke-width="2.2" stroke-dasharray="6 4" rx="6"/>
+  <text x="100" y="326" font-size="18" fill="#1f77b4" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">Empty</text>
+  <text x="100" y="344" font-size="11" fill="#1f77b4" text-anchor="middle">Pure 의 시작</text>
+
+  <line x1="162" y1="326" x2="300" y2="326" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <text x="231" y="316" font-size="14" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">Combine</text>
+
+  <rect x="302" y="300" width="150" height="52" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="377" y="332" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">["start"]</text>
+
+  <line x1="454" y1="326" x2="612" y2="326" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <text x="533" y="316" font-size="14" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">Combine</text>
+
+  <rect x="614" y="300" width="230" height="52" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="729" y="332" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">["start", "step"]</text>
+
+  <!-- 각 단계가 출력을 사슬에 더하는 점선 -->
+  <line x1="320" y1="209" x2="360" y2="298" stroke="#1f77b4" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="5 4" marker-end="url(#arrow-lift)"/>
+  <line x1="690" y1="209" x2="700" y2="298" stroke="#1f77b4" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="5 4" marker-end="url(#arrow-lift)"/>
+
+  <text x="430" y="400" font-size="14" fill="#1f77b4" text-anchor="middle" font-style="italic">출력은 Empty 에서 출발해 단계마다 Combine 으로 누적됩니다</text>
+  <text x="430" y="422" font-size="13" fill="#555555" text-anchor="middle" font-style="italic">(환경을 흘린 Reader · 상태를 갱신한 State 와 달리, Writer 는 출력을 합칩니다)</text>
+</svg>

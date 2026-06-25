@@ -25,4 +25,9 @@ public static class BudgetReader
         from tax in Tax(amount)
         from line in Format(amount + tax)
         select line;
+
+    // 설정 전체가 필요할 때 — ask 로 통째로 읽는다 (일부는 asks, 전체는 ask).
+    public static K<ReaderF<AppConfig>, string> Describe() =>
+        from cfg in Readable.ask<ReaderF<AppConfig>, AppConfig>()
+        select $"세율 {cfg.TaxRate}, 통화 {cfg.Currency}";
 }

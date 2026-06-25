@@ -5,11 +5,11 @@ namespace Ch18.Types;
 // ReaderOption<Env, A> — *두 효과를 동시에* 담는 모나드: 환경 의존(Reader) + 실패 가능(Option).
 // 내부는 `Reader<Env, Option<A>>` 즉 함수 `Env → Option<A>`.
 //
-// 이것이 15장의 핵심 — Reader 와 Option 각각은 모나드지만, *둘을 겹친* 것은
+// 이것이 18장의 핵심 — Reader 와 Option 각각은 모나드지만, *둘을 겹친* 것은
 // 공짜로 모나드가 되지 *않는다*. Bind 를 직접 짜야 하고, 그 본문은 두 층 (env / Some·None) 을
 // *손으로* 풀어야 한다. 아래 Bind 가 바로 그 "손으로 짠 배관" 이다.
 //
-// 4부의 변환기 ReaderT<Env, M, A> 는 이 배관을 *임의의 내부 모나드 M 에 대해 자동 생성* 한다.
+// 6부의 변환기 ReaderT<Env, M, A> 는 이 배관을 *임의의 내부 모나드 M 에 대해 자동 생성* 한다.
 public sealed class ReaderOption<Env, A>(Func<Env, Option<A>> run) : K<ROF<Env>, A>
 {
     public Option<A> Run(Env env) => run(env);

@@ -1,4 +1,4 @@
-# Part 3 — Effect Monads (효과를 담는 모나드)
+# Part 5 — Effect Monads (효과를 담는 모나드)
 
 ## 5부의 배경
 

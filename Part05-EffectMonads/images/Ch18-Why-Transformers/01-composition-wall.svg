@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 480" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+    <marker id="arrow-flat" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+  </defs>
+
+  <rect width="1080" height="480" fill="#ffffff"/>
+
+  <!-- 위: 그냥 겹치면 Option 이 한 겹씩 쌓임 -->
+  <text x="50" y="64" font-size="15" fill="#555555" font-style="italic">두 모나드를 그냥 겹치면</text>
+
+  <rect x="55" y="86" width="220" height="60" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="165" y="122" font-size="14" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">Reader&lt;Env, Option&lt;int&gt;&gt;</text>
+  <line x1="277" y1="116" x2="353" y2="116" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+
+  <rect x="355" y="86" width="300" height="60" fill="#fdeaea" stroke="#d62728" stroke-width="2.2" rx="6"/>
+  <text x="505" y="122" font-size="14" fill="#7a1416" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">Reader&lt;Env, Option&lt;Option&lt;int&gt;&gt;&gt;</text>
+  <line x1="657" y1="116" x2="713" y2="116" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+
+  <rect x="715" y="86" width="330" height="60" fill="#fdeaea" stroke="#d62728" stroke-width="2.2" rx="6"/>
+  <text x="880" y="122" font-size="13" fill="#7a1416" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">Reader&lt;Env, Option&lt;Option&lt;Option&lt;int&gt;&gt;&gt;&gt;</text>
+
+  <text x="55" y="186" font-size="14" fill="#d62728" font-style="italic">단계를 이을 때마다 Option 이 한 겹씩 쌓여, 매번 손으로 언랩해야 합니다.</text>
+
+  <line x1="40" y1="232" x2="1040" y2="232" stroke="#e0e0e0" stroke-width="1.5"/>
+
+  <!-- 아래: 두 층을 함께 푸는 Bind 로 평평하게 -->
+  <text x="50" y="290" font-size="15" fill="#555555" font-style="italic">두 층을 함께 푸는 Bind (ReaderOption)</text>
+
+  <rect x="55" y="312" width="270" height="64" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="190" y="342" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">ReaderOption&lt;Env, int&gt;</text>
+  <text x="190" y="362" font-size="12" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">Env → Option&lt;int&gt;</text>
+  <line x1="327" y1="344" x2="403" y2="344" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-flat)"/>
+
+  <rect x="405" y="312" width="270" height="64" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="540" y="342" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">ReaderOption&lt;Env, int&gt;</text>
+  <text x="540" y="362" font-size="12" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">Env → Option&lt;int&gt;</text>
+  <line x1="677" y1="344" x2="753" y2="344" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-flat)"/>
+
+  <rect x="755" y="312" width="270" height="64" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="890" y="342" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">ReaderOption&lt;Env, int&gt;</text>
+  <text x="890" y="362" font-size="12" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">Env → Option&lt;int&gt;</text>
+
+  <text x="55" y="418" font-size="14" fill="#1f77b4" font-style="italic">단계를 이어도 중첩이 쌓이지 않고 한 겹으로 평평하게 유지됩니다.</text>
+</svg>

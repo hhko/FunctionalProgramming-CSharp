@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="420" fill="#ffffff"/>
+
+  <!-- 바깥 환경 cfg -->
+  <rect x="50" y="178" width="180" height="64" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="140" y="205" font-size="14" fill="#5a4400" text-anchor="middle">바깥 환경</text>
+  <text x="140" y="228" font-size="18" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">cfg = (0.1, 원)</text>
+
+  <!-- Local 스코프 (점선 박스) -->
+  <rect x="340" y="48" width="580" height="150" fill="#f4f9ff" stroke="#1f77b4" stroke-width="2" stroke-dasharray="7 5" rx="10"/>
+  <text x="358" y="72" font-size="13" fill="#1f77b4" font-style="italic" font-weight="bold">하위 계산의 Run 안 — Local 스코프</text>
+
+  <rect x="360" y="92" width="150" height="58" fill="#ffe0b3" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="435" y="118" font-size="13" fill="#5a4400" text-anchor="middle">변형본</text>
+  <text x="435" y="138" font-size="16" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">(0, 원)</text>
+
+  <line x1="512" y1="121" x2="628" y2="121" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="570" y="111" font-size="13" fill="#1f1f1f" text-anchor="middle" font-family="'Consolas', monospace">TotalWithTax</text>
+
+  <rect x="630" y="92" width="140" height="58" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="700" y="128" font-size="18" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">"1000원"</text>
+
+  <!-- cfg → Local 입구 변형 (파랑) -->
+  <line x1="232" y1="205" x2="358" y2="125" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <text x="300" y="150" font-size="12" fill="#1f77b4" text-anchor="middle" font-family="'Consolas', monospace">c =&gt; c with {TaxRate=0}</text>
+
+  <!-- cfg → 변형 없이 그대로 (아래 경로) -->
+  <line x1="232" y1="222" x2="628" y2="300" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="430" y="285" font-size="13" fill="#1f1f1f" text-anchor="middle">변형 없이 그대로 Run</text>
+  <rect x="630" y="278" width="140" height="58" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="700" y="314" font-size="18" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">"1100원"</text>
+
+  <text x="140" y="300" font-size="13" fill="#5a4400" text-anchor="middle" font-style="italic">cfg 는 그대로</text>
+
+  <text x="480" y="388" font-size="14" fill="#555555" text-anchor="middle" font-style="italic">Local 의 변형은 스코프 안에서만 살아 있고, 바깥 cfg 는 (0.1, 원) 그대로입니다.</text>
+</svg>

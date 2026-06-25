@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 460" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+    <marker id="arrow-lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+  </defs>
+
+  <rect width="980" height="460" fill="#ffffff"/>
+
+  <!-- 값 흐름 (검정, 위쪽 가로) -->
+  <text x="525" y="120" font-size="16" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">a</text>
+  <text x="525" y="138" font-size="12" fill="#1f1f1f" text-anchor="middle" font-style="italic">다음 계산 f(a) 를 만듦</text>
+  <line x1="450" y1="150" x2="600" y2="150" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+
+  <!-- 초기 상태 입구 -->
+  <text x="100" y="218" font-size="12" fill="#5a4400" text-anchor="middle" font-style="italic">초기 상태 (1회 주입)</text>
+  <rect x="45" y="228" width="110" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="100" y="266" font-size="22" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">s</text>
+
+  <!-- 두 단계 (Elevated) -->
+  <rect x="240" y="195" width="210" height="86" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="345" y="230" font-size="17" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">① ma.Run(s)</text>
+  <text x="345" y="256" font-size="14" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">→ 값 a, 새 상태 s1</text>
+
+  <rect x="600" y="195" width="220" height="86" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="710" y="230" font-size="17" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">② f(a).Run(s1)</text>
+  <text x="710" y="256" font-size="14" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">→ 값 B, 새 상태 s2</text>
+
+  <!-- 상태 흐름 (파랑, 갱신되며 가로로) -->
+  <line x1="157" y1="258" x2="238" y2="245" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <text x="195" y="240" font-size="16" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">s</text>
+
+  <line x1="452" y1="245" x2="598" y2="245" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <text x="525" y="238" font-size="16" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">s1</text>
+
+  <rect x="868" y="228" width="92" height="60" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="914" y="266" font-size="20" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">s2</text>
+  <line x1="822" y1="245" x2="866" y2="252" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <text x="845" y="232" font-size="15" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">s2</text>
+
+  <!-- 대비 주석 -->
+  <text x="345" y="345" font-size="14" fill="#1f77b4" text-anchor="middle" font-style="italic">상태는 s → s1 → s2 로 단계마다 갱신되며 흐릅니다</text>
+  <text x="345" y="368" font-size="13" fill="#555555" text-anchor="middle" font-style="italic">(앞 장의 Reader 는 같은 env 가 두 단계에 그대로 흘렀습니다)</text>
+</svg>

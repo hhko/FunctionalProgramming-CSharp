@@ -23,4 +23,19 @@ public static class ConfigCheck
             select port + timeout;
         return prog.As().Run(cfg);
     }
+
+    // lift 데모 — 환경만 읽는 Reader, 상수 Option, 실패 가능 Lookup 을 한 사슬에 섞는다.
+    public static Option<int> WithBonus(Dictionary<string, int> cfg)
+    {
+        var size  = ReaderOption<Dictionary<string, int>, int>
+                        .LiftReader(new Reader<Dictionary<string, int>, int>(e => e.Count));
+        var bonus = ReaderOption<Dictionary<string, int>, int>
+                        .LiftOption(new Option<int>.Some(100));
+        var prog =
+            from n in size           // LiftReader 로 올린 환경 의존
+            from a in Lookup("a")    // 환경 의존 + 실패 가능
+            from b in bonus          // LiftOption 으로 올린 상수
+            select n + a + b;
+        return prog.As().Run(cfg);
+    }
 }

@@ -2,7 +2,7 @@ using Ch18.Traits;
 
 namespace Ch18.Types;
 
-// Reader — "환경 의존" 효과 (12장). 역시 그 자체로 완전한 모나드.
+// Reader — "환경 의존" 효과 (15장). 역시 그 자체로 완전한 모나드.
 public sealed class Reader<Env, A>(Func<Env, A> run) : K<ReaderF<Env>, A>
 {
     public A Run(Env env) => run(env);

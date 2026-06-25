@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow-fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/>
+    </marker>
+    <marker id="arrow-lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="520" fill="#ffffff"/>
+
+  <!-- env: 단 한 번 주입되는 입구 -->
+  <text x="450" y="46" font-size="13" fill="#5a4400" text-anchor="middle" font-style="italic">환경은 단 한 번 주입됩니다</text>
+  <rect x="390" y="56" width="120" height="56" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="450" y="92" font-size="22" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">env</text>
+
+  <!-- 두 단계 (Reader 계산) -->
+  <rect x="95" y="225" width="300" height="74" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="245" y="258" font-size="17" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">① ma.Run(env)</text>
+  <text x="245" y="282" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">→ a</text>
+
+  <rect x="505" y="225" width="300" height="74" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="655" y="258" font-size="17" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">② f(a).Run(env)</text>
+  <text x="655" y="282" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">→ B</text>
+
+  <!-- env 세로 흐름 (암묵 전달) — 파랑, 두 단계 모두로 -->
+  <line x1="420" y1="114" x2="245" y2="223" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <text x="300" y="158" font-size="17" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">env</text>
+  <line x1="480" y1="114" x2="655" y2="223" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <text x="600" y="158" font-size="17" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">env</text>
+
+  <!-- 값 가로 흐름 (명시 전달) — 검정 -->
+  <line x1="397" y1="262" x2="503" y2="262" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
+  <text x="450" y="250" font-size="18" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">a</text>
+
+  <!-- 최종 결과 B 끌어내림 -->
+  <rect x="595" y="410" width="120" height="62" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="655" y="450" font-size="24" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">B</text>
+  <line x1="655" y1="301" x2="655" y2="408" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
+  <text x="673" y="360" font-size="16" fill="#1f77b4" text-anchor="start" font-weight="bold" font-family="'Consolas', monospace">Run</text>
+
+  <text x="245" y="360" font-size="13" fill="#1f77b4" text-anchor="middle" font-style="italic">환경은 세로로 (암묵 전달)</text>
+  <text x="245" y="382" font-size="13" fill="#1f1f1f" text-anchor="middle" font-style="italic">값은 가로로 (명시 전달)</text>
+</svg>
