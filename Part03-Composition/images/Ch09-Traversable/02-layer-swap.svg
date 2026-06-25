@@ -1,38 +1,60 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 470" font-family="'Helvetica Neue', 'Noto Sans KR', sans-serif">
   <defs>
-    <marker id="arrow-lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <marker id="swap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+    <marker id="stay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#999999"/>
     </marker>
   </defs>
 
-  <rect width="900" height="520" fill="#ffffff"/>
+  <rect width="1040" height="470" fill="#ffffff"/>
 
-  <!-- 왼쪽 — List<E<a>> : 바깥 List(구조), 안쪽 E(효과) -->
-  <rect x="70" y="120" width="290" height="270" fill="#f3f3f3" stroke="#888888" stroke-width="2.2" rx="10"/>
-  <text x="215" y="150" font-size="17" fill="#333333" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">List&lt;E&lt;a&gt;&gt;</text>
+  <!-- 연산 라벨 -->
+  <text x="520" y="92" font-size="20" fill="#c00000" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">traverse / sequence</text>
+  <text x="520" y="113" font-size="13" fill="#c00000" text-anchor="middle" font-style="italic">위 두 세계의 순서를 맞바꿈</text>
 
-  <rect x="110" y="170" width="210" height="50" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/>
-  <text x="215" y="202" font-size="17" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">E&lt;a&gt;</text>
-  <rect x="110" y="234" width="210" height="50" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/>
-  <text x="215" y="266" font-size="17" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">E&lt;a&gt;</text>
-  <rect x="110" y="298" width="210" height="50" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/>
-  <text x="215" y="330" font-size="17" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace">E&lt;a&gt;</text>
+  <!-- 왼쪽 스택 — List<E<a>> : List(위) · E(가운데) · 값(아래) -->
+  <rect x="120" y="130" width="250" height="50" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="245" y="161" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">List</text>
+  <text x="355" y="161" font-size="11" fill="#0c3a5e" text-anchor="end">바깥 컨테이너</text>
 
-  <text x="215" y="375" font-size="12" fill="#888888" text-anchor="middle" font-style="italic">효과가 원소마다 흩어져 있음</text>
+  <rect x="120" y="183" width="250" height="50" fill="#e2efda" stroke="#548235" stroke-width="2.2" rx="6"/>
+  <text x="245" y="214" font-size="18" fill="#375623" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E</text>
+  <text x="355" y="214" font-size="11" fill="#375623" text-anchor="end">안쪽 효과</text>
 
-  <!-- 가운데 swap 화살표 -->
-  <line x1="372" y1="250" x2="528" y2="250" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-lift)"/>
-  <text x="450" y="234" font-size="18" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace">traverse</text>
-  <text x="450" y="278" font-size="13" fill="#1f77b4" text-anchor="middle" font-style="italic">층 swap</text>
+  <rect x="120" y="236" width="250" height="50" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="245" y="267" font-size="16" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">값 a</text>
+  <text x="355" y="267" font-size="11" fill="#5a4400" text-anchor="end">Normal</text>
 
-  <!-- 오른쪽 — E<List<a>> : 바깥 E(효과), 안쪽 List(구조) -->
-  <rect x="540" y="120" width="290" height="270" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.6" rx="10"/>
-  <text x="685" y="150" font-size="17" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;List&lt;a&gt;&gt;</text>
+  <text x="245" y="318" font-size="18" fill="#1f1f1f" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">List&lt;E&lt;a&gt;&gt;</text>
+  <text x="245" y="340" font-size="12" fill="#888888" text-anchor="middle" font-style="italic">효과가 원소마다 흩어져 있음</text>
 
-  <rect x="580" y="225" width="210" height="80" fill="#f3f3f3" stroke="#888888" stroke-width="2" rx="6"/>
-  <text x="685" y="272" font-size="17" fill="#333333" text-anchor="middle" font-family="'Consolas', monospace">List&lt;a&gt;</text>
+  <!-- 오른쪽 스택 — E<List<a>> : E(위) · List(가운데) · 값(아래) -->
+  <rect x="670" y="130" width="250" height="50" fill="#e2efda" stroke="#548235" stroke-width="2.2" rx="6"/>
+  <text x="795" y="161" font-size="18" fill="#375623" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E</text>
+  <text x="685" y="161" font-size="11" fill="#375623" text-anchor="start">바깥 효과</text>
 
-  <text x="685" y="375" font-size="12" fill="#1f77b4" text-anchor="middle" font-style="italic">효과가 바깥으로 한 번에 모임</text>
+  <rect x="670" y="183" width="250" height="50" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="795" y="214" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">List</text>
+  <text x="685" y="214" font-size="11" fill="#0c3a5e" text-anchor="start">안쪽 컨테이너</text>
 
-  <text x="450" y="450" font-size="13" fill="#1f1f1f" text-anchor="middle" font-style="italic">안쪽 E 를 바깥으로 끌어올려 두 층의 순서를 뒤집습니다 (List&lt;E&lt;a&gt;&gt; → E&lt;List&lt;a&gt;&gt;).</text>
+  <rect x="670" y="236" width="250" height="50" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
+  <text x="795" y="267" font-size="16" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">값 a</text>
+  <text x="685" y="267" font-size="11" fill="#5a4400" text-anchor="start">Normal</text>
+
+  <text x="795" y="318" font-size="18" fill="#1f1f1f" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E&lt;List&lt;a&gt;&gt;</text>
+  <text x="795" y="340" font-size="12" fill="#1f77b4" text-anchor="middle" font-style="italic">효과가 바깥에 한 번 모임</text>
+
+  <!-- 교차 swap: List 는 위→가운데, E 는 가운데→위 -->
+  <line x1="372" y1="155" x2="668" y2="208" stroke="#1f77b4" stroke-width="2.6" stroke-linecap="round" marker-end="url(#swap)"/>
+  <line x1="372" y1="208" x2="668" y2="155" stroke="#1f77b4" stroke-width="2.6" stroke-linecap="round" marker-end="url(#swap)"/>
+  <text x="520" y="150" font-size="13" fill="#1f77b4" text-anchor="middle" font-family="'Consolas', monospace">E ↑</text>
+  <text x="520" y="228" font-size="13" fill="#1f77b4" text-anchor="middle" font-family="'Consolas', monospace">List ↓</text>
+
+  <!-- 값(Normal) 은 바닥 그대로 -->
+  <line x1="372" y1="261" x2="668" y2="261" stroke="#999999" stroke-width="2.2" stroke-linecap="round" marker-end="url(#stay)"/>
+  <text x="520" y="253" font-size="12" fill="#999999" text-anchor="middle" font-style="italic">값은 그대로</text>
+
+  <text x="520" y="408" font-size="13" fill="#1f1f1f" text-anchor="middle" font-style="italic">위 두 세계 (List 와 E) 의 순서만 맞바꾸고, 값 (Normal) 은 바닥에 그대로 남습니다.</text>
 </svg>
