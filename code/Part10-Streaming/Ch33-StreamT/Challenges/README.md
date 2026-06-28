@@ -8,7 +8,7 @@
 
 `Program.cs` — `Tapped` 무한 스트림에 `Take(3)` 만 하면 정확히 3개만 생산된다 (당기지 않은 조각은 계산도, 부수 효과도 없음).
 
-**노리는 능력** — 스트림이 *당김(pull) 기반 lazy 시퀀스* 라 무한/대용량도 메모리 안전함을 본다. 2부 컬렉션과의 결정적 차이.
+**노리는 능력** — 스트림이 *당김(pull) 기반 lazy 시퀀스* 라 무한/대용량도 메모리 안전함을 본다. 4부 컬렉션과의 결정적 차이.
 
 ## 심화 챌린지 (선택)
 
@@ -21,5 +21,5 @@
 ## 실행
 
 ```bash
-dotnet run --project code/Part8-Streaming/Ch33-StreamT/Ch33.csproj
+dotnet run --project code/Part10-Streaming/Ch33-StreamT/Ch33.csproj
 ```

@@ -1,4 +1,4 @@
-# Part 8 — Streaming (스트리밍)
+# Part 10 — Streaming (스트리밍)
 
 ## 10부의 배경
 

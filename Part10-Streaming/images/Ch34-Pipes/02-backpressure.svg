@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 440" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="b2b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/></marker>
+    <marker id="b2g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#548235"/></marker>
+  </defs>
+  <rect width="1000" height="440" fill="#ffffff"/>
+  <text x="500" y="32" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold">당김과 역압 — 소비자가 당긴 만큼만 생산자가 일한다</text>
+  <text x="500" y="56" font-size="13" fill="#888888" text-anchor="middle">Consumer 가 <tspan font-family="'Consolas',monospace">Take(3)</tspan> 으로 3번 당기면, 무한 <tspan font-family="'Consolas',monospace">Producer.Tapped</tspan> 는 정확히 3개만 생산합니다.</text>
+
+  <!-- Producer (왼쪽, 무한) -->
+  <text x="120" y="110" font-size="13" fill="#bf9000" text-anchor="middle" font-weight="bold">무한 Producer</text>
+  <g font-family="'Consolas',monospace" font-size="13">
+    <rect x="60" y="124" width="120" height="34" fill="#fff2cc" stroke="#bf9000" stroke-width="1.8" rx="5"/><text x="120" y="146" text-anchor="middle" fill="#5a4400">1</text>
+    <rect x="60" y="166" width="120" height="34" fill="#fff2cc" stroke="#bf9000" stroke-width="1.8" rx="5"/><text x="120" y="188" text-anchor="middle" fill="#5a4400">2</text>
+    <rect x="60" y="208" width="120" height="34" fill="#fff2cc" stroke="#bf9000" stroke-width="1.8" rx="5"/><text x="120" y="230" text-anchor="middle" fill="#5a4400">3</text>
+    <rect x="60" y="250" width="120" height="34" fill="#fafafa" stroke="#bbbbbb" stroke-width="1.4" stroke-dasharray="5 4" rx="5"/><text x="120" y="272" text-anchor="middle" fill="#bbbbbb">4 (잠김)</text>
+    <text x="120" y="300" text-anchor="middle" fill="#bbbbbb" font-size="15">· · ·  ∞</text>
+  </g>
+
+  <!-- Take(3) gate -->
+  <rect x="430" y="124" width="80" height="176" fill="#eef4fd" stroke="#1f77b4" stroke-width="2" rx="6"/>
+  <text x="470" y="206" font-size="13" fill="#1f77b4" text-anchor="middle" font-family="'Consolas',monospace">Take(3)</text>
+  <text x="470" y="226" font-size="10" fill="#1f77b4" text-anchor="middle">3에서 멈춤</text>
+
+  <!-- Consumer (오른쪽) -->
+  <text x="800" y="110" font-size="13" fill="#548235" text-anchor="middle" font-weight="bold">Consumer.ToList</text>
+  <rect x="700" y="124" width="200" height="100" fill="#e2efda" stroke="#548235" stroke-width="2.2" rx="8"/>
+  <text x="800" y="158" font-size="12" fill="#375623" text-anchor="middle">한 조각씩 당겨</text>
+  <text x="800" y="180" font-size="12" fill="#375623" text-anchor="middle">필요한 만큼만</text>
+  <text x="800" y="206" font-size="13" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">[1, 2, 3]</text>
+
+  <!-- 당김 화살표 ← (3번) -->
+  <line x1="698" y1="250" x2="516" y2="250" stroke="#1f77b4" stroke-width="2.2" stroke-dasharray="6 4" marker-end="url(#b2b)"/>
+  <line x1="426" y1="250" x2="186" y2="250" stroke="#1f77b4" stroke-width="2.2" stroke-dasharray="6 4" marker-end="url(#b2b)"/>
+  <text x="305" y="242" font-size="11" fill="#1f77b4" text-anchor="middle">← 당김 요청 ×3</text>
+  <text x="607" y="242" font-size="11" fill="#1f77b4" text-anchor="middle">소비자가 한 조각씩</text>
+
+  <!-- log -->
+  <line x1="182" y1="320" x2="182" y2="320"/>
+  <rect x="320" y="318" width="360" height="40" fill="#e2efda" stroke="#548235" stroke-width="1.8" rx="6"/>
+  <text x="500" y="343" font-size="13" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace">log = [1, 2, 3]  — 생산도 정확히 3번</text>
+
+  <text x="500" y="396" font-size="13" fill="#1f1f1f" text-anchor="middle">밀어붙이는 <tspan font-family="'Consolas',monospace">IObservable</tspan>(push) 와 달리, 여기는 당김(pull) — 빠른 생산자가 느린 소비자를 압도하지 않습니다.</text>
+  <text x="500" y="420" font-size="12" fill="#888888" text-anchor="middle">소비 속도가 생산 속도를 정하는 이 성질이 역압(backpressure)이고, 당김 구조에서 공짜로 생깁니다.</text>
+</svg>

@@ -18,7 +18,7 @@ public static class Conduit
 }
 
 // 실전 파이프라인 — *자원 안전한* 소스(열기/닫기 보장) 위에서 Conduit 변환 후 sink 로 접는다.
-// (6부 bracket 의 finally 보장을 스트리밍에 결합.)
+// (8부 bracket 의 finally 보장을 스트리밍에 결합.)
 public static class Pipeline
 {
     // events 는 호출자 소유 — 예외가 나도 (finally 실행 후) 닫힘 기록을 관찰할 수 있다.

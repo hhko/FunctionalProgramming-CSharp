@@ -3,7 +3,7 @@ using Ch34.Tests;
 using Ch34.Types;
 
 Console.WriteLine("================================================");
-Console.WriteLine("31장 — Pipes (Producer / Consumer / Pipe)");
+Console.WriteLine("34장 — Pipes (Producer / Consumer / Pipe)");
 Console.WriteLine("================================================");
 Console.WriteLine();
 

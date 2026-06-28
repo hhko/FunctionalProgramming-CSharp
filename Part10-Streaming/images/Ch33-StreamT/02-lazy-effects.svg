@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 440" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="s2g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#548235"/></marker>
+  </defs>
+  <rect width="920" height="440" fill="#ffffff"/>
+  <text x="460" y="32" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold">효과는 당긴 만큼만 — 무한 스트림도 메모리·효과 안전</text>
+  <text x="460" y="56" font-size="13" fill="#888888" text-anchor="middle">정의는 무한이어도 소비가 유한하면, 계산도 부수 효과도 당긴 횟수만큼만 일어납니다.</text>
+
+  <!-- 위: eager List -->
+  <rect x="36" y="76" width="848" height="138" fill="#fbeeed" stroke="none" rx="10"/>
+  <text x="56" y="100" font-size="14" fill="#c0504d" font-weight="bold">eager 컬렉션 (List) — 무한을 전부 만들려다 터짐</text>
+  <g font-family="'Consolas',monospace" font-size="13" fill="#943634">
+    <rect x="56" y="120" width="48" height="38" fill="#ffffff" stroke="#c0504d" stroke-width="1.4" rx="5"/><text x="80" y="144" text-anchor="middle">1</text>
+    <rect x="112" y="120" width="48" height="38" fill="#ffffff" stroke="#c0504d" stroke-width="1.4" rx="5"/><text x="136" y="144" text-anchor="middle">2</text>
+    <rect x="168" y="120" width="48" height="38" fill="#ffffff" stroke="#c0504d" stroke-width="1.4" rx="5"/><text x="192" y="144" text-anchor="middle">3</text>
+    <rect x="224" y="120" width="48" height="38" fill="#ffffff" stroke="#c0504d" stroke-width="1.4" rx="5"/><text x="248" y="144" text-anchor="middle">4</text>
+    <rect x="280" y="120" width="48" height="38" fill="#ffffff" stroke="#c0504d" stroke-width="1.4" rx="5"/><text x="304" y="144" text-anchor="middle">5</text>
+    <text x="360" y="144" font-size="16">· · · · · ·</text>
+    <text x="470" y="144" font-size="20">∞</text>
+  </g>
+  <text x="560" y="152" font-size="30" fill="#c0504d" text-anchor="middle" font-weight="bold">✗</text>
+  <text x="690" y="135" font-size="13" fill="#943634" font-weight="bold">OutOfMemory</text>
+  <text x="690" y="155" font-size="11.5" fill="#943634">무한을 전부 materialize</text>
+  <text x="56" y="196" font-size="12" fill="#943634">대용량 파일도 마찬가지 — 전부 메모리에 올리면 터집니다.</text>
+
+  <!-- 아래: StreamT pull -->
+  <rect x="36" y="226" width="848" height="150" fill="#f3f9f0" stroke="none" rx="10"/>
+  <text x="56" y="250" font-size="14" fill="#548235" font-weight="bold"><tspan font-family="'Consolas',monospace">StreamT</tspan> (pull) — <tspan font-family="'Consolas',monospace">Tapped(1, log).Take(3).ToList()</tspan></text>
+  <g font-family="'Consolas',monospace" font-size="13">
+    <rect x="56" y="270" width="58" height="40" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.8" rx="5"/><text x="85" y="295" text-anchor="middle" fill="#0c3a5e">1</text>
+    <rect x="120" y="270" width="58" height="40" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.8" rx="5"/><text x="149" y="295" text-anchor="middle" fill="#0c3a5e">2</text>
+    <rect x="184" y="270" width="58" height="40" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.8" rx="5"/><text x="213" y="295" text-anchor="middle" fill="#0c3a5e">3</text>
+    <rect x="248" y="270" width="58" height="40" fill="#fafafa" stroke="#bbbbbb" stroke-width="1.4" stroke-dasharray="5 4" rx="5"/><text x="277" y="295" text-anchor="middle" fill="#bbbbbb">4</text>
+    <text x="334" y="295" font-size="15" fill="#bbbbbb">· · ·  ∞ (잠김)</text>
+  </g>
+  <text x="430" y="262" font-size="11" fill="#548235" text-anchor="middle">Take(3) 이 여기서 멈춤 ↓</text>
+  <line x1="306" y1="270" x2="306" y2="318" stroke="#548235" stroke-width="2" stroke-dasharray="4 3"/>
+  <line x1="430" y1="290" x2="540" y2="290" stroke="#548235" stroke-width="2.2" marker-end="url(#s2g)"/>
+  <rect x="544" y="268" width="150" height="44" fill="#e2efda" stroke="#548235" stroke-width="2.2" rx="6"/>
+  <text x="619" y="286" font-size="11" fill="#375623" text-anchor="middle">효과 정확히 3번</text>
+  <text x="619" y="304" font-size="13" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">log = [1, 2, 3]</text>
+  <text x="724" y="293" font-size="12" fill="#548235">Pull 안 한 4 이하는</text>
+  <text x="724" y="309" font-size="12" fill="#548235"><tspan font-family="'Consolas',monospace">log.Add</tspan> 도 안 일어남</text>
+  <text x="56" y="356" font-size="12.5" fill="#375623">정의 = 무한, 소비 = 유한 → 비용은 당긴 만큼만. 무한 정의가 유한 비용으로 끝납니다.</text>
+
+  <text x="460" y="416" font-size="13" fill="#1f1f1f" text-anchor="middle">"효과를 품은 lazy 시퀀스" 의 안전함 — 무한·대용량을 정의해도, 당긴 조각만 계산되고 그 조각의 효과만 일어납니다.</text>
+</svg>

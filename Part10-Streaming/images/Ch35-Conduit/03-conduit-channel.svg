@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="h3d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#555"/></marker>
+  </defs>
+  <rect width="1000" height="400" fill="#ffffff"/>
+  <text x="500" y="30" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold">v5 <tspan font-family="'Consolas',monospace">Conduit</tspan> 의 속 — Sink + 버퍼(Channel) + Source</text>
+  <text x="500" y="54" font-size="13" fill="#888888" text-anchor="middle">학습용은 <tspan font-family="'Consolas',monospace">IEnumerable</tspan> 변환 하나로 평탄화. v5 는 안에 큐를 둔 채널입니다.</text>
+
+  <!-- Post 입력 -->
+  <rect x="40" y="150" width="120" height="56" fill="#f5f1fa" stroke="#7a5fb0" stroke-width="1.8" rx="6"/>
+  <text x="100" y="174" font-size="12" fill="#5a3f86" text-anchor="middle" font-family="'Consolas',monospace">Post(value)</text>
+  <text x="100" y="192" font-size="10.5" fill="#7a5fb0" text-anchor="middle">값을 넣음</text>
+  <line x1="162" y1="178" x2="206" y2="178" stroke="#555" stroke-width="2" marker-end="url(#h3d)"/>
+
+  <!-- Sink (입력측, 반변) -->
+  <rect x="210" y="142" width="160" height="72" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="8"/>
+  <text x="290" y="166" font-size="13" fill="#0c3a5e" text-anchor="middle" font-weight="bold">Sink (입력측)</text>
+  <text x="290" y="186" font-size="11" fill="#1f77b4" text-anchor="middle">버퍼 들어가기 전 변환</text>
+  <text x="290" y="203" font-size="10.5" fill="#1f77b4" text-anchor="middle" font-family="'Consolas',monospace">Comap (반변)</text>
+  <line x1="372" y1="178" x2="416" y2="178" stroke="#555" stroke-width="2" marker-end="url(#h3d)"/>
+
+  <!-- 버퍼 -->
+  <rect x="420" y="142" width="160" height="72" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="8"/>
+  <text x="500" y="164" font-size="13" fill="#5a4400" text-anchor="middle" font-weight="bold">버퍼 (Channel)</text>
+  <g font-family="'Consolas',monospace" font-size="11" fill="#5a4400">
+    <rect x="436" y="176" width="24" height="22" fill="#ffffff" stroke="#bf9000" stroke-width="1.2" rx="3"/>
+    <rect x="464" y="176" width="24" height="22" fill="#ffffff" stroke="#bf9000" stroke-width="1.2" rx="3"/>
+    <rect x="492" y="176" width="24" height="22" fill="#ffffff" stroke="#bf9000" stroke-width="1.2" rx="3"/>
+  </g>
+  <text x="544" y="192" font-size="10.5" fill="#8a6d00" text-anchor="middle">큐</text>
+  <line x1="582" y1="178" x2="626" y2="178" stroke="#555" stroke-width="2" marker-end="url(#h3d)"/>
+
+  <!-- Source (출력측, 공변) -->
+  <rect x="630" y="142" width="160" height="72" fill="#e2efda" stroke="#548235" stroke-width="2" rx="8"/>
+  <text x="710" y="166" font-size="13" fill="#375623" text-anchor="middle" font-weight="bold">Source (출력측)</text>
+  <text x="710" y="186" font-size="11" fill="#548235" text-anchor="middle">버퍼에서 나온 뒤 변환</text>
+  <text x="710" y="203" font-size="10.5" fill="#548235" text-anchor="middle" font-family="'Consolas',monospace">Map (공변)</text>
+  <line x1="792" y1="178" x2="836" y2="178" stroke="#555" stroke-width="2" marker-end="url(#h3d)"/>
+  <rect x="840" y="150" width="120" height="56" fill="#e2efda" stroke="#548235" stroke-width="1.8" rx="6"/>
+  <text x="900" y="182" font-size="11" fill="#375623" text-anchor="middle">꺼내 소비</text>
+
+  <!-- 역압 주석 -->
+  <text x="500" y="246" font-size="11.5" fill="#bf9000" text-anchor="middle">버퍼가 차면 기다리거나 버림 (Bounded / Latest 전략) = 진짜 역압</text>
+
+  <text x="500" y="300" font-size="13" fill="#1f1f1f" text-anchor="middle">학습용 <tspan font-family="'Consolas',monospace">Conduit&lt;I, O&gt;</tspan> 는 이 채널·버퍼·양방향(반변+공변)을 들어내고, <tspan font-family="'Consolas',monospace">IEnumerable&lt;I&gt; → IEnumerable&lt;O&gt;</tspan> 한 함수로 단순화했습니다.</text>
+  <text x="500" y="326" font-size="13" fill="#1f1f1f" text-anchor="middle">뼈대(변환관 + 합성 + 자원 안전)는 학습용과 v5 가 같고, 나머지는 그 위에 얹은 실무 기계장치입니다.</text>
+</svg>

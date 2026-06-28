@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 430" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="c1d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#555"/></marker>
+    <marker id="c1g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#548235"/></marker>
+  </defs>
+  <rect width="1000" height="430" fill="#ffffff"/>
+  <text x="500" y="32" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold"><tspan font-family="'Consolas',monospace">Conduit</tspan> — 한 변환관으로 합친 lazy LINQ 변환</text>
+  <text x="500" y="56" font-size="13" fill="#888888" text-anchor="middle"><tspan font-family="'Consolas',monospace">Map(+1)</tspan> 를 <tspan font-family="'Consolas',monospace">Then</tspan> 으로 <tspan font-family="'Consolas',monospace">Filter(짝수)</tspan> 에 이어 한 관으로. 원소가 한 개씩 관을 통과합니다.</text>
+
+  <!-- 한 변환관 헤더 -->
+  <rect x="300" y="78" width="400" height="34" fill="#eef4fd" stroke="#1f77b4" stroke-width="1.8" rx="6"/>
+  <text x="500" y="100" font-size="13" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace">Map(+1).Then(Filter(짝수))  — 한 관</text>
+
+  <!-- 열 헤더 -->
+  <text x="95" y="138" font-size="11" fill="#888" text-anchor="middle">입력 원소</text>
+  <text x="340" y="138" font-size="11" fill="#888" text-anchor="middle">Map(+1) 후</text>
+  <text x="585" y="138" font-size="11" fill="#888" text-anchor="middle">Filter(짝수)</text>
+  <text x="820" y="138" font-size="11" fill="#888" text-anchor="middle">관을 나오면</text>
+
+  <!-- 4 행 (원소 하나씩) -->
+  <g font-family="'Consolas',monospace" font-size="13">
+    <!-- 1 -->
+    <rect x="60" y="150" width="70" height="34" fill="#fff2cc" stroke="#bf9000" stroke-width="1.6" rx="5"/><text x="95" y="172" text-anchor="middle" fill="#5a4400">1</text>
+    <line x1="132" y1="167" x2="290" y2="167" stroke="#555" stroke-width="1.8" marker-end="url(#c1d)"/>
+    <rect x="305" y="150" width="70" height="34" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.6" rx="5"/><text x="340" y="172" text-anchor="middle" fill="#0c3a5e">2</text>
+    <line x1="377" y1="167" x2="535" y2="167" stroke="#555" stroke-width="1.8" marker-end="url(#c1d)"/>
+    <text x="585" y="172" text-anchor="middle" fill="#375623">✓ 짝수</text>
+    <line x1="650" y1="167" x2="770" y2="167" stroke="#548235" stroke-width="1.8" marker-end="url(#c1g)"/>
+    <rect x="775" y="150" width="70" height="34" fill="#e2efda" stroke="#548235" stroke-width="1.8" rx="5"/><text x="810" y="172" text-anchor="middle" fill="#375623">2</text>
+
+    <!-- 2 -->
+    <rect x="60" y="196" width="70" height="34" fill="#fff2cc" stroke="#bf9000" stroke-width="1.6" rx="5"/><text x="95" y="218" text-anchor="middle" fill="#5a4400">2</text>
+    <line x1="132" y1="213" x2="290" y2="213" stroke="#555" stroke-width="1.8" marker-end="url(#c1d)"/>
+    <rect x="305" y="196" width="70" height="34" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.6" rx="5"/><text x="340" y="218" text-anchor="middle" fill="#0c3a5e">3</text>
+    <line x1="377" y1="213" x2="535" y2="213" stroke="#555" stroke-width="1.8" marker-end="url(#c1d)"/>
+    <text x="585" y="218" text-anchor="middle" fill="#c0504d">✗ 홀수</text>
+    <text x="810" y="218" text-anchor="middle" fill="#bbbbbb">버림</text>
+
+    <!-- 3 -->
+    <rect x="60" y="242" width="70" height="34" fill="#fff2cc" stroke="#bf9000" stroke-width="1.6" rx="5"/><text x="95" y="264" text-anchor="middle" fill="#5a4400">3</text>
+    <line x1="132" y1="259" x2="290" y2="259" stroke="#555" stroke-width="1.8" marker-end="url(#c1d)"/>
+    <rect x="305" y="242" width="70" height="34" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.6" rx="5"/><text x="340" y="264" text-anchor="middle" fill="#0c3a5e">4</text>
+    <line x1="377" y1="259" x2="535" y2="259" stroke="#555" stroke-width="1.8" marker-end="url(#c1d)"/>
+    <text x="585" y="264" text-anchor="middle" fill="#375623">✓ 짝수</text>
+    <line x1="650" y1="259" x2="770" y2="259" stroke="#548235" stroke-width="1.8" marker-end="url(#c1g)"/>
+    <rect x="775" y="242" width="70" height="34" fill="#e2efda" stroke="#548235" stroke-width="1.8" rx="5"/><text x="810" y="264" text-anchor="middle" fill="#375623">4</text>
+
+    <!-- 4 -->
+    <rect x="60" y="288" width="70" height="34" fill="#fff2cc" stroke="#bf9000" stroke-width="1.6" rx="5"/><text x="95" y="310" text-anchor="middle" fill="#5a4400">4</text>
+    <line x1="132" y1="305" x2="290" y2="305" stroke="#555" stroke-width="1.8" marker-end="url(#c1d)"/>
+    <rect x="305" y="288" width="70" height="34" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.6" rx="5"/><text x="340" y="310" text-anchor="middle" fill="#0c3a5e">5</text>
+    <line x1="377" y1="305" x2="535" y2="305" stroke="#555" stroke-width="1.8" marker-end="url(#c1d)"/>
+    <text x="585" y="310" text-anchor="middle" fill="#c0504d">✗ 홀수</text>
+    <text x="810" y="310" text-anchor="middle" fill="#bbbbbb">버림</text>
+  </g>
+
+  <rect x="775" y="338" width="120" height="34" fill="#e2efda" stroke="#548235" stroke-width="2.4" rx="6"/>
+  <text x="835" y="360" font-size="13" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">[2, 4]</text>
+  <text x="660" y="360" font-size="12" fill="#548235" text-anchor="end">출력 스트림 →</text>
+
+  <text x="380" y="404" font-size="12.5" fill="#1f1f1f" text-anchor="middle">한꺼번에 <tspan font-family="'Consolas',monospace">[2,3,4,5]</tspan> 로 만든 뒤 거르는 게 아니라, 원소 하나가 관을 끝까지 지나고서 다음이 들어옵니다 (LINQ <tspan font-family="'Consolas',monospace">Select</tspan>/<tspan font-family="'Consolas',monospace">Where</tspan> 지연 실행과 같은 결).</text>
+</svg>

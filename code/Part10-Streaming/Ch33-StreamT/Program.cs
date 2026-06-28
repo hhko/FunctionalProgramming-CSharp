@@ -3,7 +3,7 @@ using Ch33.Tests;
 using Ch33.Types;
 
 Console.WriteLine("================================================");
-Console.WriteLine("30장 — StreamT (효과적 lazy 스트림)");
+Console.WriteLine("33장 — StreamT (효과적 lazy 스트림)");
 Console.WriteLine("================================================");
 Console.WriteLine();
 

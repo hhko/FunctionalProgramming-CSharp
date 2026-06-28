@@ -21,5 +21,5 @@ Pipes(Producer/Consumer/Pipe)를 다룬다. *필수* 한 개 + *심화* 한 개.
 ## 실행
 
 ```bash
-dotnet run --project code/Part8-Streaming/Ch34-Pipes/Ch34.csproj
+dotnet run --project code/Part10-Streaming/Ch34-Pipes/Ch34.csproj
 ```

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 380" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="p1d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#555"/></marker>
+    <marker id="p1b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/></marker>
+    <marker id="p1g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#548235"/></marker>
+  </defs>
+  <rect width="1000" height="380" fill="#ffffff"/>
+  <text x="500" y="32" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold"><tspan font-family="'Consolas',monospace">producer | pipe | consumer</tspan> — 세 조각이 한 파이프라인으로</text>
+  <text x="500" y="56" font-size="13" fill="#888888" text-anchor="middle"><tspan font-family="'Consolas',monospace">Of(1..5) | Map(*10) | Sum = 150</tspan>. 합성은 <tspan font-family="'Consolas',monospace">Through</tspan>·<tspan font-family="'Consolas',monospace">Run</tspan> (= LanguageExt 의 <tspan font-family="'Consolas',monospace">|</tspan> 연산자).</text>
+
+  <text x="135" y="118" font-size="13" fill="#bf9000" text-anchor="middle" font-weight="bold">Producer (생산)</text>
+  <rect x="40" y="128" width="190" height="74" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="8"/>
+  <text x="135" y="158" font-size="14" fill="#5a4400" text-anchor="middle" font-family="'Consolas',monospace">Of(1,2,3,4,5)</text>
+  <text x="135" y="182" font-size="11" fill="#8a6d00" text-anchor="middle">값을 yield</text>
+
+  <text x="430" y="118" font-size="13" fill="#1f77b4" text-anchor="middle" font-weight="bold">Pipe (변환)</text>
+  <rect x="335" y="128" width="190" height="74" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="8"/>
+  <text x="430" y="158" font-size="14" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace">Map(x =&gt; x*10)</text>
+  <text x="430" y="182" font-size="11" fill="#1f77b4" text-anchor="middle">I 를 받아 O 로</text>
+
+  <text x="725" y="118" font-size="13" fill="#548235" text-anchor="middle" font-weight="bold">Consumer (소비)</text>
+  <rect x="630" y="128" width="190" height="74" fill="#e2efda" stroke="#548235" stroke-width="2.2" rx="8"/>
+  <text x="725" y="158" font-size="14" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace">Sum()</text>
+  <text x="725" y="182" font-size="11" fill="#548235" text-anchor="middle">당겨 접어 R 로</text>
+
+  <!-- 데이터 흐름 → -->
+  <line x1="232" y1="150" x2="333" y2="150" stroke="#555" stroke-width="2.2" marker-end="url(#p1d)"/>
+  <text x="282" y="142" font-size="10" fill="#666" text-anchor="middle">Through</text>
+  <line x1="527" y1="150" x2="628" y2="150" stroke="#555" stroke-width="2.2" marker-end="url(#p1d)"/>
+  <text x="577" y="142" font-size="10" fill="#666" text-anchor="middle">Run</text>
+  <text x="500" y="98" font-size="11" fill="#555" text-anchor="middle">데이터 흐름 (10, 20, 30, 40, 50) →</text>
+
+  <line x1="824" y1="165" x2="880" y2="165" stroke="#548235" stroke-width="2.4" marker-end="url(#p1g)"/>
+  <rect x="884" y="143" width="90" height="44" fill="#e2efda" stroke="#548235" stroke-width="2.4" rx="6"/>
+  <text x="929" y="170" font-size="15" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">150</text>
+
+  <!-- 당김 ← -->
+  <line x1="628" y1="250" x2="232" y2="250" stroke="#1f77b4" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#p1b)"/>
+  <text x="430" y="242" font-size="11.5" fill="#1f77b4" text-anchor="middle">당김(pull) — Consumer 가 한 조각씩 위로 요청</text>
+
+  <text x="500" y="320" font-size="13" fill="#1f1f1f" text-anchor="middle"><tspan font-family="'Consolas',monospace">Through</tspan> 가 Producer→Pipe 를, <tspan font-family="'Consolas',monospace">Run</tspan> 이 Pipe→Consumer 를 잇습니다. LINQ 메서드 체인·Unix 파이프 <tspan font-family="'Consolas',monospace">|</tspan> 와 같은 결입니다.</text>
+  <text x="500" y="346" font-size="12" fill="#888888" text-anchor="middle">세 역할이 독립이라 생산만·변환만·소비만 따로 갈아끼울 수 있습니다.</text>
+</svg>

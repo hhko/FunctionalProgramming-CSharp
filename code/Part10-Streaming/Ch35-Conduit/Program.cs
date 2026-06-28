@@ -3,7 +3,7 @@ using Ch35.Tests;
 using Ch35.Types;
 
 Console.WriteLine("================================================");
-Console.WriteLine("32장 — Conduit & 실전 파이프라인");
+Console.WriteLine("35장 — Conduit & 실전 파이프라인");
 Console.WriteLine("================================================");
 Console.WriteLine();
 
@@ -22,8 +22,8 @@ Console.WriteLine();
 
 // ── 예제 3 — Pipes vs Conduit ───────────────────────────────────────
 Console.WriteLine("== 예제 3 — Pipes vs Conduit ==");
-Console.WriteLine("  Pipes(31장)   : Producer/Consumer/Pipe 세 역할 분리 + 당김 역압");
-Console.WriteLine("  Conduit(32장) : 변환을 IEnumerable<I>→IEnumerable<O> 하나로 (lazy LINQ 위)");
+Console.WriteLine("  Pipes(34장)   : Producer/Consumer/Pipe 세 역할 분리 + 당김 역압");
+Console.WriteLine("  Conduit(35장) : 변환을 IEnumerable<I>→IEnumerable<O> 하나로 (lazy LINQ 위)");
 Console.WriteLine();
 
 // ── 검증 ────────────────────────────────────────────────────────────

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 470" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="s1p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/></marker>
+    <marker id="s1g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#548235"/></marker>
+  </defs>
+  <rect width="920" height="470" fill="#ffffff"/>
+  <text x="460" y="32" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold">Pull 기반 lazy 스트림 — 당긴 만큼만 펼쳐집니다</text>
+  <text x="460" y="56" font-size="13" fill="#888888" text-anchor="middle"><tspan font-family="'Consolas',monospace">From(1).Take(3)</tspan>: 정의는 무한이지만 <tspan font-family="'Consolas',monospace">Pull</tspan> 한 만큼만 계산되고, 나머지는 <tspan font-family="'Consolas',monospace">Func</tspan> 로 잠긴 채입니다.</text>
+
+  <!-- 정의 -->
+  <text x="40" y="100" font-size="12" fill="#888888">정의</text>
+  <rect x="150" y="80" width="320" height="40" fill="#fafafa" stroke="#bbbbbb" stroke-width="1.6" stroke-dasharray="5 4" rx="6"/>
+  <text x="310" y="105" font-size="13" fill="#999999" text-anchor="middle" font-family="'Consolas',monospace">From(1) — pull 함수만, 머리도 미계산</text>
+
+  <!-- Pull 1 -->
+  <text x="40" y="166" font-size="12" fill="#1f77b4" font-weight="bold">Pull ①</text>
+  <line x1="96" y1="161" x2="146" y2="161" stroke="#1f77b4" stroke-width="2.2" marker-end="url(#s1p)"/>
+  <rect x="150" y="140" width="120" height="44" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/>
+  <text x="210" y="158" font-size="10" fill="#1f77b4" text-anchor="middle">Head (계산됨)</text>
+  <text x="210" y="176" font-size="14" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">1</text>
+  <rect x="270" y="140" width="200" height="44" fill="#fafafa" stroke="#bbbbbb" stroke-width="1.6" stroke-dasharray="5 4" rx="6"/>
+  <text x="370" y="158" font-size="10" fill="#999999" text-anchor="middle">Tail (잠김)</text>
+  <text x="370" y="176" font-size="13" fill="#999999" text-anchor="middle" font-family="'Consolas',monospace">From(2)</text>
+  <line x1="478" y1="162" x2="600" y2="162" stroke="#548235" stroke-width="2" marker-end="url(#s1g)"/>
+  <rect x="604" y="142" width="120" height="40" fill="#e2efda" stroke="#548235" stroke-width="2" rx="6"/>
+  <text x="664" y="167" font-size="13" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace">[1]</text>
+
+  <!-- Pull 2 -->
+  <text x="40" y="240" font-size="12" fill="#1f77b4" font-weight="bold">Pull ②</text>
+  <rect x="150" y="214" width="120" height="44" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/>
+  <text x="210" y="232" font-size="10" fill="#1f77b4" text-anchor="middle">Head</text>
+  <text x="210" y="250" font-size="14" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">2</text>
+  <rect x="270" y="214" width="200" height="44" fill="#fafafa" stroke="#bbbbbb" stroke-width="1.6" stroke-dasharray="5 4" rx="6"/>
+  <text x="370" y="240" font-size="13" fill="#999999" text-anchor="middle" font-family="'Consolas',monospace">From(3) (잠김)</text>
+  <line x1="478" y1="236" x2="600" y2="236" stroke="#548235" stroke-width="2" marker-end="url(#s1g)"/>
+  <rect x="604" y="216" width="120" height="40" fill="#e2efda" stroke="#548235" stroke-width="2" rx="6"/>
+  <text x="664" y="241" font-size="13" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace">[1, 2]</text>
+
+  <!-- Pull 3 -->
+  <text x="40" y="314" font-size="12" fill="#1f77b4" font-weight="bold">Pull ③</text>
+  <rect x="150" y="288" width="120" height="44" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/>
+  <text x="210" y="306" font-size="10" fill="#1f77b4" text-anchor="middle">Head</text>
+  <text x="210" y="324" font-size="14" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">3</text>
+  <rect x="270" y="288" width="200" height="44" fill="#fafafa" stroke="#bbbbbb" stroke-width="1.6" stroke-dasharray="5 4" rx="6"/>
+  <text x="370" y="314" font-size="13" fill="#999999" text-anchor="middle" font-family="'Consolas',monospace">From(4) (잠김)</text>
+  <line x1="478" y1="310" x2="600" y2="310" stroke="#548235" stroke-width="2" marker-end="url(#s1g)"/>
+  <rect x="604" y="290" width="130" height="40" fill="#e2efda" stroke="#548235" stroke-width="2.4" rx="6"/>
+  <text x="669" y="315" font-size="13" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">[1, 2, 3]</text>
+
+  <rect x="150" y="360" width="574" height="42" fill="#f4f4f4" stroke="#cccccc" stroke-width="1.4" rx="6"/>
+  <text x="437" y="385" font-size="12.5" fill="#666666" text-anchor="middle"><tspan font-family="'Consolas',monospace">From(4)</tspan> 이하 — <tspan font-family="'Consolas',monospace">Take(3)</tspan> 이 3번에서 멈춰 한 번도 당겨지지 않아 영원히 잠긴 채</text>
+
+  <text x="460" y="440" font-size="13" fill="#1f1f1f" text-anchor="middle">당김(<tspan font-family="'Consolas',monospace">Pull</tspan>)은 OO 의 <tspan font-family="'Consolas',monospace">IEnumerator.MoveNext()</tspan> 처럼 한 칸씩 — 정의는 무한, 계산은 당긴 세 칸뿐입니다.</text>
+</svg>
