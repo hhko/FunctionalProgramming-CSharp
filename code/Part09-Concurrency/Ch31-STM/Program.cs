@@ -4,7 +4,7 @@ using Ch31.Tests;
 using Ch31.Types;
 
 Console.WriteLine("================================================");
-Console.WriteLine("28장 — STM & Ref (트랜잭션 메모리)");
+Console.WriteLine("31장 — STM & Ref (트랜잭션 메모리)");
 Console.WriteLine("================================================");
 Console.WriteLine();
 

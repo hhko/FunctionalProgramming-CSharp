@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="m32g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#548235"/></marker>
+    <marker id="m32r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0504d"/></marker>
+    <marker id="m32d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#555"/></marker>
+    <marker id="m32b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/></marker>
+  </defs>
+  <rect width="1000" height="520" fill="#ffffff"/>
+  <text x="500" y="32" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold"><tspan font-family="'Consolas',monospace">AtomHashMap</tspan> — 불변 맵을 통째로 CAS 로 갈아끼우기</text>
+  <text x="500" y="56" font-size="13" fill="#888888" text-anchor="middle">같은 불변 맵 스냅샷을 읽고 각자 <tspan font-family="'Consolas',monospace">SetItem</tspan> 으로 새 맵을 만든 뒤 <tspan font-family="'Consolas',monospace">CompareExchange</tspan> 로 교체합니다 (30장 Atom 패턴 그대로).</text>
+
+  <text x="40" y="106" font-size="13" fill="#1f77b4" font-weight="bold">스레드 A</text>
+  <rect x="80" y="84" width="170" height="48" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/>
+  <text x="165" y="103" font-size="10.5" fill="#1f77b4" text-anchor="middle">① Volatile.Read</text>
+  <text x="165" y="122" font-size="12" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace">cur = { }</text>
+  <line x1="252" y1="108" x2="300" y2="108" stroke="#555" stroke-width="2" marker-end="url(#m32d)"/>
+  <rect x="302" y="84" width="170" height="48" fill="#f4f4f4" stroke="#999" stroke-width="1.6" rx="6"/>
+  <text x="387" y="103" font-size="10.5" fill="#666" text-anchor="middle">② cur.SetItem(3,9)</text>
+  <text x="387" y="122" font-size="12" fill="#333" text-anchor="middle" font-family="'Consolas',monospace">next = { 3:9 }</text>
+  <line x1="474" y1="108" x2="522" y2="108" stroke="#555" stroke-width="2" marker-end="url(#m32d)"/>
+  <rect x="524" y="84" width="170" height="48" fill="#e2efda" stroke="#548235" stroke-width="2.2" rx="6"/>
+  <text x="609" y="103" font-size="10.5" fill="#548235" text-anchor="middle">③ CompareExchange</text>
+  <text x="609" y="122" font-size="12" fill="#375623" text-anchor="middle" font-weight="bold">✓ 성공</text>
+  <line x1="600" y1="134" x2="470" y2="196" stroke="#548235" stroke-width="2" marker-end="url(#m32g)"/>
+
+  <text x="500" y="184" font-size="12" fill="#8a6d00" text-anchor="middle">공유 <tspan font-family="'Consolas',monospace">map</tspan> 참조 — 불변 맵을 CAS 로만 교체</text>
+  <rect x="356" y="196" width="92" height="34" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/>
+  <text x="402" y="218" font-size="12" fill="#5a4400" text-anchor="middle" font-family="'Consolas',monospace">{ }</text>
+  <line x1="450" y1="213" x2="486" y2="213" stroke="#bf9000" stroke-width="2" marker-end="url(#m32b)"/>
+  <text x="468" y="206" font-size="9.5" fill="#bf9000" text-anchor="middle">A</text>
+  <rect x="488" y="196" width="96" height="34" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/>
+  <text x="536" y="218" font-size="12" fill="#5a4400" text-anchor="middle" font-family="'Consolas',monospace">{ 3:9 }</text>
+  <line x1="586" y1="213" x2="622" y2="213" stroke="#bf9000" stroke-width="2" marker-end="url(#m32b)"/>
+  <text x="604" y="206" font-size="9.5" fill="#bf9000" text-anchor="middle">B</text>
+  <rect x="624" y="196" width="120" height="34" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/>
+  <text x="684" y="218" font-size="12" fill="#5a4400" text-anchor="middle" font-family="'Consolas',monospace">{ 3:9, 7:49 }</text>
+
+  <text x="40" y="300" font-size="13" fill="#7a5fb0" font-weight="bold">스레드 B</text>
+  <rect x="80" y="278" width="170" height="48" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/>
+  <text x="165" y="297" font-size="10.5" fill="#1f77b4" text-anchor="middle">① Volatile.Read</text>
+  <text x="165" y="316" font-size="12" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace">cur = { }</text>
+  <line x1="252" y1="302" x2="300" y2="302" stroke="#555" stroke-width="2" marker-end="url(#m32d)"/>
+  <rect x="302" y="278" width="170" height="48" fill="#f4f4f4" stroke="#999" stroke-width="1.6" rx="6"/>
+  <text x="387" y="297" font-size="10.5" fill="#666" text-anchor="middle">② cur.SetItem(7,49)</text>
+  <text x="387" y="316" font-size="12" fill="#333" text-anchor="middle" font-family="'Consolas',monospace">next = { 7:49 }</text>
+  <line x1="474" y1="302" x2="522" y2="302" stroke="#555" stroke-width="2" marker-end="url(#m32d)"/>
+  <rect x="524" y="278" width="170" height="48" fill="#f6dddc" stroke="#c0504d" stroke-width="2.2" rx="6"/>
+  <text x="609" y="297" font-size="10.5" fill="#c0504d" text-anchor="middle">③ CompareExchange</text>
+  <text x="609" y="316" font-size="12" fill="#943634" text-anchor="middle" font-weight="bold">✗ 실패 (A 가 먼저 교체)</text>
+
+  <path d="M694,302 Q748,302 748,360 Q748,396 250,396 L118,396" fill="none" stroke="#c0504d" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#m32r)"/>
+  <text x="430" y="388" font-size="11" fill="#c0504d" text-anchor="middle">재시도 — fresh 맵으로 다시 SetItem</text>
+  <rect x="80" y="416" width="170" height="48" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/>
+  <text x="165" y="435" font-size="10.5" fill="#1f77b4" text-anchor="middle">① Read (fresh)</text>
+  <text x="165" y="454" font-size="12" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace">cur = { 3:9 }</text>
+  <line x1="252" y1="440" x2="300" y2="440" stroke="#555" stroke-width="2" marker-end="url(#m32d)"/>
+  <rect x="302" y="416" width="170" height="48" fill="#f4f4f4" stroke="#999" stroke-width="1.6" rx="6"/>
+  <text x="387" y="435" font-size="10.5" fill="#666" text-anchor="middle">② cur.SetItem(7,49)</text>
+  <text x="387" y="454" font-size="12" fill="#333" text-anchor="middle" font-family="'Consolas',monospace">next={3:9,7:49}</text>
+  <line x1="474" y1="440" x2="522" y2="440" stroke="#555" stroke-width="2" marker-end="url(#m32d)"/>
+  <rect x="524" y="416" width="170" height="48" fill="#e2efda" stroke="#548235" stroke-width="2.2" rx="6"/>
+  <text x="609" y="435" font-size="10.5" fill="#548235" text-anchor="middle">③ CompareExchange</text>
+  <text x="609" y="454" font-size="12" fill="#375623" text-anchor="middle" font-weight="bold">✓ 성공</text>
+  <line x1="660" y1="416" x2="690" y2="232" stroke="#548235" stroke-width="2" marker-end="url(#m32g)"/>
+
+  <text x="500" y="500" font-size="13" fill="#1f1f1f" text-anchor="middle">두 키 <tspan font-family="'Consolas',monospace">3</tspan> 과 <tspan font-family="'Consolas',monospace">7</tspan> 이 모두 남습니다. 8000 개를 동시에 넣어도 <tspan font-family="'Consolas',monospace">Count</tspan> 가 정확히 8000 — 삽입 유실이 없습니다.</text>
+</svg>

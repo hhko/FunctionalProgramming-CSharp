@@ -1,4 +1,4 @@
-# Part 7 — Concurrency (동시성)
+# Part 9 — Concurrency (동시성)
 
 ## 9부의 배경
 

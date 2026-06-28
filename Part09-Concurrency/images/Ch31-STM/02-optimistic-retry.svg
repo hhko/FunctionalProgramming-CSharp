@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 470" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="o31g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#548235"/></marker>
+    <marker id="o31r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0504d"/></marker>
+    <marker id="o31y" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#bf9000"/></marker>
+  </defs>
+  <rect width="1000" height="470" fill="#ffffff"/>
+  <text x="500" y="32" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold">낙관적 커밋 — 충돌하면 트랜잭션 전체를 다시</text>
+  <text x="500" y="56" font-size="13" fill="#888888" text-anchor="middle">두 트랜잭션이 같은 <tspan font-family="'Consolas',monospace">Ref</tspan> 를 읽고 동시에 커밋하려 하면, 먼저 커밋한 쪽이 버전을 올려 진 쪽의 검증을 깨뜨립니다.</text>
+
+  <!-- T1 -->
+  <text x="40" y="106" font-size="13" fill="#1f77b4" font-weight="bold">T1</text>
+  <rect x="80" y="84" width="184" height="46" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/>
+  <text x="172" y="103" font-size="10.5" fill="#1f77b4" text-anchor="middle">본문 실행 (로그)</text>
+  <text x="172" y="121" font-size="12" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace">Reads[alice]=0</text>
+  <line x1="266" y1="107" x2="396" y2="107" stroke="#555" stroke-width="2" marker-end="url(#o31g)"/>
+  <rect x="398" y="84" width="290" height="46" fill="#e2efda" stroke="#548235" stroke-width="2.2" rx="6"/>
+  <text x="543" y="103" font-size="10.5" fill="#548235" text-anchor="middle">커밋: 검증 0 = 0  ✓</text>
+  <text x="543" y="121" font-size="12" fill="#375623" text-anchor="middle" font-weight="bold">Writes 적용 + alice.Version 0→1</text>
+  <line x1="560" y1="132" x2="470" y2="190" stroke="#548235" stroke-width="2" marker-end="url(#o31g)"/>
+
+  <!-- 공유 Version -->
+  <text x="500" y="180" font-size="12" fill="#8a6d00" text-anchor="middle"><tspan font-family="'Consolas',monospace">alice.Version</tspan></text>
+  <rect x="372" y="192" width="76" height="32" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/>
+  <text x="410" y="213" font-size="13" fill="#5a4400" text-anchor="middle" font-family="'Consolas',monospace">0</text>
+  <line x1="450" y1="208" x2="486" y2="208" stroke="#bf9000" stroke-width="2" marker-end="url(#o31y)"/>
+  <text x="468" y="201" font-size="9.5" fill="#bf9000" text-anchor="middle">T1</text>
+  <rect x="488" y="192" width="76" height="32" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/>
+  <text x="526" y="213" font-size="13" fill="#5a4400" text-anchor="middle" font-family="'Consolas',monospace">1</text>
+  <line x1="566" y1="208" x2="602" y2="208" stroke="#bf9000" stroke-width="2" marker-end="url(#o31y)"/>
+  <text x="584" y="201" font-size="9.5" fill="#bf9000" text-anchor="middle">T2</text>
+  <rect x="604" y="192" width="76" height="32" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/>
+  <text x="642" y="213" font-size="13" fill="#5a4400" text-anchor="middle" font-family="'Consolas',monospace">2</text>
+
+  <!-- T2 첫 시도 -->
+  <text x="40" y="296" font-size="13" fill="#7a5fb0" font-weight="bold">T2</text>
+  <rect x="80" y="274" width="184" height="46" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/>
+  <text x="172" y="293" font-size="10.5" fill="#1f77b4" text-anchor="middle">본문 실행 (로그)</text>
+  <text x="172" y="311" font-size="12" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace">Reads[alice]=0</text>
+  <line x1="266" y1="297" x2="396" y2="297" stroke="#555" stroke-width="2" marker-end="url(#o31r)"/>
+  <rect x="398" y="274" width="290" height="46" fill="#f6dddc" stroke="#c0504d" stroke-width="2.2" rx="6"/>
+  <text x="543" y="293" font-size="10.5" fill="#c0504d" text-anchor="middle">커밋: 검증 0 ≠ 1  ✗</text>
+  <text x="543" y="311" font-size="12" fill="#943634" text-anchor="middle" font-weight="bold">T1 이 먼저 바꿈 → 롤백 (적용 안 함)</text>
+
+  <!-- T2 재시도 -->
+  <path d="M688,297 Q742,297 742,352 Q742,388 250,388 L118,388" fill="none" stroke="#c0504d" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#o31r)"/>
+  <text x="430" y="380" font-size="11" fill="#c0504d" text-anchor="middle">트랜잭션 전체 재시도 — fresh 버전으로 처음부터</text>
+  <rect x="80" y="408" width="184" height="46" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/>
+  <text x="172" y="427" font-size="10.5" fill="#1f77b4" text-anchor="middle">다시 실행 (fresh)</text>
+  <text x="172" y="445" font-size="12" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace">Reads[alice]=1</text>
+  <line x1="266" y1="431" x2="396" y2="431" stroke="#555" stroke-width="2" marker-end="url(#o31g)"/>
+  <rect x="398" y="408" width="290" height="46" fill="#e2efda" stroke="#548235" stroke-width="2.2" rx="6"/>
+  <text x="543" y="427" font-size="10.5" fill="#548235" text-anchor="middle">커밋: 검증 1 = 1  ✓</text>
+  <text x="543" y="445" font-size="12" fill="#375623" text-anchor="middle" font-weight="bold">Writes 적용 + alice.Version 1→2</text>
+  <line x1="640" y1="408" x2="650" y2="226" stroke="#548235" stroke-width="2" marker-end="url(#o31g)"/>
+
+  <text x="830" y="300" font-size="12" fill="#1f1f1f" text-anchor="middle">진 트랜잭션은</text>
+  <text x="830" y="320" font-size="12" fill="#1f1f1f" text-anchor="middle">중간 결과를 안 남기고</text>
+  <text x="830" y="340" font-size="12" fill="#1f1f1f" text-anchor="middle">통째로 다시 — 그래서</text>
+  <text x="830" y="360" font-size="12" fill="#1f1f1f" text-anchor="middle" font-weight="bold">총액이 보존됩니다.</text>
+</svg>

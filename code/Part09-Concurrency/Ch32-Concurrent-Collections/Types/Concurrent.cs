@@ -2,8 +2,8 @@ using System.Collections.Immutable;
 
 namespace Ch32.Types;
 
-// AtomHashMap<K,V> — 27장 Atom 의 CAS 를 *불변 컬렉션* 에 적용. 락 없이 동시 갱신 안전.
-// (2부 불변 Map 을 원자적 참조로 감싼 형태 = LanguageExt AtomHashMap 의 발상.)
+// AtomHashMap<K,V> — 30장 Atom 의 CAS 를 *불변 컬렉션* 에 적용. 락 없이 동시 갱신 안전.
+// (4부 불변 Map 을 원자적 참조로 감싼 형태 = LanguageExt AtomHashMap 의 발상.)
 public sealed class AtomHashMap<K, V> where K : notnull
 {
     ImmutableDictionary<K, V> map = ImmutableDictionary<K, V>.Empty;

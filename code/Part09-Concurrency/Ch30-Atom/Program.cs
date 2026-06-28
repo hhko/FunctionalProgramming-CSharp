@@ -2,7 +2,7 @@ using Ch30.Tests;
 using Ch30.Types;
 
 Console.WriteLine("================================================");
-Console.WriteLine("27장 — Atom (CAS 원자성)");
+Console.WriteLine("30장 — Atom (CAS 원자성)");
 Console.WriteLine("================================================");
 Console.WriteLine();
 
@@ -25,7 +25,7 @@ Parallel.For(0, tasks, _ =>
     for (var i = 0; i < perTask; i++) safe.Swap(c => c with { N = c.N + 1 });
 });
 
-long naive = 0;
+int naive = 0;
 Parallel.For(0, tasks, _ =>
 {
     for (var i = 0; i < perTask; i++) naive++;   // 락 없는 공유 증가 — 경쟁

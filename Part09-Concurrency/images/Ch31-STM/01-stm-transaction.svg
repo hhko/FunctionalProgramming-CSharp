@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="s31d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#555"/></marker>
+    <marker id="s31g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#548235"/></marker>
+  </defs>
+  <rect width="1000" height="500" fill="#ffffff"/>
+  <text x="500" y="32" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold">STM 트랜잭션 — 로그를 쌓고, 커밋에서 한꺼번에</text>
+  <text x="500" y="56" font-size="13" fill="#888888" text-anchor="middle"><tspan font-family="'Consolas',monospace">Run(txn)</tspan> 은 읽은 버전과 쓸 값을 로그에 모을 뿐, 실제 <tspan font-family="'Consolas',monospace">Ref</tspan> 는 안 바뀝니다. 커밋에서 검증을 통과하면 일괄 적용합니다.</text>
+
+  <!-- 1단계: 본문 실행 -->
+  <text x="250" y="92" font-size="14" fill="#1f77b4" text-anchor="middle" font-weight="bold">① 본문 실행 — 로그만 쌓기 (Ref 불변)</text>
+  <rect x="40" y="104" width="200" height="160" fill="#f6f9fc" stroke="#b8d4ea" stroke-width="1.4" rx="8"/>
+  <text x="140" y="124" font-size="11" fill="#1f77b4" text-anchor="middle">Bank.Transfer 네 단계</text>
+  <rect x="56" y="132" width="168" height="26" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.4" rx="4"/>
+  <text x="140" y="150" font-size="11" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace">Read(source)</text>
+  <rect x="56" y="162" width="168" height="26" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.4" rx="4"/>
+  <text x="140" y="180" font-size="11" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace">Write(source, f-30)</text>
+  <rect x="56" y="192" width="168" height="26" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.4" rx="4"/>
+  <text x="140" y="210" font-size="11" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace">Read(dest)</text>
+  <rect x="56" y="222" width="168" height="26" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.4" rx="4"/>
+  <text x="140" y="240" font-size="11" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace">Write(dest, t+30)</text>
+
+  <line x1="244" y1="184" x2="290" y2="184" stroke="#555" stroke-width="2" marker-end="url(#s31d)"/>
+
+  <!-- Txn 로그 -->
+  <rect x="292" y="110" width="220" height="150" fill="#fffaf0" stroke="#bf9000" stroke-width="1.8" rx="8"/>
+  <text x="402" y="130" font-size="12" fill="#8a6d00" text-anchor="middle" font-weight="bold">Txn 로그 (메모리에만)</text>
+  <text x="306" y="156" font-size="11" fill="#5a4400" font-family="'Consolas',monospace">Reads {</text>
+  <text x="322" y="174" font-size="11" fill="#5a4400" font-family="'Consolas',monospace">source: v0,  dest: v0</text>
+  <text x="306" y="192" font-size="11" fill="#5a4400" font-family="'Consolas',monospace">}</text>
+  <text x="306" y="216" font-size="11" fill="#5a4400" font-family="'Consolas',monospace">Writes {</text>
+  <text x="322" y="234" font-size="11" fill="#5a4400" font-family="'Consolas',monospace">source: 70,  dest: 30</text>
+  <text x="306" y="252" font-size="11" fill="#5a4400" font-family="'Consolas',monospace">}</text>
+
+  <text x="276" y="288" font-size="12" fill="#943634" text-anchor="middle">실제 <tspan font-family="'Consolas',monospace">alice/bob</tspan> 은 아직 <tspan font-family="'Consolas',monospace">100/0</tspan> 그대로 — 한 글자도 안 바뀜</text>
+
+  <!-- 2단계: 커밋 -->
+  <line x1="514" y1="184" x2="566" y2="184" stroke="#555" stroke-width="2" marker-end="url(#s31d)"/>
+  <text x="760" y="92" font-size="14" fill="#548235" text-anchor="middle" font-weight="bold">② 커밋 — lock(gate) 안에서</text>
+  <rect x="568" y="104" width="396" height="190" fill="#f3f9f0" stroke="#cfe3c4" stroke-width="1.4" rx="8"/>
+  <rect x="588" y="124" width="356" height="44" fill="#ffffff" stroke="#548235" stroke-width="1.6" rx="6"/>
+  <text x="766" y="143" font-size="11.5" fill="#375623" text-anchor="middle">Reads 의 버전이 지금도 그대로인가?</text>
+  <text x="766" y="160" font-size="11" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace">Reads.All(r =&gt; r.Version 그대로)  ✓</text>
+  <line x1="766" y1="170" x2="766" y2="194" stroke="#548235" stroke-width="2" marker-end="url(#s31g)"/>
+  <rect x="588" y="196" width="356" height="44" fill="#e2efda" stroke="#548235" stroke-width="2" rx="6"/>
+  <text x="766" y="215" font-size="11.5" fill="#375623" text-anchor="middle">통과 → Writes 일괄 적용 + Version++</text>
+  <text x="766" y="232" font-size="11.5" fill="#375623" text-anchor="middle" font-weight="bold" font-family="'Consolas',monospace">alice=70, bob=30</text>
+  <text x="766" y="266" font-size="11" fill="#548235" text-anchor="middle">all-or-nothing — 넷이 함께 적용되거나, 아무것도 안 됨</text>
+
+  <text x="500" y="334" font-size="13" fill="#1f1f1f" text-anchor="middle" font-weight="bold">핵심: 본문이 도는 동안 참조는 불변, 커밋만이 락 안에서 한꺼번에 바꿉니다 (IO 처럼 "기술을 값으로, 실행은 나중에").</text>
+
+  <!-- LINQ 조립 한 줄 -->
+  <rect x="180" y="360" width="640" height="116" fill="#fbfbfb" stroke="#cccccc" stroke-width="1.2" rx="8"/>
+  <text x="200" y="384" font-size="12" fill="#1f1f1f" font-weight="bold"><tspan font-family="'Consolas',monospace">STM&lt;A&gt;</tspan> 는 Monad — 네 단계를 LINQ 로 조립</text>
+  <text x="200" y="408" font-size="12" fill="#333" font-family="'Consolas',monospace">from f in Read(source)</text>
+  <text x="200" y="426" font-size="12" fill="#333" font-family="'Consolas',monospace">from _ in Write(source, f - 30)</text>
+  <text x="200" y="444" font-size="12" fill="#333" font-family="'Consolas',monospace">from t in Read(dest)</text>
+  <text x="200" y="462" font-size="12" fill="#333" font-family="'Consolas',monospace">from __ in Write(dest, t + 30)  select unit</text>
+</svg>

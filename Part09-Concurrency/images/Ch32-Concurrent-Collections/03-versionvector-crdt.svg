@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 480" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="v3d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#555"/></marker>
+  </defs>
+  <rect width="1000" height="480" fill="#ffffff"/>
+  <text x="500" y="30" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold"><tspan font-family="'Consolas',monospace">VersionVector</tspan> — 동시 쓰기 충돌을 자동으로 병합 (CRDT 의 바탕)</text>
+  <text x="500" y="54" font-size="13" fill="#888888" text-anchor="middle">들어온 버전과 현재 버전의 <tspan font-family="'Consolas',monospace">VectorClock</tspan> 관계를 견주어 <tspan font-family="'Consolas',monospace">Put</tspan> 이 자동 판정합니다 (v5 <tspan font-family="'Consolas',monospace">VersionVector.Put</tspan>).</text>
+
+  <!-- 입력 + 판정 -->
+  <rect x="80" y="84" width="200" height="44" fill="#eef4fd" stroke="#1f77b4" stroke-width="1.8" rx="6"/>
+  <text x="180" y="103" font-size="11" fill="#1f77b4" text-anchor="middle">현재 버전</text>
+  <text x="180" y="120" font-size="11" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace">값 + VectorClock</text>
+  <rect x="80" y="138" width="200" height="44" fill="#f5f1fa" stroke="#7a5fb0" stroke-width="1.8" rx="6"/>
+  <text x="180" y="157" font-size="11" fill="#5a3f86" text-anchor="middle">들어온 버전 (Put)</text>
+  <text x="180" y="174" font-size="11" fill="#5a3f86" text-anchor="middle" font-family="'Consolas',monospace">값 + VectorClock</text>
+  <rect x="330" y="106" width="220" height="54" fill="#ffffff" stroke="#555" stroke-width="2" rx="8"/>
+  <text x="440" y="128" font-size="12.5" fill="#333" text-anchor="middle" font-family="'Consolas',monospace">relation(현재, 들어온)</text>
+  <text x="440" y="148" font-size="11" fill="#888" text-anchor="middle">두 VectorClock 의 부분 순서</text>
+  <line x1="282" y1="133" x2="328" y2="133" stroke="#555" stroke-width="2" marker-end="url(#v3d)"/>
+  <text x="576" y="118" font-size="11" fill="#555" text-anchor="middle">분기</text>
+
+  <!-- 세 갈래 -->
+  <rect x="600" y="92" width="360" height="80" fill="#f4f4f4" stroke="#aaaaaa" stroke-width="1.6" rx="8"/>
+  <text x="620" y="116" font-size="13" fill="#666" font-weight="bold">CausedBy — 들어온 게 과거</text>
+  <text x="620" y="140" font-size="12" fill="#666">현재 버전을 그대로 유지합니다.</text>
+  <text x="620" y="160" font-size="12" fill="#666" font-family="'Consolas',monospace">→ this (무시)</text>
+
+  <rect x="600" y="184" width="360" height="80" fill="#eef4fd" stroke="#1f77b4" stroke-width="1.8" rx="8"/>
+  <text x="620" y="208" font-size="13" fill="#1f77b4" font-weight="bold">Causes — 들어온 게 미래</text>
+  <text x="620" y="232" font-size="12" fill="#0c3a5e">들어온 버전이 현재의 다음이라 받아들입니다.</text>
+  <text x="620" y="252" font-size="12" fill="#0c3a5e" font-family="'Consolas',monospace">→ version (수용)</text>
+
+  <rect x="600" y="276" width="360" height="104" fill="#e2efda" stroke="#548235" stroke-width="2.4" rx="8"/>
+  <text x="620" y="300" font-size="13" fill="#375623" font-weight="bold">★ Concurrent — 서로 다른 가지</text>
+  <text x="620" y="324" font-size="12" fill="#375623">버리지 않고 병합합니다.</text>
+  <text x="620" y="346" font-size="12" fill="#375623" font-family="'Consolas',monospace">값 = ConflictA.Resolve(a, b)</text>
+  <text x="620" y="366" font-size="12" fill="#375623" font-family="'Consolas',monospace">클록 = VectorClock.max(a, b)</text>
+
+  <line x1="552" y1="130" x2="598" y2="130" stroke="#aaaaaa" stroke-width="1.6"/>
+  <line x1="552" y1="138" x2="598" y2="222" stroke="#1f77b4" stroke-width="1.6"/>
+  <line x1="552" y1="146" x2="598" y2="318" stroke="#548235" stroke-width="2"/>
+
+  <!-- 왼쪽 아래 회상 -->
+  <rect x="80" y="220" width="470" height="160" fill="#fbfbfb" stroke="#cccccc" stroke-width="1.2" rx="8"/>
+  <text x="100" y="246" font-size="12.5" fill="#1f1f1f" font-weight="bold">앞 절의 세 관계가 그대로 쓰입니다</text>
+  <text x="100" y="272" font-size="12" fill="#333" font-family="'Consolas',monospace">{p1:1} vs {p1:2}  → Causes (미래)</text>
+  <text x="100" y="294" font-size="12" fill="#333" font-family="'Consolas',monospace">{p1:2} vs {p1:1}  → CausedBy (과거)</text>
+  <text x="100" y="316" font-size="12" fill="#333" font-family="'Consolas',monospace">{p1:1} vs {p2:1}  → Concurrent (동시)</text>
+  <text x="100" y="348" font-size="11.5" fill="#555">인과 판정 (VectorClock) 위에, 값 병합 규칙만 얹으면</text>
+  <text x="100" y="366" font-size="11.5" fill="#555">동시 쓰기를 자동으로 다스리는 버전 관리가 됩니다.</text>
+
+  <text x="500" y="438" font-size="13" fill="#1f1f1f" text-anchor="middle">동시 (<tspan font-family="'Consolas',monospace">Concurrent</tspan>) 일 때 한쪽을 버리지 않고 병합하는 것 — 이것을 충돌 없는 복제 자료형 (CRDT) 이라 부릅니다.</text>
+  <text x="500" y="460" font-size="12" fill="#888888" text-anchor="middle">32장의 두 도구 (불변 맵 + CAS, VectorClock 인과 판정) 가 v5 <tspan font-family="'Consolas',monospace">VersionVector</tspan> 한 타입에서 실제로 합쳐집니다.</text>
+</svg>

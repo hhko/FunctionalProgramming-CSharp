@@ -3,7 +3,7 @@ using Ch32.Tests;
 using Ch32.Types;
 
 Console.WriteLine("================================================");
-Console.WriteLine("29장 — 동시 컬렉션 & 인과성");
+Console.WriteLine("32장 — 동시 컬렉션 & 인과성");
 Console.WriteLine("================================================");
 Console.WriteLine();
 
@@ -11,7 +11,7 @@ Console.WriteLine();
 Console.WriteLine("== 예제 1 — AtomHashMap: 동시 삽입 무손실 ==");
 var map = new AtomHashMap<int, int>();
 Parallel.For(0, 8000, i => map.AddOrUpdate(i, i * i));
-Console.WriteLine($"  8 스레드가 8000개 삽입 → Count = {map.Count}   {(map.Count == 8000 ? "✓ 무손실" : "✗")}");
+Console.WriteLine($"  여러 스레드가 8000개 삽입 → Count = {map.Count}   {(map.Count == 8000 ? "✓ 무손실" : "✗")}");
 Console.WriteLine();
 
 // ── 예제 2 — VectorClock 인과성 ─────────────────────────────────────

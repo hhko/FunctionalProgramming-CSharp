@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 490" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <rect width="1000" height="490" fill="#ffffff"/>
+  <text x="500" y="32" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold">순수 갱신이라야 재시도가 안전합니다</text>
+  <text x="500" y="56" font-size="13" fill="#888888" text-anchor="middle">CAS 충돌로 갱신 함수가 여러 번 다시 실행됩니다. 순수하면 흔적이 없지만, 부수 효과가 들면 재시도마다 중복됩니다.</text>
+
+  <!-- 왼쪽: 순수 -->
+  <rect x="36" y="74" width="444" height="208" fill="#f3f9f0" stroke="none" rx="10"/>
+  <text x="258" y="98" font-size="14" fill="#548235" text-anchor="middle" font-weight="bold">순수 갱신 함수  A → A</text>
+  <rect x="56" y="110" width="404" height="34" fill="#e2efda" stroke="#548235" stroke-width="1.8" rx="6"/>
+  <text x="258" y="132" font-size="12.5" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace">c =&gt; c with { N = c.N + 1 }</text>
+  <text x="258" y="172" font-size="11" fill="#555" text-anchor="middle">CAS 충돌로 f 가 3번 실행 (앞 두 번은 버려짐)</text>
+  <rect x="56" y="184" width="126" height="36" fill="#ffffff" stroke="#c0504d" stroke-width="1.4" rx="5"/>
+  <text x="119" y="206" font-size="11" fill="#943634" text-anchor="middle">시도1 ✗ 버림</text>
+  <rect x="195" y="184" width="126" height="36" fill="#ffffff" stroke="#c0504d" stroke-width="1.4" rx="5"/>
+  <text x="258" y="206" font-size="11" fill="#943634" text-anchor="middle">시도2 ✗ 버림</text>
+  <rect x="334" y="184" width="126" height="36" fill="#ffffff" stroke="#548235" stroke-width="1.8" rx="5"/>
+  <text x="397" y="206" font-size="11" fill="#375623" text-anchor="middle" font-weight="bold">시도3 ✓ 성공</text>
+  <text x="258" y="252" font-size="11.5" fill="#548235" text-anchor="middle">버려진 계산은 바깥에 흔적을 남기지 않습니다.</text>
+
+  <!-- 오른쪽: 부수 효과 -->
+  <rect x="520" y="74" width="444" height="208" fill="#fbeeed" stroke="none" rx="10"/>
+  <text x="742" y="98" font-size="14" fill="#c0504d" text-anchor="middle" font-weight="bold">부수 효과 든 함수</text>
+  <rect x="540" y="110" width="404" height="34" fill="#f6dddc" stroke="#c0504d" stroke-width="1.8" rx="6"/>
+  <text x="742" y="132" font-size="11.5" fill="#943634" text-anchor="middle" font-family="'Consolas',monospace">c =&gt; { Increment(ref calls); return c with {N+1}; }</text>
+  <text x="742" y="172" font-size="11" fill="#555" text-anchor="middle">CAS 충돌로 f 가 3번 실행 (효과도 3번)</text>
+  <rect x="540" y="184" width="126" height="36" fill="#ffffff" stroke="#c0504d" stroke-width="1.4" rx="5"/>
+  <text x="603" y="200" font-size="10" fill="#943634" text-anchor="middle">시도1 ✗ 버림</text>
+  <text x="603" y="214" font-size="9" fill="#c0504d" text-anchor="middle">calls++ 실행됨</text>
+  <rect x="679" y="184" width="126" height="36" fill="#ffffff" stroke="#c0504d" stroke-width="1.4" rx="5"/>
+  <text x="742" y="200" font-size="10" fill="#943634" text-anchor="middle">시도2 ✗ 버림</text>
+  <text x="742" y="214" font-size="9" fill="#c0504d" text-anchor="middle">calls++ 실행됨</text>
+  <rect x="818" y="184" width="126" height="36" fill="#ffffff" stroke="#548235" stroke-width="1.8" rx="5"/>
+  <text x="881" y="200" font-size="10" fill="#375623" text-anchor="middle">시도3 ✓ 성공</text>
+  <text x="881" y="214" font-size="9" fill="#c0504d" text-anchor="middle">calls++ 실행됨</text>
+  <text x="742" y="252" font-size="11.5" fill="#c0504d" text-anchor="middle">버려진 계산의 부수 효과도 이미 일어났습니다.</text>
+
+  <!-- 하단 결과 비교 -->
+  <text x="500" y="320" font-size="13" fill="#1f1f1f" text-anchor="middle" font-weight="bold">같은 축으로 결과 비교</text>
+  <text x="60" y="356" font-size="12" fill="#333">최종 <tspan font-family="'Consolas',monospace">Value</tspan> (상태값)</text>
+  <rect x="250" y="344" width="300" height="22" fill="#e2efda" stroke="#548235" stroke-width="1.6" rx="4"/>
+  <text x="560" y="360" font-size="12" fill="#375623">순수 = 4000 · 부수효과 = 4000  (둘 다 정확)</text>
+  <text x="60" y="398" font-size="12" fill="#333"><tspan font-family="'Consolas',monospace">sideEffectCalls</tspan></text>
+  <text x="60" y="414" font-size="10.5" fill="#888">(부수 효과 횟수)</text>
+  <line x1="250" y1="396" x2="262" y2="396" stroke="#548235" stroke-width="4"/>
+  <text x="300" y="400" font-size="11" fill="#548235">순수 = 0 (흔적 없음)</text>
+  <rect x="250" y="414" width="430" height="22" fill="#f6dddc" stroke="#c0504d" stroke-width="1.6" rx="4"/>
+  <rect x="550" y="414" width="130" height="22" fill="#c0504d" opacity="0.25"/>
+  <text x="690" y="430" font-size="11.5" fill="#943634">부수효과 = 4000 + 재시도분 (초과 중복)</text>
+
+  <text x="500" y="468" font-size="13" fill="#1f1f1f" text-anchor="middle">최종 상태값은 둘 다 4000. 그러나 부수 효과는 재시도 횟수만큼 중복됩니다. 그래서 <tspan font-family="'Consolas',monospace">Swap</tspan> 의 함수는 순수해야 합니다.</text>
+</svg>
