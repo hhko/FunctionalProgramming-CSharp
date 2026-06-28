@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 470" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <rect width="920" height="470" fill="#ffffff"/>
+  <text x="460" y="28" font-size="19" fill="#1f1f1f" text-anchor="middle" font-weight="bold">학습용 Eff 와 v5 Eff — 같은 스택, v5 는 IO 층을 더 채움</text>
+
+  <!-- LEFT: learning stack -->
+  <text x="235" y="62" font-size="13" fill="#5a4400" text-anchor="middle" font-weight="bold" font-family="'Consolas',monospace">학습용  Eff&lt;RT, A&gt; = ReaderT&lt;RT, A&gt;</text>
+  <text x="235" y="80" font-size="10.5" fill="#888" text-anchor="middle" font-family="'Consolas',monospace">= Func&lt;RT, IO&lt;A&gt;&gt;</text>
+  <rect x="40" y="92" width="390" height="150" fill="#eaf3fb" stroke="#1f77b4" stroke-width="2" rx="8"/>
+  <text x="58" y="113" font-size="12" fill="#0c3a5e" font-weight="bold">Reader&lt;RT&gt; 층 (바깥) — RT 주입</text>
+  <rect x="64" y="124" width="342" height="100" fill="#eef6e9" stroke="#548235" stroke-width="1.8" rx="6"/>
+  <text x="82" y="146" font-size="12" fill="#375623" font-weight="bold">IO 층 (안)</text>
+  <g font-family="'Consolas',monospace" font-size="10.5" fill="#375623">
+    <text x="82" y="168">IO&lt;A&gt; = Func&lt;A&gt; thunk</text>
+  </g>
+  <rect x="82" y="180" width="306" height="34" fill="#ffffff" stroke="#a9cf8f" stroke-width="1.1" rx="4"/>
+  <text x="235" y="201" font-size="11" fill="#777" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">성공 경로만 · 동기 · 오류 채널 없음</text>
+  <rect x="40" y="252" width="390" height="34" fill="#fff8e7" stroke="#bf9000" stroke-width="1.4" rx="5"/>
+  <text x="235" y="273" font-size="10.5" fill="#5a4400" text-anchor="middle" font-family="'Consolas',monospace">Has.Get : RT → TRAIT  (순수 함수)</text>
+
+  <!-- RIGHT: v5 stack -->
+  <text x="685" y="62" font-size="13" fill="#0c3a5e" text-anchor="middle" font-weight="bold" font-family="'Consolas',monospace">v5  Eff&lt;RT, A&gt; = ReaderT&lt;RT, IO, A&gt;</text>
+  <text x="685" y="80" font-size="10.5" fill="#888" text-anchor="middle" font-family="'Consolas',monospace">= Func&lt;RT, K&lt;IO, A&gt;&gt;  (3-인자)</text>
+  <rect x="490" y="92" width="390" height="150" fill="#eaf3fb" stroke="#1f77b4" stroke-width="2" rx="8"/>
+  <text x="508" y="113" font-size="12" fill="#0c3a5e" font-weight="bold">Reader&lt;RT&gt; 층 (바깥) — RT 주입</text>
+  <rect x="514" y="124" width="342" height="100" fill="#eef6e9" stroke="#548235" stroke-width="1.8" rx="6"/>
+  <text x="532" y="146" font-size="12" fill="#375623" font-weight="bold">IO 층 (안) — 더 채워짐</text>
+  <g font-family="'Consolas',monospace" font-size="9.5">
+    <rect x="532" y="156" width="150" height="22" fill="#fbeeee" stroke="#c0504d" stroke-width="1.1" rx="3"/><text x="607" y="171" fill="#7a2b28" text-anchor="middle">Error / Fin 채널</text>
+    <rect x="690" y="156" width="150" height="22" fill="#fdf3e8" stroke="#c07a23" stroke-width="1.1" rx="3"/><text x="765" y="171" fill="#8a5413" text-anchor="middle">async (Task)</text>
+    <rect x="532" y="184" width="150" height="22" fill="#fdf3e8" stroke="#c07a23" stroke-width="1.1" rx="3"/><text x="607" y="199" fill="#8a5413" text-anchor="middle">취소 토큰 (EnvIO)</text>
+    <rect x="690" y="184" width="150" height="22" fill="#e8eef7" stroke="#5a78b0" stroke-width="1.1" rx="3"/><text x="765" y="199" fill="#34507e" text-anchor="middle">Schedule 재시도</text>
+  </g>
+  <rect x="490" y="252" width="390" height="34" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.4" rx="5"/>
+  <text x="685" y="273" font-size="10.5" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace">Has.Ask : K&lt;M, VALUE&gt;  (능력 읽기도 효과)</text>
+
+  <!-- common -->
+  <rect x="40" y="306" width="840" height="44" fill="#eef6e9" stroke="#548235" stroke-width="1.5" rx="20"/>
+  <text x="460" y="333" font-size="12.5" fill="#375623" text-anchor="middle" font-weight="bold" font-family="'Noto Sans KR',sans-serif">같은 형태 — Reader 가 바깥, IO 가 안. 코드 주석 Eff&lt;RT,A&gt; = ReaderT&lt;RT,IO,A&gt; 는 v5 소스로 확인됨.</text>
+
+  <rect x="40" y="362" width="840" height="84" fill="#fbfbfb" stroke="#e0e0e0" stroke-width="1.2" rx="8"/>
+  <text x="460" y="385" font-size="12.5" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Noto Sans KR',sans-serif">공통 뼈대 — "능력을 인터페이스로 빼고, 런타임으로 주입하고, 테스트·실제를 갈아 끼운다"</text>
+  <text x="460" y="408" font-size="11" fill="#666" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">학습용은 IO 층을 성공-동기 thunk 로 비워 두었고, v5 는 같은 IO 층에 오류 채널 · 비동기 · 취소 · 재시도를 채웠습니다.</text>
+  <text x="460" y="430" font-size="10.5" fill="#999" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">능력 읽기도 학습용은 순수 함수 (Get), v5 는 효과 (Ask) — 차이는 IO 층의 두께뿐, 스택 모양은 같습니다.</text>
+</svg>

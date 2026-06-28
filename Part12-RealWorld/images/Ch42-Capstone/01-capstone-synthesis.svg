@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="cs-lift" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/></marker>
+  </defs>
+  <rect width="900" height="440" fill="#ffffff"/>
+  <text x="450" y="30" font-size="19" fill="#1f1f1f" text-anchor="middle" font-weight="bold">책 전체가 한 서비스로 합류한다</text>
+  <text x="450" y="51" font-size="12" fill="#777" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">따로 익힌 세 도구가 OrderService 한 편으로 모입니다 — 새 추상 없이.</text>
+
+  <!-- input 1: Validation -->
+  <rect x="40" y="84" width="300" height="64" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.8" rx="7"/>
+  <rect x="48" y="90" width="36" height="17" fill="#1f77b4" rx="3"/><text x="66" y="103" font-size="10" fill="#fff" text-anchor="middle">3부</text>
+  <text x="200" y="108" font-size="13" fill="#0c3a5e" text-anchor="middle" font-weight="bold" font-family="'Consolas',monospace">Validation</text>
+  <text x="200" y="136" font-size="10.5" fill="#1f77b4" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">applicative 누적 — Map2 오류 모으기 → Order</text>
+
+  <!-- input 2: Eff + Has -->
+  <rect x="40" y="188" width="300" height="64" fill="#fff2cc" stroke="#bf9000" stroke-width="1.8" rx="7"/>
+  <rect x="48" y="194" width="36" height="17" fill="#bf9000" rx="3"/><text x="66" y="207" font-size="10" fill="#fff" text-anchor="middle">7부</text>
+  <text x="205" y="212" font-size="13" fill="#5a4400" text-anchor="middle" font-weight="bold" font-family="'Consolas',monospace">Eff&lt;RT&gt; + Has&lt;RT,TRAIT&gt;</text>
+  <text x="200" y="240" font-size="10.5" fill="#8a6d00" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">SaveOrder · Print — 능력 주입</text>
+
+  <!-- input 3: test doubles -->
+  <rect x="40" y="292" width="300" height="64" fill="#eef2f5" stroke="#888" stroke-width="1.8" rx="7"/>
+  <rect x="48" y="298" width="40" height="17" fill="#888" rx="3"/><text x="68" y="311" font-size="10" fill="#fff" text-anchor="middle">11부</text>
+  <text x="205" y="316" font-size="13" fill="#444" text-anchor="middle" font-weight="bold" font-family="'Noto Sans KR',sans-serif">테스트 더블</text>
+  <text x="200" y="344" font-size="10.5" fill="#666" text-anchor="middle" font-family="'Consolas',monospace">MemoryConsole · MemoryStore</text>
+
+  <!-- converge arrows (lift style) -->
+  <path d="M340,116 C 470,116 480,200 588,210" fill="none" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#cs-lift)"/>
+  <path d="M340,220 L 588,220" fill="none" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#cs-lift)"/>
+  <path d="M340,324 C 470,324 480,240 588,230" fill="none" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#cs-lift)"/>
+
+  <!-- OrderService -->
+  <rect x="592" y="166" width="268" height="108" fill="#1f1f2b" rx="9"/>
+  <text x="726" y="206" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="bold" font-family="'Consolas',monospace">OrderService</text>
+  <text x="726" y="234" font-size="11.5" fill="#aebfe0" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">검증 → 효과 분기 → 누적</text>
+  <text x="726" y="254" font-size="10" fill="#8b9bc7" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">ProcessOne · ProcessAll</text>
+
+  <!-- capsule -->
+  <rect x="566" y="300" width="320" height="40" fill="#eef6e9" stroke="#548235" stroke-width="1.6" rx="20"/>
+  <text x="726" y="325" font-size="13" fill="#375623" text-anchor="middle" font-weight="bold" font-family="'Noto Sans KR',sans-serif">새 추상 0 — 합성만</text>
+
+  <text x="450" y="402" font-size="12" fill="#444" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">서비스 계층이 검증기 · 저장소 · 로거를 의존성으로 받아 조율하는 모양 — 함수형에서는 그 조율이 합성입니다.</text>
+</svg>

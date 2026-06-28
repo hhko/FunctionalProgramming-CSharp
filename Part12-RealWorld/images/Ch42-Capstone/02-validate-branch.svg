@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="vb-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#555"/></marker>
+  </defs>
+  <rect width="900" height="460" fill="#ffffff"/>
+  <text x="450" y="28" font-size="19" fill="#1f1f1f" text-anchor="middle" font-weight="bold">ProcessOne — 검증 결과가 효과 분기를 정한다</text>
+
+  <!-- request -->
+  <rect x="40" y="118" width="130" height="48" rx="24" fill="#eef2f5" stroke="#888" stroke-width="1.8"/>
+  <text x="105" y="140" font-size="11.5" fill="#444" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">request</text>
+  <text x="105" y="156" font-size="10" fill="#666" text-anchor="middle" font-family="'Consolas',monospace">(id, amount)</text>
+  <line x1="170" y1="142" x2="206" y2="142" stroke="#555" stroke-width="1.8" marker-end="url(#vb-a)"/>
+
+  <!-- Validate diamond (Normal judgment) -->
+  <polygon points="290,108 360,142 290,176 220,142" fill="#e7eef4" stroke="#3b6e9e" stroke-width="2"/>
+  <text x="290" y="138" font-size="12.5" fill="#1f4a73" text-anchor="middle" font-weight="bold" font-family="'Consolas',monospace">Validate</text>
+  <text x="290" y="154" font-size="9" fill="#3b6e9e" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">Normal 판정</text>
+
+  <!-- Valid branch (up) -->
+  <path d="M340,124 C 380,100 400,86 436,86" fill="none" stroke="#548235" stroke-width="1.8" marker-end="url(#vb-a)"/>
+  <text x="372" y="98" font-size="11" fill="#548235" font-weight="bold" font-family="'Consolas',monospace">Valid</text>
+  <rect x="440" y="64" width="250" height="46" fill="#fff2cc" stroke="#bf9000" stroke-width="1.8" rx="6"/>
+  <text x="552" y="84" font-size="12" fill="#5a4400" text-anchor="middle" font-weight="bold" font-family="'Noto Sans KR',sans-serif">SaveOrder → 승인 로그</text>
+  <text x="552" y="101" font-size="9.5" fill="#8a6d00" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">효과 실행 (Elevated)</text>
+  <circle cx="712" cy="87" r="17" fill="#e2efda" stroke="#548235" stroke-width="1.8"/>
+  <text x="712" y="92" font-size="13" fill="#375623" text-anchor="middle" font-weight="bold">+1</text>
+
+  <!-- Invalid branch (down) -->
+  <path d="M340,160 C 380,184 400,198 436,198" fill="none" stroke="#c0504d" stroke-width="1.8" marker-end="url(#vb-a)"/>
+  <text x="368" y="196" font-size="11" fill="#c0504d" font-weight="bold" font-family="'Consolas',monospace">Invalid</text>
+  <rect x="440" y="176" width="250" height="46" fill="#f1f1f1" stroke="#999" stroke-width="1.8" rx="6"/>
+  <text x="552" y="196" font-size="12" fill="#555" text-anchor="middle" font-weight="bold" font-family="'Noto Sans KR',sans-serif">거부 로그</text>
+  <text x="552" y="213" font-size="9.5" fill="#888" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">저장 없음</text>
+  <circle cx="712" cy="199" r="17" fill="#f1f1f1" stroke="#999" stroke-width="1.8"/>
+  <text x="712" y="204" font-size="13" fill="#777" text-anchor="middle" font-weight="bold">+0</text>
+
+  <!-- merge -->
+  <path d="M729,87 C 770,87 786,142 786,142 786,142 770,199 729,199" fill="none" stroke="#777" stroke-width="1.5"/>
+  <rect x="704" y="120" width="170" height="44" fill="#eef2f5" stroke="#666" stroke-width="1.6" rx="6"/>
+  <text x="789" y="140" font-size="11.5" fill="#333" text-anchor="middle" font-weight="bold" font-family="'Noto Sans KR',sans-serif">승인 건수 누적</text>
+  <text x="789" y="156" font-size="9.5" fill="#777" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">ProcessAll fold</text>
+
+  <line x1="40" y1="258" x2="860" y2="258" stroke="#e2e2e2" stroke-width="1.4"/>
+  <text x="40" y="284" font-size="13" fill="#1f1f1f" font-weight="bold" font-family="'Noto Sans KR',sans-serif">네 요청 배치 — 승인 건수 누적 추적</text>
+
+  <!-- batch cells -->
+  <g font-family="'Consolas',monospace" font-size="11.5">
+    <rect x="60" y="300" width="170" height="56" fill="#fdf6e3" stroke="#bf9000" stroke-width="1.6" rx="6"/><text x="145" y="324" fill="#5a4400" text-anchor="middle" font-weight="bold">("A", 100)</text><text x="145" y="344" fill="#548235" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">승인 ↑</text>
+    <rect x="252" y="300" width="170" height="56" fill="#f3f3f3" stroke="#999" stroke-width="1.6" rx="6"/><text x="337" y="324" fill="#555" text-anchor="middle" font-weight="bold">("", 50)</text><text x="337" y="344" fill="#999" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">거부 (빈 id)</text>
+    <rect x="444" y="300" width="170" height="56" fill="#fdf6e3" stroke="#bf9000" stroke-width="1.6" rx="6"/><text x="529" y="324" fill="#5a4400" text-anchor="middle" font-weight="bold">("B", 200)</text><text x="529" y="344" fill="#548235" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">승인 ↑</text>
+    <rect x="636" y="300" width="170" height="56" fill="#f3f3f3" stroke="#999" stroke-width="1.6" rx="6"/><text x="721" y="324" fill="#555" text-anchor="middle" font-weight="bold">("C", -5)</text><text x="721" y="344" fill="#999" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">거부 (음수)</text>
+  </g>
+  <text x="145" y="378" font-size="12" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace">0→1</text>
+  <text x="337" y="378" font-size="12" fill="#777" text-anchor="middle" font-family="'Consolas',monospace">1</text>
+  <text x="529" y="378" font-size="12" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace">1→2</text>
+  <text x="721" y="378" font-size="12" fill="#777" text-anchor="middle" font-family="'Consolas',monospace">2</text>
+
+  <rect x="300" y="402" width="300" height="40" fill="#1f1f2b" rx="20"/>
+  <text x="450" y="427" font-size="13.5" fill="#ffffff" text-anchor="middle" font-weight="bold">승인 2 · 매출 300</text>
+</svg>

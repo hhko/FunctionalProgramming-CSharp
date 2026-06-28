@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="hd-dep" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7a5fb0"/></marker>
+    <marker id="hd-imp" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#548235"/></marker>
+    <marker id="hd-inj" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/></marker>
+  </defs>
+  <rect width="900" height="470" fill="#ffffff"/>
+  <text x="450" y="28" font-size="19" fill="#1f1f1f" text-anchor="middle" font-weight="bold">Has 다중 능력 DI — 앱 코드는 인터페이스에만 의존한다</text>
+
+  <!-- contract layer: three interfaces -->
+  <rect x="232" y="50" width="436" height="78" fill="#f3f1f8" stroke="#d9d0ea" rx="8"/>
+  <text x="450" y="68" font-size="12.5" fill="#5a3f86" text-anchor="middle" font-weight="bold">계약 — 인터페이스 (능력)</text>
+  <g font-family="'Consolas',monospace" font-size="11">
+    <rect x="246" y="76" width="132" height="44" fill="#ece7f6" stroke="#7a5fb0" stroke-width="1.6" rx="5"/><text x="312" y="95" fill="#5a3f86" text-anchor="middle" font-weight="bold">IConsole</text><text x="312" y="111" fill="#7a5fb0" text-anchor="middle" font-size="10">WriteLine</text>
+    <rect x="384" y="76" width="132" height="44" fill="#ece7f6" stroke="#7a5fb0" stroke-width="1.6" rx="5"/><text x="450" y="95" fill="#5a3f86" text-anchor="middle" font-weight="bold">IClock</text><text x="450" y="111" fill="#7a5fb0" text-anchor="middle" font-size="10">Now</text>
+    <rect x="522" y="76" width="132" height="44" fill="#ece7f6" stroke="#7a5fb0" stroke-width="1.6" rx="5"/><text x="588" y="95" fill="#5a3f86" text-anchor="middle" font-weight="bold">IStore</text><text x="588" y="111" fill="#7a5fb0" text-anchor="middle" font-size="10">Put · Keys · Get</text>
+  </g>
+
+  <!-- app code (left) -->
+  <rect x="40" y="228" width="330" height="150" fill="#eaf3fb" stroke="#1f77b4" stroke-width="2" rx="8"/>
+  <text x="205" y="250" font-size="13.5" fill="#0c3a5e" text-anchor="middle" font-weight="bold">앱 코드 — NoteApp  (구현 모름)</text>
+  <g font-family="'Consolas',monospace" font-size="11.5" fill="#0c3a5e">
+    <text x="60" y="276">SaveNote&lt;RT&gt;()</text>
+    <text x="60" y="296">ListNotes&lt;RT&gt;()</text>
+    <text x="60" y="316">Run&lt;RT&gt;()</text>
+  </g>
+  <rect x="56" y="330" width="298" height="36" fill="#dbeafa" stroke="#7fb1da" stroke-width="1.2" rx="4"/>
+  <text x="205" y="352" font-size="9.8" fill="#15527e" text-anchor="middle" font-family="'Consolas',monospace">where RT : Has&lt;RT,IConsole&gt;,Has&lt;RT,IClock&gt;,Has&lt;RT,IStore&gt;</text>
+
+  <!-- runtime (right) -->
+  <rect x="530" y="228" width="330" height="150" fill="#eef6e9" stroke="#548235" stroke-width="2" rx="8"/>
+  <text x="695" y="250" font-size="13.5" fill="#375623" text-anchor="middle" font-weight="bold">런타임 — AppRT  (구현 보유)</text>
+  <g font-family="'Consolas',monospace" font-size="10.5" fill="#375623">
+    <text x="550" y="276">record AppRT(Console, Clock, Store)</text>
+    <text x="550" y="300">Has&lt;AppRT,IConsole&gt;.Get → rt.Console</text>
+    <text x="550" y="320">Has&lt;AppRT,IClock&gt;.Get   → rt.Clock</text>
+    <text x="550" y="340">Has&lt;AppRT,IStore&gt;.Get   → rt.Store</text>
+  </g>
+
+  <!-- app depends on interfaces (dotted up) -->
+  <line x1="180" y1="228" x2="300" y2="122" stroke="#7a5fb0" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#hd-dep)"/>
+  <text x="210" y="180" font-size="11" fill="#7a5fb0" font-family="'Noto Sans KR',sans-serif" transform="rotate(-41 210 180)">의존 (인터페이스만)</text>
+  <!-- runtime implements interfaces (solid up) -->
+  <line x1="700" y1="228" x2="600" y2="122" stroke="#548235" stroke-width="2" marker-end="url(#hd-imp)"/>
+  <text x="690" y="180" font-size="11" fill="#548235" font-family="'Noto Sans KR',sans-serif" transform="rotate(45 690 180)">Get 으로 제공 (구현)</text>
+
+  <!-- Run injects runtime -->
+  <line x1="450" y1="303" x2="528" y2="303" stroke="#1f77b4" stroke-width="2.6" stroke-linecap="round" marker-end="url(#hd-inj)"/>
+  <text x="450" y="416" font-size="12.5" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-family="'Consolas',monospace">Eff.Run&lt;RT,A&gt;(eff, rt)</text>
+  <text x="450" y="436" font-size="11" fill="#444" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">실행 자리에서 런타임 하나를 주입 — 그 전까지 앱 코드는 어떤 구현도 모릅니다.</text>
+  <line x1="450" y1="378" x2="450" y2="404" stroke="#1f77b4" stroke-width="1.4" stroke-dasharray="3 3"/>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="tr-up" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#548235"/></marker>
+    <marker id="tr-dn" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c07a23"/></marker>
+  </defs>
+  <rect width="900" height="480" fill="#ffffff"/>
+  <text x="450" y="28" font-size="19" fill="#1f1f1f" text-anchor="middle" font-weight="bold">같은 앱, 두 런타임 — 부수 효과는 앱 경계 밖에만</text>
+
+  <!-- TEST runtime (up) -->
+  <rect x="150" y="50" width="600" height="128" fill="#eef6e9" stroke="#548235" stroke-width="2" rx="8"/>
+  <text x="170" y="72" font-size="13.5" fill="#375623" font-weight="bold">테스트 런타임 — 결정적</text>
+  <g font-family="'Consolas',monospace" font-size="10.5" fill="#375623">
+    <text x="170" y="96">AppRT(MemoryConsole ← 리스트, FixedClock(1000) ← 고정, MemoryStore ← 딕셔너리)</text>
+  </g>
+  <rect x="170" y="108" width="270" height="54" fill="#ffffff" stroke="#a9cf8f" stroke-width="1.2" rx="5"/>
+  <g font-family="'Consolas',monospace" font-size="10" fill="#375623">
+    <text x="182" y="125">Output=[저장: note1, 저장: note2,</text>
+    <text x="182" y="139">        노트 2개: note1, note2]</text>
+    <text x="182" y="155">store={note1:… @t1000, note2:… @t1000}</text>
+  </g>
+  <rect x="456" y="108" width="278" height="54" fill="#ffffff" stroke="#a9cf8f" stroke-width="1.2" rx="5"/>
+  <text x="595" y="128" font-size="12" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">count = 2</text>
+  <text x="595" y="149" font-size="11" fill="#548235" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">== 단언으로 결정적 검증</text>
+
+  <!-- center: one app code -->
+  <rect x="250" y="214" width="400" height="58" fill="#eaf3fb" stroke="#1f77b4" stroke-width="2.4" rx="8"/>
+  <text x="450" y="238" font-size="14" fill="#0c3a5e" text-anchor="middle" font-weight="bold" font-family="'Consolas',monospace">NoteApp.Run&lt;RT&gt;()</text>
+  <text x="450" y="259" font-size="10.5" fill="#15527e" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">한 코드 — Has 세 능력만 요구, 구현은 모름 (부수 효과 없음)</text>
+
+  <!-- LIVE runtime (down) -->
+  <rect x="150" y="316" width="600" height="120" fill="#fbf3e8" stroke="#c07a23" stroke-width="1.8" stroke-dasharray="7 4" rx="8"/>
+  <text x="170" y="338" font-size="13.5" fill="#8a5413" font-weight="bold">라이브 런타임 — 실제 동작  (이 장 코드엔 없음 · 디딤돌)</text>
+  <g font-family="'Consolas',monospace" font-size="10.5" fill="#8a5413">
+    <text x="170" y="362">AppRT(LiveConsole ← 진짜 콘솔, SystemClock ← 진짜 시각, DbStore ← 진짜 DB)</text>
+  </g>
+  <rect x="170" y="376" width="564" height="44" fill="#ffffff" stroke="#e0b985" stroke-width="1.2" rx="5"/>
+  <text x="452" y="403" font-size="11.5" fill="#8a5413" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">진짜 콘솔에 출력하고 진짜 DB 에 저장 — 같은 앱 코드, 런타임만 교체</text>
+
+  <!-- arrows -->
+  <line x1="420" y1="214" x2="420" y2="180" stroke="#548235" stroke-width="2.6" stroke-linecap="round" marker-end="url(#tr-up)"/>
+  <text x="372" y="200" font-size="10.5" fill="#548235" font-family="'Noto Sans KR',sans-serif">주입 (테스트)</text>
+  <line x1="480" y1="272" x2="480" y2="314" stroke="#c07a23" stroke-width="2.6" stroke-linecap="round" marker-end="url(#tr-dn)"/>
+  <text x="492" y="298" font-size="10.5" fill="#c07a23" font-family="'Noto Sans KR',sans-serif">주입 (라이브)</text>
+
+  <text x="450" y="462" font-size="11.5" fill="#444" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">부수 효과는 앱 코드 안이 아니라 주입된 런타임에만 — 통합 테스트가 진짜 DB 대신 더블을 끼워 같은 코드를 격리 검증합니다.</text>
+</svg>

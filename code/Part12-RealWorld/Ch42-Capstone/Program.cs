@@ -4,7 +4,7 @@ using Ch42.Tests;
 using Ch42.Types;
 
 Console.WriteLine("================================================");
-Console.WriteLine("39장 — 종합 capstone (주문 접수 서비스)");
+Console.WriteLine("42장 — 종합 capstone (주문 접수 서비스)");
 Console.WriteLine("================================================");
 Console.WriteLine();
 
@@ -21,7 +21,7 @@ Console.WriteLine("== 주문 배치 처리 ==");
 foreach (var line in con.Output) Console.WriteLine($"    {line}");
 Console.WriteLine();
 Console.WriteLine($"  승인 = {accepted}건, 저장된 주문 = {store.Count()}건, 매출 합계 = {store.Total()}");
-Console.WriteLine("  → 검증(1부) + 효과·DI(5부) + 테스트 더블(9부) 이 한 서비스로 합성.");
+Console.WriteLine("  → 검증(3부) + 효과·DI(7부) + 테스트 더블(11부) 이 한 서비스로 합성.");
 Console.WriteLine();
 
 // ── 검증 ────────────────────────────────────────────────────────────
@@ -37,4 +37,4 @@ Console.WriteLine();
 var allGood = checks.All(c => c.Item2);
 Console.WriteLine(allGood ? "모든 검증 통과 [OK]" : "검증 실패 [FAIL]");
 Console.WriteLine();
-if (allGood) Console.WriteLine("★ 책 전체 (Part 1~10) 의 도구가 한 capstone 으로 합성되었습니다.");
+if (allGood) Console.WriteLine("★ 책 전체 (Part 1~11) 의 도구가 한 capstone 으로 합성되었습니다.");

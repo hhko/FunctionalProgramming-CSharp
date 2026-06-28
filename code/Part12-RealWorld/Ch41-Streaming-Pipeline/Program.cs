@@ -3,7 +3,7 @@ using Ch41.Tests;
 using Ch41.Types;
 
 Console.WriteLine("================================================");
-Console.WriteLine("38장 — 동시성·스트리밍 실전 파이프라인");
+Console.WriteLine("41장 — 동시성·스트리밍 실전 파이프라인");
 Console.WriteLine("================================================");
 Console.WriteLine();
 

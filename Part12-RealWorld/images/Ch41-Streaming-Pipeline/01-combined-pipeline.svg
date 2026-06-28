@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 990 450" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="cp-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#555"/></marker>
+    <marker id="cp-drop" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0504d"/></marker>
+  </defs>
+  <rect width="990" height="450" fill="#ffffff"/>
+  <text x="495" y="28" font-size="19" fill="#1f1f1f" text-anchor="middle" font-weight="bold">네 Part 가 한 파이프라인에 — 재시도 · 자원 · 스트림 · 집계</text>
+
+  <!-- records input -->
+  <rect x="20" y="172" width="118" height="84" fill="#eef2f5" stroke="#888" stroke-width="1.6" rx="6"/>
+  <text x="79" y="190" font-size="11" fill="#444" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">records (7)</text>
+  <text x="79" y="210" font-size="9.5" fill="#555" text-anchor="middle" font-family="'Consolas',monospace">"10" "x" "20"</text>
+  <text x="79" y="224" font-size="9.5" fill="#555" text-anchor="middle" font-family="'Consolas',monospace">"" "30" "bad"</text>
+  <text x="79" y="238" font-size="9.5" fill="#555" text-anchor="middle" font-family="'Consolas',monospace">"40"</text>
+  <line x1="138" y1="214" x2="172" y2="214" stroke="#555" stroke-width="1.8" marker-end="url(#cp-a)"/>
+
+  <!-- (1) retry -->
+  <rect x="174" y="176" width="120" height="76" fill="#fdecec" stroke="#c0504d" stroke-width="1.8" rx="6"/>
+  <rect x="178" y="180" width="34" height="16" fill="#c0504d" rx="3"/><text x="195" y="192" font-size="9.5" fill="#fff" text-anchor="middle">8부</text>
+  <text x="237" y="216" font-size="12" fill="#7a2b28" text-anchor="middle" font-weight="bold" font-family="'Noto Sans KR',sans-serif">① 재시도</text>
+  <text x="237" y="234" font-size="9.5" fill="#a04" text-anchor="middle" font-family="'Consolas',monospace">Schedule · Connect</text>
+  <line x1="294" y1="214" x2="326" y2="214" stroke="#555" stroke-width="1.8" marker-end="url(#cp-a)"/>
+
+  <!-- (2) bracket outer wrapping (3)(4) -->
+  <rect x="330" y="92" width="470" height="248" fill="#fbf6ec" stroke="#bf9000" stroke-width="2" rx="9"/>
+  <rect x="336" y="98" width="34" height="16" fill="#bf9000" rx="3"/><text x="353" y="110" font-size="9.5" fill="#fff" text-anchor="middle">8부</text>
+  <text x="565" y="111" font-size="12.5" fill="#7a5a00" text-anchor="middle" font-weight="bold" font-family="'Noto Sans KR',sans-serif">② 자원 열기 (bracket / try)</text>
+  <rect x="330" y="312" width="470" height="28" fill="#f3e8c8" stroke="none" rx="0"/>
+  <text x="565" y="331" font-size="11.5" fill="#7a5a00" text-anchor="middle" font-weight="bold" font-family="'Noto Sans KR',sans-serif">자원 닫기 (finally) — 예외에도 반드시</text>
+
+  <!-- (3) lazy parse -->
+  <rect x="350" y="150" width="190" height="92" fill="#e7f0fb" stroke="#1f77b4" stroke-width="1.8" rx="6"/>
+  <rect x="354" y="154" width="40" height="16" fill="#1f77b4" rx="3"/><text x="374" y="166" font-size="9.5" fill="#fff" text-anchor="middle">10부</text>
+  <text x="445" y="190" font-size="12" fill="#0c3a5e" text-anchor="middle" font-weight="bold" font-family="'Noto Sans KR',sans-serif">③ lazy 파싱</text>
+  <text x="445" y="208" font-size="9.5" fill="#1f77b4" text-anchor="middle" font-family="'Consolas',monospace">TryParse → Where(ok)</text>
+  <text x="445" y="228" font-size="10" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace">통과 [10,20,30,40]</text>
+  <!-- broken dropped -->
+  <line x1="445" y1="242" x2="445" y2="276" stroke="#c0504d" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#cp-drop)"/>
+  <text x="445" y="292" font-size="9.5" fill="#c0504d" text-anchor="middle" font-family="'Consolas',monospace">버림: "x" "" "bad"</text>
+
+  <line x1="540" y1="196" x2="566" y2="196" stroke="#555" stroke-width="1.8" marker-end="url(#cp-a)"/>
+
+  <!-- (4) atom aggregate -->
+  <rect x="570" y="150" width="200" height="92" fill="#eef6e9" stroke="#548235" stroke-width="1.8" rx="6"/>
+  <rect x="574" y="154" width="34" height="16" fill="#548235" rx="3"/><text x="591" y="166" font-size="9.5" fill="#fff" text-anchor="middle">9부</text>
+  <text x="670" y="186" font-size="12" fill="#375623" text-anchor="middle" font-weight="bold" font-family="'Noto Sans KR',sans-serif">④ 동시 집계</text>
+  <g stroke="#548235" stroke-width="1.4">
+    <line x1="600" y1="200" x2="650" y2="216" marker-end="url(#cp-a)"/>
+    <line x1="600" y1="216" x2="650" y2="216" marker-end="url(#cp-a)"/>
+    <line x1="600" y1="232" x2="650" y2="216" marker-end="url(#cp-a)"/>
+  </g>
+  <rect x="654" y="205" width="100" height="24" fill="#ffffff" stroke="#548235" stroke-width="1.4" rx="4"/>
+  <text x="704" y="222" font-size="10" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace">AtomicLong</text>
+  <text x="670" y="234" font-size="8.5" fill="#777" text-anchor="middle" font-family="'Consolas',monospace">Interlocked</text>
+
+  <!-- report -->
+  <line x1="800" y1="214" x2="828" y2="214" stroke="#555" stroke-width="1.8" marker-end="url(#cp-a)"/>
+  <rect x="830" y="160" width="150" height="108" fill="#1f1f2b" rx="7"/>
+  <text x="905" y="182" font-size="12.5" fill="#ffffff" text-anchor="middle" font-weight="bold">Report</text>
+  <g font-family="'Consolas',monospace" font-size="11" fill="#d6e6f5">
+    <text x="846" y="204">Sum = 100</text>
+    <text x="846" y="222">Valid = 4</text>
+    <text x="846" y="240">ConnectAttempts = 3</text>
+    <text x="846" y="258">Events=[open,close]</text>
+  </g>
+</svg>

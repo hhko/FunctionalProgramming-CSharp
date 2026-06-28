@@ -1,6 +1,6 @@
 namespace Ch39.Types;
 
-// Validation<E, A> — applicative *누적* 검증 (1부 MyValidation 의 실전판).
+// Validation<E, A> — applicative *누적* 검증 (3부 MyValidation 의 실전판).
 // Map2/Map3 가 여러 필드를 동시에 검증하며 *모든 오류를 모은다* (첫 오류에서 멈추지 않음).
 public abstract record Validation<E, A>
 {

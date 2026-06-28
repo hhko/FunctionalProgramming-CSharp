@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="rr-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#777"/></marker>
+  </defs>
+  <rect width="900" height="440" fill="#ffffff"/>
+  <text x="450" y="28" font-size="19" fill="#1f1f1f" text-anchor="middle" font-weight="bold">재시도 복구 — 세 번째 시도에 연결이 붙는다</text>
+  <text x="450" y="49" font-size="11.5" fill="#777" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">8부 Schedule 의 재시도 정책 (명령형 for 루프 + 카운터로 대역)</text>
+
+  <line x1="450" y1="64" x2="450" y2="424" stroke="#ccc" stroke-width="1.4" stroke-dasharray="5 4"/>
+
+  <!-- LEFT: recovery -->
+  <text x="225" y="86" font-size="14" fill="#375623" text-anchor="middle" font-weight="bold">복구 경로</text>
+  <text x="225" y="104" font-size="10.5" fill="#777" text-anchor="middle" font-family="'Consolas',monospace">flakyUntilAttempt=3, maxRetries=5</text>
+  <g font-family="'Consolas',monospace" font-size="12">
+    <rect x="70" y="120" width="310" height="40" fill="#fdecec" stroke="#c0504d" stroke-width="1.6" rx="5"/>
+    <text x="90" y="145" fill="#7a2b28">시도 1 — attempts=1</text><text x="360" y="145" fill="#c0504d" text-anchor="end" font-weight="bold">✗ 실패</text>
+    <rect x="70" y="172" width="310" height="40" fill="#fdecec" stroke="#c0504d" stroke-width="1.6" rx="5"/>
+    <text x="90" y="197" fill="#7a2b28">시도 2 — attempts=2</text><text x="360" y="197" fill="#c0504d" text-anchor="end" font-weight="bold">✗ 실패</text>
+    <rect x="70" y="224" width="310" height="40" fill="#e2efda" stroke="#548235" stroke-width="2" rx="5"/>
+    <text x="90" y="249" fill="#375623">시도 3 — attempts=3</text><text x="360" y="249" fill="#548235" text-anchor="end" font-weight="bold">✓ 성공</text>
+  </g>
+  <line x1="225" y1="160" x2="225" y2="172" stroke="#777" stroke-width="1.5" marker-end="url(#rr-a)"/>
+  <line x1="225" y1="212" x2="225" y2="224" stroke="#777" stroke-width="1.5" marker-end="url(#rr-a)"/>
+  <rect x="70" y="288" width="310" height="56" fill="#eef6e9" stroke="#548235" stroke-width="1.6" rx="6"/>
+  <text x="225" y="312" font-size="12.5" fill="#375623" text-anchor="middle" font-weight="bold" font-family="'Consolas',monospace">ConnectAttempts = 3</text>
+  <text x="225" y="332" font-size="11" fill="#548235" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">→ 자원 열기로 진행</text>
+  <line x1="225" y1="264" x2="225" y2="288" stroke="#548235" stroke-width="2" marker-end="url(#rr-a)"/>
+
+  <!-- RIGHT: unrecoverable -->
+  <text x="675" y="86" font-size="14" fill="#a02b28" text-anchor="middle" font-weight="bold">복구 불가 경로</text>
+  <text x="675" y="104" font-size="10.5" fill="#777" text-anchor="middle" font-family="'Consolas',monospace">flakyUntilAttempt=100, maxRetries=2</text>
+  <g font-family="'Consolas',monospace" font-size="12">
+    <rect x="520" y="120" width="310" height="40" fill="#fdecec" stroke="#c0504d" stroke-width="1.6" rx="5"/>
+    <text x="540" y="145" fill="#7a2b28">시도 1 — attempts=1</text><text x="810" y="145" fill="#c0504d" text-anchor="end" font-weight="bold">✗ 실패</text>
+    <rect x="520" y="172" width="310" height="40" fill="#fdecec" stroke="#c0504d" stroke-width="1.6" rx="5"/>
+    <text x="540" y="197" fill="#7a2b28">시도 2 — 재시도 한도</text><text x="810" y="197" fill="#c0504d" text-anchor="end" font-weight="bold">✗ 실패</text>
+  </g>
+  <line x1="675" y1="160" x2="675" y2="172" stroke="#777" stroke-width="1.5" marker-end="url(#rr-a)"/>
+  <rect x="520" y="236" width="310" height="48" fill="#fff3e0" stroke="#d98324" stroke-width="2" rx="6"/>
+  <text x="675" y="265" font-size="12" fill="#8a5413" text-anchor="middle" font-weight="bold" font-family="'Consolas',monospace">throw InvalidOperationException</text>
+  <line x1="675" y1="212" x2="675" y2="236" stroke="#d98324" stroke-width="2" marker-end="url(#rr-a)"/>
+  <rect x="520" y="300" width="310" height="44" fill="#f6f6f6" stroke="#999" stroke-width="1.6" stroke-dasharray="6 4" rx="6"/>
+  <text x="675" y="320" font-size="11.5" fill="#666" text-anchor="middle" font-weight="bold" font-family="'Noto Sans KR',sans-serif">자원이 아예 열리지 않음</text>
+  <text x="675" y="337" font-size="10" fill="#888" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">throw 가 open source 기록 이전에 나므로</text>
+
+  <text x="450" y="384" font-size="12" fill="#444" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">재시도가 일시적 실패를 흡수하고 (왼쪽), 한도를 넘으면 자원을 열기 전에 깔끔히 포기합니다 (오른쪽).</text>
+</svg>

@@ -1,6 +1,6 @@
 namespace Ch41.Types;
 
-// 원자적 누산기 (7부 Atom) — 동시 집계를 락 없이 안전하게.
+// 원자적 누산기 (9부 Atom) — 동시 집계를 락 없이 안전하게.
 public sealed class AtomicLong
 {
     long value;
@@ -8,8 +8,8 @@ public sealed class AtomicLong
     public void Add(long delta) => Interlocked.Add(ref value, delta);
 }
 
-// 실전 데이터 파이프라인 — 6부 retry(Schedule) + bracket(Resource) + 7부 Atom(동시 집계) +
-// 8부 스트리밍(lazy 변환) 을 한 자리에서 결합한다.
+// 실전 데이터 파이프라인 — 8부 retry(Schedule) + bracket(Resource) + 9부 Atom(동시 집계) +
+// 10부 스트리밍(lazy 변환) 을 한 자리에서 결합한다.
 public static class Pipeline
 {
     public sealed record Report(long Sum, int Valid, int ConnectAttempts, List<string> Events);

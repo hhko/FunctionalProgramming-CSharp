@@ -4,7 +4,7 @@ using Ch40.Tests;
 using Ch40.Types;
 
 Console.WriteLine("================================================");
-Console.WriteLine("37장 — 효과 기반 애플리케이션 (Eff<RT> + Has DI)");
+Console.WriteLine("40장 — 효과 기반 애플리케이션 (Eff<RT> + Has DI)");
 Console.WriteLine("================================================");
 Console.WriteLine();
 

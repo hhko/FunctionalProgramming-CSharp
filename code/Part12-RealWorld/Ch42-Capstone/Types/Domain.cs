@@ -1,6 +1,6 @@
 namespace Ch42.Types;
 
-// 도메인 검증 (1부/36장 Validation applicative 누적).
+// 도메인 검증 (3부/39장 Validation applicative 누적).
 public abstract record Validation<A>
 {
     public sealed record Valid(A Value) : Validation<A>;

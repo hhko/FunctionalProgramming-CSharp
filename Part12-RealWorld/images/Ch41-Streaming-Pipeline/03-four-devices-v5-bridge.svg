@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="fd-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/></marker>
+  </defs>
+  <rect width="960" height="460" fill="#ffffff"/>
+  <text x="480" y="28" font-size="19" fill="#1f1f1f" text-anchor="middle" font-weight="bold">학습용 네 장치 → v5 대응 — 명령형 단순화는 디딤돌</text>
+
+  <!-- headers -->
+  <text x="195" y="58" font-size="12.5" fill="#5a4400" text-anchor="middle" font-weight="bold">학습용 (명령형 대역)</text>
+  <text x="660" y="58" font-size="12.5" fill="#0c3a5e" text-anchor="middle" font-weight="bold">v5 (효과 모나드 위)</text>
+
+  <g font-family="'Consolas',monospace">
+    <!-- Row 1: retry -->
+    <rect x="30" y="70" width="330" height="64" fill="#fff2cc" stroke="#bf9000" stroke-width="1.6" rx="6"/>
+    <text x="195" y="96" font-size="12" fill="#5a4400" text-anchor="middle">for 루프 + 카운터</text>
+    <text x="195" y="116" font-size="9.5" fill="#8a6d00" text-anchor="middle">maxRetries · flakyUntilAttempt</text>
+    <line x1="364" y1="102" x2="406" y2="102" stroke="#1f77b4" stroke-width="2.4" marker-end="url(#fd-a)"/>
+    <rect x="410" y="70" width="520" height="64" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.6" rx="6"/>
+    <rect x="416" y="74" width="34" height="15" fill="#1f77b4" rx="3"/><text x="433" y="86" font-size="9" fill="#fff" text-anchor="middle">8부</text>
+    <text x="460" y="96" font-size="12" fill="#0c3a5e">retry(Schedule.recurs(5), 효과)</text>
+    <text x="460" y="116" font-size="9.5" fill="#1f77b4" font-family="'Noto Sans KR',sans-serif">재시도 정책을 값으로 · union/intersect 합성</text>
+
+    <!-- Row 2: bracket -->
+    <rect x="30" y="142" width="330" height="64" fill="#fff2cc" stroke="#bf9000" stroke-width="1.6" rx="6"/>
+    <text x="195" y="168" font-size="12" fill="#5a4400" text-anchor="middle">try / finally + events</text>
+    <text x="195" y="188" font-size="9.5" fill="#8a6d00" text-anchor="middle">"open/close source" 기록</text>
+    <line x1="364" y1="174" x2="406" y2="174" stroke="#1f77b4" stroke-width="2.4" marker-end="url(#fd-a)"/>
+    <rect x="410" y="142" width="520" height="64" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.6" rx="6"/>
+    <rect x="416" y="146" width="34" height="15" fill="#1f77b4" rx="3"/><text x="433" y="158" font-size="9" fill="#fff" text-anchor="middle">8부</text>
+    <text x="460" y="168" font-size="12" fill="#0c3a5e">bracketIO(acq, use, fin) · use()</text>
+    <text x="460" y="188" font-size="9.5" fill="#1f77b4" font-family="'Noto Sans KR',sans-serif">예외 포함 자동 LIFO 해제 (IDisposable)</text>
+
+    <!-- Row 3: atom -->
+    <rect x="30" y="214" width="330" height="64" fill="#fff2cc" stroke="#bf9000" stroke-width="1.6" rx="6"/>
+    <text x="195" y="240" font-size="12" fill="#5a4400" text-anchor="middle">AtomicLong + Interlocked.Add</text>
+    <text x="195" y="260" font-size="9.5" fill="#8a6d00" text-anchor="middle">정수 합 전용</text>
+    <line x1="364" y1="246" x2="406" y2="246" stroke="#1f77b4" stroke-width="2.4" marker-end="url(#fd-a)"/>
+    <rect x="410" y="214" width="520" height="64" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.6" rx="6"/>
+    <rect x="416" y="218" width="34" height="15" fill="#1f77b4" rx="3"/><text x="433" y="230" font-size="9" fill="#fff" text-anchor="middle">9부</text>
+    <text x="460" y="240" font-size="12" fill="#0c3a5e">Atom&lt;A&gt;.Swap(f)</text>
+    <text x="460" y="260" font-size="9.5" fill="#1f77b4" font-family="'Noto Sans KR',sans-serif">CAS + SpinWait · 임의 불변 자료 · f 는 순수</text>
+
+    <!-- Row 4: streaming -->
+    <rect x="30" y="286" width="330" height="64" fill="#fff2cc" stroke="#bf9000" stroke-width="1.6" rx="6"/>
+    <text x="195" y="312" font-size="12" fill="#5a4400" text-anchor="middle">LINQ Select/Where/ToList</text>
+    <text x="195" y="332" font-size="9.5" fill="#8a6d00" text-anchor="middle">ToList 로 즉시 구체화 (eager)</text>
+    <line x1="364" y1="318" x2="406" y2="318" stroke="#1f77b4" stroke-width="2.4" marker-end="url(#fd-a)"/>
+    <rect x="410" y="286" width="520" height="64" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.6" rx="6"/>
+    <rect x="416" y="290" width="40" height="15" fill="#1f77b4" rx="3"/><text x="436" y="302" font-size="9" fill="#fff" text-anchor="middle">10부</text>
+    <text x="466" y="312" font-size="12" fill="#0c3a5e">SourceT&lt;IO,A&gt;.FoldUntil / Iter</text>
+    <text x="466" y="332" font-size="9.5" fill="#1f77b4" font-family="'Noto Sans KR',sans-serif">효과 안에서 fold · 진짜 역압 (backpressure)</text>
+  </g>
+
+  <rect x="30" y="366" width="900" height="74" fill="#eef6e9" stroke="#548235" stroke-width="1.4" rx="8"/>
+  <text x="480" y="390" font-size="12.5" fill="#375623" text-anchor="middle" font-weight="bold" font-family="'Noto Sans KR',sans-serif">학습용 명령형 단순화는 거짓말이 아니라 디딤돌입니다.</text>
+  <text x="480" y="412" font-size="11.5" fill="#548235" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">같은 네 관심사가 v5 에서는 한 효과 모나드 (K&lt;M,A&gt; / Eff&lt;RT,A&gt;) 위로 같은 모양 그대로 올라가</text>
+  <text x="480" y="430" font-size="11.5" fill="#548235" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">retry · bracketIO · Atom · SourceT 가 한 LINQ 흐름으로 결합되고, 실패는 예외가 아니라 Error / Fin 으로.</text>
+</svg>

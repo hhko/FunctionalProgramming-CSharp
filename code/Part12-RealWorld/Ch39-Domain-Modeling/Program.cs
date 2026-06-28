@@ -3,7 +3,7 @@ using Ch39.Tests;
 using Ch39.Types;
 
 Console.WriteLine("================================================");
-Console.WriteLine("36장 — 도메인 모델링 & 검증 파이프라인");
+Console.WriteLine("39장 — 도메인 모델링 & 검증 파이프라인");
 Console.WriteLine("================================================");
 Console.WriteLine();
 

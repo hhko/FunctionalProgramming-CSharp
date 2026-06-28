@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 450" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="sc-lift" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/></marker>
+    <marker id="sc-g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#777"/></marker>
+  </defs>
+  <rect width="900" height="450" fill="#ffffff"/>
+  <text x="450" y="30" font-size="19" fill="#1f1f1f" text-anchor="middle" font-weight="bold">스마트 생성자 — 검증을 통과해야만 도메인 타입이 된다</text>
+
+  <rect x="22" y="52" width="250" height="252" fill="#fffdf3" stroke="#e3d9b8" rx="8"/>
+  <text x="147" y="72" font-size="13" fill="#8a6d00" text-anchor="middle" font-weight="bold">Normal World — 원시 입력</text>
+  <rect x="620" y="52" width="258" height="252" fill="#f4f9ff" stroke="#cfe3f4" rx="8"/>
+  <text x="749" y="72" font-size="13" fill="#1f77b4" text-anchor="middle" font-weight="bold">Elevated World — 검증된 시민</text>
+  <text x="446" y="72" font-size="13" fill="#444" text-anchor="middle" font-weight="bold">Create 검증 게이트</text>
+
+  <g font-family="'Consolas','Courier New',monospace" font-size="12">
+    <rect x="38" y="92" width="218" height="40" fill="#fff2cc" stroke="#bf9000" stroke-width="1.6" rx="5"/>
+    <text x="147" y="117" fill="#5a4400" text-anchor="middle">string "alice"</text>
+    <rect x="312" y="88" width="268" height="48" fill="#eef3f7" stroke="#888" stroke-width="1.6" rx="9"/>
+    <text x="446" y="106" fill="#333" text-anchor="middle" font-weight="bold">Username.Create</text>
+    <text x="446" y="124" fill="#777" text-anchor="middle" font-size="10.5" font-family="'Noto Sans KR',sans-serif">불변식: Trim 3자 이상</text>
+    <rect x="636" y="92" width="226" height="40" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.8" rx="5"/>
+    <text x="749" y="117" fill="#0c3a5e" text-anchor="middle">Valid(Username)</text>
+    <line x1="256" y1="112" x2="310" y2="112" stroke="#777" stroke-width="1.8" marker-end="url(#sc-g)"/>
+    <line x1="582" y1="112" x2="632" y2="112" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#sc-lift)"/>
+
+    <rect x="38" y="172" width="218" height="40" fill="#fff2cc" stroke="#bf9000" stroke-width="1.6" rx="5"/>
+    <text x="147" y="197" fill="#5a4400" text-anchor="middle">string "a@x.com"</text>
+    <rect x="312" y="168" width="268" height="48" fill="#eef3f7" stroke="#888" stroke-width="1.6" rx="9"/>
+    <text x="446" y="186" fill="#333" text-anchor="middle" font-weight="bold">Email.Create</text>
+    <text x="446" y="204" fill="#777" text-anchor="middle" font-size="10.5" font-family="'Noto Sans KR',sans-serif">불변식: @ 와 . 포함</text>
+    <rect x="636" y="172" width="226" height="40" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.8" rx="5"/>
+    <text x="749" y="197" fill="#0c3a5e" text-anchor="middle">Valid(Email)</text>
+    <line x1="256" y1="192" x2="310" y2="192" stroke="#777" stroke-width="1.8" marker-end="url(#sc-g)"/>
+    <line x1="582" y1="192" x2="632" y2="192" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#sc-lift)"/>
+
+    <rect x="38" y="252" width="218" height="40" fill="#fff2cc" stroke="#bf9000" stroke-width="1.6" rx="5"/>
+    <text x="147" y="277" fill="#5a4400" text-anchor="middle">int 30</text>
+    <rect x="312" y="248" width="268" height="48" fill="#eef3f7" stroke="#888" stroke-width="1.6" rx="9"/>
+    <text x="446" y="266" fill="#333" text-anchor="middle" font-weight="bold">Age.Create</text>
+    <text x="446" y="284" fill="#777" text-anchor="middle" font-size="10.5" font-family="'Noto Sans KR',sans-serif">불변식: 0~150</text>
+    <rect x="636" y="252" width="226" height="40" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.8" rx="5"/>
+    <text x="749" y="277" fill="#0c3a5e" text-anchor="middle">Valid(Age)</text>
+    <line x1="256" y1="272" x2="310" y2="272" stroke="#777" stroke-width="1.8" marker-end="url(#sc-g)"/>
+    <line x1="582" y1="272" x2="632" y2="272" stroke="#1f77b4" stroke-width="3" stroke-linecap="round" marker-end="url(#sc-lift)"/>
+  </g>
+
+  <rect x="312" y="318" width="550" height="46" fill="#fbeeee" stroke="#c0504d" stroke-width="1.6" stroke-dasharray="6 4" rx="6"/>
+  <text x="328" y="338" font-size="11.5" fill="#7a2b28" font-family="'Noto Sans KR',sans-serif">불변식을 어기면 <tspan font-family="'Consolas',monospace">Invalid([오류])</tspan> — 도메인 타입이 아예 만들어지지 않습니다.</text>
+  <text x="328" y="356" font-size="11" fill="#a85" font-family="'Noto Sans KR',sans-serif">실패는 던지는 사건이 아니라 다루는 값입니다.</text>
+
+  <g transform="translate(40,392)">
+    <rect x="0" y="8" width="26" height="20" rx="3" fill="#dfe3e6" stroke="#666" stroke-width="1.6"/>
+    <path d="M5,8 v-5 a8,8 0 0 1 16,0 v5" fill="none" stroke="#666" stroke-width="2"/>
+    <text x="38" y="17" font-size="12" fill="#333" font-family="'Consolas',monospace">private ctor</text>
+    <text x="38" y="33" font-size="11" fill="#666" font-family="'Noto Sans KR',sans-serif">Create 를 거치지 않는 직접 생성은 막힙니다.</text>
+  </g>
+  <text x="660" y="404" font-size="13" fill="#c0504d" text-anchor="middle" font-weight="bold" font-family="'Consolas',monospace">✗ new Username(...)</text>
+  <text x="660" y="424" font-size="10.5" fill="#999" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">컴파일 불가 — 우회 차단</text>
+</svg>
