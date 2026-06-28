@@ -6,7 +6,7 @@
 
 ### ① EitherT 는 "왜 실패했는지" 를 남긴다
 
-`Parse.cs` — `EitherT<string, ManyF, int>` 로 여러 입력을 검사하되, 실패 시 `None` 이 아니라 `Left("에러 메시지")` 로 *이유* 를 보존한다. (16장 `OptionT` 의 `None` 과 대비.)
+`Parse.cs` — `EitherT<string, ManyF, int>` 로 여러 입력을 검사하되, 실패 시 `None` 이 아니라 `Left("에러 메시지")` 로 *이유* 를 보존한다. (19장 `OptionT` 의 `None` 과 대비.)
 
 **노리는 능력** — 실패에 정보가 필요할 때 `OptionT` 대신 `EitherT` 를 고르는 판단. 두 변환기는 같은 자리에 서지만 *실패의 표현* 이 다르다.
 
@@ -21,5 +21,5 @@
 ## 실행
 
 ```bash
-dotnet run --project code/Part4-MonadTransformers/Ch21-OptionT-EitherT/Ch21.csproj
+dotnet run --project code/Part06-MonadTransformers/Ch21-OptionT-EitherT/Ch21.csproj
 ```

@@ -1,9 +1,9 @@
-using Ch20.Traits;
+using Ch21.Traits;
 
-namespace Ch20.Types;
+namespace Ch21.Types;
 
-// Option — 변환기의 *내부 모나드 M* 으로 쓴다. ReaderT<Env, OptionF, A> 는
-// 18장의 ReaderOption 을 *내부 M=Option 으로 고정한 특수 사례* 가 된다 (이번엔 공짜로).
+// Option<A> — 실패를 *이유 없이* 담는다 (Either 의 Left(L) 와 달리 "왜" 를 남기지 않는다).
+// EitherT 와의 대비를 위해 Either.MapRight 와 짝이 되는 MapOption 을 둔다.
 public abstract record Option<A> : K<OptionF, A>
 {
     public sealed record Some(A Value) : Option<A> { public override string ToString() => $"Some({Value})"; }
@@ -12,13 +12,16 @@ public abstract record Option<A> : K<OptionF, A>
         public static readonly None Instance = new();
         public override string ToString() => "None";
     }
+
+    public Option<B> MapOption<B>(Func<A, B> f) =>
+        this is Some s ? new Option<B>.Some(f(s.Value)) : Option<B>.None.Instance;
 }
 
 public sealed class OptionF : Monad<OptionF>
 {
+    public static K<OptionF, A> Pure<A>(A value) => new Option<A>.Some(value);
     public static K<OptionF, B> Map<A, B>(Func<A, B> f, K<OptionF, A> fa) =>
         fa.As() is Option<A>.Some s ? new Option<B>.Some(f(s.Value)) : Option<B>.None.Instance;
-    public static K<OptionF, A> Pure<A>(A value) => new Option<A>.Some(value);
     public static K<OptionF, B> Apply<A, B>(K<OptionF, Func<A, B>> mf, K<OptionF, A> ma) =>
         (mf.As(), ma.As()) switch
         {

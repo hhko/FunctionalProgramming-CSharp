@@ -12,14 +12,14 @@
 
 ## 심화 챌린지 (선택)
 
-### ② ReaderT<Env, Option> = 15장 ReaderOption (공짜로)
+### ② ReaderT<Env, Option> = 18장 ReaderOption (공짜로)
 
-`Program.cs` 의 ReaderT 예제 — 15장에서 *손으로* 짠 `ReaderOption` 이 `ReaderT<Env, OptionF, A>` 의 *특수 사례* 로 공짜로 나온다. 내부 M 을 Option 으로 고정하면 같은 동작이다.
+`Program.cs` 의 ReaderT 예제 — 18장에서 *손으로* 짠 `ReaderOption` 이 `ReaderT<Env, OptionF, A>` 의 *특수 사례* 로 공짜로 나온다. 내부 M 을 Option 으로 고정하면 같은 동작이다.
 
-**노리는 능력** — 변환기가 15장의 수동 배관을 *내부 M 에 대해 자동 생성* 함을 확인한다. WriterT 도 동일한 패턴(출력 W 를 M 위에 누적)으로 따라온다.
+**노리는 능력** — 변환기가 18장의 수동 배관을 *내부 M 에 대해 자동 생성* 함을 확인한다. WriterT 도 동일한 패턴(출력 W 를 M 위에 누적)으로 따라온다.
 
 ## 실행
 
 ```bash
-dotnet run --project code/Part4-MonadTransformers/Ch20-ReaderT-StateT-WriterT/Ch20.csproj
+dotnet run --project code/Part06-MonadTransformers/Ch20-ReaderT-StateT-WriterT/Ch20.csproj
 ```

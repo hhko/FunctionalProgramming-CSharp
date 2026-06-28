@@ -5,7 +5,7 @@ namespace Ch22.Types;
 // ReaderT<Env, M, A> — 환경 효과를 *IO 를 품는 내부 모나드 M* 위에 얹는다.
 // 내부 M 이 MonadIO 이므로, 이 스택 전체도 MonadIO 가 된다 (LiftIO 를 위로 전달).
 //
-// ReaderT<Env, IOF, A> 가 곧 5부 Eff<RT, A> = ReaderT<RT, IO, A> 의 축소판이다.
+// ReaderT<Env, IOF, A> 가 곧 7부 Eff<RT, A> = ReaderT<RT, IO, A> 의 축소판이다.
 public sealed class ReaderT<Env, M, A>(Func<Env, K<M, A>> run) : K<ReaderTF<Env, M>, A>
     where M : MonadIO<M>
 {

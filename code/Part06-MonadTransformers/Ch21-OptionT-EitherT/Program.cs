@@ -5,7 +5,7 @@ using Ch21.Traits;
 using Ch21.Types;
 
 Console.WriteLine("================================================");
-Console.WriteLine("18장 — OptionT / EitherT (오류·부재 + 내부 효과)");
+Console.WriteLine("21장 — OptionT / EitherT (오류·부재 + 내부 효과)");
 Console.WriteLine("================================================");
 Console.WriteLine();
 
@@ -27,6 +27,19 @@ Console.WriteLine();
 Console.WriteLine("== 예제 2 — lift 로 내부 Many 효과를 끌어올린다 ==");
 var lifted = Trans.lift<EitherTF<string, ManyF>, ManyF, int>(new Many<int>([1, 2]));
 Console.WriteLine($"  lift([1,2]) = {Show(lifted)}");
+Console.WriteLine();
+
+// ── 예제 3 — OptionT(None) vs EitherT(Left): 실패에 이유가 있나 ─────
+Console.WriteLine("== 예제 3 — OptionT 와 EitherT: 같은 검사, 실패 표현만 다르다 ==");
+
+K<OptionTF<ManyF>, int> optChecked =
+    from x in Trans.lift<OptionTF<ManyF>, ManyF, int>(inputs)
+    from p in PosOpt(x)            // x <= 0 → None (이유 없음)
+    select p * 10;
+
+Console.WriteLine($"  OptionT: [3,-1,5,0] → {ShowOpt(optChecked)}");
+Console.WriteLine($"  EitherT: [3,-1,5,0] → {Show(checked2)}");
+Console.WriteLine("  → 두 변환기 모두 -1·0 갈래에서 실패. OptionT 는 None(이유 없음), EitherT 는 Left(이유 보존).");
 Console.WriteLine();
 
 // ── 법칙 검증 ───────────────────────────────────────────────────────
@@ -54,3 +67,10 @@ static string Pass(bool b) => b ? "통과" : "위반";
 
 static string Show(K<EitherTF<string, ManyF>, int> m) =>
     $"[{string.Join(", ", m.As().Run.As().Items.Select(e => e.ToString()))}]";
+
+// 양수면 그 값, 아니면 이유 없는 실패 (None). EitherT.Fail(이유) 과 대비된다.
+static K<OptionTF<ManyF>, int> PosOpt(int x) =>
+    x > 0 ? OptionTF<ManyF>.Pure(x) : OptionTF<ManyF>.Fail<int>();
+
+static string ShowOpt(K<OptionTF<ManyF>, int> m) =>
+    $"[{string.Join(", ", m.As().Run.As().Items.Select(o => o.ToString()))}]";

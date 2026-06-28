@@ -14,12 +14,12 @@
 
 ### ② ReaderT<Env, IOF> = Eff<RT, A> 의 축소판
 
-`ReaderT<Env, IOF, A>` 가 5부 `Eff<RT, A> = ReaderT<RT, IO, A>` 의 축소판임을 확인하라. 환경 주입(Reader) + 지연 부수 효과(IO) 이 한 스택에 있다.
+`ReaderT<Env, IOF, A>` 가 7부 `Eff<RT, A> = ReaderT<RT, IO, A>` 의 축소판임을 확인하라. 환경 주입(Reader) + 지연 부수 효과(IO) 이 한 스택에 있다.
 
-**노리는 능력** — 4부 변환기가 5부 효과 시스템의 *골격* 임을 미리 본다. `Has<RT, …>` DI 는 이 위에 얹힌다.
+**노리는 능력** — 6부 변환기가 7부 효과 시스템의 *골격* 임을 미리 본다. `Has<RT, …>` DI 는 이 위에 얹힌다.
 
 ## 실행
 
 ```bash
-dotnet run --project code/Part4-MonadTransformers/Ch22-MonadIO/Ch22.csproj
+dotnet run --project code/Part06-MonadTransformers/Ch22-MonadIO/Ch22.csproj
 ```

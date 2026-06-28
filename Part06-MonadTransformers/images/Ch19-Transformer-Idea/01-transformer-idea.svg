@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 430" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="a19a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+  </defs>
+  <rect width="980" height="430" fill="#ffffff"/>
+
+  <text x="490" y="40" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold">변환기 = 바깥 효과 한 층 + 안쪽 모나드 M (빈칸)</text>
+
+  <!-- 왼쪽: OptionT 스택 -->
+  <text x="225" y="92" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">OptionT&lt;M, A&gt;</text>
+
+  <rect x="90" y="108" width="270" height="62" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="225" y="136" font-size="15" fill="#0c3a5e" text-anchor="middle" font-weight="bold">실패 효과 (Option 층)</text>
+  <text x="225" y="157" font-size="12" fill="#0c3a5e" text-anchor="middle">변환기가 고정해 얹는 한 층</text>
+
+  <rect x="90" y="176" width="270" height="62" fill="#f5f5f5" stroke="#888888" stroke-width="2.2" stroke-dasharray="7 5" rx="6"/>
+  <text x="225" y="204" font-size="15" fill="#555555" text-anchor="middle" font-weight="bold" font-family="'Consolas',monospace">내부 모나드 M</text>
+  <text x="225" y="225" font-size="12" fill="#777777" text-anchor="middle">빈칸 — 타입 인자로 비워 둔다</text>
+
+  <!-- 화살표 -->
+  <line x1="378" y1="207" x2="558" y2="207" stroke="#1f77b4" stroke-width="2.6" marker-end="url(#a19a)"/>
+  <text x="468" y="197" font-size="13" fill="#1f77b4" text-anchor="middle" font-style="italic">M 자리에 끼우면</text>
+
+  <!-- 오른쪽: 어떤 M 이든 -->
+  <text x="775" y="92" font-size="14" fill="#375623" text-anchor="middle" font-weight="bold">안쪽 M 은 무엇이든</text>
+  <rect x="600" y="108" width="350" height="62" fill="#e2efda" stroke="#548235" stroke-width="2" rx="6"/>
+  <text x="775" y="145" font-size="15" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">Many · Option · State · …</text>
+  <rect x="600" y="176" width="350" height="62" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/>
+  <text x="775" y="203" font-size="14" fill="#0c3a5e" text-anchor="middle">같은 Option 층은 그대로,</text>
+  <text x="775" y="224" font-size="14" fill="#0c3a5e" text-anchor="middle">안쪽 M 만 갈아 끼운다</text>
+
+  <!-- 하단 메시지 -->
+  <rect x="90" y="298" width="860" height="90" fill="#fbfbfb" stroke="#cccccc" stroke-width="1.2" rx="8"/>
+  <text x="520" y="332" font-size="15" fill="#1f1f1f" text-anchor="middle">효과 쌍마다 <tspan font-family="'Consolas',monospace">Bind</tspan> 를 다시 짜는 대신, 바깥 효과 하나당 변환기 하나만 둡니다.</text>
+  <text x="520" y="364" font-size="16" fill="#c00000" text-anchor="middle" font-weight="bold">조합마다 하나 (N×M) → 효과당 하나 (N+M)</text>
+</svg>

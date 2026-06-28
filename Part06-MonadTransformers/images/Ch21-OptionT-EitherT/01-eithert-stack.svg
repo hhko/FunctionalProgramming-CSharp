@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 420" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="a21a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+  </defs>
+  <rect width="980" height="420" fill="#ffffff"/>
+
+  <text x="490" y="38" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold">실패에 이유가 있나 — <tspan font-family="'Consolas',monospace">OptionT</tspan> 대 <tspan font-family="'Consolas',monospace">EitherT</tspan></text>
+
+  <!-- 왼쪽: OptionT (회색조, 이유 없음) -->
+  <text x="255" y="78" font-size="15" fill="#888888" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">OptionT&lt;M, A&gt; = M&lt;Option&lt;A&gt;&gt;</text>
+  <rect x="90" y="96" width="330" height="58" fill="#eef0f2" stroke="#9aa0a6" stroke-width="2" rx="6"/>
+  <text x="255" y="131" font-size="14" fill="#5f6368" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">내부 모나드 M</text>
+  <rect x="120" y="166" width="125" height="50" fill="#e9efe4" stroke="#7a9c5e" stroke-width="1.8" rx="6"/>
+  <text x="182" y="197" font-size="14" fill="#4d6b34" text-anchor="middle" font-family="'Consolas',monospace">Some(a)</text>
+  <rect x="265" y="166" width="125" height="50" fill="#efe6e6" stroke="#b08a88" stroke-width="1.8" rx="6"/>
+  <text x="327" y="197" font-size="14" fill="#8a5a58" text-anchor="middle" font-family="'Consolas',monospace">None</text>
+  <text x="255" y="244" font-size="12" fill="#888888" text-anchor="middle">실패는 <tspan font-weight="bold">None</tspan> — 왜 실패했는지 남지 않음</text>
+
+  <!-- 가운데 화살표 -->
+  <text x="490" y="160" font-size="13" fill="#c00000" text-anchor="middle">Some·None 자리가</text>
+  <text x="490" y="180" font-size="13" fill="#c00000" text-anchor="middle">Right·Left 로</text>
+
+  <!-- 오른쪽: EitherT (또렷, 이유 보존) -->
+  <text x="725" y="78" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">EitherT&lt;L, M, A&gt; = M&lt;Either&lt;L, A&gt;&gt;</text>
+  <rect x="560" y="96" width="330" height="58" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="725" y="131" font-size="14" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">내부 모나드 M</text>
+  <rect x="590" y="166" width="125" height="50" fill="#e2efda" stroke="#548235" stroke-width="2" rx="6"/>
+  <text x="652" y="197" font-size="14" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace">Right(a)</text>
+  <rect x="735" y="166" width="125" height="50" fill="#f6dddc" stroke="#c0504d" stroke-width="2" rx="6"/>
+  <text x="797" y="197" font-size="14" fill="#943634" text-anchor="middle" font-family="'Consolas',monospace">Left(L)</text>
+  <text x="725" y="244" font-size="12" fill="#1f77b4" text-anchor="middle">실패는 <tspan font-weight="bold">Left(L)</tspan> — 이유 L 을 함께 담음</text>
+
+  <!-- 하단 -->
+  <rect x="90" y="290" width="800" height="92" fill="#fbfbfb" stroke="#cccccc" stroke-width="1.2" rx="8"/>
+  <text x="490" y="322" font-size="14" fill="#1f1f1f" text-anchor="middle">두 변환기는 골격이 같습니다. <tspan font-family="'Consolas',monospace">Bind</tspan> 가 내부 <tspan font-family="'Consolas',monospace">M</tspan> 을 흘리고, 안쪽을 성공·실패로 가릅니다.</text>
+  <text x="490" y="352" font-size="14" fill="#1f1f1f" text-anchor="middle">다른 점은 한 자리뿐 — 부재 <tspan font-family="'Consolas',monospace">None</tspan> 이 이유 있는 실패 <tspan font-family="'Consolas',monospace">Left(L)</tspan> 로 바뀝니다.</text>
+  <text x="490" y="374" font-size="12" fill="#888888" text-anchor="middle">같은 입력 [3,-1,5,0]: OptionT → [Some(30), None, Some(50), None] / EitherT → [Right(30), Left("…"), Right(50), Left("…")]</text>
+</svg>

@@ -12,7 +12,7 @@ Console.WriteLine();
 Console.WriteLine("== 예제 1 — ReaderT<int, IOF>: env 주입 + 지연 IO ==");
 
 var sideLog = new List<string>();
-IO<int> effect = new IO<int>(() => { sideLog.Add("[IO] 부수작용 실행 → 7"); return 7; });
+IO<int> effect = new IO<int>(() => { sideLog.Add("[IO] 부수 효과 실행 → 7"); return 7; });
 
 // env(배수) 를 읽고, IO 로 값을 얻어, 곱한다.
 K<ReaderTF<int, IOF>, int> stack =
@@ -30,7 +30,7 @@ Console.WriteLine($"  io.Run() → {result}   (6 × 7)");
 Console.WriteLine($"  sideLog = [{string.Join(", ", sideLog)}]");
 Console.WriteLine();
 
-Console.WriteLine("  → ReaderT<Env, IOF, A> 는 5부 Eff<RT,A> = ReaderT<RT, IO, A> 의 축소판.");
+Console.WriteLine("  → ReaderT<Env, IOF, A> 는 7부 Eff<RT,A> = ReaderT<RT, IO, A> 의 축소판.");
 Console.WriteLine();
 
 // ── 법칙 검증 ───────────────────────────────────────────────────────

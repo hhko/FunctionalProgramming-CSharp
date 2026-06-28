@@ -26,6 +26,12 @@ public static class Stateful
     public static K<M, A> gets<M, S, A>(Func<S, A> f) where M : Stateful<M, S> => M.Gets(f);
 }
 
+public static class Writable
+{
+    public static K<M, Unit> tell<M, W>(W output)
+        where M : Writable<M, W> where W : Monoid<W> => M.Tell(output);
+}
+
 public static class Trans
 {
     public static K<T, A> lift<T, M, A>(K<M, A> ma)

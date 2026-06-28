@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 430" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="a20b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#bf9000"/>
+    </marker>
+  </defs>
+  <rect width="980" height="430" fill="#ffffff"/>
+
+  <text x="490" y="40" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold"><tspan font-family="'Consolas',monospace">StateT&lt;S, M, A&gt; = S → M&lt;(A, S)&gt;</tspan></text>
+
+  <!-- 스택 그림 -->
+  <rect x="320" y="92" width="340" height="62" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="490" y="120" font-size="15" fill="#0c3a5e" text-anchor="middle" font-weight="bold">상태 스레딩 (State 층)</text>
+  <text x="490" y="141" font-size="12" fill="#0c3a5e" text-anchor="middle">바깥 한 층 — 값과 새 상태 (A, S) 를 함께</text>
+
+  <rect x="320" y="160" width="340" height="62" fill="#f5f5f5" stroke="#888888" stroke-width="2.2" stroke-dasharray="7 5" rx="6"/>
+  <text x="490" y="188" font-size="15" fill="#555555" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">내부 모나드 M</text>
+  <text x="490" y="209" font-size="12" fill="#777777" text-anchor="middle">실패·비결정 같은 둘째 효과 (빈칸)</text>
+
+  <!-- 상태 손계산 추적 -->
+  <text x="490" y="262" font-size="14" fill="#1f1f1f" text-anchor="middle" font-weight="bold">push10 · push20 · pop · pop  —  상태가 다음 단계로 흐른다</text>
+
+  <g font-family="'Consolas',monospace" font-size="13">
+    <rect x="70" y="280" width="150" height="40" fill="#fff2cc" stroke="#bf9000" stroke-width="1.6" rx="5"/>
+    <text x="145" y="305" fill="#5a4400" text-anchor="middle">[]</text>
+    <line x1="222" y1="300" x2="252" y2="300" stroke="#bf9000" stroke-width="2" marker-end="url(#a20b)"/>
+    <rect x="254" y="280" width="150" height="40" fill="#fff2cc" stroke="#bf9000" stroke-width="1.6" rx="5"/>
+    <text x="329" y="305" fill="#5a4400" text-anchor="middle">[10]</text>
+    <line x1="406" y1="300" x2="436" y2="300" stroke="#bf9000" stroke-width="2" marker-end="url(#a20b)"/>
+    <rect x="438" y="280" width="160" height="40" fill="#fff2cc" stroke="#bf9000" stroke-width="1.6" rx="5"/>
+    <text x="518" y="305" fill="#5a4400" text-anchor="middle">[20, 10]</text>
+    <line x1="600" y1="300" x2="630" y2="300" stroke="#bf9000" stroke-width="2" marker-end="url(#a20b)"/>
+    <rect x="632" y="280" width="150" height="40" fill="#eef6e8" stroke="#548235" stroke-width="1.6" rx="5"/>
+    <text x="707" y="305" fill="#375623" text-anchor="middle">값20, [10]</text>
+    <line x1="784" y1="300" x2="814" y2="300" stroke="#bf9000" stroke-width="2" marker-end="url(#a20b)"/>
+    <rect x="816" y="280" width="150" height="40" fill="#eef6e8" stroke="#548235" stroke-width="1.6" rx="5"/>
+    <text x="891" y="305" fill="#375623" text-anchor="middle">값10, []</text>
+  </g>
+
+  <text x="490" y="360" font-size="13" fill="#888888" text-anchor="middle">한 단계가 낸 새 상태가 다음 단계의 입력으로 들어갑니다 (<tspan font-family="'Consolas',monospace">t.State → 다음 Run</tspan>).</text>
+  <text x="490" y="390" font-size="13" fill="#888888" text-anchor="middle">상태 스레딩은 바깥 층이, 빈 스택 pop 같은 실패는 안쪽 <tspan font-family="'Consolas',monospace">M(Option)</tspan> 이 맡습니다.</text>
+</svg>

@@ -5,7 +5,7 @@ using Ch19.Traits;
 using Ch19.Types;
 
 Console.WriteLine("================================================");
-Console.WriteLine("16장 — 변환기 발상 & lift");
+Console.WriteLine("19장 — 변환기 발상 & lift");
 Console.WriteLine("================================================");
 Console.WriteLine();
 

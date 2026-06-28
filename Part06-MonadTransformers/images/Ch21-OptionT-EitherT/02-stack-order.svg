@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 440" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <rect width="980" height="440" fill="#ffffff"/>
+
+  <text x="490" y="38" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold">스택을 쌓는 순서가 결과의 모양을 바꾼다</text>
+  <text x="490" y="62" font-size="13" fill="#888888" text-anchor="middle">같은 두 효과(Many · Either), 같은 입력 [3, -1, 5, 0]. 바깥에 둔 효과가 안쪽을 감쌉니다.</text>
+
+  <!-- 순서 1: Many 바깥 / Either 안쪽 -->
+  <rect x="60" y="92" width="400" height="300" fill="#fbfbfb" stroke="#cccccc" stroke-width="1.4" rx="10"/>
+  <text x="260" y="120" font-size="15" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">Many&lt;Either&lt;L, A&gt;&gt;</text>
+  <text x="260" y="142" font-size="12" fill="#548235" text-anchor="middle">Many 가 바깥 — 갈래마다 따로 실패</text>
+
+  <rect x="90" y="158" width="340" height="44" fill="#e2efda" stroke="#548235" stroke-width="1.6" rx="6"/>
+  <text x="260" y="186" font-size="13" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace">Many [ ·, ·, ·, · ]  (네 갈래)</text>
+
+  <g font-family="'Consolas',monospace" font-size="13">
+    <rect x="100" y="214" width="150" height="38" fill="#eef6e8" stroke="#7a9c5e" stroke-width="1.5" rx="5"/>
+    <text x="175" y="238" fill="#375623" text-anchor="middle">Right(30)</text>
+    <rect x="270" y="214" width="150" height="38" fill="#f6dddc" stroke="#c0504d" stroke-width="1.5" rx="5"/>
+    <text x="345" y="238" fill="#943634" text-anchor="middle">Left("-1…")</text>
+    <rect x="100" y="258" width="150" height="38" fill="#eef6e8" stroke="#7a9c5e" stroke-width="1.5" rx="5"/>
+    <text x="175" y="282" fill="#375623" text-anchor="middle">Right(50)</text>
+    <rect x="270" y="258" width="150" height="38" fill="#f6dddc" stroke="#c0504d" stroke-width="1.5" rx="5"/>
+    <text x="345" y="282" fill="#943634" text-anchor="middle">Left("0…")</text>
+  </g>
+  <text x="260" y="330" font-size="14" fill="#375623" text-anchor="middle" font-weight="bold">네 갈래가 모두 살아남는다</text>
+  <text x="260" y="356" font-size="12" fill="#888888" text-anchor="middle">한 갈래의 실패가 다른 갈래를 죽이지 않음</text>
+  <text x="260" y="378" font-size="12" fill="#888888" text-anchor="middle">(실패는 그 갈래 안의 Left 로만 남음)</text>
+
+  <!-- 순서 2: Either 바깥 / Many 안쪽 -->
+  <rect x="520" y="92" width="400" height="300" fill="#fbfbfb" stroke="#cccccc" stroke-width="1.4" rx="10"/>
+  <text x="720" y="120" font-size="15" fill="#943634" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">Either&lt;L, Many&lt;A&gt;&gt;</text>
+  <text x="720" y="142" font-size="12" fill="#c0504d" text-anchor="middle">Either 가 바깥 — 첫 실패가 전체를 덮음</text>
+
+  <rect x="550" y="158" width="340" height="44" fill="#f6dddc" stroke="#c0504d" stroke-width="1.6" rx="6"/>
+  <text x="720" y="186" font-size="13" fill="#943634" text-anchor="middle" font-family="'Consolas',monospace">Either  (성공이면 Right, 실패면 Left 하나)</text>
+
+  <g font-family="'Consolas',monospace" font-size="13">
+    <rect x="560" y="220" width="320" height="70" fill="#f0d6d5" stroke="#c0504d" stroke-width="2" rx="6"/>
+    <text x="720" y="250" fill="#943634" text-anchor="middle" font-weight="bold">Left("-1 은(는) 양수가 아님")</text>
+    <text x="720" y="274" fill="#943634" text-anchor="middle" font-size="12">— 첫 실패에서 Many 전체가 붕괴 —</text>
+  </g>
+  <text x="720" y="330" font-size="14" fill="#943634" text-anchor="middle" font-weight="bold">실패 하나가 모든 갈래를 죽인다</text>
+  <text x="720" y="356" font-size="12" fill="#888888" text-anchor="middle">바깥 Either 가 Left 가 되면</text>
+  <text x="720" y="378" font-size="12" fill="#888888" text-anchor="middle">안쪽 Many 의 갈래는 사라짐</text>
+
+  <text x="490" y="420" font-size="13" fill="#1f1f1f" text-anchor="middle"><tspan font-weight="bold">어느 효과를 바깥에 두는가</tspan> 가 곧 설계 결정입니다. 스택 순서가 의미를 바꿉니다.</text>
+</svg>
