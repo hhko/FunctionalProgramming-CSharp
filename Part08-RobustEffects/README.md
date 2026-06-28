@@ -1,4 +1,4 @@
-# Part 6 — Robust Effects (견고한 효과)
+# Part 8 — Robust Effects (견고한 효과)
 
 ## 8부의 배경
 
@@ -18,7 +18,7 @@
 
 8부를 마치면 독자는 다음을 갖게 됩니다.
 
-- `Schedule` 을 시간 간격의 스트림으로 보는 발상 + `recurs` / `spaced` / `exponential` / `fibonacci` 의 직접 구현.
+- `Schedule` 을 시간 간격의 스트림으로 보는 발상 + `recurs` / `spaced` / `exponential` / `linear` 의 직접 구현.
 - 스케줄 결합 — union `|` (둘 중 짧은 쪽) 과 intersect `&` (둘 중 긴 쪽), 그리고 `retry` / `repeat` 결합.
 - `Resource` / `bracket` 으로 예외가 나도 반드시 해제되는 자원 수명을, 계층적 자원 추적 (parent/child) 과 함께 직접 구현.
 - `Activity` 기반 분산 추적을 효과에 얹어 관측 가능 한 코드를 작성.
@@ -54,7 +54,7 @@
 
 ### 27장 — Schedule / 재시도와 반복
 
-`Schedule` 은 다음에 언제 시도할지를 담은 (잠재적으로 무한한) `Duration` 스트림입니다. 학습용 `MySchedule` 을 직접 정의해 `recurs(n)` / `spaced(d)` / `exponential(d)` / `fibonacci` 를 구현하고, union `|` (둘 중 짧은 간격) 과 intersect `&` (둘 중 긴 간격) 으로 스케줄을 합성합니다. `effect.Retry(schedule)` / `effect.Repeat(schedule)` 이 효과에 얹히는 자리를 봅니다.
+`Schedule` 은 다음에 언제 시도할지를 담은 (잠재적으로 무한한) `Duration` 스트림입니다. 학습용 `MySchedule` 을 직접 정의해 `recurs(n)` / `spaced(d)` / `exponential(d)` / `linear` 를 구현하고, union `|` (둘 중 짧은 간격) 과 intersect `&` (둘 중 긴 간격) 으로 스케줄을 합성합니다. `effect.Retry(schedule)` / `effect.Repeat(schedule)` 이 효과에 얹히는 자리를 봅니다.
 
 ### 28장 — Resource & bracket / 자원 수명
 

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 400" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <rect width="980" height="400" fill="#ffffff"/>
+
+  <text x="490" y="38" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold"><tspan font-family="'Consolas',monospace">Schedule</tspan> = (무한) <tspan font-family="'Consolas',monospace">Duration</tspan> 스트림</text>
+  <text x="490" y="62" font-size="13" fill="#888888" text-anchor="middle">재시도/반복 정책을 명령형 루프가 아니라 "다음에 언제 다시 할지" 의 간격 스트림으로 봅니다.</text>
+
+  <!-- recurs(3) -->
+  <text x="120" y="112" font-size="15" fill="#1f1f1f" text-anchor="start" font-family="'Consolas',monospace" font-weight="bold">recurs(3)</text>
+  <g font-family="'Consolas',monospace" font-size="13" fill="#5a4400" text-anchor="middle">
+    <rect x="120" y="124" width="80" height="40" fill="#fff2cc" stroke="#bf9000" stroke-width="1.6" rx="5"/><text x="160" y="149">0ms</text>
+    <rect x="208" y="124" width="80" height="40" fill="#fff2cc" stroke="#bf9000" stroke-width="1.6" rx="5"/><text x="248" y="149">0ms</text>
+    <rect x="296" y="124" width="80" height="40" fill="#fff2cc" stroke="#bf9000" stroke-width="1.6" rx="5"/><text x="336" y="149">0ms</text>
+    <text x="430" y="149" fill="#999999" font-family="'Noto Sans KR'">(끝 — 3회)</text>
+  </g>
+
+  <!-- spaced(50) -->
+  <text x="120" y="200" font-size="15" fill="#1f1f1f" text-anchor="start" font-family="'Consolas',monospace" font-weight="bold">spaced(50ms)</text>
+  <g font-family="'Consolas',monospace" font-size="13" fill="#375623" text-anchor="middle">
+    <rect x="120" y="212" width="80" height="40" fill="#e2efda" stroke="#548235" stroke-width="1.6" rx="5"/><text x="160" y="237">50ms</text>
+    <rect x="208" y="212" width="80" height="40" fill="#e2efda" stroke="#548235" stroke-width="1.6" rx="5"/><text x="248" y="237">50ms</text>
+    <rect x="296" y="212" width="80" height="40" fill="#e2efda" stroke="#548235" stroke-width="1.6" rx="5"/><text x="336" y="237">50ms</text>
+    <text x="430" y="237" fill="#548235" font-family="'Noto Sans KR'">… 고정 간격 무한</text>
+  </g>
+
+  <!-- exponential(10) -->
+  <text x="120" y="288" font-size="15" fill="#1f1f1f" text-anchor="start" font-family="'Consolas',monospace" font-weight="bold">exponential(10ms)</text>
+  <g font-family="'Consolas',monospace" font-size="13" fill="#0c3a5e" text-anchor="middle">
+    <rect x="120" y="300" width="80" height="40" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.6" rx="5"/><text x="160" y="325">10ms</text>
+    <rect x="208" y="300" width="80" height="40" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.6" rx="5"/><text x="248" y="325">20ms</text>
+    <rect x="296" y="300" width="92" height="40" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.6" rx="5"/><text x="342" y="325">40ms</text>
+    <rect x="396" y="300" width="92" height="40" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.6" rx="5"/><text x="442" y="325">80ms</text>
+    <rect x="496" y="300" width="100" height="40" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.6" rx="5"/><text x="546" y="325">160ms</text>
+    <text x="640" y="325" fill="#1f77b4" font-family="'Noto Sans KR'">… ×2 배가 무한</text>
+  </g>
+
+  <text x="490" y="378" font-size="13" fill="#1f1f1f" text-anchor="middle">정책이 <tspan font-weight="bold">값(스트림)</tspan> 이라, <tspan font-family="'Consolas',monospace">|</tspan> 와 <tspan font-family="'Consolas',monospace">&amp;</tspan> 로 합성하고 <tspan font-family="'Consolas',monospace">retry</tspan>/<tspan font-family="'Consolas',monospace">repeat</tspan> 로 효과 위에 얹습니다.</text>
+</svg>

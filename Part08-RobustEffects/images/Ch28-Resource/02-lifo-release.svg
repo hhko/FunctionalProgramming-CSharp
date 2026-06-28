@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 420" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="b28c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#548235"/></marker>
+    <marker id="b28d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#bf9000"/></marker>
+  </defs>
+  <rect width="980" height="420" fill="#ffffff"/>
+
+  <text x="490" y="36" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold">LIFO 해제 — 나중에 연 것을 먼저 닫는다</text>
+  <text x="490" y="60" font-size="13" fill="#888888" text-anchor="middle">A·B·C 순으로 획득하면 해제는 C·B·A 역순. 자원 사이의 의존(B 가 A 위에 열림)이 깨지지 않습니다.</text>
+
+  <!-- 획득 (아래에서 위로 쌓임) -->
+  <text x="245" y="96" font-size="15" fill="#375623" text-anchor="middle" font-weight="bold">획득 (순서대로 쌓기)</text>
+  <g text-anchor="middle" font-family="'Consolas',monospace" font-size="14">
+    <rect x="155" y="250" width="180" height="44" fill="#dcebd0" stroke="#548235" stroke-width="2" rx="6"/><text x="245" y="278" fill="#375623">A (DB 연결)</text>
+    <rect x="155" y="200" width="180" height="44" fill="#dcebd0" stroke="#548235" stroke-width="2" rx="6"/><text x="245" y="228" fill="#375623">B (트랜잭션)</text>
+    <rect x="155" y="150" width="180" height="44" fill="#dcebd0" stroke="#548235" stroke-width="2" rx="6"/><text x="245" y="178" fill="#375623">C (커서)</text>
+  </g>
+  <line x1="375" y1="270" x2="375" y2="166" stroke="#548235" stroke-width="2.4" marker-end="url(#b28c)"/>
+  <text x="410" y="222" font-size="12" fill="#548235" text-anchor="start" transform="rotate(0)">A→B→C</text>
+
+  <!-- 화살표 -->
+  <text x="490" y="225" font-size="22" fill="#888888" text-anchor="middle">⇒</text>
+
+  <!-- 해제 (위에서 아래로, 역순) -->
+  <text x="735" y="96" font-size="15" fill="#5a4400" text-anchor="middle" font-weight="bold">해제 (역순 LIFO)</text>
+  <g text-anchor="middle" font-family="'Consolas',monospace" font-size="14">
+    <rect x="645" y="150" width="180" height="44" fill="#fff2cc" stroke="#bf9000" stroke-width="2.4" rx="6"/><text x="735" y="178" fill="#5a4400">C 먼저 닫기</text>
+    <rect x="645" y="200" width="180" height="44" fill="#fdf2d0" stroke="#bf9000" stroke-width="2" rx="6"/><text x="735" y="228" fill="#5a4400">B 닫기</text>
+    <rect x="645" y="250" width="180" height="44" fill="#fdf2d0" stroke="#bf9000" stroke-width="2" rx="6"/><text x="735" y="278" fill="#5a4400">A 마지막</text>
+  </g>
+  <line x1="865" y1="166" x2="865" y2="270" stroke="#bf9000" stroke-width="2.4" marker-end="url(#b28d)"/>
+  <text x="900" y="222" font-size="12" fill="#bf9000" text-anchor="middle">C→B→A</text>
+
+  <text x="490" y="350" font-size="13" fill="#1f1f1f" text-anchor="middle">커서는 트랜잭션에, 트랜잭션은 연결에 기대므로, <tspan font-weight="bold">역순</tspan> 으로 닫아야 의존이 살아 있는 동안 닫힙니다.</text>
+  <text x="490" y="378" font-size="12" fill="#888888" text-anchor="middle"><tspan font-family="'Consolas',monospace">Resources</tspan> 가 획득을 스택에 쌓고, 해제는 스택을 위에서부터 비웁니다 (LIFO).</text>
+</svg>

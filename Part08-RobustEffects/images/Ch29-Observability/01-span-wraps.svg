@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 400" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="o29a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/></marker>
+    <marker id="o29b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7a5fb0"/></marker>
+  </defs>
+  <rect width="980" height="400" fill="#ffffff"/>
+
+  <text x="490" y="38" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold">추적은 효과를 바꾸지 않고 감싼다</text>
+  <text x="490" y="62" font-size="13" fill="#888888" text-anchor="middle">효과 구간을 span 으로 감싸도 입력·결과는 그대로. 옆에 span 기록(이름·시작·종료)만 남습니다.</text>
+
+  <!-- 효과 흐름 (결과 불변) -->
+  <rect x="120" y="120" width="140" height="56" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/>
+  <text x="190" y="146" font-size="13" fill="#5a4400" text-anchor="middle">입력</text>
+  <text x="190" y="166" font-size="12" fill="#5a4400" text-anchor="middle" font-family="'Consolas',monospace">21 * 2</text>
+  <line x1="262" y1="148" x2="378" y2="148" stroke="#1f77b4" stroke-width="2.4" marker-end="url(#o29a)"/>
+
+  <!-- span 으로 감싼 효과 -->
+  <rect x="380" y="104" width="220" height="88" fill="#eef0f7" stroke="#7a5fb0" stroke-width="2.2" stroke-dasharray="6 4" rx="10"/>
+  <text x="490" y="124" font-size="12" fill="#7a5fb0" text-anchor="middle" font-family="'Consolas',monospace">Activity("op", …)</text>
+  <rect x="408" y="134" width="164" height="46" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/>
+  <text x="490" y="162" font-size="13" fill="#0c3a5e" text-anchor="middle">효과 그대로 실행</text>
+
+  <line x1="602" y1="148" x2="718" y2="148" stroke="#1f77b4" stroke-width="2.4" marker-end="url(#o29a)"/>
+  <rect x="720" y="120" width="140" height="56" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/>
+  <text x="790" y="146" font-size="13" fill="#5a4400" text-anchor="middle">결과</text>
+  <text x="790" y="166" font-size="12" fill="#5a4400" text-anchor="middle" font-family="'Consolas',monospace">42 (그대로)</text>
+
+  <!-- span 기록 (옆에) -->
+  <line x1="490" y1="194" x2="490" y2="232" stroke="#7a5fb0" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#o29b)"/>
+  <rect x="320" y="234" width="340" height="58" fill="#f3effa" stroke="#7a5fb0" stroke-width="1.6" rx="8"/>
+  <text x="490" y="258" font-size="13" fill="#5a3f86" text-anchor="middle" font-weight="bold">span 기록 (옆에 남김)</text>
+  <text x="490" y="280" font-size="12" fill="#7a5fb0" text-anchor="middle" font-family="'Consolas',monospace">op : 시작 → 종료</text>
+
+  <text x="490" y="338" font-size="13" fill="#1f1f1f" text-anchor="middle">결과 <tspan font-family="'Consolas',monospace">42</tspan> 는 추적을 켜든 끄든 같습니다. 추적은 결과를 바꾸지 않는 <tspan font-weight="bold">횡단 관심사</tspan> 입니다.</text>
+  <text x="490" y="364" font-size="12" fill="#888888" text-anchor="middle">"모양 보존" — 효과의 값은 그대로 두고 관측만 곁들입니다 (<tspan font-family="'Consolas',monospace">A → A</tspan>).</text>
+</svg>

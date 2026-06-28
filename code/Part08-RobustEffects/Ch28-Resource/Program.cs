@@ -2,7 +2,7 @@ using Ch28.Tests;
 using Ch28.Types;
 
 Console.WriteLine("================================================");
-Console.WriteLine("25장 — Resource & bracket (자원 수명)");
+Console.WriteLine("28장 — Resource & bracket (자원 수명)");
 Console.WriteLine("================================================");
 Console.WriteLine();
 

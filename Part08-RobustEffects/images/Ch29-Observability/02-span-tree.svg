@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 410" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <rect width="980" height="410" fill="#ffffff"/>
+
+  <text x="490" y="36" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold">중첩 span 트리 — 효과 안의 효과를 계층으로</text>
+  <text x="490" y="60" font-size="13" fill="#888888" text-anchor="middle">효과 안에서 다른 효과를 추적하면 부모 span 아래 자식 span 이 쌓여 트리를 이룹니다.</text>
+
+  <!-- 트리 -->
+  <g font-family="'Consolas',monospace">
+    <!-- 루트 -->
+    <rect x="120" y="92" width="300" height="44" fill="#e9e3f5" stroke="#7a5fb0" stroke-width="2.2" rx="6"/>
+    <text x="140" y="120" font-size="14" fill="#5a3f86" font-weight="bold">handleRequest</text>
+    <text x="405" y="120" font-size="11" fill="#7a5fb0" text-anchor="end">루트 span</text>
+
+    <!-- 자식 1: loadUser -->
+    <line x1="150" y1="136" x2="150" y2="166" stroke="#7a5fb0" stroke-width="1.8"/>
+    <line x1="150" y1="166" x2="180" y2="166" stroke="#7a5fb0" stroke-width="1.8"/>
+    <rect x="180" y="148" width="280" height="40" fill="#eef4fd" stroke="#1f77b4" stroke-width="1.8" rx="6"/>
+    <text x="200" y="173" font-size="13" fill="#0c3a5e">loadUser</text>
+    <text x="445" y="173" font-size="11" fill="#1f77b4" text-anchor="end">자식</text>
+
+    <!-- 손자: queryDb -->
+    <line x1="210" y1="188" x2="210" y2="218" stroke="#1f77b4" stroke-width="1.8"/>
+    <line x1="210" y1="218" x2="240" y2="218" stroke="#1f77b4" stroke-width="1.8"/>
+    <rect x="240" y="200" width="260" height="40" fill="#e2efda" stroke="#548235" stroke-width="1.8" rx="6"/>
+    <text x="260" y="225" font-size="13" fill="#375623">queryDb</text>
+    <text x="485" y="225" font-size="11" fill="#548235" text-anchor="end">손자</text>
+
+    <!-- 자식 2: computeTotal -->
+    <line x1="150" y1="136" x2="150" y2="270" stroke="#7a5fb0" stroke-width="1.8"/>
+    <line x1="150" y1="270" x2="180" y2="270" stroke="#7a5fb0" stroke-width="1.8"/>
+    <rect x="180" y="252" width="280" height="40" fill="#eef4fd" stroke="#1f77b4" stroke-width="1.8" rx="6"/>
+    <text x="200" y="277" font-size="13" fill="#0c3a5e">computeTotal</text>
+    <text x="445" y="277" font-size="11" fill="#1f77b4" text-anchor="end">자식</text>
+  </g>
+
+  <!-- 오른쪽 설명 -->
+  <rect x="560" y="100" width="360" height="190" fill="#fbfbfb" stroke="#cccccc" stroke-width="1.2" rx="8"/>
+  <text x="580" y="128" font-size="13" fill="#1f1f1f">현재 어느 구간 안인지("현재 span")를</text>
+  <text x="580" y="150" font-size="13" fill="#1f1f1f">스택으로 들고 다니며,</text>
+  <text x="580" y="178" font-size="13" fill="#1f1f1f">새 <tspan font-family="'Consolas',monospace">Activity</tspan> 는 스택 맨 위 구간의</text>
+  <text x="580" y="200" font-size="13" fill="#1f1f1f"><tspan font-weight="bold">자식</tspan>으로 달리고, 끝나면 <tspan font-family="'Consolas',monospace">pop</tspan>.</text>
+  <text x="580" y="234" font-size="12" fill="#888888">결과: 어느 단계가 얼마나 걸렸나를</text>
+  <text x="580" y="254" font-size="12" fill="#888888">계층(트리)으로 분산 추적.</text>
+  <text x="580" y="278" font-size="12" fill="#7a5fb0">OO: OpenTelemetry <tspan font-family="'Consolas',monospace">Activity.Current</tspan></text>
+
+  <text x="490" y="350" font-size="13" fill="#1f1f1f" text-anchor="middle">예외가 나도 <tspan font-family="'Consolas',monospace">finally</tspan> 가 구간을 닫아(<tspan font-family="'Consolas',monospace">pop</tspan>) 트리가 오염되지 않습니다 (28장 <tspan font-family="'Consolas',monospace">bracket</tspan> 의 해제와 같은 구조).</text>
+</svg>

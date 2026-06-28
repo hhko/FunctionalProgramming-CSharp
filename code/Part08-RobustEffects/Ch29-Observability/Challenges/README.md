@@ -14,12 +14,12 @@
 
 ### ② 예외 안전한 구간 종료
 
-`Tests/TracingLaws.cs` — 구간 안에서 예외가 나도 span 이 올바르게 닫혀 다음 추적이 오염되지 않음을 확인한다 (25장 bracket 의 finally 와 같은 보장).
+`Tests/TracingLaws.cs` — 구간 안에서 예외가 나도 span 이 올바르게 닫혀 다음 추적이 오염되지 않음을 확인한다 (28장 bracket 의 finally 와 같은 보장).
 
-**노리는 능력** — 추적·자원·재시도가 모두 "효과 위에 조합으로 얹히는" 6부의 공통 주제임을 정리한다.
+**노리는 능력** — 추적·자원·재시도가 모두 "효과 위에 조합으로 얹히는" 8부의 공통 주제임을 정리한다.
 
 ## 실행
 
 ```bash
-dotnet run --project code/Part6-RobustEffects/Ch29-Observability/Ch29.csproj
+dotnet run --project code/Part08-RobustEffects/Ch29-Observability/Ch29.csproj
 ```

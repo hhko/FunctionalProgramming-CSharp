@@ -21,5 +21,5 @@
 ## 실행
 
 ```bash
-dotnet run --project code/Part6-RobustEffects/Ch27-Schedule/Ch27.csproj
+dotnet run --project code/Part08-RobustEffects/Ch27-Schedule/Ch27.csproj
 ```

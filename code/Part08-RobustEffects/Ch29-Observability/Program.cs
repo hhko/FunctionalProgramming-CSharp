@@ -2,7 +2,7 @@ using Ch29.Tests;
 using Ch29.Types;
 
 Console.WriteLine("================================================");
-Console.WriteLine("26장 — Observability (Activity / 분산 추적)");
+Console.WriteLine("29장 — Observability (Activity / 분산 추적)");
 Console.WriteLine("================================================");
 Console.WriteLine();
 

@@ -16,10 +16,10 @@
 
 `Resources` — 열린 순서 A→B 면 닫히는 순서는 B→A (중첩 자원의 올바른 정리). 예외에도 모두 해제된다.
 
-**노리는 능력** — 5부 `EnvIO` 가 자원을 운반하던 그림(20장)과 연결해, 효과 실행 환경이 자원 수명을 관리함을 이해한다.
+**노리는 능력** — 7부 `EnvIO` 가 자원을 운반하던 그림(23장)과 연결해, 효과 실행 환경이 자원 수명을 관리함을 이해한다.
 
 ## 실행
 
 ```bash
-dotnet run --project code/Part6-RobustEffects/Ch28-Resource/Ch28.csproj
+dotnet run --project code/Part08-RobustEffects/Ch28-Resource/Ch28.csproj
 ```

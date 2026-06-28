@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 430" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <rect width="980" height="430" fill="#ffffff"/>
+
+  <text x="490" y="36" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold"><tspan font-family="'Consolas',monospace">union (|)</tspan> 대 <tspan font-family="'Consolas',monospace">intersect (&amp;)</tspan> — 스케줄 합성</text>
+
+  <!-- union -->
+  <rect x="55" y="64" width="420" height="300" fill="#eef6e8" stroke="#548235" stroke-width="1.8" rx="10"/>
+  <text x="265" y="92" font-size="16" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">a | b  (union)</text>
+  <text x="265" y="114" font-size="12" fill="#548235" text-anchor="middle">둘 중 <tspan font-weight="bold">짧은</tspan> 간격 · 한쪽이라도 남으면 계속 (긴 길이)</text>
+  <text x="265" y="140" font-size="12" fill="#1f1f1f" text-anchor="middle" font-family="'Consolas',monospace">spaced(100) | spaced(10)</text>
+  <g font-family="'Consolas',monospace" font-size="12" text-anchor="middle">
+    <rect x="80" y="156" width="170" height="34" fill="#ffffff" stroke="#9aa0a6" stroke-width="1.2" rx="4"/><text x="165" y="178" fill="#777">100,100,100,…</text>
+    <rect x="280" y="156" width="170" height="34" fill="#ffffff" stroke="#9aa0a6" stroke-width="1.2" rx="4"/><text x="365" y="178" fill="#777">10,10,10,…</text>
+  </g>
+  <text x="265" y="214" font-size="13" fill="#375623" text-anchor="middle">↓ 각 자리에서 더 짧은 쪽</text>
+  <rect x="120" y="226" width="290" height="40" fill="#dcebd0" stroke="#548235" stroke-width="2" rx="6"/>
+  <text x="265" y="252" font-size="14" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">10, 10, 10, …</text>
+  <text x="265" y="298" font-size="12" fill="#548235" text-anchor="middle">더 자주 시도 · 둘 중 하나라도 계속하면 계속</text>
+  <text x="265" y="332" font-size="12" fill="#888888" text-anchor="middle">OO: <tspan font-family="'Consolas',monospace">||</tspan> 처럼 "둘 중 하나라도"</text>
+
+  <!-- intersect -->
+  <rect x="505" y="64" width="420" height="300" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.8" rx="10"/>
+  <text x="715" y="92" font-size="16" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">a &amp; b  (intersect)</text>
+  <text x="715" y="114" font-size="12" fill="#1f77b4" text-anchor="middle">둘 중 <tspan font-weight="bold">긴</tspan> 간격 · 둘 다 남아야 계속 (짧은 길이)</text>
+  <text x="715" y="140" font-size="12" fill="#1f1f1f" text-anchor="middle" font-family="'Consolas',monospace">recurs(5) &amp; exponential(10)</text>
+  <g font-family="'Consolas',monospace" font-size="12" text-anchor="middle">
+    <rect x="530" y="156" width="170" height="34" fill="#ffffff" stroke="#9aa0a6" stroke-width="1.2" rx="4"/><text x="615" y="178" fill="#777">0,0,0,0,0 (5개)</text>
+    <rect x="730" y="156" width="170" height="34" fill="#ffffff" stroke="#9aa0a6" stroke-width="1.2" rx="4"/><text x="815" y="178" fill="#777">10,20,40,…</text>
+  </g>
+  <text x="715" y="214" font-size="13" fill="#0c3a5e" text-anchor="middle">↓ 각 자리에서 더 긴 쪽 · 짧은 5개에서 끊김</text>
+  <rect x="545" y="226" width="340" height="40" fill="#cfe4f7" stroke="#1f77b4" stroke-width="2" rx="6"/>
+  <text x="715" y="252" font-size="14" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">10, 20, 40, 80, 160</text>
+  <text x="715" y="298" font-size="12" fill="#1f77b4" text-anchor="middle">"최대 5회 + 지수 백오프" — 실무 재시도 정책</text>
+  <text x="715" y="332" font-size="12" fill="#888888" text-anchor="middle">OO: <tspan font-family="'Consolas',monospace">&amp;&amp;</tspan> 처럼 "둘 다 살아야"</text>
+
+  <text x="490" y="400" font-size="13" fill="#1f1f1f" text-anchor="middle"><tspan font-family="'Consolas',monospace">|</tspan> 는 간격을 <tspan font-weight="bold">짧게</tspan>·길이를 <tspan font-weight="bold">길게</tspan>, <tspan font-family="'Consolas',monospace">&amp;</tspan> 는 간격을 <tspan font-weight="bold">길게</tspan>·길이를 <tspan font-weight="bold">짧게</tspan>. 두 축(간격 × 길이)이 반대로 움직입니다.</text>
+</svg>

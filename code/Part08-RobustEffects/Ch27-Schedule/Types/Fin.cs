@@ -1,6 +1,6 @@
 namespace Ch27.Types;
 
-// 효과 결과 (21장 Fin 축소판) — retry/repeat 시연용.
+// 효과 결과 (24장 Fin 축소판) — retry/repeat 시연용.
 public sealed record Error(string Message)
 {
     public override string ToString() => Message;

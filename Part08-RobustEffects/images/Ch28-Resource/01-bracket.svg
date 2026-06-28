@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 420" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="b28a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#548235"/></marker>
+    <marker id="b28b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0504d"/></marker>
+  </defs>
+  <rect width="980" height="420" fill="#ffffff"/>
+
+  <text x="490" y="38" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold"><tspan font-family="'Consolas',monospace">bracket</tspan> — 획득·사용·해제를 한 값으로</text>
+  <text x="490" y="62" font-size="13" fill="#888888" text-anchor="middle"><tspan font-family="'Consolas',monospace">try</tspan>-<tspan font-family="'Consolas',monospace">finally</tspan> 의 효과판. 사용 중 예외가 나도 해제는 반드시 실행됩니다.</text>
+
+  <!-- 세 박스 -->
+  <rect x="120" y="120" width="200" height="64" fill="#e2efda" stroke="#548235" stroke-width="2.2" rx="8"/>
+  <text x="220" y="148" font-size="15" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">acquire</text>
+  <text x="220" y="170" font-size="12" fill="#375623" text-anchor="middle">자원을 얻는다</text>
+
+  <rect x="390" y="120" width="200" height="64" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="8"/>
+  <text x="490" y="148" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">use</text>
+  <text x="490" y="170" font-size="12" fill="#0c3a5e" text-anchor="middle">자원을 쓴다</text>
+
+  <rect x="660" y="120" width="200" height="64" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="8"/>
+  <text x="760" y="148" font-size="15" fill="#5a4400" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">release</text>
+  <text x="760" y="170" font-size="12" fill="#5a4400" text-anchor="middle">반드시 해제한다</text>
+
+  <!-- 정상 경로 -->
+  <line x1="322" y1="152" x2="388" y2="152" stroke="#548235" stroke-width="2.4" marker-end="url(#b28a)"/>
+  <line x1="592" y1="152" x2="658" y2="152" stroke="#548235" stroke-width="2.4" marker-end="url(#b28a)"/>
+  <text x="490" y="210" font-size="13" fill="#548235" text-anchor="middle">정상 경로: 사용을 마치면 해제로</text>
+
+  <!-- 예외 경로 -->
+  <path d="M490,186 Q490,260 700,260 Q760,260 760,188" fill="none" stroke="#c0504d" stroke-width="2.4" stroke-dasharray="6 4" marker-end="url(#b28b)"/>
+  <rect x="410" y="244" width="160" height="36" fill="#f6dddc" stroke="#c0504d" stroke-width="1.6" rx="5"/>
+  <text x="490" y="268" font-size="13" fill="#943634" text-anchor="middle" font-family="'Consolas',monospace">use 에서 예외!</text>
+  <text x="650" y="300" font-size="13" fill="#c0504d" text-anchor="middle">예외가 나도 release 를 거쳐</text>
+
+  <!-- 결과 -->
+  <text x="490" y="350" font-size="14" fill="#1f1f1f" text-anchor="middle">두 경로 모두 <tspan font-family="'Consolas',monospace" font-weight="bold">release</tspan> 를 지납니다. 성공이든 예외든 자원은 빠짐없이 닫힙니다.</text>
+  <text x="490" y="378" font-size="12" fill="#888888" text-anchor="middle"><tspan font-family="'Consolas',monospace">release</tspan> 는 예외를 삼키지 않습니다. 해제 후 예외는 그대로 전파됩니다.</text>
+</svg>

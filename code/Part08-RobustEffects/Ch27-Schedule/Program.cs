@@ -3,7 +3,7 @@ using Ch27.Tests;
 using Ch27.Types;
 
 Console.WriteLine("================================================");
-Console.WriteLine("24장 — Schedule (재시도 / 반복 정책)");
+Console.WriteLine("27장 — Schedule (재시도 / 반복 정책)");
 Console.WriteLine("================================================");
 Console.WriteLine();
 
