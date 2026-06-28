@@ -79,20 +79,20 @@ LanguageExt v5 의 핵심 발상인 **`K<F, A>` 마커 인터페이스 + self-bo
 
 Part 1 ~ 3 (기초) 은 함수형의 어휘와 동작 원리를 쌓습니다 (사고·기계장치 → 핵심 trait → 조합·확장). Part 4 ~ 6 은 실제 컬렉션 / 효과 모나드 / 변환기로 이어지고, Part 7 ~ 10 은 부수 효과 (side-effect) 를 순수하게 다루는 고급 주제를 직접 구현합니다. 효과를 값으로 인코딩하고 (IO / Eff), 견고하게 다루고 (Schedule / Resource), 안전하게 동시 처리하고 (STM), 메모리 안전하게 스트리밍합니다. Part 11 ~ 12 는 함수형 테스트 표준과 실무 예제로 마무리합니다.
 
-| Part | 주제 | 상태 |
-|---|---|---|
-| **[Part 1. Foundations](./Part01-Foundations/README.md)** | 함수형 사고와 기계장치 — 두 평행 세계 비유 + Higher Kinds (`K<F, A>` + 3-tuple) + Monoid (Order 0). 4 가지 함수 유형(`a -> b`, `a -> E<b>`, `E<a> -> b`, `E<a> -> E<b>`) 의 지도. (Ch01 ~ 03) | **진행 중** |
-| **[Part 2. Core Traits](./Part02-CoreTraits/README.md)** | 네 자리의 다리 — Functor (`map`) / Applicative (`pure`+`apply`) / Foldable (`fold`) / Monad (`bind`). 4 가지 함수 유형 위 끌어올림 · 끌어내림 · 합성. (Ch04 ~ 07) | **진행 중** |
-| **[Part 3. Composition](./Part03-Composition/README.md)** | 조합 · 실전 · 확장 — Validation 누적 vs 단락 + Traversable 층 swap (세 trait 합성) + Bifunctor / NaturalTransformation 확장. (Ch08 ~ 11) | **진행 중** |
-| **[Part 4. Collections](./Part04-Collections/README.md)** | 불변 컬렉션 — 기초 toy 추상을 실무 컬렉션에 적용. lazy `Seq` (5 trait) · `Map` 값 Functor·Foldable·Traversable · `Set` Foldable 경계 · `Alternative` / `MonoidK` (고르기 vs 모으기). (Ch12 ~ 14) | **진행 중** |
-| **[Part 5. Effect Monads](./Part05-EffectMonads/README.md)** | 효과를 담는 모나드 — `Reader` / `State` / `Writer` 와 `Readable` / `Stateful` / `Writable` trait. 효과를 타입으로 인코딩하고, 단일 모나드의 합성 한계로 6부 변환기의 다리를 놓음. (Ch15 ~ 18) | **진행 중** |
-| **[Part 6. Monad Transformers](./Part06-MonadTransformers/README.md)** | 세계를 쌓다 — `ReaderT` / `StateT` / `WriterT` / `OptionT` / `EitherT` + `MonadIO` / `LiftIO`. 여러 효과를 한 스택에, 바깥 효과 하나당 변환기 하나 (`lift`). 18장 합성 한계 → 7부 `Eff<RT, A> = ReaderT<RT, IO, A>` 다리. (Ch19 ~ 22) | **진행 중** |
-| **[Part 7. Effect System](./Part07-EffectSystem/README.md)** | IO 와 효과 런타임 — `IO<A>` DSL 노드 + 트램폴린 스택 안전 · `EnvIO` 취소, `Error` / `Fin` / `Fallible` (예외를 값으로), `Eff<A>`, **`Eff<RT, A> = ReaderT<RT, IO, A>`** + `Has<RT, Trait>` 능력 DI. (Ch23 ~ 26) | **진행 중** |
-| **[Part 8. Robust Effects](./Part08-RobustEffects/README.md)** | 견고한 효과 — `Schedule` (재시도·반복, union/intersect 합성), `Resource` / `bracket` (예외에도 해제, LIFO), `Activity` / `Tracer` (분산 추적, 결과 불변 횡단 관심사). 셋 다 7부 효과 위에 조합으로 얹힘. (Ch27 ~ 29) | **진행 중** |
-| **[Part 9. Concurrency](./Part09-Concurrency/README.md)** | 동시성 — `Atom` (CAS 로 락 없는 원자적 갱신, 순수 함수라 충돌 시 재시도 안전), `STM` / `Ref` (여러 참조를 한 트랜잭션으로, 낙관적 커밋·전체 재시도), `AtomHashMap` / `VectorClock` (불변 맵을 CAS 로 감싼 동시 컬렉션 · happens-before 인과성). 상태 변화를 순수 함수로 표현해 충돌을 재적용으로 푼다. (Ch30 ~ 32) | **진행 중** |
-| **[Part 10. Streaming](./Part10-Streaming/README.md)** | 스트리밍 — `StreamT` (효과를 품은 lazy 스트림, 당긴 만큼만 계산·메모리 안전), Pipes `Producer` / `Consumer` / `Pipe` (당김 기반 합성·역압), `Conduit` + `bracket` (자원 안전 ETL 파이프라인). 기초의 합성 어휘가 무한·대용량으로 확장됩니다. (Ch33 ~ 35) | **진행 중** |
-| **[Part 11. Functional Testing](./Part11-FunctionalTesting/README.md)** | 효과·전문성 테스트 — 효과 코드 결정적 테스트 (`Sys.Test` / `MemoryConsole`), 동시·스트리밍·자원 효과, property-based 심화. 법칙 검증은 각 trait 장에서 `ForAll` 로 수행. (Ch36 ~ 38) | **진행 중** |
-| **[Part 12. Real-world](./Part12-RealWorld/README.md)** | 실무 예제 — 따로 익힌 도구를 한 코드로 합성. 강타입 도메인 + Validation 누적 검증, `Eff<RT>` + `Has` 다중 능력 DI 앱, 재시도·자원·스트림·동시 집계 파이프라인, 종합 capstone (책을 마치며). (Ch39 ~ 42) | **진행 중** |
+| Part | 주제 |
+|---|---|
+| **[Part 1. Foundations](./Part01-Foundations/README.md)** | 함수형 사고와 기계장치 — 두 평행 세계 비유 + Higher Kinds (`K<F, A>` + 3-tuple) + Monoid (Order 0). 4 가지 함수 유형(`a -> b`, `a -> E<b>`, `E<a> -> b`, `E<a> -> E<b>`) 의 지도. (Ch01 ~ 03) |
+| **[Part 2. Core Traits](./Part02-CoreTraits/README.md)** | 네 자리의 다리 — Functor (`map`) / Applicative (`pure`+`apply`) / Foldable (`fold`) / Monad (`bind`). 4 가지 함수 유형 위 끌어올림 · 끌어내림 · 합성. (Ch04 ~ 07) |
+| **[Part 3. Composition](./Part03-Composition/README.md)** | 조합 · 실전 · 확장 — Validation 누적 vs 단락 + Traversable 층 swap (세 trait 합성) + Bifunctor / NaturalTransformation 확장. (Ch08 ~ 11) |
+| **[Part 4. Collections](./Part04-Collections/README.md)** | 불변 컬렉션 — 기초 toy 추상을 실무 컬렉션에 적용. lazy `Seq` (5 trait) · `Map` 값 Functor·Foldable·Traversable · `Set` Foldable 경계 · `Alternative` / `MonoidK` (고르기 vs 모으기). (Ch12 ~ 14) |
+| **[Part 5. Effect Monads](./Part05-EffectMonads/README.md)** | 효과를 담는 모나드 — `Reader` / `State` / `Writer` 와 `Readable` / `Stateful` / `Writable` trait. 효과를 타입으로 인코딩하고, 단일 모나드의 합성 한계로 6부 변환기의 다리를 놓음. (Ch15 ~ 18) |
+| **[Part 6. Monad Transformers](./Part06-MonadTransformers/README.md)** | 세계를 쌓다 — `ReaderT` / `StateT` / `WriterT` / `OptionT` / `EitherT` + `MonadIO` / `LiftIO`. 여러 효과를 한 스택에, 바깥 효과 하나당 변환기 하나 (`lift`). 18장 합성 한계 → 7부 `Eff<RT, A> = ReaderT<RT, IO, A>` 다리. (Ch19 ~ 22) |
+| **[Part 7. Effect System](./Part07-EffectSystem/README.md)** | IO 와 효과 런타임 — `IO<A>` DSL 노드 + 트램폴린 스택 안전 · `EnvIO` 취소, `Error` / `Fin` / `Fallible` (예외를 값으로), `Eff<A>`, **`Eff<RT, A> = ReaderT<RT, IO, A>`** + `Has<RT, Trait>` 능력 DI. (Ch23 ~ 26) |
+| **[Part 8. Robust Effects](./Part08-RobustEffects/README.md)** | 견고한 효과 — `Schedule` (재시도·반복, union/intersect 합성), `Resource` / `bracket` (예외에도 해제, LIFO), `Activity` / `Tracer` (분산 추적, 결과 불변 횡단 관심사). 셋 다 7부 효과 위에 조합으로 얹힘. (Ch27 ~ 29) |
+| **[Part 9. Concurrency](./Part09-Concurrency/README.md)** | 동시성 — `Atom` (CAS 로 락 없는 원자적 갱신, 순수 함수라 충돌 시 재시도 안전), `STM` / `Ref` (여러 참조를 한 트랜잭션으로, 낙관적 커밋·전체 재시도), `AtomHashMap` / `VectorClock` (불변 맵을 CAS 로 감싼 동시 컬렉션 · happens-before 인과성). 상태 변화를 순수 함수로 표현해 충돌을 재적용으로 푼다. (Ch30 ~ 32) |
+| **[Part 10. Streaming](./Part10-Streaming/README.md)** | 스트리밍 — `StreamT` (효과를 품은 lazy 스트림, 당긴 만큼만 계산·메모리 안전), Pipes `Producer` / `Consumer` / `Pipe` (당김 기반 합성·역압), `Conduit` + `bracket` (자원 안전 ETL 파이프라인). 기초의 합성 어휘가 무한·대용량으로 확장됩니다. (Ch33 ~ 35) |
+| **[Part 11. Functional Testing](./Part11-FunctionalTesting/README.md)** | 효과·전문성 테스트 — 효과 코드 결정적 테스트 (`Sys.Test` / `MemoryConsole`), 동시·스트리밍·자원 효과, property-based 심화. 법칙 검증은 각 trait 장에서 `ForAll` 로 수행. (Ch36 ~ 38) |
+| **[Part 12. Real-world](./Part12-RealWorld/README.md)** | 실무 예제 — 따로 익힌 도구를 한 코드로 합성. 강타입 도메인 + Validation 누적 검증, `Eff<RT>` + `Has` 다중 능력 DI 앱, 재시도·자원·스트림·동시 집계 파이프라인, 종합 capstone (책을 마치며). (Ch39 ~ 42) |
 
 ---
 
