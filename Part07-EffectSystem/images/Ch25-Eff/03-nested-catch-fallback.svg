@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="p25red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c0504d"/>
+    </marker>
+    <marker id="p25grn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#548235"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="500" fill="#ffffff"/>
+
+  <text x="500" y="34" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold">중첩 <tspan font-family="'Consolas',monospace">Catch</tspan> — 1차 실패 → 2차 시도 → 기본값</text>
+  <text x="500" y="58" font-size="13" fill="#888888" text-anchor="middle">실패를 값으로 받아 다음 효과로 넘기는 <tspan font-family="'Consolas',monospace">Catch</tspan> 를 중첩하면 재시도·폴백이 됩니다. 입력에 따라 멈추는 단계가 다릅니다.</text>
+
+  <!-- 종료 칩 (성공으로 빠져나감) -->
+  <rect x="120" y="80" width="140" height="30" fill="#dcebd0" stroke="#548235" stroke-width="2" rx="6"/>
+  <text x="190" y="100" font-size="14" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">Succ(12)</text>
+  <rect x="430" y="80" width="140" height="30" fill="#dcebd0" stroke="#548235" stroke-width="2" rx="6"/>
+  <text x="500" y="100" font-size="14" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">Succ(9)</text>
+  <rect x="730" y="80" width="140" height="30" fill="#dcebd0" stroke="#548235" stroke-width="2" rx="6"/>
+  <text x="800" y="100" font-size="14" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">Succ(-1)</text>
+
+  <!-- 성공 출구 (위로) -->
+  <line x1="190" y1="150" x2="190" y2="112" stroke="#548235" stroke-width="2.2" marker-end="url(#p25grn)"/>
+  <text x="208" y="134" font-size="10" fill="#548235">성공</text>
+  <line x1="500" y1="150" x2="500" y2="112" stroke="#548235" stroke-width="2.2" marker-end="url(#p25grn)"/>
+  <text x="518" y="134" font-size="10" fill="#548235">성공</text>
+  <line x1="800" y1="150" x2="800" y2="112" stroke="#548235" stroke-width="2.2" marker-end="url(#p25grn)"/>
+  <text x="818" y="134" font-size="10" fill="#548235">항상</text>
+
+  <!-- 세 단계 -->
+  <rect x="70" y="150" width="240" height="64" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="8"/>
+  <text x="190" y="174" font-size="12" fill="#1f77b4" text-anchor="middle" font-weight="bold">1차</text>
+  <text x="190" y="197" font-size="12" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace">Effect(int.Parse(primary))</text>
+
+  <rect x="380" y="150" width="240" height="64" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="8"/>
+  <text x="500" y="174" font-size="12" fill="#1f77b4" text-anchor="middle" font-weight="bold">2차</text>
+  <text x="500" y="197" font-size="12" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace">Effect(int.Parse(secondary))</text>
+
+  <rect x="690" y="150" width="220" height="64" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="8"/>
+  <text x="800" y="174" font-size="12" fill="#1f77b4" text-anchor="middle" font-weight="bold">기본값</text>
+  <text x="800" y="197" font-size="13" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace">Pure(defaultValue)</text>
+
+  <!-- 폴백 화살표 (실패면 다음, Error 무시) -->
+  <line x1="312" y1="182" x2="378" y2="182" stroke="#c0504d" stroke-width="2.6" marker-end="url(#p25red)"/>
+  <text x="345" y="170" font-size="10" fill="#c0504d" text-anchor="middle">바깥 Catch</text>
+  <text x="345" y="204" font-size="9" fill="#c0504d" text-anchor="middle">실패 → 2차</text>
+
+  <line x1="622" y1="182" x2="688" y2="182" stroke="#c0504d" stroke-width="2.6" marker-end="url(#p25red)"/>
+  <text x="655" y="170" font-size="10" fill="#c0504d" text-anchor="middle">안쪽 Catch</text>
+  <text x="655" y="204" font-size="9" fill="#c0504d" text-anchor="middle">실패 → 기본값</text>
+
+  <text x="500" y="250" font-size="11" fill="#888888" text-anchor="middle">화살표의 <tspan fill="#c0504d">_</tspan> 은 "실패 이유를 보지 않고 다음으로" — <tspan font-family="'Consolas',monospace">Catch</tspan> 의 복구 함수가 <tspan font-family="'Consolas',monospace">Error</tspan> 를 무시함을 뜻합니다.</text>
+
+  <!-- 입력 → 멈추는 단계 → 결과 -->
+  <rect x="60" y="282" width="880" height="170" fill="#fbfbfb" stroke="#cccccc" stroke-width="1.2" rx="8"/>
+  <text x="80" y="308" font-size="13" fill="#1f1f1f" font-weight="bold">입력에 따라 멈추는 단계가 다릅니다 (<tspan font-family="'Consolas',monospace">defaultValue = -1</tspan>)</text>
+
+  <rect x="80" y="324" width="150" height="30" fill="#fff2cc" stroke="#bf9000" stroke-width="1.8" rx="6"/>
+  <text x="155" y="344" font-size="13" fill="#5a4400" text-anchor="middle" font-family="'Consolas',monospace">("12", "9", -1)</text>
+  <text x="400" y="344" font-size="12" fill="#375623" text-anchor="middle">1차에서 성공 →</text>
+  <rect x="500" y="324" width="120" height="30" fill="#dcebd0" stroke="#548235" stroke-width="1.8" rx="6"/>
+  <text x="560" y="344" font-size="13" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">Succ(12)</text>
+
+  <rect x="80" y="362" width="150" height="30" fill="#fff2cc" stroke="#bf9000" stroke-width="1.8" rx="6"/>
+  <text x="155" y="382" font-size="13" fill="#5a4400" text-anchor="middle" font-family="'Consolas',monospace">("x", "9", -1)</text>
+  <text x="400" y="382" font-size="12" fill="#375623" text-anchor="middle">1차 실패 → 2차에서 성공 →</text>
+  <rect x="500" y="362" width="120" height="30" fill="#dcebd0" stroke="#548235" stroke-width="1.8" rx="6"/>
+  <text x="560" y="382" font-size="13" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">Succ(9)</text>
+
+  <rect x="80" y="400" width="150" height="30" fill="#fff2cc" stroke="#bf9000" stroke-width="1.8" rx="6"/>
+  <text x="155" y="420" font-size="13" fill="#5a4400" text-anchor="middle" font-family="'Consolas',monospace">("x", "y", -1)</text>
+  <text x="400" y="420" font-size="12" fill="#c0504d" text-anchor="middle">둘 다 실패 → 기본값으로 →</text>
+  <rect x="500" y="400" width="120" height="30" fill="#dcebd0" stroke="#548235" stroke-width="1.8" rx="6"/>
+  <text x="560" y="420" font-size="13" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">Succ(-1)</text>
+
+  <text x="755" y="392" font-size="11" fill="#888888" text-anchor="middle">객체 지향의 중첩</text>
+  <text x="755" y="409" font-size="11" fill="#888888" text-anchor="middle"><tspan font-family="'Consolas',monospace">try-catch</tspan> 와 같은 구조 —</text>
+  <text x="755" y="426" font-size="11" fill="#888888" text-anchor="middle">잇는 것이 예외가 아니라 <tspan font-family="'Consolas',monospace">Fin</tspan> 값.</text>
+</svg>

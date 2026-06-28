@@ -40,7 +40,7 @@ public interface Readable<M, Env> where M : Readable<M, Env>
 }
 
 // Has — *능력 기반 DI*. 런타임 RT 가 특정 능력 TRAIT 를 가짐을 타입으로 보장한다.
-// LanguageExt v5 의 Has<RT, TRAIT> 와 정합. 효과가 `where RT : Has<RT, IConsole>` 를 요구하면
+// LanguageExt v5 의 Has 와 의도는 같다 (멤버는 다름: 학습용 Get(RT) 동기 반환 ↔ v5 Ask 효과). 효과가 `where RT : Has<RT, IConsole>` 를 요구하면
 // 컴파일러가 "이 런타임은 콘솔 능력이 있다" 를 검증한다.
 public interface Has<RT, TRAIT> where RT : Has<RT, TRAIT>
 {

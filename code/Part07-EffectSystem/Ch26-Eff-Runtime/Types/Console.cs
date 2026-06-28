@@ -22,7 +22,7 @@ public sealed class LiveConsole : IConsole
     public string ReadLine() => Console.ReadLine() ?? "";
 }
 
-// 테스트 더블 — 입력은 큐에서, 출력은 리스트에 (결정적·검증 가능). 9부 테스트 런타임의 토대.
+// 테스트 더블 — 입력은 큐에서, 출력은 리스트에 (결정적·검증 가능). 11부 테스트 런타임의 토대.
 public sealed class TestConsole(IEnumerable<string> inputs) : IConsole
 {
     readonly Queue<string> queue = new(inputs);

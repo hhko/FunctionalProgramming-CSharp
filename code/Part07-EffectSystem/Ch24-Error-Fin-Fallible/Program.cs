@@ -4,7 +4,7 @@ using Ch24.Traits;
 using Ch24.Types;
 
 Console.WriteLine("================================================");
-Console.WriteLine("21장 — Error / Fin / Fallible (함수형 오류 모델)");
+Console.WriteLine("24장 — Error / Fin / Fallible (함수형 오류 모델)");
 Console.WriteLine("================================================");
 Console.WriteLine();
 

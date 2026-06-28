@@ -4,7 +4,7 @@ using Ch25.Traits;
 using Ch25.Types;
 
 Console.WriteLine("================================================");
-Console.WriteLine("22장 — Eff (런타임 없는 효과)");
+Console.WriteLine("25장 — Eff (런타임 없는 효과)");
 Console.WriteLine("================================================");
 Console.WriteLine();
 
@@ -43,6 +43,19 @@ Console.WriteLine("== 예제 3 — Catch 로 폴백 ==");
 
 var recovered = Fallibles.@catch<EffF, int>(boom, _ => EffF.Pure(-1));
 Console.WriteLine($"  실패 → Catch → 폴백 = {recovered.As().Run()}");
+Console.WriteLine();
+
+// ── 예제 4 — Choose (고르기) 와 Finally (정리) ──────────────────────
+Console.WriteLine("== 예제 4 — Choose 로 고르기, Finally 로 정리 ==");
+
+var chosen = Alternatives.choose<EffF, int>(boom, EffF.Pure(99));
+Console.WriteLine($"  실패 | 성공 → Choose = {chosen.As().Run()}   (첫째 실패 → 둘째 99)");
+
+var cleanup = new List<string>();
+var withCleanup = Finals.@finally<EffF, int, int>(
+    boom,
+    Eff<int>.Effect(() => { cleanup.Add("정리 실행"); return 0; }));
+Console.WriteLine($"  실패 + Finally → {withCleanup.As().Run()}, 정리 = [{string.Join(", ", cleanup)}]   (실패여도 정리 실행)");
 Console.WriteLine();
 
 // ── 법칙 검증 ───────────────────────────────────────────────────────

@@ -1,6 +1,6 @@
 namespace Ch25.Types;
 
-// Error / Fin — 21장에서 정의한 함수형 오류 모델 (자족적으로 재선언).
+// Error / Fin — 24장에서 정의한 함수형 오류 모델 (자족적으로 재선언).
 public sealed record Error(string Message, Exception? Exception = null)
 {
     public static Error New(string message) => new(message);

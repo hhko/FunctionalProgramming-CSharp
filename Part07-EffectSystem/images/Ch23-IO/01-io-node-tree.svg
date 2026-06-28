@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 440" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="p23a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#bf9000"/>
+    </marker>
+  </defs>
+  <rect width="980" height="440" fill="#ffffff"/>
+
+  <text x="490" y="38" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold"><tspan font-family="'Consolas',monospace">IO&lt;A&gt;</tspan> = 부수 효과를 노드 트리로 인코딩</text>
+  <text x="490" y="62" font-size="13" fill="#888888" text-anchor="middle">조립하면 트리가 쌓일 뿐 부수 효과는 아직 없습니다. <tspan font-family="'Consolas',monospace">Run</tspan> 이 트리를 해석할 때 비로소 일어납니다.</text>
+
+  <!-- 왼쪽: 조립 (Elevated, 파랑) — 노드 트리 -->
+  <rect x="55" y="86" width="420" height="300" fill="#eaf4fd" stroke="#1f77b4" stroke-width="2" rx="10"/>
+  <text x="75" y="112" font-size="15" fill="#0c3a5e" font-weight="bold">조립 (Run 전) — 부수 효과 없음</text>
+  <text x="265" y="134" font-size="12" fill="#1f77b4" text-anchor="middle" font-style="italic">Elevated World — 효과를 값으로 들고 있다</text>
+
+  <!-- 트리 노드들 -->
+  <rect x="150" y="150" width="230" height="40" fill="#ffffff" stroke="#1f77b4" stroke-width="1.6" rx="6"/>
+  <text x="265" y="176" font-size="13" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace">BindNode (×2)</text>
+  <line x1="265" y1="190" x2="265" y2="212" stroke="#1f77b4" stroke-width="1.6"/>
+  <rect x="150" y="212" width="230" height="40" fill="#ffffff" stroke="#1f77b4" stroke-width="1.6" rx="6"/>
+  <text x="265" y="238" font-size="13" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace">BindNode (+1)</text>
+  <line x1="265" y1="252" x2="265" y2="274" stroke="#1f77b4" stroke-width="1.6"/>
+  <rect x="150" y="274" width="230" height="44" fill="#fdf6e3" stroke="#bf9000" stroke-width="2" rx="6"/>
+  <text x="265" y="295" font-size="13" fill="#5a4400" text-anchor="middle" font-family="'Consolas',monospace">EffectNode</text>
+  <text x="265" y="311" font-size="11" fill="#5a4400" text-anchor="middle">thunk — 아직 실행 안 됨</text>
+  <text x="265" y="352" font-size="12" fill="#888888" text-anchor="middle">노드 트리만 쌓임 (log 비어 있음)</text>
+
+  <!-- 끌어내림 화살표 -->
+  <line x1="478" y1="236" x2="572" y2="236" stroke="#bf9000" stroke-width="2.8" marker-end="url(#p23a)"/>
+  <text x="525" y="224" font-size="14" fill="#bf9000" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">Run(EnvIO)</text>
+  <text x="525" y="254" font-size="12" fill="#bf9000" text-anchor="middle" font-style="italic">끌어내림</text>
+
+  <!-- 오른쪽: 실행 (Normal, 노랑) -->
+  <rect x="575" y="86" width="350" height="300" fill="#fff8e8" stroke="#bf9000" stroke-width="2" rx="10"/>
+  <text x="595" y="112" font-size="15" fill="#5a4400" font-weight="bold">실행 (Run) — 부수 효과 발생</text>
+  <text x="750" y="134" font-size="12" fill="#bf9000" text-anchor="middle" font-style="italic">Normal World — 트램폴린이 트리를 해석</text>
+
+  <rect x="615" y="160" width="270" height="44" fill="#ffffff" stroke="#bf9000" stroke-width="1.6" rx="6"/>
+  <text x="750" y="187" font-size="13" fill="#5a4400" text-anchor="middle">① EffectNode.thunk() 실행 → 10</text>
+  <rect x="615" y="212" width="270" height="44" fill="#ffffff" stroke="#bf9000" stroke-width="1.6" rx="6"/>
+  <text x="750" y="239" font-size="13" fill="#5a4400" text-anchor="middle">② 연속(+1, ×2) 적용</text>
+  <rect x="615" y="276" width="270" height="44" fill="#fdf6e3" stroke="#bf9000" stroke-width="2.4" rx="6"/>
+  <text x="750" y="303" font-size="15" fill="#5a4400" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">A 값 반환</text>
+  <text x="750" y="352" font-size="12" fill="#888888" text-anchor="middle">이때 log 가 채워짐 — 효과는 여기서만</text>
+</svg>

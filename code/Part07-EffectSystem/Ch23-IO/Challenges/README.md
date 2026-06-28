@@ -16,10 +16,10 @@
 
 `Program.cs` 의 취소 예제 — `EnvIO` 에 이미 취소된 `CancellationToken` 을 실어 Run 하면 인터프리터가 각 단계에서 취소를 확인해 중단한다.
 
-**노리는 능력** — `Run` 시점의 환경(`EnvIO`)이 실행을 *제어* 함을 본다. 5부 뒤쪽의 자원·런타임이 여기에 얹힌다.
+**노리는 능력** — `Run` 시점의 환경(`EnvIO`)이 실행을 *제어* 함을 본다. 7부 뒤쪽의 자원·런타임이 여기에 얹힌다.
 
 ## 실행
 
 ```bash
-dotnet run --project code/Part5-EffectSystem/Ch23-IO/Ch23.csproj
+dotnet run --project code/Part07-EffectSystem/Ch23-IO/Ch23.csproj
 ```

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 420" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="p25a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#bf9000"/>
+    </marker>
+  </defs>
+  <rect width="980" height="420" fill="#ffffff"/>
+
+  <text x="490" y="38" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold"><tspan font-family="'Consolas',monospace">Eff&lt;A&gt;</tspan> = 바깥 <tspan font-family="'Consolas',monospace">IO</tspan> + 안쪽 <tspan font-family="'Consolas',monospace">Fin</tspan></text>
+  <text x="490" y="62" font-size="13" fill="#888888" text-anchor="middle">23장 IO 의 지연과 24장 Fin 의 오류 포획이 한 타입에 두 겹으로 겹쳐 있습니다 (<tspan font-family="'Consolas',monospace">Func&lt;Fin&lt;A&gt;&gt;</tspan>).</text>
+
+  <!-- 바깥 IO 겹 (파랑) -->
+  <rect x="120" y="92" width="450" height="250" fill="#eaf4fd" stroke="#1f77b4" stroke-width="2.4" rx="12"/>
+  <text x="142" y="118" font-size="15" fill="#0c3a5e" font-weight="bold">바깥 <tspan font-family="'Consolas',monospace">IO</tspan> 겹 — 부수 효과를 Run 까지 미룸</text>
+
+  <!-- 안쪽 Fin 겹 (초록) -->
+  <rect x="160" y="138" width="370" height="170" fill="#eef6e8" stroke="#548235" stroke-width="2.2" rx="10"/>
+  <text x="180" y="164" font-size="14" fill="#375623" font-weight="bold">안쪽 <tspan font-family="'Consolas',monospace">Fin</tspan> 겹 — 성공·실패를 값으로</text>
+  <rect x="200" y="186" width="130" height="50" fill="#dcebd0" stroke="#548235" stroke-width="1.8" rx="6"/>
+  <text x="265" y="217" font-size="14" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace">Succ A</text>
+  <rect x="360" y="186" width="130" height="50" fill="#f6dddc" stroke="#c0504d" stroke-width="1.8" rx="6"/>
+  <text x="425" y="217" font-size="14" fill="#943634" text-anchor="middle" font-family="'Consolas',monospace">Fail Error</text>
+  <text x="345" y="268" font-size="12" fill="#548235" text-anchor="middle">실패는 Fin 의 Fail 로 단락</text>
+
+  <!-- Run 화살표 -->
+  <line x1="572" y1="210" x2="660" y2="210" stroke="#bf9000" stroke-width="2.8" marker-end="url(#p25a)"/>
+  <text x="616" y="198" font-size="14" fill="#bf9000" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">Run()</text>
+  <text x="616" y="228" font-size="11" fill="#bf9000" text-anchor="middle" font-style="italic">바깥 IO 를 벗김</text>
+
+  <!-- 결과 Fin -->
+  <rect x="665" y="170" width="250" height="80" fill="#fff8e8" stroke="#bf9000" stroke-width="2" rx="8"/>
+  <text x="790" y="200" font-size="14" fill="#5a4400" text-anchor="middle">바깥 겹이 풀리면</text>
+  <text x="790" y="224" font-size="14" fill="#5a4400" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">Fin&lt;A&gt; 가 드러남</text>
+
+  <text x="490" y="380" font-size="13" fill="#1f1f1f" text-anchor="middle"><tspan font-family="'Consolas',monospace">Bind</tspan> 는 바깥 <tspan font-family="'Consolas',monospace">IO</tspan> 를 흘리며 안쪽 <tspan font-family="'Consolas',monospace">Fin</tspan> 의 <tspan font-family="'Consolas',monospace">Succ</tspan> 는 잇고 <tspan font-family="'Consolas',monospace">Fail</tspan> 은 단락합니다. 두 효과가 한 타입에서 함께 작동합니다.</text>
+</svg>

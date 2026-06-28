@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 380" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="p25b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c0504d"/>
+    </marker>
+    <marker id="p25c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#548235"/>
+    </marker>
+  </defs>
+  <rect width="980" height="380" fill="#ffffff"/>
+
+  <text x="490" y="36" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold"><tspan font-family="'Consolas',monospace">Choose</tspan> 폴백 — 첫째가 실패하면 둘째를 시도</text>
+  <text x="490" y="60" font-size="13" fill="#888888" text-anchor="middle">4부 <tspan font-family="'Consolas',monospace">Alternative</tspan> 의 "고르기"가 효과 위에서 그대로 작동합니다 (<tspan font-family="'Consolas',monospace">boom | Pure(99)</tspan>).</text>
+
+  <!-- 첫째 Eff -->
+  <rect x="110" y="120" width="200" height="64" fill="#f6dddc" stroke="#c0504d" stroke-width="2.2" rx="8"/>
+  <text x="210" y="148" font-size="14" fill="#943634" text-anchor="middle" font-family="'Consolas',monospace">첫째 Eff (boom)</text>
+  <text x="210" y="170" font-size="13" fill="#943634" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">Fail</text>
+
+  <!-- 실패면 둘째로 -->
+  <line x1="312" y1="152" x2="392" y2="152" stroke="#c0504d" stroke-width="2.6" marker-end="url(#p25b)"/>
+  <text x="352" y="140" font-size="12" fill="#c0504d" text-anchor="middle">실패 → 둘째</text>
+
+  <rect x="394" y="120" width="200" height="64" fill="#dcebd0" stroke="#548235" stroke-width="2.2" rx="8"/>
+  <text x="494" y="148" font-size="14" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace">둘째 Eff (Pure 99)</text>
+  <text x="494" y="170" font-size="13" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">Succ(99)</text>
+
+  <line x1="596" y1="152" x2="676" y2="152" stroke="#548235" stroke-width="2.6" marker-end="url(#p25c)"/>
+  <rect x="678" y="120" width="200" height="64" fill="#dcebd0" stroke="#548235" stroke-width="2.6" rx="8"/>
+  <text x="778" y="148" font-size="14" fill="#375623" text-anchor="middle">결과</text>
+  <text x="778" y="170" font-size="14" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">Succ(99)</text>
+
+  <!-- 첫째 성공이면 둘째 미평가 -->
+  <text x="210" y="232" font-size="13" fill="#888888" text-anchor="middle">만약 첫째가 <tspan font-family="'Consolas',monospace" fill="#375623">Succ</tspan> 였다면</text>
+  <rect x="394" y="212" width="200" height="40" fill="#f3f3f3" stroke="#bbbbbb" stroke-width="1.6" stroke-dasharray="5 4" rx="6"/>
+  <text x="494" y="237" font-size="12" fill="#aaaaaa" text-anchor="middle">둘째는 미평가 (건너뜀)</text>
+  <line x1="312" y1="232" x2="392" y2="232" stroke="#bbbbbb" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#p25b)"/>
+
+  <text x="490" y="320" font-size="13" fill="#1f1f1f" text-anchor="middle">코드: <tspan font-family="'Consolas',monospace">Alternatives.choose&lt;EffF, int&gt;(boom, EffF.Pure(99))</tspan> → <tspan font-family="'Consolas',monospace" font-weight="bold">Succ(99)</tspan></text>
+  <text x="490" y="346" font-size="12" fill="#888888" text-anchor="middle">첫째 성공이면 둘째를 평가하지 않습니다 (단락).</text>
+</svg>

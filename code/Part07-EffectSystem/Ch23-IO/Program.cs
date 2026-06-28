@@ -4,7 +4,7 @@ using Ch23.Traits;
 using Ch23.Types;
 
 Console.WriteLine("================================================");
-Console.WriteLine("20장 — IO (지연 효과 DSL + 스택 안전)");
+Console.WriteLine("23장 — IO (지연 효과 DSL + 스택 안전)");
 Console.WriteLine("================================================");
 Console.WriteLine();
 

@@ -2,9 +2,9 @@ using Ch26.Traits;
 
 namespace Ch26.Types;
 
-// Eff<RT, A> = ReaderT<RT, IO, A> — 5부의 결론.
+// Eff<RT, A> = ReaderT<RT, IO, A> — 7부의 결론.
 // 런타임 RT 를 환경으로 주입(Reader)하고, IO 효과를 안쪽에 품는다(MonadIO).
-// 4부에서 쌓은 변환기가 그대로 실무 효과 시스템의 골격이 된다.
+// 6부에서 쌓은 변환기가 그대로 실무 효과 시스템의 골격이 된다.
 public sealed class ReaderT<RT, M, A>(Func<RT, K<M, A>> run) : K<ReaderTF<RT, M>, A>
     where M : MonadIO<M>
 {

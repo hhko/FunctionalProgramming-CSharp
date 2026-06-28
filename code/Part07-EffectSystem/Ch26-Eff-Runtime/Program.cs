@@ -4,7 +4,7 @@ using Ch26.Traits;
 using Ch26.Types;
 
 Console.WriteLine("================================================");
-Console.WriteLine("23장 — Eff<RT,A> = ReaderT<RT, IO, A> + Has DI");
+Console.WriteLine("26장 — Eff<RT,A> = ReaderT<RT, IO, A> + Has DI");
 Console.WriteLine("================================================");
 Console.WriteLine();
 

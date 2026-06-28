@@ -3,7 +3,7 @@ using Ch23.Traits;
 namespace Ch23.Types;
 
 // ── 효과 실행 환경 ──────────────────────────────────────────────────
-// EnvIO — IO 가 Run 될 때 운반되는 것. 여기선 취소 토큰만 (5부 본 DSL 은 자원·동기화도 운반).
+// EnvIO — IO 가 Run 될 때 운반되는 것. 여기선 취소 토큰만 (7부 본 DSL 은 자원·동기화도 운반).
 public sealed record EnvIO(CancellationToken Token)
 {
     public static EnvIO Default => new(CancellationToken.None);

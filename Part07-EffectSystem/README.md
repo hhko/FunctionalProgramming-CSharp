@@ -1,4 +1,4 @@
-# Part 5 — Effect System (IO 와 효과 런타임)
+# Part 7 — Effect System (IO 와 효과 런타임)
 
 ## 7부의 배경
 

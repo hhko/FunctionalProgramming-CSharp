@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 430" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="p26b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7a7a7a"/>
+    </marker>
+  </defs>
+  <rect width="980" height="430" fill="#ffffff"/>
+
+  <text x="490" y="36" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold"><tspan font-family="'Consolas',monospace">Has&lt;RT, IConsole&gt;</tspan> — 컴파일러가 검증하는 능력 주입</text>
+  <text x="490" y="60" font-size="13" fill="#888888" text-anchor="middle">같은 효과 코드를 런타임만 바꿔 주입합니다. 능력이 빠진 런타임은 컴파일 단계에서 거부됩니다.</text>
+
+  <!-- 가운데 효과 코드 -->
+  <rect x="370" y="86" width="240" height="64" fill="#eef0f2" stroke="#555555" stroke-width="2" rx="8"/>
+  <text x="490" y="113" font-size="14" fill="#333" text-anchor="middle" font-family="'Consolas',monospace">Greet&lt;RT&gt;()</text>
+  <text x="490" y="135" font-size="11" fill="#555" text-anchor="middle"><tspan font-family="'Consolas',monospace">where RT : Has&lt;RT, IConsole&gt;</tspan></text>
+
+  <!-- 두 갈래 주입 -->
+  <line x1="430" y1="152" x2="300" y2="196" stroke="#7a7a7a" stroke-width="2.2" marker-end="url(#p26b)"/>
+  <line x1="550" y1="152" x2="680" y2="196" stroke="#7a7a7a" stroke-width="2.2" marker-end="url(#p26b)"/>
+
+  <!-- 왼쪽: Live RT -->
+  <rect x="90" y="200" width="320" height="150" fill="#fff8e8" stroke="#bf9000" stroke-width="2" rx="10"/>
+  <text x="250" y="226" font-size="14" fill="#5a4400" text-anchor="middle" font-weight="bold"><tspan font-family="'Consolas',monospace">AppRT(LiveConsole)</tspan></text>
+  <rect x="120" y="244" width="260" height="40" fill="#ffffff" stroke="#bf9000" stroke-width="1.4" rx="5"/>
+  <text x="250" y="270" font-size="12" fill="#5a4400" text-anchor="middle">진짜 콘솔에 출력</text>
+  <text x="250" y="312" font-size="13" fill="#bf9000" text-anchor="middle" font-weight="bold">부수 효과 발생 (실행)</text>
+  <text x="250" y="334" font-size="11" fill="#888888" text-anchor="middle">실무 실행</text>
+
+  <!-- 오른쪽: Test RT -->
+  <rect x="570" y="200" width="320" height="150" fill="#eef6e8" stroke="#548235" stroke-width="2" rx="10"/>
+  <text x="730" y="226" font-size="14" fill="#375623" text-anchor="middle" font-weight="bold"><tspan font-family="'Consolas',monospace">AppRT(TestConsole)</tspan></text>
+  <rect x="600" y="244" width="260" height="40" fill="#ffffff" stroke="#548235" stroke-width="1.4" rx="5"/>
+  <text x="730" y="270" font-size="12" fill="#375623" text-anchor="middle"><tspan font-family="'Consolas',monospace">Output</tspan> 리스트에 모음</text>
+  <text x="730" y="312" font-size="13" fill="#548235" text-anchor="middle" font-weight="bold">부수 효과 없음 (결정적)</text>
+  <text x="730" y="334" font-size="11" fill="#888888" text-anchor="middle">단위 테스트 (11부 다리)</text>
+
+  <!-- 컴파일 게이트 -->
+  <rect x="120" y="372" width="740" height="44" fill="#fbeceb" stroke="#c0504d" stroke-width="1.4" rx="8"/>
+  <text x="490" y="399" font-size="13" fill="#943634" text-anchor="middle"><tspan font-weight="bold">능력 없는 런타임은 ✗ 컴파일 거부</tspan> — <tspan font-family="'Consolas',monospace">Has&lt;RT, IConsole&gt;</tspan> 제약이 런타임에 터지기 전에 막습니다.</text>
+</svg>

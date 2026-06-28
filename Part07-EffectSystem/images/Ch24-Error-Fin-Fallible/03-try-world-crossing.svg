@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 470" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="p24lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+    <marker id="p24grn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#548235"/>
+    </marker>
+    <marker id="p24red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c0504d"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="470" fill="#ffffff"/>
+
+  <text x="500" y="34" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold"><tspan font-family="'Consolas',monospace">Try.Run</tspan> — 예외를 <tspan font-family="'Consolas',monospace">Fin</tspan> 값으로 끌어올리는 World-crossing</text>
+  <text x="500" y="58" font-size="13" fill="#888888" text-anchor="middle">예외를 던지는 Normal World 코드를, <tspan font-family="'Consolas',monospace">catch</tspan> 가 붙잡아 <tspan font-family="'Consolas',monospace">Fin</tspan> 값의 Elevated World 로 올립니다.</text>
+
+  <!-- 두 세계 배경 띠 -->
+  <rect x="36" y="74" width="444" height="352" fill="#fef8ea"/>
+  <rect x="560" y="74" width="404" height="352" fill="#eef6fd"/>
+  <text x="258" y="98" font-size="15" fill="#8a6d00" text-anchor="middle" font-weight="bold">Normal World</text>
+  <text x="258" y="116" font-size="11" fill="#a98a2a" text-anchor="middle">예외로 실패를 알리는 옛 세계</text>
+  <text x="762" y="98" font-size="15" fill="#1f77b4" text-anchor="middle" font-weight="bold">Elevated World</text>
+  <text x="762" y="116" font-size="11" fill="#5a8fc0" text-anchor="middle"><tspan font-family="'Consolas',monospace">Fin</tspan> 값으로 실패를 담는 세계</text>
+
+  <!-- 경계선 -->
+  <line x1="520" y1="132" x2="520" y2="408" stroke="#999999" stroke-width="1.5" stroke-dasharray="6 5"/>
+
+  <!-- 입국 심사대: Try.Run (경계에 걸침) -->
+  <rect x="462" y="174" width="116" height="158" fill="#ffffff" stroke="#555555" stroke-width="2.2" rx="8"/>
+  <text x="520" y="198" font-size="15" fill="#333333" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">Try.Run</text>
+  <text x="520" y="215" font-size="10" fill="#888888" text-anchor="middle">입국 심사대</text>
+  <line x1="472" y1="226" x2="568" y2="226" stroke="#dddddd" stroke-width="1.2"/>
+  <text x="520" y="248" font-size="11" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace">try { f() }</text>
+  <text x="520" y="264" font-size="9.5" fill="#375623" text-anchor="middle">값이면 Succ</text>
+  <text x="520" y="294" font-size="11" fill="#c0504d" text-anchor="middle" font-family="'Consolas',monospace">catch (e):</text>
+  <text x="520" y="310" font-size="9.5" fill="#c0504d" text-anchor="middle" font-family="'Consolas',monospace">e → Error.New(e)</text>
+
+  <!-- 성공 경로 -->
+  <rect x="70" y="186" width="250" height="46" fill="#fff2cc" stroke="#bf9000" stroke-width="2" rx="6"/>
+  <text x="195" y="214" font-size="14" fill="#5a4400" text-anchor="middle" font-family="'Consolas',monospace">int.Parse("42")</text>
+  <line x1="322" y1="208" x2="458" y2="218" stroke="#1f77b4" stroke-width="2.4" marker-end="url(#p24lift)"/>
+  <text x="392" y="200" font-size="11" fill="#1f77b4" text-anchor="middle" font-family="'Consolas',monospace">값 42</text>
+  <line x1="580" y1="218" x2="698" y2="208" stroke="#548235" stroke-width="2.4" marker-end="url(#p24grn)"/>
+  <rect x="700" y="186" width="200" height="46" fill="#e2efda" stroke="#548235" stroke-width="2.2" rx="6"/>
+  <text x="800" y="214" font-size="15" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">Succ(42)</text>
+
+  <!-- 실패 경로 -->
+  <text x="195" y="280" font-size="11" fill="#c0504d" text-anchor="middle" font-family="'Consolas',monospace">throw FormatException</text>
+  <rect x="70" y="288" width="250" height="46" fill="#fbeceb" stroke="#c0504d" stroke-width="2" rx="6"/>
+  <text x="195" y="316" font-size="12.5" fill="#943634" text-anchor="middle" font-family="'Consolas',monospace">int.Parse("not-a-number")</text>
+  <line x1="322" y1="305" x2="458" y2="300" stroke="#c0504d" stroke-width="2.4" stroke-dasharray="6 4" marker-end="url(#p24red)"/>
+  <text x="390" y="322" font-size="11" fill="#c0504d" text-anchor="middle">예외</text>
+  <line x1="580" y1="300" x2="698" y2="305" stroke="#c0504d" stroke-width="2.4" marker-end="url(#p24red)"/>
+  <rect x="700" y="288" width="200" height="46" fill="#f6dddc" stroke="#c0504d" stroke-width="2.2" rx="6"/>
+  <text x="800" y="311" font-size="14" fill="#943634" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">Fail(Error)</text>
+  <text x="800" y="328" font-size="9.5" fill="#943634" text-anchor="middle">파싱 예외 메시지</text>
+
+  <!-- 튀려다 막힘 -->
+  <path d="M300,288 Q358,214 446,194" fill="none" stroke="#c0504d" stroke-width="1.6" stroke-dasharray="4 4"/>
+  <text x="452" y="196" font-size="13" fill="#c0504d" font-weight="bold">✕</text>
+  <text x="356" y="178" font-size="10" fill="#c0504d" text-anchor="middle">그냥 두면 흐름 밖으로 튀려 함 — 막힘</text>
+
+  <text x="500" y="452" font-size="13" fill="#1f1f1f" text-anchor="middle">한 번 <tspan font-family="'Consolas',monospace">Try.Run</tspan> 을 거치면 그 뒤로는 예외가 날지 않고, 실패가 <tspan font-family="'Consolas',monospace" font-weight="bold">Fail</tspan> 값으로 <tspan font-family="'Consolas',monospace">Bind</tspan> 사슬을 따라 흐릅니다.</text>
+</svg>

@@ -21,5 +21,5 @@
 ## 실행
 
 ```bash
-dotnet run --project code/Part5-EffectSystem/Ch24-Error-Fin-Fallible/Ch24.csproj
+dotnet run --project code/Part07-EffectSystem/Ch24-Error-Fin-Fallible/Ch24.csproj
 ```
