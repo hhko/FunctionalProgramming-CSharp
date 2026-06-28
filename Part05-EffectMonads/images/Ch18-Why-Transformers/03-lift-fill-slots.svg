@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 540" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="p18lift" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="540" fill="#ffffff"/>
+
+  <text x="500" y="34" font-size="20" fill="#1f1f1f" text-anchor="middle" font-weight="bold">lift — 빈 칸을 채워 두 효과 스택에 올림</text>
+  <text x="500" y="58" font-size="13" fill="#888888" text-anchor="middle">한 효과만 가진 입력의 빈 칸을 "문제 없음"으로 채우면, 셋이 같은 <tspan font-family="'Consolas',monospace">ReaderOption</tspan> 양식이 되어 한 사슬에 섞입니다.</text>
+
+  <!-- 왼쪽: 한 효과만 가진 입력 -->
+  <text x="182" y="92" font-size="13" fill="#555555" text-anchor="middle" font-style="italic">한 효과만 가진 입력 — 한 칸은 비어 있음</text>
+
+  <!-- Form A: Reader (환경 칸만 참) -->
+  <text x="70" y="114" font-size="13" fill="#1f77b4" font-family="'Consolas',monospace" font-weight="bold">Reader&lt;Env, A&gt;</text>
+  <rect x="70" y="120" width="112" height="58" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="126" y="139" font-size="10" fill="#1f77b4" text-anchor="middle">환경 칸 ✓</text>
+  <text x="126" y="162" font-size="14" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">Env →</text>
+  <rect x="182" y="120" width="112" height="58" fill="#fafafa" stroke="#bbbbbb" stroke-width="1.6" stroke-dasharray="5 4" rx="6"/>
+  <text x="238" y="139" font-size="10" fill="#aaaaaa" text-anchor="middle">실패 칸</text>
+  <text x="238" y="162" font-size="12" fill="#bbbbbb" text-anchor="middle">(빔)</text>
+
+  <!-- Form B: Option (실패 칸만 참) -->
+  <text x="70" y="212" font-size="13" fill="#548235" font-family="'Consolas',monospace" font-weight="bold">Option&lt;A&gt;</text>
+  <rect x="70" y="218" width="112" height="58" fill="#fafafa" stroke="#bbbbbb" stroke-width="1.6" stroke-dasharray="5 4" rx="6"/>
+  <text x="126" y="237" font-size="10" fill="#aaaaaa" text-anchor="middle">환경 칸</text>
+  <text x="126" y="260" font-size="12" fill="#bbbbbb" text-anchor="middle">(빔)</text>
+  <rect x="182" y="218" width="112" height="58" fill="#e2efda" stroke="#548235" stroke-width="2.2" rx="6"/>
+  <text x="238" y="237" font-size="10" fill="#548235" text-anchor="middle">실패 칸 ✓</text>
+  <text x="238" y="260" font-size="13" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">Some/None</text>
+
+  <!-- 가운데: lift 화살표 (빈 칸 채우기) -->
+  <line x1="298" y1="150" x2="596" y2="200" stroke="#1f77b4" stroke-width="2.6" marker-end="url(#p18lift)"/>
+  <text x="432" y="134" font-size="13" fill="#1f77b4" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">LiftReader</text>
+  <text x="432" y="151" font-size="10.5" fill="#1f77b4" text-anchor="middle">실패 칸 ← Some (항상 성공)</text>
+
+  <line x1="298" y1="247" x2="596" y2="220" stroke="#1f77b4" stroke-width="2.6" marker-end="url(#p18lift)"/>
+  <text x="432" y="258" font-size="13" fill="#1f77b4" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">LiftOption</text>
+  <text x="432" y="276" font-size="10.5" fill="#1f77b4" text-anchor="middle">환경 칸 ← _ (환경 안 봄)</text>
+
+  <!-- 오른쪽: 같은 양식 (두 칸 다 참) -->
+  <text x="720" y="166" font-size="13" fill="#1f77b4" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">ReaderOption&lt;Env, int&gt;</text>
+  <rect x="600" y="178" width="120" height="58" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="660" y="197" font-size="10" fill="#1f77b4" text-anchor="middle">환경 칸 ✓</text>
+  <text x="660" y="220" font-size="14" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">Env →</text>
+  <rect x="720" y="178" width="120" height="58" fill="#e2efda" stroke="#548235" stroke-width="2.2" rx="6"/>
+  <text x="780" y="197" font-size="10" fill="#548235" text-anchor="middle">실패 칸 ✓</text>
+  <text x="780" y="220" font-size="13" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">Some/None</text>
+  <rect x="600" y="178" width="240" height="58" fill="none" stroke="#1f77b4" stroke-width="2.6" rx="6"/>
+  <text x="720" y="258" font-size="12" fill="#555555" text-anchor="middle">두 칸이 다 찬 같은 양식 — 이제 한 사슬에 섞입니다.</text>
+
+  <!-- 아래: 한 LINQ 사슬 -->
+  <rect x="60" y="300" width="880" height="216" fill="#fbfbfb" stroke="#cccccc" stroke-width="1.2" rx="8"/>
+  <text x="80" y="326" font-size="13" fill="#1f1f1f" font-weight="bold">셋을 한 사슬에 — 같은 <tspan font-family="'Consolas',monospace">ReaderOption</tspan> 어휘</text>
+  <g font-family="'Consolas',monospace" font-size="13">
+    <text x="80" y="352" fill="#333333">var size  = LiftReader(e =&gt; e.Count);    <tspan fill="#888888">// 환경 의존, 빈 실패 칸은 Some 으로</tspan></text>
+    <text x="80" y="374" fill="#333333">var bonus = LiftOption(Some(100));        <tspan fill="#888888">// 환경 무관 상수, 빈 환경 칸은 _ 로</tspan></text>
+    <text x="80" y="404" fill="#333333">from n in size</text>
+    <text x="80" y="424" fill="#333333">from a in Lookup("a")    <tspan fill="#888888">// 환경 의존 + 실패 가능 (두 칸 다 원래 참)</tspan></text>
+    <text x="80" y="444" fill="#333333">from b in bonus</text>
+    <text x="80" y="464" fill="#333333">select n + a + b</text>
+  </g>
+  <text x="80" y="496" font-size="13" fill="#1f77b4" font-family="'Consolas',monospace" font-weight="bold">Run({ a = 10, b = 32 }) → Some(2 + 10 + 100) = Some(112)</text>
+</svg>

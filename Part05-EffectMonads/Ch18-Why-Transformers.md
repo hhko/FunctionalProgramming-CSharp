@@ -293,6 +293,10 @@ public static ReaderOption<Env, A> LiftOption(Option<A> o) =>
 
 두 lift 모두 한 효과만 가진 계산의 빈 층을 채워 두 효과 스택에 올립니다. 그러면 `LiftReader(...)` 와 `LiftOption(...)` 과 `Lookup(...)` 을 같은 `ReaderOption` 어휘로 한 LINQ 사슬에 섞어 쓸 수 있습니다. 환경에서 항목 수를 읽는 `Reader`, 환경과 무관한 상수 `Option`, 그리고 실패할 수 있는 `Lookup` 셋을 한 사슬에 섞어 봅니다.
 
+![lift 가 빈 칸을 채워 같은 ReaderOption 양식으로 맞춘다](./images/Ch18-Why-Transformers/03-lift-fill-slots.svg)
+
+**그림 18-3. lift: 빈 칸을 채워 두 효과 스택에 올림** — 환경만 읽는 `Reader` 는 실패 칸이, 실패만 다루는 `Option` 은 환경 칸이 비어 있습니다. `LiftReader` 는 빈 실패 칸을 "항상 성공"(`Some`) 으로, `LiftOption` 은 빈 환경 칸을 "환경을 안 봄"(`_`) 으로 채웁니다. 그러면 셋이 모두 같은 `ReaderOption` 양식이 되어 한 LINQ 사슬에 섞이고, `Run({ a = 10, b = 32 })` 가 `Some(112)` 를 냅니다.
+
 ```csharp
 // 환경만 읽는 Reader 를 올림 (실패 없음)
 var size  = ReaderOption<Dictionary<string, int>, int>
