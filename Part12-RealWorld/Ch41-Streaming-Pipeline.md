@@ -135,7 +135,7 @@ for (var i = 0; i < maxRetries && !connected; i++) connected = Connect();
 if (!connected) throw new InvalidOperationException("연결 실패");
 ```
 
-`Connect()` 는 부를 때마다 `attempts` 를 하나 올리고, 그 횟수가 `flakyUntilAttempt` 에 닿으면 성공 (`true`) 을 냅니다. 곧 `flakyUntilAttempt` 는 "몇 번째 시도에 붙는가" 를 흉내 내는 손잡이입니다. 첫 시도가 실패하면 `for` 루프가 `maxRetries` 번까지 다시 부르고, 그래도 안 붙으면 던집니다. 이것이 8부 `Schedule` 이 하던 일입니다. 8부에서는 `Schedule.recurs(n)` 으로 "n 번 반복" 을 값으로 만들고 `retry` 로 효과에 걸었는데, 여기서는 그 정책을 명령형 `for` 루프와 두 정수 인자로 대역합니다. OO 직감으로 다리를 놓으면, 재시도 정책을 가진 HTTP 클라이언트 (`Polly` 의 retry policy) 가 일시적 오류에 자동으로 다시 거는 것과 같은 발상입니다.
+`Connect()` 는 부를 때마다 `attempts` 를 하나 올리고, 그 횟수가 `flakyUntilAttempt` 에 닿으면 성공 (`true`) 을 냅니다. 곧 `flakyUntilAttempt` 는 "몇 번째 시도에 붙는가" 를 흉내 내는 손잡이입니다. 첫 시도가 실패하면 `for` 루프가 `maxRetries` 번까지 다시 부르고, 그래도 안 붙으면 던집니다. 이것이 8부 `Schedule` 이 하던 일입니다. 8부에서는 `Schedule.recurs(n)` 으로 "n 번 반복" 을 값으로 만들고 `retry` 로 효과에 걸었는데, 여기서는 그 정책을 명령형 `for` 루프와 두 정수 인자로 대역합니다. OO 직감으로 다리를 놓으면, 재시도 정책을 갖춘 HTTP 클라이언트 (`Polly` 의 retry policy) 가 일시적 오류에 자동으로 다시 거는 것과 같은 발상입니다.
 
 **② 자원 (bracket, 8부).** 소스를 열고, 본문이 끝나든 예외가 나든 반드시 닫습니다.
 

@@ -549,7 +549,7 @@ K<MyMaybeF, int> stillNo = MyMaybeF.Map(f, ParseInt("xyz"));
 | 1 | `ParseInt("…")` | `string → MyMaybe<int>` | **효과 인코딩** — 있음/없음을 타입에 감춤 | World-crossing (`a → E<b>`) |
 | 2 | `Map(f, …)` | `MyMaybe<int> → MyMaybe<int>` | **일반 연산 합성** — f 를 효과 위에 적용 | Elevated 자연 합성 (`E<a> → E<b>`, **Functor 의 자리**) |
 
-1단계의 효과 인코딩 (있음/없음 분기 가능성) 위에서 2단계의 일반 연산 (`n => n * 2`) 이 자유롭게 합성됩니다. 두 단계가 어법 일치 (입력·출력 모두 `MyMaybe<int>`) 라 마침표 한 점으로 직접 연결.
+1단계의 효과 인코딩 (있음/없음 분기 가능성) 위에서 2단계의 일반 연산 (`n => n * 2`) 이 자유롭게 합성됩니다. 두 단계가 어법 일치 (입력·출력 모두 `MyMaybe<int>`) 라 마침표 한 점으로 직접 연결됩니다.
 
 #### 효과 + 일반 연산 분리의 가치
 

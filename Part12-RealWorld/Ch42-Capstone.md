@@ -383,7 +383,7 @@ public static bool LogsAllOutcomes()
 
 **능력 trait 시그니처.** 학습용 `Has<RT, TRAIT>` 는 `static abstract TRAIT Get(RT runtime)` 으로, 런타임 인스턴스를 받아 맨 trait 값을 곧장 돌려주는 평범한 메서드입니다. v5 의 `Has<in M, VALUE>` 는 `static abstract K<M, VALUE> Ask { get; }` 로, trait 를 효과 (`K<M, VALUE>`) 로 감싸 돌려주는 정적 프로퍼티입니다. 곧 v5 는 능력 접근 자체도 효과 흐름 안에 있습니다. 학습용은 그 효과 래핑을 벗겨 `Get` 한 메서드로 단순화했습니다.
 
-**효과 스택과 오류 채널.** 학습용 `Eff<RT>` 는 `ReaderT<RT, A>` (`Func<RT, IO<A>>`) 를 손으로 짠 것이고, 내부 `IO` 는 단순한 `Func<A>` thunk 라 오류·취소·비동기가 없습니다. v5 의 `Eff<RT, A>` 는 구조는 같지만 (`ReaderT<RT, IO, A>`) `Fallible` 로 `Error` 를 단락시키고 취소 토큰과 Schedule 재시도까지 통합합니다. 그래서 v5 의 효과 흐름은 오류가 나면 중간에 단락하지만, 학습용 capstone 은 효과 흐름에 오류 채널이 없습니다. 검증 실패는 `Validation` 단계에서 분기로 처리하고, 효과 흐름은 승인 건수 (`int`) 만 돌립니다.
+**효과 스택과 오류 채널.** 학습용 `Eff<RT>` 는 `ReaderT<RT, A>` (`Func<RT, IO<A>>`) 를 손으로 짠 것이고, 내부 `IO` 는 단순한 `Func<A>` thunk 여서 오류도 취소도 비동기도 다루지 못합니다. v5 의 `Eff<RT, A>` 는 구조는 같지만 (`ReaderT<RT, IO, A>`) `Fallible` 로 `Error` 를 단락시키고 취소 토큰과 Schedule 재시도까지 통합합니다. 그래서 v5 의 효과 흐름은 오류가 나면 중간에 단락하지만, 학습용 capstone 은 효과 흐름에 오류 채널이 없습니다. 검증 실패는 `Validation` 단계에서 분기로 처리하고, 효과 흐름은 승인 건수 (`int`) 만 돌립니다.
 
 **배치 누적.** 학습용 `ProcessAll` 은 명령형 `foreach` + `acc` 재할당으로 효과를 누적합니다. v5 라면 같은 일을 3부에서 본 `Traverse` 나 fold 추상으로 표현해 명시적 루프 없이 잇습니다. 학습용은 누적의 동작을 또렷이 보이려고 명시적 루프로 단순화했습니다.
 

@@ -93,7 +93,7 @@ foreach (var part in parts)
 
 빈 것에서 시작해 하나씩 모은다. 이 패턴은 3장에서 본 `Monoid` 그대로입니다. 거기서도 `0` (빈 것) 에서 시작해 값을 하나씩 더했습니다. 모양이 똑같습니다.
 
-그런데 한 가지가 다릅니다. 3장의 `Monoid` 는 `int`, `string` 같은 Normal World 의 평범한 값만 합쳤습니다 (`int` 셋을 더해 `int` 하나). 지금 합치려는 것은 `MySeq<int>` 같은 컨테이너 자체입니다 (시퀀스 둘을 이어 시퀀스 하나). 합칠 대상이 Normal 값이 아니라 Elevated 시민입니다.
+그런데 한 가지가 다릅니다. 3장의 `Monoid` 는 `int`, `string` 같은 Normal World 의 평범한 값만 합쳤습니다 (`int` 셋을 더해 `int` 하나). 지금 합치려는 것은 `MySeq<int>` 같은 컨테이너 자체, 곧 Normal 값이 아니라 Elevated 시민입니다 (시퀀스 둘을 이어 시퀀스 하나).
 
 그래서 3장의 결합을 그대로 쓸 수 없습니다. 결합을 한 층 위, Elevated World 로 끌어올려야 합니다. 그 끌어올린 결합이 이 장의 두 번째 추상입니다.
 

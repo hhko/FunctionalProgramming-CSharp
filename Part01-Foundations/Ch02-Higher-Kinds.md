@@ -953,7 +953,7 @@ public interface Functor<F>
 
 코드의 `static abstract` 는 앞서 이미 익힌 도구입니다. 지금 자리의 핵심은 하나입니다. `F<B>` / `F<A>` 어법이 거부됩니다.
 
-두 에러 메시지의 정확한 의미는 다음과 같습니다. **CS0307** 은 "`F` 가 다시 인자를 받는 자리에서 사용 불가", **CS0246** 은 "`F` 를 완성 타입으로 해석하려 했으나 찾을 수 없다" 는 뜻입니다. 두 에러의 근본 원인은 하나입니다 — Order 1 에서 type constructor 자체가 일급 시민이 아니라서, `Functor<F>` 의 `F` 자리에 type constructor 가정이 어법으로 불가능하고, 그 결과 `F<...>` 어법 모두가 거부됩니다. 학술 어휘로는 *higher-kinded polymorphism* 미지원입니다.
+두 에러 메시지를 정확히 풀면 이렇습니다. **CS0307** 은 "`F` 가 다시 인자를 받는 자리에서 쓸 수 없다", **CS0246** 은 "`F` 를 완성 타입으로 해석하려 했으나 찾을 수 없다" 는 뜻입니다. 두 에러의 근본 원인은 하나로 모입니다. Order 1 에서 type constructor 자체가 일급 시민이 아니므로, `Functor<F>` 의 `F` 자리에 type constructor 를 가정하는 어법이 성립하지 않고, 그 결과 `F<...>` 어법이 모두 거부됩니다. 학술 어휘로는 *higher-kinded polymorphism* 미지원입니다.
 
 Haskell / Scala 에서는 정확히 이 어법이 일급으로 지원됩니다.
 

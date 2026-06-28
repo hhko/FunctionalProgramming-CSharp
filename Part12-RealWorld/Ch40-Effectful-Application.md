@@ -118,7 +118,7 @@ public sealed record AppRT(IConsole Console, IClock Clock, IStore Store)
 }
 ```
 
-`AppRT` 는 세 능력 구현 (`Console` · `Clock` · `Store`) 을 필드로 들고 있는 record 입니다. 그리고 `Has<AppRT, IConsole>`, `Has<AppRT, IClock>`, `Has<AppRT, IStore>` 세 제약을 동시에 구현한다고 선언합니다. 7 부에서 본 `Has<RT, Trait>` 의 약속을 떠올립니다. `static abstract Trait Get(RT runtime)` 한 줄, 곧 런타임을 받아 그 능력 구현을 돌려주는 정적 메서드입니다. `AppRT` 는 그 `Get` 을 세 능력에 대해 각각 구현해, `런타임을 주면 콘솔을 꺼내 주겠다`, `시계를 꺼내 주겠다`, `저장소를 꺼내 주겠다` 를 약속합니다.
+`AppRT` 는 세 능력 구현 (`Console` · `Clock` · `Store`) 을 필드로 들고 있는 record 입니다. 그리고 `Has<AppRT, IConsole>`, `Has<AppRT, IClock>`, `Has<AppRT, IStore>` 세 제약을 동시에 구현한다고 선언합니다. 7 부에서 본 `Has<RT, Trait>` 의 약속을 떠올립니다. `static abstract Trait Get(RT runtime)` 한 줄, 곧 런타임을 받아 그 능력 구현을 돌려주는 정적 메서드입니다. `AppRT` 는 그 `Get` 을 세 능력마다 각각 구현해, `런타임을 주면 콘솔을 꺼내 주겠다`, `시계를 꺼내 주겠다`, `저장소를 꺼내 주겠다` 를 약속합니다.
 
 OO 직감으로 다리를 놓으면, `AppRT` 는 DI 컨테이너에 인터페이스 세 개를 등록한 것과 같습니다. `services.AddSingleton<IConsole>(...)` 를 세 번 부른 셈입니다. 다만 등록처가 런타임이라는 한 record 이고, 꺼내는 일이 객체 메서드가 아니라 `Has` 라는 타입 제약을 통한 정적 디스패치라는 점만 다릅니다.
 

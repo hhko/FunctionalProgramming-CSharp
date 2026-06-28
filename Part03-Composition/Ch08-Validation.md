@@ -48,7 +48,7 @@ ValidateEmail(email).Bind(e =>
 
 ### 8.2.1 5장에서 만든 `MyValidation` 자리 복습
 
-`MyValidation<E, A>` 는 5장에서 Applicative 의 인스턴스로 부착했습니다. 두 케이스를 가집니다. 성공이면 값을 담은 `Valid`, 실패면 오류 목록을 담은 `Invalid` 입니다.
+`MyValidation<E, A>` 는 5장에서 Applicative 의 인스턴스로 부착했습니다. 두 케이스로 나뉩니다. 성공이면 값을 담은 `Valid`, 실패면 오류 목록을 담은 `Invalid` 입니다.
 
 ```csharp
 public abstract record MyValidation<E, A> : K<MyValidationF<E>, A>

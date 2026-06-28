@@ -456,7 +456,7 @@ var r = nothingF.Apply(three);
 // → Nothing      (함수가 없으니 적용할 길이 없음)
 ```
 
-함수 측이 Nothing 이면 값을 보지도 않고 결과 Nothing. 어느 쪽이든 Nothing 이면 결과 Nothing 의 단락 동작입니다. 사용자에게 왜 실패했는지의 정보가 없다는 점이 8장 Validation 에서 누적으로 바뀝니다.
+함수 측이 Nothing 이면 값을 보지도 않고 결과가 Nothing 입니다. 어느 쪽이든 Nothing 이면 결과도 Nothing 인 단락 동작입니다. 사용자에게 왜 실패했는지의 정보가 없다는 점이 8장 Validation 에서 누적으로 바뀝니다.
 
 ---
 
@@ -560,7 +560,7 @@ K<MyValidationF<string>, User> user = Lift.Lift4<MyValidationF<string>, string, 
 
 ### 5.4.5 회원가입 폼 검증 예제 — 세 책임 분리의 N 인자 확장
 
-두 필드 (`CustomerId`, `EmailAddress`) 의 검증 결과로 `CustomerInfo` 를 만드는 자리는 효과 인코딩과 일반 연산 합성의 정통 N 인자 확장 예제입니다. *Lift2 / Lift3 / Lift4* 의 결정적 가치는 N 회 Apply 라는 문법적 형태가 아니라 **세 책임의 깔끔한 분리** 에 있습니다. 효과는 타입, 연산은 함수, 합성은 Lift 입니다. 4장 `Map` 이 하나의 효과 위에서 1 인자 일반 함수를 끌어올렸다면, 여기서는 두 (또는 N 개) 효과 위에서 N 인자 일반 함수를 끌어올립니다.
+두 필드 (`CustomerId`, `EmailAddress`) 의 검증 결과로 `CustomerInfo` 를 만드는 자리를 봅니다. 효과 인코딩과 일반 연산 합성을 N 인자로 넓히는 정통 예제입니다. *Lift2 / Lift3 / Lift4* 의 결정적 가치는 N 회 Apply 라는 문법적 형태가 아니라 **세 책임의 깔끔한 분리** 에 있습니다. 효과는 타입, 연산은 함수, 합성은 Lift 입니다. 4장 `Map` 이 하나의 효과 위에서 1 인자 일반 함수를 끌어올렸다면, 여기서는 두 (또는 N 개) 효과 위에서 N 인자 일반 함수를 끌어올립니다.
 
 - **효과 인코딩 — `MyValidation<E, A>`** — 각 필드의 검증은 통과할 수도 있고 실패할 수도 있습니다 (`42` 는 통과, `-1` 은 실패). 이 통과/실패 가능성과 에러 누적 자체를 **타입에 인코딩** 하는 자리가 `MyValidation<string, T>` 입니다. 호출자가 분기 검사를 잊을 수 없도록 시그니처가 강제합니다. 효과는 타입의 책임입니다.
 - **일반 연산 — `createCustomer = (id, email) => new CustomerInfo(id, email)`** — 두 필드로 고객 정보를 생성한다는 평범한 2 인자 생성자는 효과를 모릅니다. 시그니처는 `(CustomerId, EmailAddress) → CustomerInfo` 한 줄이고 `MyValidation` 어휘는 들어가지 않습니다. 데이터가 이미 검증된 상태 하의 단순 함수입니다. 연산은 함수의 책임입니다.

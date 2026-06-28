@@ -189,7 +189,7 @@ public sealed class EitherF : Bifunctor<EitherF>
 }
 ```
 
-여기서 자료 선언의 성공 자리 `R` 은, 2-인자 마커 `K<F, L, A>` 어휘를 따르는 `BiMap` 본문에서 `A` 로 나타납니다 (`Right<L, R>` 의 `R` 과 `Right<L, A>` 의 `A` 는 같은 둘째 자리입니다). `Either<L, R>` 의 `MapSecond` 가 곧 성공값만 변환하는 평범한 Functor `map` 이고, `MapFirst` 는 오류 타입을 변환하는 자리입니다. 두 갈래를 한 번에 다루는 능력이 Bifunctor 입니다.
+여기서 자료 선언의 성공 자리 `R` 은 `BiMap` 본문에서 `A` 로 나타납니다. `BiMap` 본문이 2-인자 마커 `K<F, L, A>` 의 어휘를 따르기 때문입니다 (`Right<L, R>` 의 `R` 과 `Right<L, A>` 의 `A` 는 같은 둘째 자리입니다). `Either<L, R>` 의 `MapSecond` 가 곧 성공값만 변환하는 평범한 Functor `map` 이고, `MapFirst` 는 오류 타입을 변환하는 자리입니다. 두 갈래를 한 번에 다루는 능력이 Bifunctor 입니다.
 
 세 경우를 손으로 굴려 호출 횟수를 봅니다. `first = s => s.ToUpper()`, `second = n => n * 2` 라 합니다.
 
@@ -233,7 +233,7 @@ ToDomain(new Left<DbError, Row>(new DbError("E42")));
 
 ## 10.5 가족 — Biapplicative / Bimonad
 
-Bifunctor 위에 두 인자 버전의 Applicative 와 Monad 가 쌓입니다. v5 의 어휘로 Biapplicative 와 Bimonad 입니다.
+Bifunctor 위에 두 인자 버전의 Applicative 와 Monad 가 쌓입니다. v5 는 이 둘을 각각 Biapplicative 와 Bimonad 라 부릅니다.
 
 Biapplicative 는 5장 Applicative 의 `apply` 를 두 인자로 일반화합니다. 두 자리에 각각 함수를 담은 컨테이너로, 두 자리의 값을 동시에 적용합니다.
 
