@@ -698,7 +698,7 @@ Option<User> step2 = step1 switch
 
 `parse` 의 출력 (`Option<int>`) 과 `findUser` 의 입력 (`int`) 이 서로 다른 World 의 시민이라 어법이 어긋납니다. C# 컴파일러가 두 함수의 직접 합성을 거부합니다. 손으로 풀면 매 단계마다 `switch` 가 반복됩니다. 단계가 N 개로 늘면 중첩이 N 단계로 깊어집니다.
 
-이 합성 불가능의 자리가 7장 Monad 가 푸는 문제입니다. `bind : E<a> → (a → E<b>) → E<b>` 라는 도구가 *World-crossing* (`a → E<b>`) 함수를 *Elevated → Elevated* (`E<a> → E<b>`) 함수로 끌어올려 합성을 되살립니다. `switch` 반복이 `bind` 한 메서드 (또는 LINQ `from-from-select`) 안으로 흡수됩니다.
+이 합성 불가능의 자리가 7장 Monad 가 푸는 문제입니다. `bind : E<a> → (a → E<b>) → E<b>` 라는 도구가 *World-crossing* (`a → E<b>`) 함수를 *Elevated → Elevated* (`E<a> → E<b>`) 함수로 끌어올려 합성을 되살립니다. `switch` 반복이 `bind` 한 메서드 (또는 LINQ `from-from-select`) 안으로 흡수됩니다. 직감을 한 줄로 잡으면, 명령형 코드에서 세미콜론 (`;`) 이 문장과 문장을 차례로 잇듯, `bind` 는 *World-crossing* 단계와 다음 단계를 차례로 잇는 이음새입니다. 한 단계가 `None` / 실패로 끝나면 거기서 사슬이 멈추는 단락까지 그 이음새가 알아서 처리합니다.
 
 ### 1.7.5 `E<a> → b` 끌어내림
 

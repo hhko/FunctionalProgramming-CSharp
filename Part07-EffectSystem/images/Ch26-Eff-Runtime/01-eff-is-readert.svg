@@ -21,14 +21,14 @@
   <!-- 치환 화살표 -->
   <line x1="388" y1="215" x2="478" y2="215" stroke="#1f77b4" stroke-width="2.6" marker-end="url(#p26a)"/>
   <text x="433" y="203" font-size="12" fill="#1f77b4" text-anchor="middle" font-style="italic">두 빈칸을 채우면</text>
-  <text x="433" y="146" font-size="12" fill="#bf9000" text-anchor="middle"><tspan font-family="'Consolas',monospace">Env := RT</tspan></text>
+  <text x="433" y="146" font-size="12" fill="#1f77b4" text-anchor="middle"><tspan font-family="'Consolas',monospace">Env := RT</tspan></text>
   <text x="433" y="246" font-size="12" fill="#548235" text-anchor="middle"><tspan font-family="'Consolas',monospace">M := IO</tspan></text>
 
   <!-- 오른쪽: Eff<RT,A> -->
   <text x="735" y="98" font-size="15" fill="#1f1f1f" text-anchor="middle" font-weight="bold">7부 실무 효과 <tspan font-family="'Consolas',monospace">Eff&lt;RT, A&gt;</tspan></text>
-  <rect x="600" y="116" width="270" height="62" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
-  <text x="735" y="144" font-size="14" fill="#5a4400" text-anchor="middle" font-weight="bold">런타임 <tspan font-family="'Consolas',monospace">RT</tspan> 주입</text>
-  <text x="735" y="165" font-size="12" fill="#5a4400" text-anchor="middle">환경 자리에 런타임</text>
+  <rect x="600" y="116" width="270" height="62" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="735" y="144" font-size="14" fill="#0c3a5e" text-anchor="middle" font-weight="bold">런타임 <tspan font-family="'Consolas',monospace">RT</tspan> 주입</text>
+  <text x="735" y="165" font-size="12" fill="#0c3a5e" text-anchor="middle">환경 자리에 런타임</text>
   <rect x="600" y="184" width="270" height="62" fill="#e2efda" stroke="#548235" stroke-width="2.2" rx="6"/>
   <text x="735" y="212" font-size="14" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">IO</text>
   <text x="735" y="233" font-size="12" fill="#375623" text-anchor="middle">내부 모나드 자리에 IO</text>

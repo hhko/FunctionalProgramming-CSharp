@@ -19,9 +19,9 @@
   <text x="245" y="161" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">List</text>
   <text x="355" y="161" font-size="11" fill="#0c3a5e" text-anchor="end">바깥 컨테이너</text>
 
-  <rect x="120" y="183" width="250" height="50" fill="#e2efda" stroke="#548235" stroke-width="2.2" rx="6"/>
-  <text x="245" y="214" font-size="18" fill="#375623" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E</text>
-  <text x="355" y="214" font-size="11" fill="#375623" text-anchor="end">안쪽 효과</text>
+  <rect x="120" y="183" width="250" height="50" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="245" y="214" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E</text>
+  <text x="355" y="214" font-size="11" fill="#0c3a5e" text-anchor="end">안쪽 효과</text>
 
   <rect x="120" y="236" width="250" height="50" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="6"/>
   <text x="245" y="267" font-size="16" fill="#5a4400" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">값 a</text>
@@ -31,9 +31,9 @@
   <text x="245" y="340" font-size="12" fill="#888888" text-anchor="middle" font-style="italic">효과가 원소마다 흩어져 있음</text>
 
   <!-- 오른쪽 스택 — E<List<a>> : E(위) · List(가운데) · 값(아래) -->
-  <rect x="670" y="130" width="250" height="50" fill="#e2efda" stroke="#548235" stroke-width="2.2" rx="6"/>
-  <text x="795" y="161" font-size="18" fill="#375623" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E</text>
-  <text x="685" y="161" font-size="11" fill="#375623" text-anchor="start">바깥 효과</text>
+  <rect x="670" y="130" width="250" height="50" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="795" y="161" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">E</text>
+  <text x="685" y="161" font-size="11" fill="#0c3a5e" text-anchor="start">바깥 효과</text>
 
   <rect x="670" y="183" width="250" height="50" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
   <text x="795" y="214" font-size="18" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">List</text>

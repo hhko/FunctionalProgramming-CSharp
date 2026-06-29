@@ -201,7 +201,7 @@ Apply(tier):   tier 도 Invalid → 이어붙임  오류 [email, pw, age, tier]
 
 ## 8.7 applicative style vs monadic style — 같은 도메인, 다른 의미
 
-같은 입력을 두 어법으로 풀어 결과를 나란히 둡니다. applicative style 은 `Apply` 사슬로 네 칸을 모두 평가해 오류를 누적합니다. monadic style 은 차례로 평가하다 첫 `Invalid` 에서 단락합니다.
+같은 입력을 두 어법으로 풀어 결과를 나란히 둡니다. 두 어법이 갈리는 뿌리는 칸들이 서로 독립인가 의존인가입니다. applicative style 의 네 검증은 서로의 결과를 읽지 않으므로 (이메일 검증이 비밀번호 결과를 보지 않습니다), `Apply` 사슬은 순서에 매이지 않고 네 칸을 모두 평가해 오류를 누적합니다. 반대로 monadic style 은 다음 단계가 앞 단계의 성공 값을 받아야 하는 의존 사슬이라, 차례로 평가할 수밖에 없고 첫 `Invalid` 를 만나면 뒤로 건넬 값이 없어 그 자리에서 단락합니다.
 
 `MyValidation` 에는 `Bind` 가 없으므로, monadic 단락은 `switch` 로 직접 흉내 냅니다. 의미는 7장 `Bind` 의 단락과 같습니다.
 

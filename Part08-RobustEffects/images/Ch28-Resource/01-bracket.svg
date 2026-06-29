@@ -9,17 +9,17 @@
   <text x="490" y="62" font-size="13" fill="#888888" text-anchor="middle"><tspan font-family="'Consolas',monospace">try</tspan>-<tspan font-family="'Consolas',monospace">finally</tspan> 의 효과판. 사용 중 예외가 나도 해제는 반드시 실행됩니다.</text>
 
   <!-- 세 박스 -->
-  <rect x="120" y="120" width="200" height="64" fill="#e2efda" stroke="#548235" stroke-width="2.2" rx="8"/>
-  <text x="220" y="148" font-size="15" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">acquire</text>
-  <text x="220" y="170" font-size="12" fill="#375623" text-anchor="middle">자원을 얻는다</text>
+  <rect x="120" y="120" width="200" height="64" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="8"/>
+  <text x="220" y="148" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">acquire</text>
+  <text x="220" y="170" font-size="12" fill="#0c3a5e" text-anchor="middle">자원을 얻는다</text>
 
   <rect x="390" y="120" width="200" height="64" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="8"/>
   <text x="490" y="148" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">use</text>
   <text x="490" y="170" font-size="12" fill="#0c3a5e" text-anchor="middle">자원을 쓴다</text>
 
-  <rect x="660" y="120" width="200" height="64" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="8"/>
-  <text x="760" y="148" font-size="15" fill="#5a4400" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">release</text>
-  <text x="760" y="170" font-size="12" fill="#5a4400" text-anchor="middle">반드시 해제한다</text>
+  <rect x="660" y="120" width="200" height="64" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="8"/>
+  <text x="760" y="148" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">release</text>
+  <text x="760" y="170" font-size="12" fill="#0c3a5e" text-anchor="middle">반드시 해제한다</text>
 
   <!-- 정상 경로 -->
   <line x1="322" y1="152" x2="388" y2="152" stroke="#548235" stroke-width="2.4" marker-end="url(#b28a)"/>

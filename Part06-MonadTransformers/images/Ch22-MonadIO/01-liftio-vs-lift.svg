@@ -29,8 +29,8 @@
   <text x="730" y="166" font-size="13" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace">StateT</text>
   <rect x="625" y="184" width="210" height="40" fill="#e2efda" stroke="#548235" stroke-width="1.8" rx="5"/>
   <text x="730" y="210" font-size="13" fill="#375623" text-anchor="middle" font-family="'Consolas',monospace">EitherT</text>
-  <rect x="625" y="228" width="210" height="44" fill="#fff2cc" stroke="#bf9000" stroke-width="2.2" rx="5"/>
-  <text x="730" y="256" font-size="14" fill="#5a4400" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">IO  (맨 안쪽)</text>
+  <rect x="625" y="228" width="210" height="44" fill="#dbeafa" stroke="#1f77b4" stroke-width="2.6" rx="5"/>
+  <text x="730" y="256" font-size="14" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas',monospace" font-weight="bold">IO  (맨 안쪽)</text>
   <!-- 긴 화살표: 맨 안쪽 IO → 맨 위 -->
   <line x1="858" y1="250" x2="858" y2="116" stroke="#1f77b4" stroke-width="2.8" marker-end="url(#a22a)"/>
   <line x1="836" y1="250" x2="858" y2="250" stroke="#1f77b4" stroke-width="2.8"/>

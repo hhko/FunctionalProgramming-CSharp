@@ -22,8 +22,8 @@
   <rect x="48" y="80" width="128" height="48" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
   <text x="112" y="110" font-size="14" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">K&lt;F, a→b&gt;</text>
 
-  <text x="204" y="86" font-size="14" fill="#1f77b4" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace" font-style="italic">Apply</text>
-  <line x1="176" y1="104" x2="230" y2="104" stroke="#1f77b4" stroke-width="2.6" marker-end="url(#arrow-lift)"/>
+  <text x="204" y="86" font-size="14" fill="#1f1f1f" text-anchor="middle" font-weight="bold" font-family="'Consolas', monospace" font-style="italic">Apply</text>
+  <line x1="176" y1="104" x2="230" y2="104" stroke="#1f1f1f" stroke-width="2.4" marker-end="url(#arrow-fn)"/>
 
   <rect x="232" y="80" width="84" height="48" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
   <text x="274" y="110" font-size="15" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">K&lt;F, a&gt;</text>

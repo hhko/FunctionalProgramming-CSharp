@@ -42,8 +42,8 @@
   <text x="960" y="148" font-size="10.5" fill="#1f1f1f" text-anchor="middle" font-family="'Consolas', monospace">Apply(tier)</text>
 
   <!-- Box 5 — Valid(User) -->
-  <rect x="1000" y="128" width="160" height="64" fill="#d9ead3" stroke="#38761d" stroke-width="2.8" rx="6"/>
-  <text x="1080" y="165" font-size="13" fill="#274e13" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">Valid(User)</text>
+  <rect x="1000" y="128" width="160" height="64" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2.2" rx="6"/>
+  <text x="1080" y="165" font-size="13" fill="#0c3a5e" text-anchor="middle" font-family="'Consolas', monospace" font-weight="bold">Valid(User)</text>
 
   <text x="600" y="262" font-size="12.5" fill="#5a4400" text-anchor="middle">어느 칸이든 Invalid 면 그 단계의 Apply 가 에러 채널에 오류를 누적합니다 (그림 8-2).</text>
   <text x="600" y="286" font-size="12.5" fill="#5a4400" text-anchor="middle">네 칸이 모두 통과해야 Valid(User), 하나라도 틀리면 누적된 오류의 Invalid 입니다.</text>
