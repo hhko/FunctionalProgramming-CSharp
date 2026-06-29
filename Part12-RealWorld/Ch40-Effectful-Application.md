@@ -439,7 +439,7 @@ public static bool ConsoleOutput()
 | 40장 도구 | Elevated World 어휘 |
 |---|---|
 | `Eff<RT, A>` | 런타임을 읽어 `IO` 를 내는 Elevated 시민, 7 부 `ReaderT<RT, IO, A>` 그대로 |
-| `Has<RT, Trait>` | 런타임에서 능력을 꺼내는 끌어내림의 한 단계 |
+| `Has<RT, Trait>` | Elevated 시민 안에서 런타임의 능력을 읽는 한 단계, 7 부 `Reader` 의 환경 읽기 그대로 |
 | `Asks` | 런타임을 Normal 값으로 받아 능력 구현을 꺼내는 효과 |
 | `LiftIO` | 부수 효과 한 스텝 (`IO`) 을 효과 스택으로 끌어올림 |
 | `Eff.Run` | 런타임 주입 + 실행, Elevated 시민을 Normal 값으로 끌어내림 |

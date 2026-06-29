@@ -1,48 +1,111 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 740" font-family="'Helvetica Neue','Noto Sans KR',sans-serif">
   <defs>
-    <marker id="ae-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#548235"/></marker>
-    <marker id="ae-g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#999"/></marker>
+    <marker id="lift" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/></marker>
+    <marker id="okm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f77b4"/></marker>
+    <marker id="errm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0504d"/></marker>
+    <marker id="apl" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f1f1f"/></marker>
   </defs>
-  <rect width="900" height="470" fill="#ffffff"/>
-  <text x="450" y="28" font-size="19" fill="#1f1f1f" text-anchor="middle" font-weight="bold">applicative 누적 vs monadic 단락 — 모든 오류를 모은다</text>
-  <text x="450" y="50" font-size="12.5" fill="#555" text-anchor="middle">입력 <tspan font-family="'Consolas',monospace" fill="#7a2b28">Register("ab", "no-at", 200)</tspan> — 세 검증이 모두 실패 (uV · eV · aV = Invalid)</text>
+  <rect width="1040" height="740" fill="#ffffff"/>
+  <text x="520" y="28" font-size="18" fill="#1f1f1f" text-anchor="middle" font-weight="bold">합성 가능한 Elevated World — Create 로 끌어올리고(↑), Apply 로 왼쪽에서 오른쪽으로 합성한다(→)</text>
+  <text x="520" y="50" font-size="11.5" fill="#555" text-anchor="middle">입력 <tspan font-family="'Consolas',monospace" fill="#7a2b28">Customer.Create("ab", "no-at", "010-…", "1 Main St", "Seoul", "bad")</tspan></text>
 
-  <!-- TOP: applicative / Map3 -->
-  <rect x="22" y="64" width="856" height="158" fill="#f3f8ef" stroke="#cfe0c2" rx="8"/>
-  <text x="40" y="86" font-size="14" fill="#375623" font-weight="bold">applicative · Map3  →  누적</text>
-  <g font-family="'Consolas',monospace" font-size="11.5">
-    <rect x="48" y="98" width="150" height="30" fill="#fbeeee" stroke="#c0504d" stroke-width="1.5" stroke-dasharray="5 3" rx="4"/><text x="123" y="118" fill="#7a2b28" text-anchor="middle">uV "ab 너무 짧음"</text>
-    <rect x="48" y="134" width="150" height="30" fill="#fbeeee" stroke="#c0504d" stroke-width="1.5" stroke-dasharray="5 3" rx="4"/><text x="123" y="154" fill="#7a2b28" text-anchor="middle">eV "@ 없음"</text>
-    <rect x="48" y="170" width="150" height="30" fill="#fbeeee" stroke="#c0504d" stroke-width="1.5" stroke-dasharray="5 3" rx="4"/><text x="123" y="190" fill="#7a2b28" text-anchor="middle">aV "200 범위 밖"</text>
-    <rect x="372" y="124" width="150" height="50" fill="#e2efda" stroke="#548235" stroke-width="2" rx="6"/>
-    <text x="447" y="146" fill="#375623" text-anchor="middle" font-weight="bold">Map3</text>
-    <text x="447" y="164" fill="#548235" text-anchor="middle" font-size="10">[..uV, ..eV, ..aV]</text>
-    <rect x="636" y="118" width="226" height="62" fill="#e8f4fd" stroke="#1f77b4" stroke-width="2" rx="6"/>
-    <text x="749" y="139" fill="#0c3a5e" text-anchor="middle" font-weight="bold">Invalid([3개 오류])</text>
-    <text x="749" y="158" fill="#1f77b4" text-anchor="middle" font-size="9.5">"ab 짧음" · "@ 없음" · "범위 밖"</text>
-    <text x="749" y="172" fill="#777" text-anchor="middle" font-size="9.5" font-family="'Noto Sans KR',sans-serif">세 오류를 모두 모음</text>
+  <!-- ELEVATED WORLD band -->
+  <rect x="18" y="64" width="1004" height="558" rx="14" fill="#f4f9ff" stroke="#bcd9f0" stroke-width="1.5"/>
+  <text x="40" y="90" font-size="13" fill="#1f77b4" font-style="italic" font-weight="bold" letter-spacing="0.5">Elevated World</text>
+  <text x="40" y="108" font-size="11.5" fill="#0c3a5e" font-style="italic">검증된 값이 Apply 사슬로 합성된다</text>
+
+  <!-- NORMAL WORLD band -->
+  <rect x="18" y="650" width="1004" height="78" rx="14" fill="#fffdf3" stroke="#e6d9a8" stroke-width="1.5"/>
+  <text x="40" y="674" font-size="13" fill="#bf9000" font-style="italic" font-weight="bold" letter-spacing="0.5">Normal World</text>
+  <text x="40" y="692" font-size="11" fill="#5a4400" font-style="italic">원시 문자열 (검증·합성 이전)</text>
+
+  <!-- ===== HERO: Customer Apply chain, LEFT → RIGHT (accumulation grows) ===== -->
+  <g font-family="'Consolas',monospace">
+    <rect x="36" y="150" width="120" height="58" rx="6" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.8"/>
+    <text x="96" y="174" font-size="10" fill="#0c3a5e" text-anchor="middle" font-weight="bold">Pure(curry f)</text>
+    <text x="96" y="193" font-size="10.5" fill="#1f77b4" text-anchor="middle">오류 [ ]</text>
+
+    <rect x="252" y="150" width="138" height="58" rx="6" fill="#fbeeee" stroke="#c0504d" stroke-width="1.6"/>
+    <text x="321" y="174" font-size="10.5" fill="#7a2b28" text-anchor="middle">[username]</text>
+    <text x="321" y="193" font-size="9" fill="#a0303a" text-anchor="middle">오류 1</text>
+
+    <rect x="486" y="150" width="180" height="58" rx="6" fill="#fbeeee" stroke="#c0504d" stroke-width="1.6"/>
+    <text x="576" y="174" font-size="10.5" fill="#7a2b28" text-anchor="middle">[username, email]</text>
+    <text x="576" y="193" font-size="9" fill="#a0303a" text-anchor="middle">오류 2</text>
+
+    <rect x="762" y="146" width="244" height="66" rx="6" fill="#fbeeee" stroke="#c0504d" stroke-width="2.6"/>
+    <text x="884" y="170" font-size="10" fill="#7a2b28" text-anchor="middle" font-weight="bold">Invalid([username, email, postal])</text>
+    <text x="884" y="190" font-size="9" fill="#a0303a" text-anchor="middle">오류 3 — 한 목록에 모두 모임</text>
   </g>
-  <path d="M200,113 C 290,113 290,140 370,144" fill="none" stroke="#548235" stroke-width="1.8" marker-end="url(#ae-a)"/>
-  <path d="M200,149 L 370,149" fill="none" stroke="#548235" stroke-width="1.8" marker-end="url(#ae-a)"/>
-  <path d="M200,185 C 290,185 290,158 370,154" fill="none" stroke="#548235" stroke-width="1.8" marker-end="url(#ae-a)"/>
-  <line x1="524" y1="149" x2="632" y2="149" stroke="#548235" stroke-width="2.2" marker-end="url(#ae-a)"/>
-
-  <!-- BOTTOM: monadic / Bind -->
-  <rect x="22" y="240" width="856" height="158" fill="#f6f6f6" stroke="#dddddd" rx="8"/>
-  <text x="40" y="262" font-size="14" fill="#555" font-weight="bold">monadic · Bind  →  단락</text>
-  <g font-family="'Consolas',monospace" font-size="11.5">
-    <rect x="48" y="300" width="140" height="34" fill="#fbeeee" stroke="#c0504d" stroke-width="1.6" rx="4"/><text x="118" y="322" fill="#7a2b28" text-anchor="middle">uV Invalid</text>
-    <rect x="250" y="300" width="140" height="34" fill="#f0f0f0" stroke="#bbb" stroke-width="1.4" stroke-dasharray="4 3" rx="4"/><text x="320" y="322" fill="#aaa" text-anchor="middle">eV (안 굴림)</text>
-    <rect x="452" y="300" width="140" height="34" fill="#f0f0f0" stroke="#bbb" stroke-width="1.4" stroke-dasharray="4 3" rx="4"/><text x="522" y="322" fill="#aaa" text-anchor="middle">aV (안 굴림)</text>
-    <rect x="660" y="298" width="202" height="38" fill="#eef2f5" stroke="#888" stroke-width="1.8" rx="6"/>
-    <text x="761" y="322" fill="#444" text-anchor="middle" font-weight="bold">Invalid([1개 오류])</text>
+  <!-- horizontal Apply arrows (left -> right spine) -->
+  <g stroke="#1f1f1f" stroke-width="2.2">
+    <line x1="156" y1="179" x2="250" y2="179" marker-end="url(#apl)"/>
+    <line x1="390" y1="179" x2="484" y2="179" marker-end="url(#apl)"/>
+    <line x1="666" y1="179" x2="760" y2="179" marker-end="url(#apl)"/>
   </g>
-  <text x="221" y="288" font-size="20" fill="#c0504d" text-anchor="middle" font-weight="bold">✗ STOP</text>
-  <line x1="188" y1="317" x2="248" y2="317" stroke="#c0504d" stroke-width="2" marker-end="url(#ae-g)"/>
-  <line x1="390" y1="317" x2="450" y2="317" stroke="#ccc" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#ae-g)"/>
-  <line x1="592" y1="317" x2="656" y2="317" stroke="#ccc" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#ae-g)"/>
-  <text x="761" y="352" font-size="10.5" fill="#888" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">첫 오류에서 멈춤 — username 오류 하나만</text>
+  <text x="203" y="170" font-size="9.5" fill="#1f1f1f" text-anchor="middle" font-family="'Consolas',monospace">.Apply</text>
+  <text x="437" y="170" font-size="9.5" fill="#1f1f1f" text-anchor="middle" font-family="'Consolas',monospace">.Apply</text>
+  <text x="713" y="170" font-size="9.5" fill="#1f1f1f" text-anchor="middle" font-family="'Consolas',monospace">.Apply</text>
 
-  <text x="450" y="428" font-size="13" fill="#1f1f1f" text-anchor="middle"><tspan fill="#375623" font-weight="bold">독립이라 모은다 (위)</tspan>  ·  <tspan fill="#777" font-weight="bold">의존이라 멈춘다 (아래)</tspan></text>
-  <text x="450" y="450" font-size="11.5" fill="#666" text-anchor="middle">세 검증이 서로의 결과를 필요로 하지 않으니, 동시에 굴려 실패를 다 모을 수 있습니다.</text>
+  <!-- arguments rising into each Apply (vertical, from below) -->
+  <line x1="321" y1="500" x2="321" y2="210" stroke="#c0504d" stroke-width="2.2" marker-end="url(#errm)"/>
+  <line x1="576" y1="430" x2="576" y2="210" stroke="#c0504d" stroke-width="2.2" marker-end="url(#errm)"/>
+  <line x1="884" y1="430" x2="884" y2="214" stroke="#c0504d" stroke-width="2.2" marker-end="url(#errm)"/>
+
+  <!-- composite VOs (their own Lift chain), middle -->
+  <g font-family="'Consolas',monospace" font-size="9.5">
+    <rect x="482" y="362" width="188" height="68" rx="6" fill="#fbeeee" stroke="#c0504d" stroke-width="1.8"/>
+    <text x="576" y="383" fill="#7a2b28" text-anchor="middle" font-weight="bold">ContactInfo</text>
+    <text x="576" y="399" fill="#a0303a" text-anchor="middle" font-size="9">= Lift2(Email, Phone)</text>
+    <text x="576" y="417" fill="#7a2b28" text-anchor="middle">Invalid([email])</text>
+    <rect x="784" y="362" width="200" height="68" rx="6" fill="#fbeeee" stroke="#c0504d" stroke-width="1.8"/>
+    <text x="884" y="383" fill="#7a2b28" text-anchor="middle" font-weight="bold">Address</text>
+    <text x="884" y="399" fill="#a0303a" text-anchor="middle" font-size="9">= Lift3(Street, City, Postal)</text>
+    <text x="884" y="417" fill="#7a2b28" text-anchor="middle">Invalid([postal])</text>
+  </g>
+  <!-- leaves -> composites -->
+  <line x1="528" y1="500" x2="552" y2="432" stroke="#c0504d" stroke-width="1.9" marker-end="url(#errm)"/>
+  <line x1="624" y1="500" x2="600" y2="432" stroke="#1f77b4" stroke-width="1.9" marker-end="url(#okm)"/>
+  <line x1="802" y1="500" x2="845" y2="432" stroke="#1f77b4" stroke-width="1.9" marker-end="url(#okm)"/>
+  <line x1="884" y1="500" x2="884" y2="432" stroke="#1f77b4" stroke-width="1.9" marker-end="url(#okm)"/>
+  <line x1="966" y1="500" x2="925" y2="432" stroke="#c0504d" stroke-width="1.9" marker-end="url(#errm)"/>
+
+  <!-- leaf VOs -->
+  <g font-family="'Consolas',monospace" font-size="9.5">
+    <rect x="277" y="502" width="88" height="44" rx="5" fill="#fbeeee" stroke="#c0504d" stroke-width="1.5" stroke-dasharray="5 3"/><text x="321" y="520" fill="#7a2b28" text-anchor="middle">Username</text><text x="321" y="536" fill="#7a2b28" text-anchor="middle" font-size="8.5">✗ 3자 미만</text>
+    <rect x="484" y="502" width="88" height="44" rx="5" fill="#fbeeee" stroke="#c0504d" stroke-width="1.5" stroke-dasharray="5 3"/><text x="528" y="520" fill="#7a2b28" text-anchor="middle">Email</text><text x="528" y="536" fill="#7a2b28" text-anchor="middle" font-size="8.5">✗ @ 없음</text>
+    <rect x="580" y="502" width="88" height="44" rx="5" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.5"/><text x="624" y="520" fill="#0c3a5e" text-anchor="middle">Phone</text><text x="624" y="536" fill="#1f77b4" text-anchor="middle" font-size="8.5">✓</text>
+    <rect x="764" y="502" width="76" height="44" rx="5" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.5"/><text x="802" y="520" fill="#0c3a5e" text-anchor="middle">Street</text><text x="802" y="536" fill="#1f77b4" text-anchor="middle" font-size="8.5">✓</text>
+    <rect x="846" y="502" width="76" height="44" rx="5" fill="#e8f4fd" stroke="#1f77b4" stroke-width="1.5"/><text x="884" y="520" fill="#0c3a5e" text-anchor="middle">City</text><text x="884" y="536" fill="#1f77b4" text-anchor="middle" font-size="8.5">✓</text>
+    <rect x="928" y="502" width="76" height="44" rx="5" fill="#fbeeee" stroke="#c0504d" stroke-width="1.5" stroke-dasharray="5 3"/><text x="966" y="518" fill="#7a2b28" text-anchor="middle" font-size="9">PostalCode</text><text x="966" y="534" fill="#7a2b28" text-anchor="middle" font-size="8">✗ 5자리</text>
+  </g>
+
+  <!-- raw strings (Normal) + Create lifts -->
+  <g font-family="'Consolas',monospace" font-size="9.5">
+    <rect x="279" y="662" width="84" height="32" rx="5" fill="#fff2cc" stroke="#bf9000" stroke-width="1.3"/><text x="321" y="682" fill="#7a5b00" text-anchor="middle">"ab"</text>
+    <rect x="486" y="662" width="84" height="32" rx="5" fill="#fff2cc" stroke="#bf9000" stroke-width="1.3"/><text x="528" y="682" fill="#7a5b00" text-anchor="middle">"no-at"</text>
+    <rect x="582" y="662" width="84" height="32" rx="5" fill="#fff2cc" stroke="#bf9000" stroke-width="1.3"/><text x="624" y="682" fill="#7a5b00" text-anchor="middle">"010-…"</text>
+    <rect x="764" y="662" width="76" height="32" rx="5" fill="#fff2cc" stroke="#bf9000" stroke-width="1.3"/><text x="802" y="682" fill="#7a5b00" text-anchor="middle" font-size="8">"1 Main St"</text>
+    <rect x="846" y="662" width="76" height="32" rx="5" fill="#fff2cc" stroke="#bf9000" stroke-width="1.3"/><text x="884" y="682" fill="#7a5b00" text-anchor="middle">"Seoul"</text>
+    <rect x="928" y="662" width="76" height="32" rx="5" fill="#fff2cc" stroke="#bf9000" stroke-width="1.3"/><text x="966" y="682" fill="#7a5b00" text-anchor="middle">"bad"</text>
+  </g>
+  <g stroke="#1f77b4" stroke-width="2.2" stroke-linecap="round">
+    <line x1="321" y1="660" x2="321" y2="550" marker-end="url(#lift)"/>
+    <line x1="528" y1="660" x2="528" y2="550" marker-end="url(#lift)"/>
+    <line x1="624" y1="660" x2="624" y2="550" marker-end="url(#lift)"/>
+    <line x1="802" y1="660" x2="802" y2="550" marker-end="url(#lift)"/>
+    <line x1="884" y1="660" x2="884" y2="550" marker-end="url(#lift)"/>
+    <line x1="966" y1="660" x2="966" y2="550" marker-end="url(#lift)"/>
+  </g>
+  <text x="150" y="610" font-size="11" fill="#1f77b4" text-anchor="middle" font-weight="bold">↑ Create</text>
+  <text x="150" y="628" font-size="9.5" fill="#1f77b4" text-anchor="middle">검증하며 끌어올림</text>
+
+  <!-- left annotation: Lift3 takes a plain lambda, no hand-curried Make field -->
+  <text x="96" y="240" font-size="9" fill="#555" text-anchor="middle" font-family="'Consolas',monospace">f = (n,c,a)</text>
+  <text x="96" y="253" font-size="9" fill="#555" text-anchor="middle" font-family="'Consolas',monospace">=> new Customer</text>
+  <text x="96" y="275" font-size="9" fill="#888" text-anchor="middle">Lift3 가 f 를 Curry →</text>
+  <text x="96" y="288" font-size="9" fill="#888" text-anchor="middle">Pure 로 올림 (손 커리 없음)</text>
+
+  <text x="520" y="120" font-size="11" fill="#1f77b4" text-anchor="middle">코드 한 줄 <tspan font-family="'Consolas',monospace">Customer.Create = Lift3(f, Username, ContactInfo, Address)</tspan> 를, 5장의 <tspan font-weight="bold">Lift3 가 아래 Pure → Apply 사슬로 펼칩니다</tspan> (오류 누적).</text>
+  <text x="520" y="736" font-size="10.5" fill="#888" text-anchor="middle">한 번 끌어올린 값은 다시 Normal World 로 내려가지 않고, Elevated World 안에서 같은 어법으로 계속 합성됩니다.</text>
 </svg>

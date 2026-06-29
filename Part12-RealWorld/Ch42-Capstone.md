@@ -73,30 +73,44 @@ public abstract record Validation<A>
     public sealed record Invalid(IReadOnlyList<string> Errors) : Validation<A>;
 }
 
-public static Validation<C> Map2<A, B, C>(Validation<A> a, Validation<B> b, Func<A, B, C> f) =>
-    (a, b) switch
+// Pure: 함수를 Elevated World 로 끌어올린다 (오류 없는 Valid). Ok 와 같은 일.
+public static Validation<A> Pure<A>(A v) => new Validation<A>.Valid(v);
+
+// Apply: 끌어올린 함수에 끌어올린 인자를 적용하며, 양쪽 오류를 누적한다.
+public static Validation<B> Apply<A, B>(this Validation<Func<A, B>> vf, Validation<A> va) =>
+    (vf, va) switch
     {
-        (Validation<A>.Valid x, Validation<B>.Valid y) => new Validation<C>.Valid(f(x.Value, y.Value)),
-        _ => new Validation<C>.Invalid([.. Errs(a), .. Errs(b)])     // ← 두 오류를 모은다
+        (Validation<Func<A, B>>.Valid f, Validation<A>.Valid a) => new Validation<B>.Valid(f.Value(a.Value)),
+        _ => new Validation<B>.Invalid([.. Errs(vf), .. Errs(va)])     // ← 두 오류를 모은다
     };
+
+// Lift2 — 5장의 Lift 그대로. 평범한 2인자 함수를 받아 Curry → Pure → Apply 를 캡슐화한다.
+public static Validation<C> Lift2<A, B, C>(Func<A, B, C> f, Validation<A> fa, Validation<B> fb) =>
+    Pure<Func<A, Func<B, C>>>(a => b => f(a, b)).Apply(fa).Apply(fb);
 ```
 
-`Map2` 가 2부 applicative 의 핵심이었습니다. 두 검증을 받아, 둘 다 `Valid` 면 함수를 적용하고, 하나라도 `Invalid` 면 두 오류 목록을 `[.. Errs(a), .. Errs(b)]` 로 모읍니다. 모양 보존입니다. 두 검증이 한 검증으로 합쳐지되, 오류는 단락하지 않고 누적됩니다. 주문 검증은 이 `Map2` 로 식별자 검사와 금액 검사를 합칩니다.
+`Pure` 와 `Apply` 가 2부 applicative 의 핵심이었습니다. `Pure` 는 함수를 오류 없이 Elevated World 로 끌어올리고, `Apply` 는 그 끌어올린 함수에 검증을 하나씩 적용합니다. 양쪽이 모두 `Valid` 면 함수를 적용하고, 하나라도 `Invalid` 면 두 오류 목록을 `[.. Errs(vf), .. Errs(va)]` 로 모읍니다. 모양 보존입니다. 검증이 한 검증으로 합쳐지되, 오류는 단락하지 않고 누적됩니다. 그 아래 `Lift2` 는 2부에서 만든 그 `Lift` 로, 평범한 2인자 생성자를 받아 안에서 커리·`Pure`·`Apply` 를 한 줄에 캡슐화합니다. 주문 검증은 이 `Lift2` 로 식별자 검사와 금액 검사를 합칩니다.
 
 ```csharp
-public sealed record Order(string Id, decimal Amount);
+// 39장과 같은 어법: private 생성자로 직접 생성을 막고, Create 만이 검증을 통과한 값을 내준다.
+public sealed record Order
+{
+    public string Id { get; }
+    public decimal Amount { get; }
+    private Order(string id, decimal amount) => (Id, Amount) = (id, amount);
 
-static Validation<string> Id(string id) =>
-    string.IsNullOrWhiteSpace(id) ? Validation.Err<string>("id 비어 있음") : Validation.Ok(id);
+    static Validation<string> CheckId(string id) =>
+        string.IsNullOrWhiteSpace(id) ? Validation.Err<string>("id 비어 있음") : Validation.Ok(id);
 
-static Validation<decimal> Amount(decimal a) =>
-    a >= 0 ? Validation.Ok(a) : Validation.Err<decimal>($"amount {a} 음수");
+    static Validation<decimal> CheckAmount(decimal a) =>
+        a >= 0 ? Validation.Ok(a) : Validation.Err<decimal>($"amount {a} 음수");
 
-public static Validation<Order> Validate(string id, decimal amount) =>
-    Validation.Map2(Id(id), Amount(amount), (i, a) => new Order(i, a));
+    // Lift2 로 두 검증을 합성 (39장과 같은 Create 형). 5장 Lift 가 Curry → Pure → Apply 를 캡슐화한다.
+    public static Validation<Order> Create(string id, decimal amount) =>
+        Validation.Lift2((string i, decimal a) => new Order(i, a), CheckId(id), CheckAmount(amount));
 ```
 
-`Validate` 는 식별자가 비어 있지 않고 (`Id`) 금액이 0 이상이면 (`Amount`) `Order` 를 만듭니다. 둘 중 하나라도 어긋나면 `Invalid` 입니다. 여기까지 부수 효과는 한 줄도 없습니다. 순수한 판정입니다.
+`Validate` 는 식별자가 비어 있지 않고 (`Id`) 금액이 0 이상이면 (`Amount`) `Order` 를 만듭니다. 평범한 2인자 생성자 `(i, a) => new Order(i, a)` 를 `Lift2` 에 넘기면, 5장의 `Lift` 가 `Curry → Pure → Apply` 를 안에서 처리하므로 커리한 생성자를 손으로 적지 않습니다. 둘 중 하나라도 어긋나면 `Invalid` 이고, 둘 다 어긋나면 `Lift2` 안의 `Apply` 사슬이 두 오류를 모읍니다. 여기까지 부수 효과는 한 줄도 없습니다. 순수한 판정입니다.
 
 **7부에서 만든 `Eff<RT>`** 입니다. 런타임 `RT` 를 받아 `IO` 를 돌려주는 효과 스택 (`ReaderT<RT, IO, A>`) 이었고, `Has<RT, TRAIT>` 제약으로 능력을 주입받았습니다. 저장과 로그라는 효과를 이 흐름으로 다룹니다.
 
@@ -120,7 +134,7 @@ public static K<ReaderTF<RT>, Unit> SaveOrder<RT>(Order order) where RT : Has<RT
 ```csharp
 static K<ReaderTF<RT>, int> ProcessOne<RT>(string id, decimal amount)
     where RT : Has<RT, IConsole>, Has<RT, IStore> =>
-    OrderValidation.Validate(id, amount) switch
+    Order.Create(id, amount) switch
     {
         Validation<Order>.Valid v =>                                 // ← 검증 통과: 저장 + 승인 로그
             from _1 in Eff.SaveOrder<RT>(v.Value)
@@ -133,7 +147,7 @@ static K<ReaderTF<RT>, int> ProcessOne<RT>(string id, decimal amount)
     };
 ```
 
-이 함수가 이 장의 심부입니다. 한 줄씩 읽습니다. `ProcessOne` 은 먼저 `Validate(id, amount)` 로 입력을 검증합니다. 이 결과가 `switch` 의 대상입니다. 검증이 `Valid` 면 저장 (`SaveOrder`) 하고 승인을 로그 (`Print`) 한 뒤 승인 건수 1 을 냅니다. `Invalid` 면 거부를 로그한 뒤 0 을 냅니다. 결정적인 점은 **검증 결과 (Normal World 의 값) 가 어떤 효과 흐름 (Elevated World 의 흐름) 을 고를지 정한다**는 것입니다. 검증은 순수한 판정이고, 그 판정을 보고 분기가 갈립니다.
+이 함수가 이 장의 심부입니다. 한 줄씩 읽습니다. `ProcessOne` 은 먼저 `Order.Create(id, amount)` 로 입력을 검증합니다. 이 결과가 `switch` 의 대상입니다. 검증이 `Valid` 면 저장 (`SaveOrder`) 하고 승인을 로그 (`Print`) 한 뒤 승인 건수 1 을 냅니다. `Invalid` 면 거부를 로그한 뒤 0 을 냅니다. 결정적인 점은 **검증 결과 (Normal World 의 값) 가 어떤 효과 흐름 (Elevated World 의 흐름) 을 고를지 정한다**는 것입니다. 검증은 순수한 판정이고, 그 판정을 보고 분기가 갈립니다.
 
 여기서 3부의 `Validation` 과 7부의 `Eff` 가 만나는 자리를 또렷이 짚습니다. `switch` 의 왼쪽 (`Validation<Order>.Valid v`) 은 검증이 만든 값이고, 오른쪽 (`from _1 in Eff.SaveOrder ...`) 은 그 값으로 고른 효과 흐름입니다. 검증이 값을 만들고 (3부), 효과가 그 값을 받아 흐릅니다 (7부). 둘을 잇는 것은 `switch` 한 줄입니다. 별다른 접착제가 없습니다. `Valid v` 에서 꺼낸 `v.Value` (검증된 `Order`) 가 곧장 `SaveOrder<RT>(v.Value)` 로 넘어갑니다.
 
@@ -155,7 +169,7 @@ public static K<ReaderTF<RT>, int> ProcessAll<RT>(IEnumerable<(string Id, decima
 }
 ```
 
-`ProcessAll` 은 승인 건수를 누적합니다. `acc` 를 `Pure(0)` 으로 시작해, 요청마다 `from n in acc from m in ProcessOne select n + m` 으로 앞까지의 누계 `n` 에 이번 건 `m` (0 또는 1) 을 더해 새 누계로 잇습니다. 이 `from .. from .. select` 가 Monad 의 bind 입니다. 효과 흐름을 순서대로 잇습니다. 앞 효과 (앞 요청의 저장·로그) 가 다 실행된 뒤 다음 효과가 일어납니다. `captured = req` 는 루프 변수를 포획하는 안전 장치입니다. 클로저가 루프 변수를 그대로 잡으면 마지막 값만 보게 되므로, 매 반복마다 새 변수에 담습니다.
+`ProcessAll` 은 승인 건수를 누적합니다. `acc` 를 `Pure(0)` 으로 시작해, 요청마다 `from n in acc from m in ProcessOne select n + m` 으로 앞까지의 누계 `n` 에 이번 건 `m` (0 또는 1) 을 더해 새 누계로 잇습니다. 이 `from .. from .. select` 가 Monad 의 bind 입니다. 효과 흐름을 순서대로 잇습니다. 앞 효과 (앞 요청의 저장·로그) 가 다 실행된 뒤 다음 효과가 일어납니다. 7장에서 bind 를 프로그래밍 가능한 세미콜론이라 불렀습니다. 명령형이라면 저장하고 로그하는 문장을 세미콜론으로 이었을 그 자리를, 여기서는 bind 가 효과 흐름으로 잇습니다. capstone 의 배치 처리에서도 그 이음매가 그대로 돌아, 앞 요청의 효과가 다 끝나야 다음 요청이 일어납니다. `captured = req` 는 루프 변수를 포획하는 안전 장치입니다. 클로저가 루프 변수를 그대로 잡으면 마지막 값만 보게 되므로, 매 반복마다 새 변수에 담습니다.
 
 여기서 capstone 의 한 결이 보입니다. 앞서 본 bind 가 한 자리에서 두 가지 일을 동시에 합니다. 첫째는 효과 흐름을 순서대로 잇는 것이고 (앞 요청이 다 끝나야 다음 요청이 일어납니다), 둘째는 그 사이로 승인 건수라는 평범한 `int` 값을 실어 나르는 것입니다. `from n in acc` 에서 `n` 은 앞까지 쌓인 누계이고, `from m in ProcessOne` 에서 `m` 은 이번 건의 0 또는 1 이며, `select n + m` 이 둘을 더해 다음 `acc` 로 넘깁니다. 새 도구가 더 필요한 것이 아니라, 이미 손에 익은 bind 하나가 효과의 순서와 값의 누적을 함께 떠받칩니다. 바로 다음 손계산에서 `n` 이 0 에서 2 까지 자라는 과정을 한 줄씩 따라가면 이 두 일이 한 흐름에서 맞물리는 것이 또렷이 보입니다.
 
@@ -173,16 +187,16 @@ ProcessAll 은 먼저 효과 흐름을 합성만 한다 (아직 실행 안 됨):
 
 Eff.Run 이 런타임을 주입하고 IO 를 실행하면, 순서대로:
 
-  ("A", 100):  Validate → Map2(Ok("A"), Ok(100)) = Valid(Order("A",100))
+  ("A", 100):  Order.Create → Lift2(f, Ok("A"), Ok(100)) = Valid(Order("A",100))
                → SaveOrder: store["A"]=100,  Print: "승인: A (100)"
                → m=1,  누계 n: 0 → 1
-  ("",  50):   Validate → Map2(Err("id 비어 있음"), Ok(50)) = Invalid(["id 비어 있음"])
+  ("",  50):   Order.Create → Lift2(f, Err("id 비어 있음"), Ok(50)) = Invalid(["id 비어 있음"])
                → Print: "거부: id 비어 있음"
                → m=0,  누계 n: 1 → 1
-  ("B", 200):  Validate → Valid(Order("B",200))
+  ("B", 200):  Order.Create → Valid(Order("B",200))
                → SaveOrder: store["B"]=200,  Print: "승인: B (200)"
                → m=1,  누계 n: 1 → 2
-  ("C", -5):   Validate → Map2(Ok("C"), Err("amount -5 음수")) = Invalid(["amount -5 음수"])
+  ("C", -5):   Order.Create → Lift2(f, Ok("C"), Err("amount -5 음수")) = Invalid(["amount -5 음수"])
                → Print: "거부: amount -5 음수"
                → m=0,  누계 n: 2 → 2
 
@@ -202,7 +216,7 @@ Eff.Run 이 런타임을 주입하고 IO 를 실행하면, 순서대로:
 
 > **더 깊이 (처음엔 건너뛰어도 됩니다)** — 한 요청에 오류가 둘이면 어떻게 됩니까.
 >
-> 데모 입력은 각 무효 요청이 오류를 하나씩만 냅니다. 빈 식별자는 "id 비어 있음" 하나, 음수 금액은 "amount -5 음수" 하나입니다. 그래서 3부 `Validation` 의 진짜 가치인 오류 누적이 데모에서는 잘 드러나지 않습니다. 만약 한 요청이 식별자도 비고 금액도 음수라면 (`("", -5)`), `Map2` 가 두 오류를 모두 모읍니다. `Map2(Err("id 비어 있음"), Err("amount -5 음수"), ...)` 의 두 인자가 모두 `Invalid` 이므로, `switch` 의 두 번째 갈래 `[.. Errs(a), .. Errs(b)]` 가 `["id 비어 있음", "amount -5 음수"]` 두 오류를 한 목록으로 만듭니다. 거부 로그는 `"거부: id 비어 있음; amount -5 음수"` 가 됩니다. 이것이 3부에서 본 누적 (applicative) 과 단락 (monadic) 의 차이입니다. 단락이라면 첫 오류에서 멈춰 "id 비어 있음" 만 보고하지만, 누적은 두 오류를 모두 모아 한 번에 보여 줍니다. 폼 검증에서 모든 잘못을 한 번에 알려 주는 것이 이 누적의 실무 가치입니다.
+> 데모 입력은 각 무효 요청이 오류를 하나씩만 냅니다. 빈 식별자는 "id 비어 있음" 하나, 음수 금액은 "amount -5 음수" 하나입니다. 그래서 3부 `Validation` 의 진짜 가치인 오류 누적이 데모에서는 잘 드러나지 않습니다. 만약 한 요청이 식별자도 비고 금액도 음수라면 (`("", -5)`), `Lift2` 안의 `Apply` 사슬이 두 오류를 모두 모읍니다. `Lift2` 가 펼쳐지면 `Pure(f).Apply(Err("id 비어 있음")).Apply(Err("amount -5 음수"))` 인데, 첫 `Apply` 가 `Invalid(["id 비어 있음"])` 를 만들고, 둘째 `Apply` 의 두 인자가 모두 `Invalid` 이므로 `switch` 의 두 번째 갈래 `[.. Errs(vf), .. Errs(va)]` 가 `["id 비어 있음", "amount -5 음수"]` 두 오류를 한 목록으로 만듭니다. 거부 로그는 `"거부: id 비어 있음; amount -5 음수"` 가 됩니다. 이것이 3부에서 본 누적 (applicative) 과 단락 (monadic) 의 차이입니다. 단락이라면 첫 오류에서 멈춰 "id 비어 있음" 만 보고하지만, 누적은 두 오류를 모두 모아 한 번에 보여 줍니다. 폼 검증에서 모든 잘못을 한 번에 알려 주는 것이 이 누적의 실무 가치입니다.
 
 ---
 
@@ -344,10 +358,10 @@ public static bool LogsAllOutcomes()
 그런데 이 책에서 만든 도구들은 학습용입니다. `Validation`, `Eff<RT>`, `Has`, `IO`, 스트리밍 모두 뼈대만 남긴 단순화판이었습니다. 그렇다면 진짜 라이브러리는 무엇이 다를까요. 여기서 마지막 다리를 놓습니다. LanguageExt v5 의 `Samples` 폴더를 펼치면, 이 책에서 손으로 만든 패턴의 변형이 그대로 보입니다.
 
 - **`Newsletter`** — `Eff<RT>` + `Has<RT, TRAIT>` 로 이메일 발송 워크플로를 짭니다. 이 책의 `Eff.Print` / `SaveOrder` 가 능력을 제약으로 받아 흐름을 짜던 그 모양입니다. v5 는 `Runtime.Test` / `Runtime.Live` 두 정적 팩터리로 테스트 구현과 실 구현을 가르는데, 이 책의 `AppRT(MemoryConsole, MemoryStore)` 주입이 바로 그 테스트 런타임 구성의 단순화판입니다.
-- **`CardGame`** — `Validation` 의 누적 검증과 효과 흐름을 카드 게임 규칙에 씁니다. 이 책의 `Map2` 가 두 오류를 모으던 그 applicative 누적이, v5 에서는 `&` 연산자와 튜플 applicative 로 더 매끄럽게 표현됩니다.
+- **`CardGame`** — `Validation` 의 누적 검증과 효과 흐름을 카드 게임 규칙에 씁니다. 이 책의 `Lift` (`Pure` → `Apply`) 가 두 오류를 모으던 그 applicative 누적이, v5 에서는 같은 `.Apply(...)` 사슬에 `&` 연산자와 튜플 applicative 를 더 얹어 매끄럽게 표현됩니다.
 - **`BlazorApp`** — 효과 기반 설계를 웹 UI 에 얹습니다. 이 책에서 `Eff.Run` 이 설명서와 실행을 분리하던 그 발상이, 웹 요청 처리의 경계에서 그대로 살아납니다.
 
-이 책을 끝낸 독자는 이제 이 Samples 를 낯선 코드가 아니라 익숙한 패턴의 변형으로 읽을 수 있습니다. `Eff<RT, A>` 를 보면 `ReaderT<RT, IO, A>` 가 떠오르고, `Has<M, VALUE>` 를 보면 능력을 제약으로 주입하던 자리가 떠오릅니다. `Validation<F, A>` 의 누적을 보면 `Map2` 의 오류 모으기가 떠오릅니다. v5 가 더한 것 (오류 단락, 취소 토큰, Schedule 통합, 실 구현 추상) 은 그 익숙한 뼈대 위의 옷입니다. 뼈대를 손으로 만들어 봤기에, 그 옷이 무엇을 감싸고 있는지 보입니다.
+이 책을 끝낸 독자는 이제 이 Samples 를 낯선 코드가 아니라 익숙한 패턴의 변형으로 읽을 수 있습니다. `Eff<RT, A>` 를 보면 `ReaderT<RT, IO, A>` 가 떠오르고, `Has<M, VALUE>` 를 보면 능력을 제약으로 주입하던 자리가 떠오릅니다. `Validation<F, A>` 의 누적을 보면 `Apply` 사슬의 오류 모으기가 떠오릅니다. v5 가 더한 것 (오류 단락, 취소 토큰, Schedule 통합, 실 구현 추상) 은 그 익숙한 뼈대 위의 옷입니다. 뼈대를 손으로 만들어 봤기에, 그 옷이 무엇을 감싸고 있는지 보입니다.
 
 이것이 이 책이 목표한 자리입니다. 비유 (두 평행 세계) 로 직감을 잡고, `K<F, A>` 직접 구현으로 그 직감을 손으로 만지고, 실무 합성으로 그것이 실제로 도는 것을 봤습니다. 이제 라이브러리는 도구일 뿐, 학습의 본질은 독자의 손에 있습니다. 함수형의 본질을 한 문장으로 다시 적습니다. **모든 값과 함수를 합성 가능한 Elevated World 로 끌어올리는 것.** 이 한 줄을 손에 쥐고 책을 닫습니다.
 
@@ -379,7 +393,7 @@ public static bool LogsAllOutcomes()
 
 학습용 capstone 은 합성의 뼈대만 남긴 것이고, v5 의 실무 효과 코드는 같은 발상에 여러 겹을 더 입혔습니다. 정직하게 짚어 둡니다.
 
-**검증 자료형.** 학습용 `Validation<A>` 는 오류를 평범한 문자열 목록 (`IReadOnlyList<string>`) 으로 누적하는 `Valid` / `Invalid` 두 케이스입니다. v5 는 `Validation<F, A>` 로, 실패 타입 `F` 가 `Monoid<F>` 여야 하며 (보통 `Error` / `Seq<Error>`) `Success` / `Fail` 케이스입니다. 누적도 `Map2` 한 함수 대신 `&` 연산자 (두 검증을 모아 `Seq` 로) 나 `.Map(...).Apply(...)` 사슬로 표현합니다 (v5 의 `CreditCardValidation` 샘플은 `fun(Make).Map(ValidateCardNumber(no)).Apply(ValidateExpiryDate(exp)).Apply(ValidateCVV(cvv))` 처럼 세 검증을 누적합니다). 학습용은 2부에서 본 그 `Map2` 누적을 그대로 가져왔습니다.
+**검증 자료형.** 학습용 `Validation<A>` 는 오류를 평범한 문자열 목록 (`IReadOnlyList<string>`) 으로 누적하는 `Valid` / `Invalid` 두 케이스입니다. v5 는 `Validation<F, A>` 로, 실패 타입 `F` 가 `Monoid<F>` 여야 하며 (보통 `Error` / `Seq<Error>`) `Success` / `Fail` 케이스입니다. 누적은 둘 다 `Pure(f).Apply(...).Apply(...)` 사슬로 표현하는데, 이 책은 그 사슬을 `Lift2` 로 감싸 평범한 생성자만 넘기고, v5 는 여기에 `&` 연산자 (두 검증을 모아 `Seq` 로) 를 더 얹습니다 (v5 의 `CreditCardValidation` 샘플은 `fun(Make).Map(ValidateCardNumber(no)).Apply(ValidateExpiryDate(exp)).Apply(ValidateCVV(cvv))` 처럼 세 검증을 누적하는데, 첫 인자를 `Map` 으로 시작하는 것만 다를 뿐 이 책의 `Lift2` 가 안에서 펼치는 `Pure(f).Apply(...).Apply(...)` 와 같은 Apply 사슬입니다). 학습용은 2부에서 본 그 `Apply` 누적을 `Lift` 로 그대로 가져왔습니다.
 
 **능력 trait 시그니처.** 학습용 `Has<RT, TRAIT>` 는 `static abstract TRAIT Get(RT runtime)` 으로, 런타임 인스턴스를 받아 맨 trait 값을 곧장 돌려주는 평범한 메서드입니다. v5 의 `Has<in M, VALUE>` 는 `static abstract K<M, VALUE> Ask { get; }` 로, trait 를 효과 (`K<M, VALUE>`) 로 감싸 돌려주는 정적 프로퍼티입니다. 곧 v5 는 능력 접근 자체도 효과 흐름 안에 있습니다. 학습용은 그 효과 래핑을 벗겨 `Get` 한 메서드로 단순화했습니다.
 
@@ -428,11 +442,11 @@ capstone 은 따로 익힌 도구들을 한 실무 코드로 합치는 마무리
 
 > **Q2. 검증과 효과는 어떻게 자리가 다릅니까?** (42.3절, 42.8절)
 
-검증은 Normal World 의 순수 판정이고, 효과는 Elevated World 의 흐름입니다. `Validate(id, amount)` 는 입력을 받아 `Order` 값을 만들거나 오류를 냅니다. 부수 효과가 한 줄도 없습니다. 반면 `Eff.SaveOrder` / `Eff.Print` 는 저장과 로그라는 부수 효과를 흐름으로 끌어올린 것이라, `Run` 전까지는 실행되지 않습니다. `ProcessOne` 의 `switch` 가 바로 이 둘을 잇는 자리입니다. Normal 의 판정 결과를 보고 어떤 Elevated 흐름을 고를지 정합니다.
+검증은 Normal World 의 순수 판정이고, 효과는 Elevated World 의 흐름입니다. `Order.Create(id, amount)` 는 입력을 받아 `Order` 값을 만들거나 오류를 냅니다. 부수 효과가 한 줄도 없습니다. 반면 `Eff.SaveOrder` / `Eff.Print` 는 저장과 로그라는 부수 효과를 흐름으로 끌어올린 것이라, `Run` 전까지는 실행되지 않습니다. `ProcessOne` 의 `switch` 가 바로 이 둘을 잇는 자리입니다. Normal 의 판정 결과를 보고 어떤 Elevated 흐름을 고를지 정합니다.
 
 > **Q3. `ProcessOne` 의 분기는 무엇을 보고 갈립니까?** (42.3절)
 
-검증 결과를 보고 갈립니다. `OrderValidation.Validate(id, amount)` 의 결과가 `switch` 의 대상입니다. `Valid v` 면 `v.Value` (검증된 `Order`) 를 `SaveOrder` 로 저장하고 승인을 `Print` 한 뒤 1 을 냅니다. `Invalid e` 면 `e.Errors` 를 거부 로그로 `Print` 한 뒤 0 을 냅니다. 곧 검증이 만든 값 (Normal World) 이 어떤 효과 흐름 (Elevated World) 을 고를지 정합니다. 둘을 잇는 접착제는 `switch` 한 줄뿐이고, `Valid v` 에서 꺼낸 `v.Value` 가 곧장 효과 흐름으로 넘어갑니다.
+검증 결과를 보고 갈립니다. `Order.Create(id, amount)` 의 결과가 `switch` 의 대상입니다. `Valid v` 면 `v.Value` (검증된 `Order`) 를 `SaveOrder` 로 저장하고 승인을 `Print` 한 뒤 1 을 냅니다. `Invalid e` 면 `e.Errors` 를 거부 로그로 `Print` 한 뒤 0 을 냅니다. 곧 검증이 만든 값 (Normal World) 이 어떤 효과 흐름 (Elevated World) 을 고를지 정합니다. 둘을 잇는 접착제는 `switch` 한 줄뿐이고, `Valid v` 에서 꺼낸 `v.Value` 가 곧장 효과 흐름으로 넘어갑니다.
 
 > **Q4. `ProcessAll` 은 승인 건수를 어떻게 누적합니까?** (42.3절)
 
@@ -448,11 +462,11 @@ capstone 은 따로 익힌 도구들을 한 실무 코드로 합치는 마무리
 
 > **Q7. 한 요청에 오류가 둘이면 어떻게 됩니까?** (42.3절)
 
-`Map2` 가 두 오류를 모두 모읍니다. `("", -5)` 처럼 식별자도 비고 금액도 음수면, `Map2(Err("id 비어 있음"), Err("amount -5 음수"), ...)` 의 두 인자가 모두 `Invalid` 이므로 `[.. Errs(a), .. Errs(b)]` 가 두 오류를 한 목록으로 만듭니다. 거부 로그는 `"거부: id 비어 있음; amount -5 음수"` 가 됩니다. 이것이 3부에서 본 누적 (applicative) 과 단락 (monadic) 의 차이입니다. 단락이라면 첫 오류에서 멈추지만, 누적은 두 오류를 모두 모아 한 번에 보여 줍니다. 데모 입력은 각 무효 요청이 오류를 하나씩만 내서 이 누적이 잘 드러나지 않습니다.
+`Lift2` 안의 `Apply` 사슬이 두 오류를 모두 모읍니다. `("", -5)` 처럼 식별자도 비고 금액도 음수면, `Lift2` 가 펼치는 `Pure(f).Apply(Err("id 비어 있음")).Apply(Err("amount -5 음수"))` 의 마지막 `Apply` 두 인자가 모두 `Invalid` 이므로 `[.. Errs(vf), .. Errs(va)]` 가 두 오류를 한 목록으로 만듭니다. 거부 로그는 `"거부: id 비어 있음; amount -5 음수"` 가 됩니다. 이것이 3부에서 본 누적 (applicative) 과 단락 (monadic) 의 차이입니다. 단락이라면 첫 오류에서 멈추지만, 누적은 두 오류를 모두 모아 한 번에 보여 줍니다. 데모 입력은 각 무효 요청이 오류를 하나씩만 내서 이 누적이 잘 드러나지 않습니다.
 
 > **Q8. v5 의 Samples 와 이 책의 코드는 어떻게 이어집니까?** (42.5절, 42.7절)
 
-v5 의 Samples 가 이 책에서 손으로 만든 패턴의 변형입니다. `Newsletter` 는 `Eff<RT>` + `Has` 로 워크플로를 짜는데, 이 책의 `Eff.Print` / `SaveOrder` 가 능력을 제약으로 받던 그 모양입니다. `Newsletter` 의 `Runtime.Test` / `Runtime.Live` 분기가 이 책의 `AppRT(MemoryConsole, ...)` 주입의 정교한 판입니다. `CardGame` 의 `Validation` 누적이 `Map2` 의 오류 모으기와 같고, `BlazorApp` 의 효과 설계가 `Eff.Run` 의 설명서·실행 분리와 같습니다. v5 가 더한 것 (오류 단락, 취소, Schedule 통합, 실 구현 추상) 은 그 익숙한 뼈대 위의 옷입니다. 뼈대를 손으로 만들어 봤기에 그 옷이 무엇을 감싸는지 보입니다.
+v5 의 Samples 가 이 책에서 손으로 만든 패턴의 변형입니다. `Newsletter` 는 `Eff<RT>` + `Has` 로 워크플로를 짜는데, 이 책의 `Eff.Print` / `SaveOrder` 가 능력을 제약으로 받던 그 모양입니다. `Newsletter` 의 `Runtime.Test` / `Runtime.Live` 분기가 이 책의 `AppRT(MemoryConsole, ...)` 주입의 정교한 판입니다. `CardGame` 의 `Validation` 누적이 `Apply` 사슬의 오류 모으기와 같고, `BlazorApp` 의 효과 설계가 `Eff.Run` 의 설명서·실행 분리와 같습니다. v5 가 더한 것 (오류 단락, 취소, Schedule 통합, 실 구현 추상) 은 그 익숙한 뼈대 위의 옷입니다. 뼈대를 손으로 만들어 봤기에 그 옷이 무엇을 감싸는지 보입니다.
 
 ---
 
@@ -475,7 +489,7 @@ v5 의 Samples 가 이 책에서 손으로 만든 패턴의 변형입니다. `Ne
 
 처음 1장에서 두 평행 세계라는 비유 한 개로 출발했습니다. Normal World 와 Elevated World, 그 사이를 오가는 네 가지 함수 유형이라는 지도만 손에 들었습니다. 그 지도 위에서 다섯 trait (Functor / Applicative / Monad / Foldable / Traversable) 이 각자의 자리를 찾았고, Monoid 와 Validation 이 그 곁에 놓였습니다. 효과를 값으로 다루는 발상이 Reader / State / Writer 와 변환기로, `IO` 와 `Eff<RT>` 와 능력 기반 DI 로 이어졌습니다. 그 위에 재시도와 자원 관리와 동시성과 스트리밍이 얹혔고, 효과가 값으로 분리된 덕에 테스트가 쉬워졌습니다. 그리고 이 마지막 장에서 그 모든 도구가 실무 코드 한 편으로 합쳐졌습니다.
 
-이 책의 정체성은 세 결속에 있었습니다. 비유로 직감을 잡고, `K<F, A>` 직접 구현으로 그 직감을 손으로 만지고, 실행 가능한 코드로 그것이 실제로 도는 것을 봤습니다. 도구를 외워 쓴 것이 아니라, 그 내부 구조를 손으로 만들어 봤습니다. 그래서 이제 LanguageExt v5 같은 진짜 라이브러리를 펼쳐도, 그것이 낯선 마법이 아니라 손에 익은 패턴의 정교한 판으로 읽힙니다. `Eff<RT, A>` 를 보면 `ReaderT<RT, IO, A>` 가, `Validation<F, A>` 의 누적을 보면 `Map2` 가 떠오릅니다. 라이브러리는 도구일 뿐, 학습의 본질은 독자의 손에 남았습니다.
+이 책의 정체성은 세 결속에 있었습니다. 비유로 직감을 잡고, `K<F, A>` 직접 구현으로 그 직감을 손으로 만지고, 실행 가능한 코드로 그것이 실제로 도는 것을 봤습니다. 도구를 외워 쓴 것이 아니라, 그 내부 구조를 손으로 만들어 봤습니다. 그래서 이제 LanguageExt v5 같은 진짜 라이브러리를 펼쳐도, 그것이 낯선 마법이 아니라 손에 익은 패턴의 정교한 판으로 읽힙니다. `Eff<RT, A>` 를 보면 `ReaderT<RT, IO, A>` 가, `Validation<F, A>` 의 누적을 보면 `Pure` → `Apply` 사슬이 떠오릅니다. 라이브러리는 도구일 뿐, 학습의 본질은 독자의 손에 남았습니다.
 
 다음 걸음은 독자의 몫입니다. v5 의 `Samples` (`Newsletter` / `CardGame` / `BlazorApp` / `EffectsExamples`) 를 펼쳐 익숙한 패턴의 변형으로 읽어 보고, 자신의 실무 코드에 이 합성을 적용해 보는 것입니다. 더 깊은 갈래 (모나드 변환기 스택, 효과 시스템의 오류·취소·자원 통합) 로 나아갈 수도 있습니다. 어느 길이든, 이 책에서 손으로 만든 뼈대가 그 길의 디딤돌입니다.
 

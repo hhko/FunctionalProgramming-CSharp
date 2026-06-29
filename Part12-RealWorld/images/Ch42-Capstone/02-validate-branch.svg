@@ -38,7 +38,7 @@
   <path d="M729,87 C 770,87 786,142 786,142 786,142 770,199 729,199" fill="none" stroke="#777" stroke-width="1.5"/>
   <rect x="704" y="120" width="170" height="44" fill="#eef2f5" stroke="#666" stroke-width="1.6" rx="6"/>
   <text x="789" y="140" font-size="11.5" fill="#333" text-anchor="middle" font-weight="bold" font-family="'Noto Sans KR',sans-serif">승인 건수 누적</text>
-  <text x="789" y="156" font-size="9.5" fill="#777" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">ProcessAll fold</text>
+  <text x="789" y="156" font-size="9.5" fill="#777" text-anchor="middle" font-family="'Noto Sans KR',sans-serif">ProcessAll bind 누적</text>
 
   <line x1="40" y1="258" x2="860" y2="258" stroke="#e2e2e2" stroke-width="1.4"/>
   <text x="40" y="284" font-size="13" fill="#1f1f1f" font-weight="bold" font-family="'Noto Sans KR',sans-serif">네 요청 배치 — 승인 건수 누적 추적</text>

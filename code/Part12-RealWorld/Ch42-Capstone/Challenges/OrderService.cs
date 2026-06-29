@@ -12,7 +12,7 @@ public static class OrderService
 {
     static K<ReaderTF<RT>, int> ProcessOne<RT>(string id, decimal amount)
         where RT : Has<RT, IConsole>, Has<RT, IStore> =>
-        OrderValidation.Validate(id, amount) switch
+        Order.Create(id, amount) switch
         {
             Validation<Order>.Valid v =>
                 from _1 in Eff.SaveOrder<RT>(v.Value)
